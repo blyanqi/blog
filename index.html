@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="blyanqi@163.com">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>blyanqi@163.com</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/hexo%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/hexo%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">hexo安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-13 15:54:09 / 修改时间：17:41:21" itemprop="dateCreated datePublished" datetime="2020-05-13T15:54:09+08:00">2020-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="hexo-安装使用"><a href="#hexo-安装使用" class="headerlink" title="hexo 安装使用"></a>hexo 安装使用</h1><blockquote>
+<p>hexo 功能很多很完善。样式比自己写的好的多。为了快速构建，还是选用了 hexo。<br>话不多说，直接上干货。</p>
+</blockquote>
+<h2 id="nodejs-安装"><a href="#nodejs-安装" class="headerlink" title="nodejs 安装"></a>nodejs 安装</h2><p><a href="https://npm.taobao.org/mirrors/node/v14.2.0/" target="_blank" rel="noopener">nodejs 下载</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用阿里云镜像下载比较快，xz 压缩率高。</span></span><br><span class="line"><span class="comment"># 在 mac 上安装直接选择 pkg 包安装</span></span><br><span class="line">https://cdn.npm.taobao.org/dist/node/v14.2.0/node-v14.2.0.pkg</span><br></pre></td></tr></table></figure>
+
+<h2 id="hexo-安装"><a href="#hexo-安装" class="headerlink" title="hexo 安装"></a>hexo 安装</h2><blockquote>
+<p>hexo 使用 nodejs 编写，使用 npm 包管理工具进行安装。</p>
+<p>安装前要设置好国内镜像。否则会很慢。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># npm 帮助</span></span><br><span class="line">npm --<span class="built_in">help</span></span><br><span class="line"><span class="comment"># npm command 帮助</span></span><br><span class="line">npm config -h</span><br><span class="line"><span class="comment"># 列出配置</span></span><br><span class="line">npm config list</span><br><span class="line"><span class="comment"># 这样就配置好镜像了，阿里云是国内镜像大户</span></span><br><span class="line">npm config <span class="built_in">set</span> metrics-registry <span class="string">"https://registry.npm.taobao.org"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>hexo 使用 nodejs 编写，使用 npm 包管理工具进行安装。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nodejs 分全局模块库和项目模块库 </span></span><br><span class="line"><span class="comment"># 全局模块库位于 nodejs 安装目录下 /usr/local/lib/node_modules</span></span><br><span class="line"><span class="comment"># 项目模块库位于项目目录下 node_modules/</span></span><br><span class="line"><span class="comment"># 列出模块</span></span><br><span class="line">npm list</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>全局模块安装一些通用的模块，比如: cnpm、@vue、bower</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装到全局模块（重复安装加 --force）</span></span><br><span class="line">npm install hexo-cli -g --force</span><br><span class="line"><span class="comment"># 创建个目录</span></span><br><span class="line">mkdir blog</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">hexo init</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">hexo init blog</span><br><span class="line"></span><br><span class="line"><span class="comment"># npm 包管理文件 package.json</span></span><br><span class="line">npm install</span><br><span class="line"><span class="comment"># 启动服务，在 http://localhost:4000 查看</span></span><br><span class="line">hexo server</span><br><span class="line"><span class="comment"># 支持简写。简写有好处，也有坏处。好处是输入少，坏处是不利于记忆。</span></span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<h3 id="hexo-目录结构"><a href="#hexo-目录结构" class="headerlink" title="hexo 目录结构"></a>hexo 目录结构</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tree -L 1</span></span><br><span class="line"></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span>         <span class="comment"># 站点配置文件</span></span><br><span class="line"><span class="string">├──</span> <span class="string">db.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">node_modules</span>        <span class="comment"># nodejs 模块库</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package-lock.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package.json</span>        <span class="comment"># npm 包管理文件</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scaffolds</span>           <span class="comment"># hexo 模板</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span>              <span class="comment"># 文章目录</span></span><br><span class="line"><span class="string">└──</span> <span class="string">themes</span>              <span class="comment"># 主题目录</span></span><br></pre></td></tr></table></figure>
+<h3 id="配置-blog"><a href="#配置-blog" class="headerlink" title="配置 blog"></a>配置 blog</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看配置</span></span><br><span class="line">grep -v <span class="string">"#"</span> _config.yml |grep -v <span class="string">"^$"</span></span><br><span class="line">cp _config.yml _config.yml.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 标题、描述、关键字</span></span><br><span class="line">title: blyanqi@163.com</span><br><span class="line">subtitle: <span class="string">''</span></span><br><span class="line">description: <span class="string">'君子学以聚之，问以辩之，宽以居之，仁以行之。'</span></span><br><span class="line">keywords: 运维、自动化、devops、容器架构</span><br><span class="line">author: yan qi</span><br><span class="line"><span class="comment"># 语言、时区、站点 url</span></span><br><span class="line">language: zh-CN</span><br><span class="line">timezone: <span class="string">'Asia/Shanghai'</span></span><br><span class="line">url: http://yoursite.com</span><br><span class="line">root: /</span><br><span class="line"><span class="comment"># 文章按日期分类</span></span><br><span class="line">new_post_name: :year/:month/:title/</span><br><span class="line">permalink: :year/:month/:title.md</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line"><span class="comment"># 目录配置</span></span><br><span class="line">source_dir: <span class="built_in">source</span></span><br><span class="line">public_dir: public</span><br><span class="line">tag_dir: tags</span><br><span class="line">archive_dir: archives</span><br><span class="line">category_dir: categories</span><br><span class="line">code_dir: downloads/code</span><br><span class="line">i18n_dir: :lang</span><br><span class="line">skip_render:</span><br><span class="line">default_layout: post</span><br><span class="line">external_link:</span><br><span class="line">  exclude: <span class="string">''</span></span><br><span class="line"><span class="comment"># 文件名大小写</span></span><br><span class="line">filename_case: 0</span><br><span class="line">render_drafts: <span class="literal">false</span></span><br><span class="line"><span class="comment"># 生成文章资源文件夹</span></span><br><span class="line">post_asset_folder: <span class="literal">true</span></span><br><span class="line">relative_link: <span class="literal">false</span></span><br><span class="line">future: <span class="literal">true</span></span><br><span class="line"><span class="comment"># 代码框配置</span></span><br><span class="line">highlight:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  line_number: <span class="literal">true</span></span><br><span class="line">  auto_detect: <span class="literal">false</span></span><br><span class="line">  tab_replace: <span class="string">''</span></span><br><span class="line">  wrap: <span class="literal">true</span></span><br><span class="line">  hljs: <span class="literal">false</span></span><br><span class="line">index_generator:</span><br><span class="line">  path: <span class="string">''</span></span><br><span class="line">  per_page: 10</span><br><span class="line">  order_by: -date</span><br><span class="line">default_category: uncategorized</span><br><span class="line">category_map:</span><br><span class="line">tag_map:</span><br><span class="line">meta_generator: <span class="literal">true</span></span><br><span class="line">date_format: YYYY-MM-DD</span><br><span class="line">time_format: HH:mm:ss</span><br><span class="line">use_date_for_updated: <span class="literal">false</span></span><br><span class="line">per_page: 10</span><br><span class="line">pagination_dir: page</span><br><span class="line">include:</span><br><span class="line">exclude:</span><br><span class="line">ignore:</span><br><span class="line">theme: next</span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: <span class="string">''</span></span><br></pre></td></tr></table></figure>
+<h3 id="写文章、配置文章本地图片"><a href="#写文章、配置文章本地图片" class="headerlink" title="写文章、配置文章本地图片"></a>写文章、配置文章本地图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成 markdown 文件(source/_post 下)</span></span><br><span class="line">hexo n first</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置站点配置 _config.yml:</span></span><br><span class="line">post_asset_folder: <span class="literal">false</span>改为post_asset_folder: <span class="literal">true</span></span><br><span class="line"><span class="comment"># 安装插件</span></span><br><span class="line">npm install hexo-asset-image -- save</span><br><span class="line"><span class="comment"># 创建文章(同时生成和文章相同的目录)</span></span><br><span class="line">hexo n firstimg</span><br><span class="line"><span class="comment"># 在 markdown 添加图片</span></span><br><span class="line">在想添加的位置写入![](图片名字.图片格式),例如![](1.png)。</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="下载-next-主题"><a href="#下载-next-主题" class="headerlink" title="下载 next 主题"></a>下载 next 主题</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置加速，否则很慢</span></span><br><span class="line"><span class="comment"># 使用之前配置一下 github 进行加速。使用 https://www.ipaddress.com/ 进行地址查询</span></span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;/etc/hosts</span><br><span class="line">140.82.113.3 github.com</span><br><span class="line">185.199.109.153 assets-cdn.github.com</span><br><span class="line">199.232.69.194 github.global.ssl.fastly.net</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># 下载主题</span></span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<h3 id="next-主题目录"><a href="#next-主题目录" class="headerlink" title="next 主题目录"></a>next 主题目录</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">├──</span> <span class="string">LICENSE.md</span></span><br><span class="line"><span class="string">├──</span> <span class="string">README.md</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span>     <span class="comment"># 主题配置文件</span></span><br><span class="line"><span class="string">├──</span> <span class="string">crowdin.yml</span></span><br><span class="line"><span class="string">├──</span> <span class="string">docs</span>            <span class="comment"># 帮助信息</span></span><br><span class="line"><span class="string">├──</span> <span class="string">gulpfile.js</span></span><br><span class="line"><span class="string">├──</span> <span class="string">languages</span>       <span class="comment">#语言包</span></span><br><span class="line"><span class="string">├──</span> <span class="string">layout</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package.json</span>    <span class="comment"># npm 依赖</span></span><br><span class="line"><span class="string">├──</span> <span class="string">renovate.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scripts</span>         <span class="comment"># js 文件</span></span><br><span class="line"><span class="string">└──</span> <span class="string">source</span>          <span class="comment"># 资源文件：css、字体、svg</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="配置-next-主题"><a href="#配置-next-主题" class="headerlink" title="配置 next 主题"></a>配置 next 主题</h3><blockquote>
+<p>主题配置内容比较多 <a href="https://hexo-theme-next.netlify.app/docs/" target="_blank" rel="noopener">next 主题配置</a></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 此处纪录常用配置</span></span><br><span class="line"><span class="comment"># 使用主题 themes/next/_config.yml 查找 theme</span></span><br><span class="line"><span class="comment"># sed -i '/^theme/s/landscape/next/' _config.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看一下配置文件</span></span><br><span class="line">grep -v <span class="string">"#"</span> themes/next/_config.yml |grep -v <span class="string">"^$"</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改一下 scheme (hexo 主题有4种样式)，选用 Gemini</span></span><br><span class="line">scheme: Gemini</span><br><span class="line"></span><br><span class="line"><span class="comment"># 代码高亮 codeblock</span></span><br><span class="line">codeblock:</span><br><span class="line">  theme:</span><br><span class="line">    light: vs</span><br><span class="line">    dark: tomorrow-night</span><br><span class="line"></span><br><span class="line"><span class="comment"># footer 修改</span></span><br><span class="line">since: 2017</span><br><span class="line">animated: <span class="literal">true</span></span><br><span class="line">powered: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 post 模板</span></span><br><span class="line">vim scaffolds/post.md</span><br><span class="line"><span class="comment"># 添加：</span></span><br><span class="line">categories:</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加字数统计 （新创建 post 才会有数据）</span></span><br><span class="line">npm install hexo-symbols-count-time</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo config</span></span><br><span class="line"><span class="comment"># Post Wordcount</span></span><br><span class="line">symbols_count_time:</span><br><span class="line">  symbols: <span class="literal">true</span></span><br><span class="line">  time: <span class="literal">true</span></span><br><span class="line">  total_symbols: <span class="literal">true</span></span><br><span class="line">  total_time: <span class="literal">true</span></span><br><span class="line">  awl: 4</span><br><span class="line">  wpm: 275</span><br><span class="line"></span><br><span class="line"><span class="comment"># hexo/theme/next/_config.yml</span></span><br><span class="line">symbols_count_time:</span><br><span class="line">  separated_meta: <span class="literal">true</span></span><br><span class="line">  item_text_post: <span class="literal">true</span></span><br><span class="line">  item_text_total: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SEO 配置 next/_config.yml</span></span><br><span class="line">disable_baidu_transformation: <span class="literal">true</span></span><br><span class="line">index_with_subtitle: <span class="literal">true</span></span><br><span class="line">exturl: <span class="literal">true</span></span><br><span class="line">google_site_verification: XXXXXXXXXXXXXXXXXXXXXXX</span><br><span class="line">bing_site_verification: XXXXXXXXXXXXXXXXXXXXXXX</span><br><span class="line">baidu_site_verification: XXXXXXXXXXXXXXXXXXXXXXX</span><br><span class="line">baidu_push: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># web Analytics</span></span><br><span class="line">google_analytics:</span><br><span class="line">  tracking_id: UA-XXXXXXXX-X</span><br><span class="line">  only_pageview: <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Local Search 配置</span></span><br><span class="line">npm install hexo-generator-searchdb</span><br><span class="line"><span class="comment"># hexo/_config.yml</span></span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  <span class="built_in">limit</span>: 10000</span><br><span class="line"></span><br><span class="line"><span class="comment"># next/_config.yml</span></span><br><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="comment"># Dependencies: https://github.com/next-theme/hexo-generator-searchdb</span></span><br><span class="line">local_search:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  <span class="comment"># If auto, trigger search by changing input.</span></span><br><span class="line">  <span class="comment"># If manual, trigger search by pressing enter key or search button.</span></span><br><span class="line">  trigger: auto</span><br><span class="line">  <span class="comment"># Show top n results per article, show all results by setting to -1</span></span><br><span class="line">  top_n_per_article: 1</span><br><span class="line">  <span class="comment"># Unescape html strings to the readable one.</span></span><br><span class="line">  unescape: <span class="literal">false</span></span><br><span class="line">  <span class="comment"># Preload the search data when the page loads.</span></span><br><span class="line">  preload: <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h2 id="设置文章分类"><a href="#设置文章分类" class="headerlink" title="设置文章分类"></a>设置文章分类</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 page</span></span><br><span class="line">hexo new page categories</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取日期</span></span><br><span class="line">date <span class="string">"+%F %T"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 page</span></span><br><span class="line">cat &lt;&lt;<span class="string">"EOF"</span> &gt;<span class="built_in">source</span>/categories/index.md</span><br><span class="line">---</span><br><span class="line">title: 文章分类</span><br><span class="line">date: 2020-05-13 16:22:16 </span><br><span class="line"><span class="built_in">type</span>: <span class="string">"categories"</span></span><br><span class="line">---</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给文章添加“categories”属性</span></span><br><span class="line">categories: </span><br><span class="line">- develop</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置文章标签"><a href="#设置文章标签" class="headerlink" title="设置文章标签"></a>设置文章标签</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 page</span></span><br><span class="line">hexo new page tags</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改 page</span></span><br><span class="line">cat &lt;&lt;<span class="string">"EOF"</span> &gt;<span class="built_in">source</span>/tags/index.md</span><br><span class="line">---</span><br><span class="line">title: 标签</span><br><span class="line">date: 2020-05-13 16:22:16 </span><br><span class="line"><span class="built_in">type</span>: <span class="string">"tags"</span></span><br><span class="line">---</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给文章添加“tags”属性</span></span><br><span class="line">tags:</span><br><span class="line">- jQuery</span><br><span class="line">- 表格</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="生成部署-hexo"><a href="#生成部署-hexo" class="headerlink" title="生成部署 hexo"></a>生成部署 hexo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成静态文件 (用于githup page 部署)</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个 githup repository</span></span><br><span class="line">name: blog.githup.io</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置 githup 库地址 _config.yaml</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/blyanqi/blog.githup.io.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为github设置SSH Keys</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"blyanqi@163.com"</span></span><br><span class="line"><span class="comment"># 测试 ssh key</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 部署到 githup page</span></span><br><span class="line">npm install --save hexo-deployer-git</span><br><span class="line">hexo deploy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键部署</span></span><br><span class="line"><span class="comment"># 编辑 package.json</span></span><br><span class="line"><span class="string">"dev"</span>: <span class="string">"hexo s"</span>,</span><br><span class="line"><span class="string">"build"</span>: <span class="string">"hexo clean &amp; hexo deploy"</span></span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<h2 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">INFO  Copying files from public folder...</span><br><span class="line">FATAL Something<span class="string">'s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span></span><br><span class="line"><span class="string">TypeError [ERR_INVALID_ARG_TYPE]: The "mode" argument must be integer. Received an instance of Object</span></span><br><span class="line"><span class="string">    at copyFile (fs.js:1890:10)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 是因为 nodejs 版本问题，选用稳定版本 v12.16.3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">remote: Invalid username or password.</span></span><br><span class="line"><span class="string">fatal: Authentication failed for '</span>https://github.com/blyanqi/blog.githup.io.git/<span class="string">'</span></span><br><span class="line"><span class="string">FATAL Something'</span>s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">Error: Spawn failed</span><br><span class="line"></span><br><span class="line"><span class="comment"># git 验证失败</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">6k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">5 分钟</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
