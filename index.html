@@ -321,6 +321,352 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/gitlab%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/gitlab%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">gitlib安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-18 07:05:58 / 修改时间：07:23:47" itemprop="dateCreated datePublished" datetime="2020-05-18T07:05:58+08:00">2020-05-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Centos7"><a href="#Centos7" class="headerlink" title="Centos7"></a>Centos7</h3><h4 id="安装配置依赖包"><a href="#安装配置依赖包" class="headerlink" title="安装配置依赖包"></a>安装配置依赖包</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install -y curl policycoreutils-python openssh-server</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sshd</span><br><span class="line">sudo systemctl start sshd</span><br></pre></td></tr></table></figure>
+
+<h4 id="打开防火墙"><a href="#打开防火墙" class="headerlink" title="打开防火墙"></a>打开防火墙</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --permanent --add-service=http</span><br><span class="line">sudo systemctl reload firewalld</span><br></pre></td></tr></table></figure>
+<h4 id="安装postfix"><a href="#安装postfix" class="headerlink" title="安装postfix"></a>安装postfix</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install postfix</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> postfix</span><br><span class="line">sudo systemctl start postfix</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置postfix"><a href="#配置postfix" class="headerlink" title="配置postfix"></a>配置postfix</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fatal: parameter inet_interfaces: <span class="literal">no</span> local<span class="built_in"> interface </span>found <span class="keyword">for</span> ::1</span><br><span class="line">vim /etc/postfix/main.cf</span><br><span class="line">inet_interfaces = all</span><br></pre></td></tr></table></figure>
+<h2 id="GitLab-安装"><a href="#GitLab-安装" class="headerlink" title="GitLab 安装"></a>GitLab 安装</h2><h3 id="添加-GitLab-安装库"><a href="#添加-GitLab-安装库" class="headerlink" title="添加 GitLab 安装库"></a>添加 GitLab 安装库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ee/script.rpm.sh | sudo bash</span><br><span class="line">EXTERNAL_URL=<span class="string">"http://gitlab.example.com"</span>;yum install -y gitlab-ee</span><br></pre></td></tr></table></figure>
+
+<h3 id="gitlab服务列表"><a href="#gitlab服务列表" class="headerlink" title="gitlab服务列表"></a>gitlab服务列表</h3><p>gitaly<br>gitlab-monitor<br>gitlab-workhorse<br>logrotate<br>nginx<br>node-exporter<br>postgres-exporter<br>postgresql<br>prometheus<br>redis<br>redis-exporter<br>sidekiq<br>unicorn</p>
+<h3 id="gitlab-配置文件"><a href="#gitlab-配置文件" class="headerlink" title="gitlab 配置文件"></a>gitlab 配置文件</h3><p>设置访问url<br>cat /etc/gitlab/gitlab.rb<br>external_url ‘<a href="http://192.168.88.201&#39;" target="_blank" rel="noopener">http://192.168.88.201&#39;</a><br>–修改url后需要重新reconfigure<br>–重新配置(配置完成会启动各服务)<br>gitlab-ctl reconfigure<br>访问<br><a href="http://192.168.88.201/" target="_blank" rel="noopener">http://192.168.88.201/</a><br>会提示更改新的账号密码，如下：<br>root,ahyanqi320724</p>
+<h3 id="管理、配置gitlab"><a href="#管理、配置gitlab" class="headerlink" title="管理、配置gitlab"></a>管理、配置gitlab</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动所有gitlab组件：</span></span><br><span class="line">gitlab-ctl start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 停止所有gitlab组件：</span></span><br><span class="line">gitlab-ctl stop</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启所有gitlab组件：</span></span><br><span class="line">gitlab-ctl restart</span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理员密码忘了：</span></span><br><span class="line">登录GitLab的Rails控制台</span><br><span class="line">gitlab-rails<span class="built_in"> console </span>production</span><br><span class="line">user = User.where(id: 1).first()</span><br><span class="line">user.password = 12345678</span><br><span class="line">user.<span class="attribute">password_confirmation</span>=12345678</span><br><span class="line">user.save!</span><br></pre></td></tr></table></figure>
+
+<h3 id="备份计划："><a href="#备份计划：" class="headerlink" title="备份计划："></a>备份计划：</h3><p>备份GitLab repositories and GitLab metadata</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 加入计划任务：</span></span><br><span class="line"><span class="number">0</span> <span class="number">2</span> * * * <span class="regexp">/opt/gi</span>tlab<span class="regexp">/bin/gi</span>tlab-rake gitlab:backup:create</span><br></pre></td></tr></table></figure>
+
+<h3 id="恢复gitlab："><a href="#恢复gitlab：" class="headerlink" title="恢复gitlab："></a>恢复gitlab：</h3><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">root@puppet backups</span>]<span class="meta"># pwd</span></span><br><span class="line">/<span class="keyword">var</span>/opt/gitlab/backups</span><br><span class="line"></span><br><span class="line">[<span class="meta">root@puppet backups</span>]<span class="meta"># ls</span></span><br><span class="line"><span class="number">1406691018</span>_gitlab_backup.tar</span><br><span class="line"></span><br><span class="line">b.停止unicorn和sidekiq，保证数据库没有新的连接，不会有写数据情况</span><br><span class="line">[<span class="meta">root@puppet backups</span>]<span class="meta"># gitlab-ctl stop unicorn</span></span><br><span class="line">ok: down: unicorn: <span class="number">0</span>s, normally up</span><br><span class="line"></span><br><span class="line">[<span class="meta">root@puppet backups</span>]<span class="meta"># gitlab-ctl stop sidekiq</span></span><br><span class="line">ok: down: sidekiq: <span class="number">0</span>s, normally up</span><br><span class="line"></span><br><span class="line">c.恢复数据，<span class="number">1406691018</span>为备份文件的时间戳</span><br><span class="line">[<span class="meta">root@puppet backups</span>]<span class="meta"># gitlab-rake gitlab:backup:restore BACKUP=1406691018</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="目前使用http方式，没有使用ssh"><a href="#目前使用http方式，没有使用ssh" class="headerlink" title="目前使用http方式，没有使用ssh"></a>目前使用http方式，没有使用ssh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下面用管理员 root 创建一个普通用户 yanqi,</span></span><br><span class="line"><span class="comment"># 从邮件中登录修改密码 yanqi , 5th9ol</span></span><br><span class="line"><span class="comment"># 然后使用yanqi创建一个git仓库girl，</span></span><br><span class="line">new project:<span class="string">"websystem"</span></span><br><span class="line"><span class="comment"># 最后在客户机下向新建的仓库里上传一个代码文件。</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"alarm_machine@163.com"</span></span><br></pre></td></tr></table></figure>
+<h3 id="pycharm-配置gitlab"><a href="#pycharm-配置gitlab" class="headerlink" title="pycharm 配置gitlab"></a>pycharm 配置gitlab</h3><p><a href="http://192.168.88.201/yanqi/websystem.git" target="_blank" rel="noopener">http://192.168.88.201/yanqi/websystem.git</a><br><a href="http://www.cnblogs.com/derekchen/p/5873010.html" target="_blank" rel="noopener">参考配置</a></p>
+<h3 id="linux-使用-gitlab"><a href="#linux-使用-gitlab" class="headerlink" title="linux 使用 gitlab"></a>linux 使用 gitlab</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">yum</span> <span class="string">install git</span></span><br><span class="line"></span><br><span class="line"><span class="attr">git</span> <span class="string">clone http://192.168.88.201/yanqi/websystem.git</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">websystem</span></span><br><span class="line"><span class="attr">git</span> <span class="string">pull</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E5%91%A8%E6%98%93%E5%90%8D%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/%E5%91%A8%E6%98%93%E5%90%8D%E8%A8%80/" class="post-title-link" itemprop="url">周易名言</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-18 06:44:01 / 修改时间：07:25:39" itemprop="dateCreated datePublished" datetime="2020-05-18T06:44:01+08:00">2020-05-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/%E4%B8%9C%E6%96%B9%E5%93%B2%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">东方哲学</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>936</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="吉凶悔吝-周而复始"><a href="#吉凶悔吝-周而复始" class="headerlink" title="吉凶悔吝 周而复始"></a>吉凶悔吝 周而复始</h3><h4 id="修身"><a href="#修身" class="headerlink" title="修身"></a>修身</h4><ul>
+<li>天行健，君子以自强不息。</li>
+<li>地势坤，君子以厚德载物。</li>
+<li>君子以反身修德。</li>
+<li>君子以自昭明德。</li>
+<li>君子以顺德，积小以高大。</li>
+<li>君子以见善则迁，有过则改。</li>
+<li>见险而能止，智矣哉。</li>
+<li>君子上交不谄，下交不渎。</li>
+<li>君子以慎言语，节饮食。</li>
+<li>君子以俭德辟难，不可荣以禄。</li>
+<li>君子以独立不惧，遁世无闷。</li>
+<li>君子藏器于身，待时而动。</li>
+<li>君子以惩忿窒欲。</li>
+<li>君子之道，或出或处，或默或语。</li>
+<li>君子以非礼弗履。</li>
+<li>君子以言有物而行有恒。</li>
+<li>君子以思不出其位。</li>
+<li>君子以恐惧修省。</li>
+<li>君子以正位凝命。</li>
+<li>君子敬以直内，义以方外，敬义立而德不孤。</li>
+<li>君子以向晦入宴息。</li>
+<li>君子以立不易方。</li>
+<li>君子以果行育德。</li>
+<li>君子以多识前言往行以畜其德。</li>
+<li>君子以致命遂志。</li>
+<li>君子以朋友讲习。</li>
+<li>君子以思患而豫防之。</li>
+<li>君子以同而异。</li>
+<li>君子以行过乎恭，丧过乎哀，用过乎俭。</li>
+</ul>
+<h4 id="齐家"><a href="#齐家" class="headerlink" title="齐家"></a>齐家</h4><ul>
+<li>方以类聚，物以群分。</li>
+<li>积善之家，必有余庆；积不善之家，必有余殃。</li>
+<li>德薄而位尊，知小而谋大，力小而任重，鲜不及矣。</li>
+<li>仁者见之谓之仁，知者见之谓之知。</li>
+<li>穷则变，变则通，通则久。</li>
+<li>居上位而不骄，在下位而不忧。故乾乾因其时而惕，虽危而无咎矣。</li>
+</ul>
+<h4 id="平天下"><a href="#平天下" class="headerlink" title="平天下"></a>平天下</h4><ul>
+<li>天地之道，恒久而不已也。</li>
+<li>形而上者谓之道。形而下者谓之器。</li>
+<li>几事不密则害成。</li>
+<li>遏恶扬善，顺天休命。</li>
+<li>知周乎万物，而道济天下。</li>
+</ul>
+<p>不易乎世，不成乎名；遁世无闷，不见是而无闷；乐则行之，忧则违之，确乎其不可拔。</p>
+<p>探赜索隐，钩深致远。</p>
+<p>劳尔不伐，有功而不德，厚之至也！</p>
+<p>乐天知名，故不忧。</p>
+<p>君子知微知彰，知柔知刚，万夫之望。</p>
+<p>虎视眈眈，其欲逐逐。</p>
+<p>尺蠖之屈，以求信也。龙蛇之蛰，以存身也。</p>
+<p>本乎天者亲上，本乎地者亲下。</p>
+<p>二人同心，其利断金。同心之言，其臭如兰。</p>
+<p>谦谦君子，卑以自牧也。</p>
+<p>蒙以正养，圣功也。</p>
+<p>书不尽言，言不尽意。</p>
+<p>尺蠖之屈，以求信也；龙蛇之蛰，以存身也。</p>
+<p>神而明之，存乎其人；默而成之，不言而信，存乎德行。</p>
+<p>括囊无咎无誉，盖言慎也。</p>
+<p>庸言之信，庸行之谨，闲邪存其诚，善世而不伐，德博而化。</p>
+<p>汤武革命，顺乎天而应乎人。</p>
+<p>乐天知命，故不忧。</p>
+<p>日中则昃，月盈则食。天地盈虚，与时消息。而况于人乎？况于鬼神乎？</p>
+<p>时止则止，时行则行，动静不失其时，其道光明。</p>
+<p>困而不失其所亨，其唯君子乎！</p>
+<p>备物致用，立成器以为天下利，莫大乎圣人。</p>
+<p>物不可穷也，故受之以未济。</p>
+<p>谦也者，致恭以存其位者也。</p>
+<p>同声相应，同气相求。</p>
+<p>慢藏诲盗，冶容诲淫。</p>
+<p>刚健笃实辉光，日新其德。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/DevOps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/DevOps/" class="post-title-link" itemprop="url">DevOps</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-15 22:37:32 / 修改时间：23:01:44" itemprop="dateCreated datePublished" datetime="2020-05-15T22:37:32+08:00">2020-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>219</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>CI 持续集成（Continuous Integration）<br>CD 持续部署（Continuous Delivery）<br>CD 持续部署（Continuous Deployment）</p>
+<p>BUILD 构建</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">Java</span> <span class="string">maven</span></span><br><span class="line"><span class="string">nodejs</span> <span class="string">npm</span></span><br><span class="line"><span class="string">python</span> <span class="string">pyinstaller</span></span><br></pre></td></tr></table></figure>
+
+<p>流水线</p>
+<p>Blue Ocean</p>
+<p>TEST</p>
+<p>MERGE</p>
+<p>kubernetes<br>docker</p>
+<p><a href="https://github.com/gitlabhq" target="_blank" rel="noopener">gitlib</a><br><a href="https://goharbor.io/" target="_blank" rel="noopener">harbor</a><br><a href="https://www.jenkins.io/zh/doc/" target="_blank" rel="noopener">Jenkins</a><br><a href="https://docs.rancher.cn/" target="_blank" rel="noopener">rancher</a></p>
+<p>docker + gitlib + jenkins + horbor</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E4%BB%BFhexo%E7%9A%84golang%E5%AE%9E%E7%8E%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -883,375 +1229,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Homebrew%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/Homebrew%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Homebrew使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-14 09:22:48 / 修改时间：17:04:09" itemprop="dateCreated datePublished" datetime="2020-05-14T09:22:48+08:00">2020-05-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/mactools/" itemprop="url" rel="index"><span itemprop="name">mactools</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>743</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://brew.sh/index_zh-cn" target="_blank" rel="noopener">Homebrew</a></p>
-<h3 id="Install-Homebrew"><a href="#Install-Homebrew" class="headerlink" title="Install Homebrew"></a>Install Homebrew</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ruby 写的管理包管理工具</span></span><br><span class="line">/bin/bash -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="using"><a href="#using" class="headerlink" title="using"></a>using</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">brew install wget</span><br><span class="line">把软件包安装到 /usr/<span class="built_in">local</span>/Cellar</span><br><span class="line">将可执行文件链接到 /usr/<span class="built_in">local</span>/bin/ 下</span><br><span class="line"></span><br><span class="line">brew edit wget</span><br><span class="line"></span><br><span class="line">brew cask create foo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包管理</span></span><br><span class="line">brew install node</span><br><span class="line">brew uninstall &lt;packageName&gt;</span><br><span class="line">brew search &lt;packageName&gt;</span><br><span class="line">brew list</span><br><span class="line">brew info &lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">xcode-select --install</span><br><span class="line">brew upgrade</span><br></pre></td></tr></table></figure>
-
-<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mac使用brew update无反应,更新慢解决办法</span><br><span class="line"></span><br><span class="line">使用中科大的镜像</span><br><span class="line">替换默认源</span><br><span class="line">第一步，替换brew.git</span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span> || <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/Homebrew</span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line">第二步：替换homebrew-core.git</span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line"></span><br><span class="line">最后使用</span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/AwesomeNavigation/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/AwesomeNavigation/" class="post-title-link" itemprop="url">AwesomeNavigation</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 09:21:17" itemprop="dateCreated datePublished" datetime="2020-05-14T09:21:17+08:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-15 08:19:11" itemprop="dateModified" datetime="2020-05-15T08:19:11+08:00">2020-05-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E5%88%86%E7%B1%BB%E5%AF%BC%E8%88%AA/" itemprop="url" rel="index"><span itemprop="name">分类导航</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>264</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="运维站点"><a href="#运维站点" class="headerlink" title="运维站点"></a>运维站点</h2><ul>
-<li><a href="https://www.infoq.cn/topic/operation" target="_blank" rel="noopener">InfoQ</a></li>
-<li><a href="http://www.ttlsa.com/" target="_blank" rel="noopener">运维时间</a></li>
-<li><a href="https://tech.youzan.com/" target="_blank" rel="noopener">有赞技术团队</a></li>
-<li><a href="https://www.hi-linux.com/" target="_blank" rel="noopener">运维之美</a></li>
-<li><a href="http://www.178linux.com/" target="_blank" rel="noopener">Linux 运维部落</a></li>
-</ul>
-<h2 id="网站资源"><a href="#网站资源" class="headerlink" title="网站资源"></a>网站资源</h2><ul>
-<li><a href="https://access.redhat.com/documentation/en-us/" target="_blank" rel="noopener"> Red Hat Container Development  </a></li>
-<li><a href="https://edu.aliyun.com/developer" target="_blank" rel="noopener">ali online courses</a></li>
-<li><a href="https://e.huawei.com/cn/material/MaterialList" target="_blank" rel="noopener">HUAWEI</a></li>
-</ul>
-<h2 id="Awesome"><a href="#Awesome" class="headerlink" title="Awesome"></a>Awesome</h2><ul>
-<li><p><a href="https://www.kcsou.com/s_kubesphere/" target="_blank" rel="noopener">课程搜</a></p>
-</li>
-<li><p><a href="https://github.com/prakhar1989/awesome-courses#algorithms" target="_blank" rel="noopener">CS Courses</a></p>
-</li>
-<li><p><a href="https://github.com/xingshaocheng/architect-awesome" target="_blank" rel="noopener">architect</a></p>
-</li>
-<li><p><a href="https://github.com/awesome-selfhosted/awesome-selfhosted" target="_blank" rel="noopener">selfhosted</a></p>
-</li>
-<li><p><a href="https://github.com/fffaraz/awesome-cpp" target="_blank" rel="noopener">cpp</a></p>
-</li>
-<li><p><a href="https://github.com/akullpp/awesome-java" target="_blank" rel="noopener">java</a></p>
-</li>
-<li><p><a href="https://github.com/vinta/awesome-python" target="_blank" rel="noopener">python </a></p>
-</li>
-<li><p><a href="https://github.com/jobbole/awesome-python-cn" target="_blank" rel="noopener">python-cn</a></p>
-</li>
-<li><p><a href="https://github.com/avelino/awesome-go" target="_blank" rel="noopener">go</a></p>
-</li>
-<li><p><a href="https://github.com/sindresorhus/awesome-nodejs" target="_blank" rel="noopener">nodejs</a></p>
-</li>
-<li><p><a href="https://github.com/sorrycc/awesome-javascript" target="_blank" rel="noopener">javascript</a></p>
-</li>
-<li><p><a href="https://github.com/alebcay/awesome-shell" target="_blank" rel="noopener">shell</a></p>
-</li>
-<li><p><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">vue</a></p>
-</li>
-<li><p><a href="http://c.biancheng.net/c/" target="_blank" rel="noopener">C语言入门</a></p>
-</li>
-<li><p><a href="https://github.com/josephmisiti/awesome-machine-learning" target="_blank" rel="noopener">machine-learning</a></p>
-</li>
-<li><p><a href="https://github.com/MaximAbramchuck/awesome-interview-questions" target="_blank" rel="noopener">interview-questions</a></p>
-</li>
-<li><p><a href="https://github.com/Hack-with-Github/Awesome-Hacking" target="_blank" rel="noopener">Hacking</a></p>
-</li>
-<li><p><a href="https://github.com/kahun/awesome-sysadmin" target="_blank" rel="noopener">sysadmin</a></p>
-</li>
-<li><p><a href="https://github.com/veggiemonk/awesome-docker" target="_blank" rel="noopener">docker</a></p>
-</li>
-<li><p><a href="https://github.com/jaywcjlove/awesome-mac" target="_blank" rel="noopener">mac</a></p>
-</li>
-<li><p><a href="https://github.com/herrbischoff/awesome-macos-command-line" target="_blank" rel="noopener">macos-command-line</a></p>
-</li>
-<li><p><a href="https://github.com/viatsko/awesome-vscode" target="_blank" rel="noopener">vscode</a></p>
-</li>
-<li><p><a href="https://github.com/fighting41love/funNLP" target="_blank" rel="noopener">funNLP</a></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Django%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/Django%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Django框架使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-14 09:16:35 / 修改时间：09:35:45" itemprop="dateCreated datePublished" datetime="2020-05-14T09:16:35+08:00">2020-05-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/python%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">python开发</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Django"><a href="#Django" class="headerlink" title="Django"></a>Django</h2><ul>
-<li><a href="https://docs.djangoproject.com/zh-hans/3.0/" target="_blank" rel="noopener"> Django </a></li>
-</ul>
-<h2 id="概念-Concepts"><a href="#概念-Concepts" class="headerlink" title="概念 Concepts"></a>概念 Concepts</h2><ul>
-<li>项目 project</li>
-<li>模板 template</li>
-<li>模型 modules</li>
-<li>表单 form</li>
-<li>视图 view</li>
-<li>管理工具<ul>
-<li>django-admin</li>
-</ul>
-</li>
-</ul>
-<p>brower -&gt; view -&gt; controller -&gt; models</p>
-<h3 id="python3-install"><a href="#python3-install" class="headerlink" title="python3 install"></a>python3 install</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.8.2/Python-3.8.2.tgz</span><br><span class="line">tar -zxf Python-3.8.2.tgz </span><br><span class="line">cd Python-3.8.2</span><br><span class="line">./configure  <span class="comment">--prefix /usr/local/python</span></span><br><span class="line">make -j $(/proc/cpuinfo |grep cores|wc -l)</span><br><span class="line">make <span class="keyword">install</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置国内镜像源</span></span><br><span class="line">mkdir ~/.pip</span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;~/.pip/pip.conf </span><br><span class="line">[<span class="keyword">global</span>]</span><br><span class="line"><span class="keyword">index</span>-<span class="keyword">url</span> = <span class="keyword">http</span>://pypi.douban.com/simple</span><br><span class="line">extra-<span class="keyword">index</span>-<span class="keyword">url</span>=https://mirrors.aliyun.com/pypi/simple</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置虚拟环境</span></span><br><span class="line">/usr/<span class="keyword">local</span>/python/<span class="keyword">bin</span>/pip3 <span class="keyword">install</span> <span class="comment">--upgrade pip</span></span><br><span class="line">/usr/<span class="keyword">local</span>/python/<span class="keyword">bin</span>/pip3 <span class="keyword">install</span> virtualenv</span><br><span class="line">/usr/<span class="keyword">local</span>/python/<span class="keyword">bin</span>/virtualenv djangodemo</span><br><span class="line"></span><br><span class="line">echo <span class="string">". djangodemo/bin/activate"</span> &gt;&gt;~/.bash_profile</span><br><span class="line">. djangodemo/<span class="keyword">bin</span>/<span class="keyword">activate</span></span><br><span class="line">pip <span class="keyword">install</span> django</span><br><span class="line">django-<span class="keyword">admin</span> <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="创建了一个项目"><a href="#创建了一个项目" class="headerlink" title="创建了一个项目"></a>创建了一个项目</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject -h</span><br><span class="line">django-admin startproject web1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置数据库</span></span><br><span class="line">yum -y install mariadb mariadb-devel</span><br><span class="line">systemctl start mariadb</span><br><span class="line">pip install mysqlclient</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建数据库</span></span><br><span class="line">mysql -uroot -p <span class="string">"create database web1"</span></span><br><span class="line">CREATE DATABASE `web1`<span class="built_in"> DEFAULT </span>CHARACTER <span class="builtin-name">SET</span> utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment"># vim web1/setting.py</span></span><br><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">"HOST"</span>: <span class="string">'localhost'</span>,</span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'root'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'web1'</span>,</span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">''</span>,</span><br><span class="line">        <span class="string">'PORT'</span>: 3306,</span><br><span class="line">    <span class="string">'OPTIONS'</span>: &#123;</span><br><span class="line">        <span class="string">'init_command'</span>: <span class="string">'SET default_storage_engine=INNODB'</span>,</span><br><span class="line">        <span class="string">'autocommit'</span>: <span class="literal">True</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 允许所有主机访问，默认为空，返回 400</span></span><br><span class="line">ALLOWED_HOSTS=[<span class="string">"*"</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步数据库</span></span><br><span class="line">python manage.py migrate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建管理员账号</span></span><br><span class="line">python manage.py createsuperuser</span><br><span class="line"></span><br><span class="line"><span class="comment"># admin 模块位置</span></span><br><span class="line">lib/python3.8/site-packages/django/contrib/admin/</span><br><span class="line"><span class="attribute">DEBUG</span>=<span class="literal">True</span></span><br><span class="line">导致 admin 模块的静态文件加载不到</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">python manage.py runserver 0:8000</span><br></pre></td></tr></table></figure>
-
-<h3 id="Django-目录结构"><a href="#Django-目录结构" class="headerlink" title="Django 目录结构"></a>Django 目录结构</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">web1  <span class="meta"># 项目目录</span></span><br><span class="line">web1/manage.py <span class="meta"># 项目管理工具</span></span><br><span class="line">web1/web1  <span class="meta"># </span></span><br><span class="line">web1<span class="meta-keyword">/web1/</span>__init__.py <span class="meta"># 告诉 Python 这个目录应该被认为是一个 Python 包。</span></span><br><span class="line">web1<span class="meta-keyword">/web1/</span>asgi.py     <span class="meta"># ASGI 兼容的Web服务器上的入口</span></span><br><span class="line">web1<span class="meta-keyword">/web1/</span>settings.py <span class="meta"># Django 项目的配置文件</span></span><br><span class="line">web1<span class="meta-keyword">/web1/</span>urls.py     <span class="meta"># Django 项目的 URL 声明 ，路由</span></span><br><span class="line">web1<span class="meta-keyword">/web1/</span>wsgi.py     <span class="meta"># WSGI 兼容的Web服务器上的入口</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> web1</span><br><span class="line"><span class="keyword">python</span> manage.<span class="keyword">py</span> startapp polls</span><br><span class="line"></span><br><span class="line">polls/</span><br><span class="line">├── admin.<span class="keyword">py</span></span><br><span class="line">├── apps.<span class="keyword">py</span></span><br><span class="line">├── __init__.<span class="keyword">py</span></span><br><span class="line">├── migrations</span><br><span class="line">│   └── __init__.<span class="keyword">py</span></span><br><span class="line">├── models.<span class="keyword">py</span></span><br><span class="line">├── tests.<span class="keyword">py</span> </span><br><span class="line">├── urls.<span class="keyword">py</span>  # 路由</span><br><span class="line">└── views.<span class="keyword">py</span> # 视图</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>创建项目</p>
-<ul>
-<li>创建应用<ul>
-<li>编写视图</li>
-<li>配置路由</li>
-<li>配置模型</li>
-<li>生成迁移文件<ul>
-<li>查看迁移文件</li>
-</ul>
-</li>
-<li>执行迁移</li>
-<li>通过 shell 调试</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>后台创建</p>
-<ul>
-<li>创建后台用户</li>
-<li>通过 admin 文件向后台注册表</li>
-</ul>
-</li>
-<li><p>编写多视图</p>
-</li>
-<li><p>使用模板来渲染视图</p>
-</li>
-<li><p>404 页面处理</p>
-</li>
-<li><p>为 url 添加命名空间</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1321,14 +1298,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog.githup.io/categories/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1371,13 +1348,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">139k</span>
+    <span title="站点总字数">140k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:06</span>
+    <span title="站点阅读时长">2:08</span>
 </div>
 
         
