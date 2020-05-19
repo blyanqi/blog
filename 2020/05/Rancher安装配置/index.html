@@ -258,8 +258,6 @@
 <h2 id="Rancher-2-X-docker-安装"><a href="#Rancher-2-X-docker-安装" class="headerlink" title="Rancher 2.X docker 安装"></a>Rancher 2.X docker 安装</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载最新的镜像</span></span><br><span class="line"><span class="string">docker</span> <span class="string">pull</span> <span class="string">rancher/rancher</span></span><br><span class="line"><span class="string">docker</span> <span class="string">image</span> <span class="string">ls</span></span><br><span class="line"><span class="comment"># 查看镜像详情</span></span><br><span class="line"><span class="string">docker</span> <span class="string">inspect</span> <span class="string">rancher/rancher:latest</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"> <span class="attr">"Volumes":</span> <span class="string">&#123;</span></span><br><span class="line">                <span class="string">"/var/lib/rancher"</span><span class="string">:</span> <span class="string">&#123;&#125;,</span></span><br><span class="line">                <span class="string">"/var/log/auditlog"</span><span class="string">:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">            <span class="string">&#125;,</span></span><br><span class="line">            <span class="attr">"WorkingDir":</span> <span class="string">"/var/lib/rancher"</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># 创建 pvc</span></span><br><span class="line"><span class="string">mkdir</span> <span class="string">-p</span> <span class="string">/docker_volume/rancher_home/rancher</span></span><br><span class="line"><span class="string">mkdir</span> <span class="string">-p</span> <span class="string">/docker_volume/rancher_home/auditlog</span></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line"><span class="string">docker</span> <span class="string">run</span> <span class="string">-d</span> <span class="string">--restart=unless-stopped</span> <span class="string">-p</span> <span class="number">80</span><span class="string">:80</span> <span class="string">-p</span> <span class="number">443</span><span class="string">:443</span> <span class="string">\</span></span><br><span class="line"><span class="string">-v</span> <span class="string">/docker_volume/rancher_home/rancher:/var/lib/rancher</span> <span class="string">\</span></span><br><span class="line"><span class="string">-v</span> <span class="string">/docker_volume/rancher_home/auditlog:/var/log/auditlog</span> <span class="string">\</span></span><br><span class="line"><span class="string">--name</span> <span class="string">rancher</span> <span class="string">rancher/rancher</span>  </span><br><span class="line"><span class="comment"># 查看容器</span></span><br><span class="line"><span class="string">docker</span> <span class="string">container</span> <span class="string">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line"><span class="string">http://192.168.0.61</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 admin 密码</span></span><br><span class="line"><span class="string">admin@123456.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择页面底部 设置语言</span></span><br></pre></td></tr></table></figure>
 <h2 id="导入现有的-kubernetes-集群"><a href="#导入现有的-kubernetes-集群" class="headerlink" title="导入现有的 kubernetes 集群"></a>导入现有的 kubernetes 集群</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加集群 -&gt; 导入现有集群 -&gt; 名称 -&gt; 导入命令 -&gt; 完成 </span></span><br><span class="line"><span class="comment"># 需要 kubernetes 管理员权限，已经有了无需执行</span></span><br><span class="line">kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user [USER_ACCOUNT]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 kubernetes 集群执行</span></span><br><span class="line"><span class="comment"># 有证书</span></span><br><span class="line">kubectl apply -f https://192.168.0.61/v3/import/d2nkw8bzktbzrtsnfcdbxdzjbxqpbn8gwbhntxcpprwpf7jq9t9689.yaml</span><br><span class="line"><span class="comment"># 绕过证书检查</span></span><br><span class="line">curl --insecure -sfL https://192.168.0.61/v3/import/d2nkw8bzktbzrtsnfcdbxdzjbxqpbn8gwbhntxcpprwpf7jq9t9689.yaml | kubectl apply -f -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 会在kubernetes 上所有节点上创建 </span></span><br><span class="line">cattle-node-agent</span><br><span class="line"><span class="comment"># 在 master 上创建两个 pod</span></span><br><span class="line">cattle-cluster-agent</span><br></pre></td></tr></table></figure>
 
-
-
     </div>
 
     
@@ -353,20 +351,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog.githup.io/categories/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog.githup.io/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -403,13 +401,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">170k</span>
+    <span title="站点总字数">173k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:35</span>
+    <span title="站点阅读时长">2:37</span>
 </div>
 
         
@@ -462,6 +460,8 @@
 
 
 
+
+  
 
   
 

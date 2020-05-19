@@ -262,11 +262,8 @@
       
         <p><a href="https://www.jenkins.io/" target="_blank" rel="noopener">jenkins</a></p>
 <h2 id="jenkins-conceptual"><a href="#jenkins-conceptual" class="headerlink" title="jenkins conceptual"></a>jenkins conceptual</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">pipeline    <span class="comment"># 流水线</span></span><br><span class="line">item        <span class="comment"># 工程</span></span><br><span class="line">build       <span class="comment"># 构建</span></span><br><span class="line">hook        <span class="comment"># 钩子</span></span><br><span class="line"><span class="comment"># 定义执行环境</span></span><br><span class="line">workspace   <span class="comment"># 工作空间，包含来自远程仓库的文件和一些用于Pipeline的工作文件</span></span><br><span class="line">agent       <span class="comment">#</span></span><br><span class="line">stages      <span class="comment"># 块</span></span><br><span class="line">    stage(<span class="string">'Build'</span>)   <span class="comment">#</span></span><br><span class="line">    stage(<span class="string">'Test'</span>)    <span class="comment">#</span></span><br><span class="line">    stage(<span class="string">'Deploy'</span>)  <span class="comment">#</span></span><br><span class="line">        steps   <span class="comment"># 步骤</span></span><br><span class="line">executor    <span class="comment"># 执行器</span></span><br><span class="line"> </span><br><span class="line">environment <span class="comment"># 定义环境变量</span></span><br><span class="line">post        <span class="comment"># </span></span><br><span class="line">    always      <span class="comment">#</span></span><br><span class="line">    success     <span class="comment">#</span></span><br><span class="line">    unstable    <span class="comment">#</span></span><br><span class="line">    failure     <span class="comment">#</span></span><br><span class="line">    changed     <span class="comment">#</span></span><br><span class="line"><span class="comment"># 通知</span></span><br><span class="line">mail to:        <span class="comment">#</span></span><br><span class="line"><span class="comment"># 部署</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="jenkins-安装"><a href="#jenkins-安装" class="headerlink" title="jenkins 安装"></a>jenkins 安装</h2><p><a href="http://mirrors.jenkins.io/war-stable/latest/jenkins.war" target="_blank" rel="noopener">jenkins 下载</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行jenkins</span></span><br><span class="line">java -jar jenkins.war --httpPort=8080.</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line">http://localhost:8080</span><br></pre></td></tr></table></figure>
+<h2 id="jenkins-安装"><a href="#jenkins-安装" class="headerlink" title="jenkins 安装"></a>jenkins 安装</h2><p><a href="http://mirrors.jenkins.io/war-stable/latest/jenkins.war" target="_blank" rel="noopener">jenkins 下载</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行jenkins</span></span><br><span class="line">java -jar jenkins.war --httpPort=8080.</span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line">http://localhost:8080</span><br></pre></td></tr></table></figure></p>
 <h2 id="pipeline-指令"><a href="#pipeline-指令" class="headerlink" title="pipeline 指令"></a>pipeline 指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#39;Build&#39;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#39;echo &quot;Hello World&quot;&#39;</span><br><span class="line">                sh &#39;&#39;&#39;</span><br><span class="line">                    echo &quot;Multiline shell steps works too&quot;</span><br><span class="line">                    ls -lah</span><br><span class="line">                &#39;&#39;&#39;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
     </div>
 
@@ -361,20 +358,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog.githup.io/categories/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog.githup.io/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -411,13 +408,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">170k</span>
+    <span title="站点总字数">173k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:35</span>
+    <span title="站点阅读时长">2:37</span>
 </div>
 
         
@@ -470,6 +467,8 @@
 
 
 
+
+  
 
   
 

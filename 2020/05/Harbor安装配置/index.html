@@ -254,19 +254,14 @@
 <h2 id="harbor-下载"><a href="#harbor-下载" class="headerlink" title="harbor 下载"></a><a href="https://github.com/goharbor/harbor/releases" target="_blank" rel="noopener">harbor 下载</a></h2><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">cp harbor.yml.tmpl harbor.yml</span><br><span class="line"><span class="meta"># 配置 harbor.yml</span></span><br><span class="line">hostname 本机IP</span><br><span class="line"><span class="meta"># 把 ssl 先注释</span></span><br><span class="line"><span class="symbol">https:</span></span><br><span class="line"><span class="symbol">  port:</span> <span class="number">443</span></span><br><span class="line"><span class="symbol">  certificate:</span> <span class="meta-keyword">/your/</span>certificate/path</span><br><span class="line"><span class="symbol">  private_key:</span> <span class="meta-keyword">/your/</span>private<span class="meta-keyword">/key/</span>path</span><br><span class="line"></span><br><span class="line"><span class="meta"># 下载镜像</span></span><br><span class="line">./prepare </span><br><span class="line"></span><br><span class="line"><span class="meta"># 安装</span></span><br><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
 <h3 id="安装-16-个镜像，启动了9个容器"><a href="#安装-16-个镜像，启动了9个容器" class="headerlink" title="安装 16 个镜像，启动了9个容器"></a>安装 16 个镜像，启动了9个容器</h3><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">goharbor/chartmuseum-photon    <span class="comment">#</span></span><br><span class="line">goharbor/redis-photon          <span class="comment">#</span></span><br><span class="line">goharbor/trivy-adapter-photon  <span class="comment">#</span></span><br><span class="line">goharbor/clair-adapter-photon  <span class="comment">#</span></span><br><span class="line">goharbor/clair-photon          <span class="comment">#</span></span><br><span class="line">goharbor/notary-server-photon  </span><br><span class="line">goharbor/notary-signer-photon  </span><br><span class="line">goharbor/harbor-registryctl    </span><br><span class="line">goharbor/registry-photon       </span><br><span class="line">goharbor/nginx-photon          </span><br><span class="line">goharbor/harbor-<span class="built_in">log</span>            </span><br><span class="line">goharbor/harbor-jobservice     </span><br><span class="line">goharbor/harbor-core           </span><br><span class="line">goharbor/harbor-portal         </span><br><span class="line">goharbor/harbor-db             </span><br><span class="line">goharbor/<span class="built_in">prepare</span></span><br></pre></td></tr></table></figure>
 <h3 id="配置docker信任"><a href="#配置docker信任" class="headerlink" title="配置docker信任"></a>配置docker信任</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"insecure-registries"</span>: [</span><br><span class="line">    <span class="string">"A.B.C.D"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">systemctl reload docker</span><br></pre></td></tr></table></figure>
-
 <h3 id="创建一个项目"><a href="#创建一个项目" class="headerlink" title="创建一个项目"></a>创建一个项目</h3><blockquote>
 <p>登录后</p>
-</blockquote>
 <ul>
 <li>创建一个项目 newproject,分配大小。（ -1 不限制）</li>
 <li>创建一个用户 new 。 到项目中授权新用户为项目管理员 </li>
 </ul>
+</blockquote>
 <h3 id="制作上传镜像"><a href="#制作上传镜像" class="headerlink" title="制作上传镜像"></a>制作上传镜像</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 制作镜像</span><br><span class="line">docker tag busybox <span class="number">192.168</span><span class="number">.0</span><span class="number">.61</span>:<span class="number">81</span>/newproject/busybox:<span class="number">0.1</span></span><br><span class="line"># 将当前容器打为镜像 (docker commit 当前运行的容器名 新镜像名:版本号)</span><br><span class="line">docker commit busybox <span class="number">192.168</span><span class="number">.0</span><span class="number">.61</span>:<span class="number">81</span>/newproject/busybox:<span class="number">0.2</span></span><br><span class="line"></span><br><span class="line"># 登录镜像库</span><br><span class="line">docker login <span class="number">192.168</span><span class="number">.0</span><span class="number">.61</span>:<span class="number">81</span></span><br><span class="line"># 上传镜像</span><br><span class="line">docker push <span class="number">192.168</span><span class="number">.0</span><span class="number">.61</span>:<span class="number">81</span>/newproject/busybox:<span class="number">0.1</span></span><br></pre></td></tr></table></figure>
-
-
-
-
 
     </div>
 
@@ -361,20 +356,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog.githup.io/categories/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog.githup.io/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -411,13 +406,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">170k</span>
+    <span title="站点总字数">173k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:35</span>
+    <span title="站点阅读时长">2:37</span>
 </div>
 
         
@@ -470,6 +465,8 @@
 
 
 
+
+  
 
   
 

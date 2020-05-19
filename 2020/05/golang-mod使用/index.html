@@ -259,8 +259,8 @@
 <p><a href="https://www.runoob.com/go/go-tutorial.html" target="_blank" rel="noopener"> 菜鸟教程 golang  </a></p>
 </blockquote>
 <h2 id="go-mod-使用"><a href="#go-mod-使用" class="headerlink" title="go mod 使用"></a>go mod 使用</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">go.mod 提供了module, require、<span class="keyword">replace</span>和<span class="keyword">exclude</span> 四个命令</span><br><span class="line"><span class="keyword">module</span> 语句指定包的名字（路径）</span><br><span class="line">require 语句指定的依赖项模块</span><br><span class="line"><span class="keyword">replace</span> 语句可以替换依赖项模块</span><br><span class="line"><span class="keyword">exclude</span> 语句可以忽略依赖项模块</span><br><span class="line"></span><br><span class="line"><span class="keyword">go</span> <span class="keyword">list</span> -m -u <span class="keyword">all</span> 来检查可以升级的<span class="keyword">package</span></span><br><span class="line"><span class="keyword">go</span> <span class="keyword">get</span> -u need-<span class="keyword">upgrade</span>-<span class="keyword">package</span> 升级后会将新的依赖版本更新到</span><br><span class="line"><span class="keyword">go</span> <span class="keyword">get</span> <span class="keyword">package</span>@<span class="keyword">version</span> 将会升级到指定的版本号<span class="keyword">version</span></span><br><span class="line"><span class="keyword">go</span> <span class="keyword">get</span> -u 升级所有依赖</span><br></pre></td></tr></table></figure>
-<p>创建一个 go mod 项目</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir project</span><br><span class="line"></span><br><span class="line">export GOPATH=<span class="string">"/Users/alert/go"</span></span><br><span class="line">export GOROOT=<span class="string">"/usr/local/go"</span></span><br><span class="line">export GO111MODULE=on</span><br><span class="line">export GOPROXY=https:<span class="comment">//goproxy.io</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">go</span> env GOPATH</span><br><span class="line"><span class="keyword">go</span> mod init</span><br><span class="line">touch main.<span class="keyword">go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译运行，不生成可执行文件</span></span><br><span class="line"><span class="keyword">go</span> run main.<span class="keyword">go</span></span><br><span class="line"><span class="comment">// 项目编译</span></span><br><span class="line"><span class="keyword">go</span> build</span><br><span class="line"><span class="comment">// 编译后安装到 bin 目录</span></span><br><span class="line"><span class="keyword">go</span> install</span><br></pre></td></tr></table></figure>
+<p>创建一个 go mod 项目<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir project</span><br><span class="line"></span><br><span class="line">export GOPATH=<span class="string">"/Users/alert/go"</span></span><br><span class="line">export GOROOT=<span class="string">"/usr/local/go"</span></span><br><span class="line">export GO111MODULE=on</span><br><span class="line">export GOPROXY=https:<span class="comment">//goproxy.io</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">go</span> env GOPATH</span><br><span class="line"><span class="keyword">go</span> mod init</span><br><span class="line">touch main.<span class="keyword">go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译运行，不生成可执行文件</span></span><br><span class="line"><span class="keyword">go</span> run main.<span class="keyword">go</span></span><br><span class="line"><span class="comment">// 项目编译</span></span><br><span class="line"><span class="keyword">go</span> build</span><br><span class="line"><span class="comment">// 编译后安装到 bin 目录</span></span><br><span class="line"><span class="keyword">go</span> install</span><br></pre></td></tr></table></figure></p>
+
     </div>
 
     
@@ -357,20 +357,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/blog.githup.io/categories/">
           
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/blog.githup.io/tags/">
           
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -407,13 +407,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">170k</span>
+    <span title="站点总字数">173k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:35</span>
+    <span title="站点阅读时长">2:37</span>
 </div>
 
         
@@ -466,6 +466,8 @@
 
 
 
+
+  
 
   
 
