@@ -38,7 +38,7 @@
 <li><a href="https://github.com/NextMoe/hexo-tag-dplayer" target="_blank" rel="noopener">视频</a></li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 音频插件</span></span><br><span class="line">npm install hexo-tag-aplayer</span><br><span class="line"><span class="comment"># 视频插件</span></span><br><span class="line">npm install hexo-tag-dplayer</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在markdown里添加音频</span></span><br><span class="line">&#123;% aplayer <span class="string">"她的睫毛"</span> <span class="string">"周杰伦"</span> <span class="string">"http://home.ustc.edu.cn/~mmmwhy/%d6%dc%bd%dc%c2%d7%20-%20%cb%fd%b5%c4%bd%de%c3%ab.mp3"</span>  <span class="string">"http://home.ustc.edu.cn/~mmmwhy/jay.jpg"</span> <span class="string">"autoplay=false"</span> %&#125;</span><br><span class="line"><span class="comment"># 在markdown里添加视频</span></span><br><span class="line">&#123;% dplayer <span class="string">"url=http://home.ustc.edu.cn/~mmmwhy/GEM.mp4"</span>  <span class="string">"pic=http://home.ustc.edu.cn/~mmmwhy/GEM.jpg"</span> <span class="string">"loop=yes"</span> <span class="string">"theme=#FADFA3"</span> <span class="string">"autoplay=false"</span> <span class="string">"token=tokendemo"</span> %&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="生成部署-hexo"><a href="#生成部署-hexo" class="headerlink" title="生成部署 hexo"></a>生成部署 hexo</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成静态文件 (用于githup page 部署)</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个 githup repository</span></span><br><span class="line">name: blog.githup.io</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置 githup 库地址 _config.yaml</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/blyanqi/blog.githup.io.git</span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为github设置SSH Keys</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"blyanqi@163.com"</span></span><br><span class="line"><span class="comment"># 测试 ssh key</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line"></span><br><span class="line"><span class="comment"># 部署到 githup page</span></span><br><span class="line">npm install --save hexo-deployer-git</span><br><span class="line">hexo deploy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一键部署</span></span><br><span class="line"><span class="comment"># 编辑 package.json</span></span><br><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"hexo generate"</span>,</span><br><span class="line">    <span class="string">"clean"</span>: <span class="string">"hexo clean"</span>,</span><br><span class="line">    <span class="string">"deploy"</span>: <span class="string">"hexo deploy"</span>,</span><br><span class="line">    <span class="string">"server"</span>: <span class="string">"hexo server"</span>,</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment"># build</span></span><br><span class="line">npm run deploy</span><br></pre></td></tr></table></figure>
+<h2 id="站内文章引用"><a href="#站内文章引用" class="headerlink" title="站内文章引用"></a>站内文章引用</h2><figure class="highlight vala"><table><tr><td class="code"><pre><span class="line">&#123;% post_link 路径/文件名(不要后缀) 文章别名(可选) %&#125;</span><br><span class="line">&#123;% post_link dir/hexo安装配置 %&#125;</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"><span class="meta">## 生成部署 hexo</span></span><br><span class="line"></span><br><span class="line">```bash </span><br><span class="line"><span class="meta"># 生成静态文件 (用于githup page 部署)</span></span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="meta"># 创建一个 githup repository</span></span><br><span class="line">name: blog.githup.io</span><br><span class="line"></span><br><span class="line"><span class="meta"># 配置 githup 库地址 _config.yaml</span></span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https:<span class="comment">//github.com/blyanqi/blog.githup.io.git</span></span><br><span class="line">  branch: master</span><br><span class="line"></span><br><span class="line"><span class="meta"># 为github设置SSH Keys</span></span><br><span class="line">ssh-keygen -t rsa -C <span class="string">"blyanqi@163.com"</span></span><br><span class="line"><span class="meta"># 测试 ssh key</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line"></span><br><span class="line"><span class="meta"># 部署到 githup page</span></span><br><span class="line">npm install --save hexo-deployer-git</span><br><span class="line">hexo deploy</span><br><span class="line"></span><br><span class="line"><span class="meta"># 一键部署</span></span><br><span class="line"><span class="meta"># 编辑 package.json</span></span><br><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"build"</span>: <span class="string">"hexo generate"</span>,</span><br><span class="line">    <span class="string">"clean"</span>: <span class="string">"hexo clean"</span>,</span><br><span class="line">    <span class="string">"deploy"</span>: <span class="string">"hexo deploy"</span>,</span><br><span class="line">    <span class="string">"server"</span>: <span class="string">"hexo server"</span>,</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta"># build</span></span><br><span class="line">npm run deploy</span><br></pre></td></tr></table></figure>
 <h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">INFO  Copying files from public folder...</span><br><span class="line">FATAL Something<span class="string">'s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span></span><br><span class="line"><span class="string">TypeError [ERR_INVALID_ARG_TYPE]: The "mode" argument must be integer. Received an instance of Object</span></span><br><span class="line"><span class="string">    at copyFile (fs.js:1890:10)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 是因为 nodejs 版本问题，选用稳定版本 v12.16.3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">remote: Invalid username or password.</span></span><br><span class="line"><span class="string">fatal: Authentication failed for '</span>https://github.com/blyanqi/blog.githup.io.git/<span class="string">'</span></span><br><span class="line"><span class="string">FATAL Something'</span>s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">Error: Spawn failed</span><br><span class="line"></span><br><span class="line"><span class="comment"># git 验证失败</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># index.html 里面空白没有内容 (重新生成一遍，可能是node换版本导致)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态文件请求不到，修改 _config,yaml 里 root: / 改成  root: /blog.githup.io/</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
@@ -49,6 +49,275 @@
         <tag>hexo</tag>
         <tag>nodejs</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Linux操作系统原理</title>
+    <url>/blog.githup.io/2020/05/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+  </entry>
+  <entry>
+    <title>计算机组成原理</title>
+    <url>/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h2><ul>
+<li><p><a href="https://zh.wikipedia.org/wiki/%E5%A4%8D%E6%9D%82%E6%8C%87%E4%BB%A4%E9%9B%86" target="_blank" rel="noopener">CISC 复杂指令集</a></p>
+<ul>
+<li>X86架构 (<a href="http://www.zhaoxin.com/" target="_blank" rel="noopener">兆芯</a>)<ul>
+<li><a href="https://zh.wikipedia.org/wiki/X86" target="_blank" rel="noopener">X86</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://zh.wikipedia.org/wiki/%E7%B2%BE%E7%AE%80%E6%8C%87%E4%BB%A4%E9%9B%86" target="_blank" rel="noopener">RISC 精简指令集</a></p>
+<ul>
+<li>ARM架构 (<a href="https://e.huawei.com/cn/solutions/hic" target="_blank" rel="noopener">华为</a>)<ul>
+<li><a href="https://zh.wikipedia.org/wiki/ARM%E6%9E%B6%E6%A7%8B" target="_blank" rel="noopener">ARM</a></li>
+</ul>
+</li>
+<li>MIPS架构(<a href="http://www.loongson.cn/index.html" target="_blank" rel="noopener">龙芯</a>)<ul>
+<li><a href="https://zh.wikipedia.org/wiki/MIPS%E6%9E%B6%E6%A7%8B" target="_blank" rel="noopener">MIPS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="计算机组成"><a href="#计算机组成" class="headerlink" title="计算机组成"></a>计算机组成</h2><ul>
+<li>CPU</li>
+<li>MEMORY</li>
+<li>DISK</li>
+<li><p>IO</p>
+<ul>
+<li>GPU</li>
+<li>NET</li>
+</ul>
+</li>
+<li><p>主板</p>
+<ul>
+<li>北桥<ul>
+<li>CPU</li>
+<li>MEMORY</li>
+<li>GPU</li>
+<li>PCIE</li>
+</ul>
+</li>
+<li>南桥<ul>
+<li>DISK</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="hello-world-工作流程"><a href="#hello-world-工作流程" class="headerlink" title="hello world 工作流程"></a>hello world 工作流程</h2><p><a href="https://yangwang.hk/?p=281" target="_blank" rel="noopener">引用：用机器码写hello world</a></p>
+<p>加电 -&gt; BIOS -&gt; 读取第一扇区 -&gt; bootloader -&gt; 操作系统</p>
+<ul>
+<li>加电</li>
+<li>BIOS<ul>
+<li>电池</li>
+<li>只读 ROM</li>
+</ul>
+</li>
+<li><p>第一扇区</p>
+<ul>
+<li>MBR（ Master Boot Record，主引导记录 ）<ul>
+<li>466字节的引导程序</li>
+<li>64字节的分区表<blockquote>
+<p>为什么一块硬盘上最多只能有四个主分区的原因——第五个主分区放不下…</p>
+</blockquote>
+</li>
+<li>2字节的校验位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>实模式</p>
+</li>
+<li><p>保护模式</p>
+<ul>
+<li>286架构<blockquote>
+<p>段寄存器保存的数据不再是内存物理地址，而是称作选择器（selector）</p>
+<ul>
+<li>选择器<ul>
+<li>高13位指向描述符表</li>
+<li>最低的两位数据定义了请求的权限，从0到3，0是最高权限，3是最低权限；</li>
+<li>剩下的一位表示是使用全局描述符表（GDT）还是局部描述符表（LDT）。</li>
+</ul>
+</li>
+<li>全局描述表（GDT Global Descriptor Table)</li>
+</ul>
+</blockquote>
+</li>
+<li>386架构 （CPU开创的分页内存管理）<ul>
+<li>页目（page directory）</li>
+<li>页表（page table）<blockquote>
+<p>CR3寄存器保存了进程的页目的物理地址。页目与页表中每4字节为一个单元，是一个32位的值，当页目项第0位为1时，表明页表已经在物理内存中；当页表项第0位为1时，表明访问的数据已经在内存中。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>0x7c00</p>
+<blockquote>
+<p>8086设计出了20位的寻址总线(16位集群器寻20位地址)<br>16位最大是65536，也就是64kb。2^20=1MB。</p>
+</blockquote>
+</li>
+<li>段寄存器（16位）一级<ul>
+<li>段地址</li>
+</ul>
+</li>
+<li><p>指针寄存器（4位）二级</p>
+<ul>
+<li>偏移地址</li>
+</ul>
+</li>
+<li><p>显示器</p>
+<ul>
+<li>点距<blockquote>
+<p>像素之间的距离</p>
+</blockquote>
+</li>
+<li><p>分辨率</p>
+<blockquote>
+<p>显示分辨率（屏幕分辨率）是屏幕图像的精密度，是指显示器所能显示的像素有多少。</p>
+</blockquote>
+<ul>
+<li>ppi（像素每英寸）</li>
+<li>dpi（点每英寸）用于打印机    </li>
+</ul>
+</li>
+<li>频率<blockquote>
+<p>刷新率指每秒钟出现新图像的数量</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>显卡<blockquote>
+<p>控制像素点显示，显卡有一块内存，叫显存。只需要把字符写入显存，显卡就会帮助我们将他显示在屏幕上。</p>
+</blockquote>
+</li>
+<li>内存映射<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">086</span>下<span class="number">0X00000</span><span class="number">-0X9FFFF</span>是留给普通内存的，后面的<span class="number">0XF0000</span>-FFFFF则是存放BIOS的芯片。</span><br><span class="line">中间<span class="number">0XA0000</span>-EFFFFF的<span class="number">320</span>k字节，则由各种外围设备提供，比如显卡。</span><br><span class="line">显存的范围是<span class="number">0xB8000</span><span class="number">-0XBFFF</span></span><br><span class="line">显卡在启动后，会自动的被初始化为<span class="number">80</span>×<span class="number">25</span>的文本模式，一共两千个字符。</span><br><span class="line"><span class="number">0xB8000</span>就对应屏幕的左上角第一个字符，然后是往右依次类推</span><br><span class="line"></span><br><span class="line">一个字符并不是占用一个字节，而是两个。</span><br><span class="line">第一个字节是字符的ASCII，第二个字节指定了字符的显示属性，比如颜色，是否闪烁。</span><br><span class="line">颜色分为前景色和背景色（前四bit，后四bit）</span><br><span class="line">前四：K RGB K,控制是否闪烁</span><br><span class="line">后四：I RGB I,控制颜色深浅</span><br><span class="line"></span><br><span class="line">屏幕黑色时，显存里是空格。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>计算机语言编译过程</title>
+    <url>/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h2><a href="/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" title="参考">参考</a>
+<h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><blockquote>
+<p>不同的指令集对应不同的汇编器</p>
+</blockquote>
+<p><a href="https://www.ibm.com/developerworks/cn/linux/l-assembly/index.html" target="_blank" rel="noopener">Linux 汇编语言开发指南</a></p>
+<h2 id="C-语言编译过程"><a href="#C-语言编译过程" class="headerlink" title="C 语言编译过程"></a>C 语言编译过程</h2><ul>
+<li>预处理<ul>
+<li>处理预编译指令，例如 #define，#if，#ifdefine 等。</li>
+<li>将 #include 包含文件插入到该预编译指令的位置</li>
+<li>删除所有的注析 // 、/**/</li>
+</ul>
+</li>
+<li>编译<ul>
+<li>把预处理过的代码编译成汇编代码</li>
+</ul>
+</li>
+<li>汇编<ul>
+<li>把汇编代码编译成目标代码</li>
+</ul>
+</li>
+<li>链接<ul>
+<li>把目标代码链接成可执行文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="以-nginx-代码为例，使用-gcc-编译器了解一下编译过程。"><a href="#以-nginx-代码为例，使用-gcc-编译器了解一下编译过程。" class="headerlink" title="以 nginx 代码为例，使用 gcc 编译器了解一下编译过程。"></a>以 nginx 代码为例，使用 gcc 编译器了解一下编译过程。</h2><h3 id="下载-nginx-代码"><a href="#下载-nginx-代码" class="headerlink" title="下载 nginx 代码"></a>下载 nginx 代码</h3><p><a href="http://nginx.org/download/nginx-1.17.10.tar.gz" target="_blank" rel="noopener">nginx 源码</a></p>
+<h3 id="使用-gcc-编译器-gcc-version-4-8-5"><a href="#使用-gcc-编译器-gcc-version-4-8-5" class="headerlink" title="使用 gcc 编译器 (gcc version 4.8.5)"></a>使用 gcc 编译器 (gcc version 4.8.5)</h3><figure class="highlight clean"><table><tr><td class="code"><pre><span class="line">gcc -v # 显示编译过程</span><br><span class="line">gcc -### # 选项和命令不执行</span><br><span class="line">gcc -E # 预处理</span><br><span class="line">gcc -S # 编译成汇编代码</span><br><span class="line">gcc -c # 编译、汇编，不链接</span><br></pre></td></tr></table></figure>
+<h3 id="gcc-编译过程"><a href="#gcc-编译过程" class="headerlink" title="gcc 编译过程"></a>gcc 编译过程</h3><a href="/blog.githup.io/2020/05/nginx/" title="nginx源码分析">nginx源码分析</a>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.17.10.tar.gz</span><br><span class="line">tar -zxf nginx-1.17.10.tar.gz</span><br><span class="line"><span class="built_in">cd</span> /root/nginx-1.17.10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先执行 configure 配置一下整个环境。因为要生成一些文件</span></span><br><span class="line">./configure --prefix=/opt/nginx</span><br><span class="line"><span class="built_in">cd</span> /src/core</span><br><span class="line"><span class="comment"># 备份一下源码</span></span><br><span class="line">cp nginx.c nginx.c.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># -I 用于预处理时，指定头文件</span></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core \</span><br><span class="line">-I../../objs/ \</span><br><span class="line">-I../../src/os/unix/ \</span><br><span class="line">-E nginx.c</span><br><span class="line"></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core -I../../objs/ -I../../src/os/unix/ -E nginx.c &gt;nginx1.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理前后的对比</span></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core -I../../objs/ -I../../src/os/unix/ -E nginx.c |less -N</span><br><span class="line">less -N nginx.c.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">gcc -S nginx1.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 汇编</span></span><br><span class="line">gcc -c nginx1.s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接</span></span><br><span class="line">gcc nginx1.o -o nginx1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译后文件大小(行)</span></span><br><span class="line">1590 nginx.c.bak    <span class="comment"># 源码</span></span><br><span class="line">13535 nginx1.c      <span class="comment"># 预处理后代码，把所有需要的头文件都 include 进来</span></span><br><span class="line">3726 nginx1.s       <span class="comment"># 编译后汇编代码</span></span><br><span class="line">139 nginx1.o        <span class="comment"># 编译成目标文件</span></span><br></pre></td></tr></table></figure>
+<h2 id="linux-可执行文件介绍"><a href="#linux-可执行文件介绍" class="headerlink" title="linux 可执行文件介绍"></a>linux 可执行文件介绍</h2><blockquote>
+<p>ELF 是Executable and Linking Format的缩写，即可执行和可链接的格式，是Unix/Linux系统ABI (Application Binary Interface)规范的一部分。</p>
+</blockquote>
+<h3 id="usr-include-elf-h"><a href="#usr-include-elf-h" class="headerlink" title="/usr/include/elf.h"></a>/usr/include/elf.h</h3><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"># 定义了数据类型</span><br><span class="line"> <span class="number">30</span> <span class="comment">/* Type for a 16-bit quantity.  */</span></span><br><span class="line">  <span class="number">31</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf32_Half;</span><br><span class="line">  <span class="number">32</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf64_Half;</span><br><span class="line">  <span class="number">33</span> </span><br><span class="line">  <span class="number">34</span> <span class="comment">/* Types for signed and unsigned 32-bit quantities.  */</span></span><br><span class="line">  <span class="number">35</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Word;</span><br><span class="line">  <span class="number">36</span> <span class="keyword">typedef</span> <span class="built_in">int</span>32_t  Elf32_Sword;</span><br><span class="line">  <span class="number">37</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf64_Word;</span><br><span class="line">  <span class="number">38</span> <span class="keyword">typedef</span> <span class="built_in">int</span>32_t  Elf64_Sword;</span><br><span class="line">  <span class="number">39</span> </span><br><span class="line">  <span class="number">40</span> <span class="comment">/* Types for signed and unsigned 64-bit quantities.  */</span></span><br><span class="line">  <span class="number">41</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf32_Xword;</span><br><span class="line">  <span class="number">42</span> <span class="keyword">typedef</span> <span class="built_in">int</span>64_t  Elf32_Sxword;</span><br><span class="line">  <span class="number">43</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Xword;</span><br><span class="line">  <span class="number">44</span> <span class="keyword">typedef</span> <span class="built_in">int</span>64_t  Elf64_Sxword;</span><br><span class="line">  <span class="number">45</span> </span><br><span class="line">  <span class="number">46</span> <span class="comment">/* Type of addresses.  */</span></span><br><span class="line">  <span class="number">47</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Addr;</span><br><span class="line">  <span class="number">48</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Addr;</span><br><span class="line">  <span class="number">49</span> </span><br><span class="line">  <span class="number">50</span> <span class="comment">/* Type of file offsets.  */</span></span><br><span class="line">  <span class="number">51</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Off;</span><br><span class="line">  <span class="number">52</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Off;</span><br><span class="line">  <span class="number">53</span> </span><br><span class="line">  <span class="number">54</span> <span class="comment">/* Type for section indices, which are 16-bit quantities.  */</span></span><br><span class="line">  <span class="number">55</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf32_Section;</span><br><span class="line">  <span class="number">56</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf64_Section;</span><br><span class="line">  <span class="number">57</span> </span><br><span class="line">  <span class="number">58</span> <span class="comment">/* Type for version symbol information.  */</span></span><br><span class="line">  <span class="number">59</span> <span class="keyword">typedef</span> Elf32_Half Elf32_Versym;</span><br><span class="line">  <span class="number">60</span> <span class="keyword">typedef</span> Elf64_Half Elf64_Versym;</span><br><span class="line"></span><br><span class="line"># 定义了结构体</span><br><span class="line">  <span class="number">67</span> <span class="keyword">typedef</span> struct</span><br><span class="line">  <span class="number">68</span> &#123;</span><br><span class="line">  <span class="number">69</span>   unsigned char e_ident[EI_NIDENT];     <span class="comment">/* Magic number and other info */</span></span><br><span class="line">  <span class="number">70</span>   Elf32_Half    e_type;                 <span class="comment">/* Object file type */</span></span><br><span class="line">  <span class="number">71</span>   Elf32_Half    e_machine;              <span class="comment">/* Architecture */</span></span><br><span class="line">  <span class="number">72</span>   Elf32_Word    e_version;              <span class="comment">/* Object file version */</span></span><br><span class="line">  <span class="number">73</span>   Elf32_Addr    e_entry;                <span class="comment">/* Entry point virtual address */</span></span><br><span class="line">  <span class="number">74</span>   Elf32_Off     e_phoff;                <span class="comment">/* Program header table file offset */</span></span><br><span class="line">  <span class="number">75</span>   Elf32_Off     e_shoff;                <span class="comment">/* Section header table file offset */</span></span><br><span class="line">  <span class="number">76</span>   Elf32_Word    e_flags;                <span class="comment">/* Processor-specific flags */</span></span><br><span class="line">  <span class="number">77</span>   Elf32_Half    e_ehsize;               <span class="comment">/* ELF header size in bytes */</span></span><br><span class="line">  <span class="number">78</span>   Elf32_Half    e_phentsize;            <span class="comment">/* Program header table entry size */</span></span><br><span class="line">  <span class="number">79</span>   Elf32_Half    e_phnum;                <span class="comment">/* Program header table entry count */</span></span><br><span class="line">  <span class="number">80</span>   Elf32_Half    e_shentsize;            <span class="comment">/* Section header table entry size */</span></span><br><span class="line">  <span class="number">81</span>   Elf32_Half    e_shnum;                <span class="comment">/* Section header table entry count */</span></span><br><span class="line">  <span class="number">82</span>   Elf32_Half    e_shstrndx;             <span class="comment">/* Section header string table index */</span></span><br><span class="line">  <span class="number">83</span> &#125; Elf32_Ehdr;</span><br><span class="line">  <span class="number">84</span> </span><br><span class="line">  <span class="number">85</span> <span class="keyword">typedef</span> struct</span><br><span class="line">  <span class="number">86</span> &#123;</span><br><span class="line">  <span class="number">87</span>   unsigned char e_ident[EI_NIDENT];     <span class="comment">/* Magic number and other info */</span></span><br><span class="line">  <span class="number">88</span>   Elf64_Half    e_type;                 <span class="comment">/* Object file type */</span></span><br><span class="line">  <span class="number">89</span>   Elf64_Half    e_machine;              <span class="comment">/* Architecture */</span></span><br><span class="line">  <span class="number">90</span>   Elf64_Word    e_version;              <span class="comment">/* Object file version */</span></span><br><span class="line">  <span class="number">91</span>   Elf64_Addr    e_entry;                <span class="comment">/* Entry point virtual address */</span></span><br><span class="line">  <span class="number">92</span>   Elf64_Off     e_phoff;                <span class="comment">/* Program header table file offset */</span></span><br><span class="line">  <span class="number">93</span>   Elf64_Off     e_shoff;                <span class="comment">/* Section header table file offset */</span></span><br><span class="line">  <span class="number">94</span>   Elf64_Word    e_flags;                <span class="comment">/* Processor-specific flags */</span></span><br><span class="line">  <span class="number">95</span>   Elf64_Half    e_ehsize;               <span class="comment">/* ELF header size in bytes */</span></span><br><span class="line">  <span class="number">96</span>   Elf64_Half    e_phentsize;            <span class="comment">/* Program header table entry size */</span></span><br><span class="line">  <span class="number">97</span>   Elf64_Half    e_phnum;                <span class="comment">/* Program header table entry count */</span></span><br><span class="line">  <span class="number">98</span>   Elf64_Half    e_shentsize;            <span class="comment">/* Section header table entry size */</span></span><br><span class="line">  <span class="number">99</span>   Elf64_Half    e_shnum;                <span class="comment">/* Section header table entry count */</span></span><br><span class="line"> <span class="number">100</span>   Elf64_Half    e_shstrndx;             <span class="comment">/* Section header string table index */</span></span><br><span class="line"> <span class="number">101</span> &#125; Elf64_Ehdr;</span><br><span class="line"></span><br><span class="line"># 解释了数值表示的意义</span><br><span class="line"> <span class="number">160</span> <span class="comment">/* Legal values for e_type (object file type).  */</span></span><br><span class="line"> <span class="number">161</span> </span><br><span class="line"> <span class="number">162</span> #define ET_NONE         <span class="number">0</span>               <span class="comment">/* No file type */</span></span><br><span class="line"> <span class="number">163</span> #define ET_REL          <span class="number">1</span>               <span class="comment">/* Relocatable file */</span></span><br><span class="line"> <span class="number">164</span> #define ET_EXEC         <span class="number">2</span>               <span class="comment">/* Executable file */</span></span><br><span class="line"> <span class="number">165</span> #define ET_DYN          <span class="number">3</span>               <span class="comment">/* Shared object file */</span></span><br><span class="line"> <span class="number">166</span> #define ET_CORE         <span class="number">4</span>               <span class="comment">/* Core file */</span></span><br><span class="line"> <span class="number">167</span> #define ET_NUM          <span class="number">5</span>               <span class="comment">/* Number of defined types */</span></span><br><span class="line"> <span class="number">168</span> #define ET_LOOS         <span class="number">0xfe00</span>          <span class="comment">/* OS-specific range start */</span></span><br><span class="line"> <span class="number">169</span> #define ET_HIOS         <span class="number">0xfeff</span>          <span class="comment">/* OS-specific range end */</span></span><br><span class="line"> <span class="number">170</span> #define ET_LOPROC       <span class="number">0xff00</span>          <span class="comment">/* Processor-specific range start */</span></span><br><span class="line"> <span class="number">171</span> #define ET_HIPROC       <span class="number">0xffff</span>          <span class="comment">/* Processor-specific range end */</span></span><br></pre></td></tr></table></figure>
+<h3 id="通过-readelf-命令了解-linux-可执行文件"><a href="#通过-readelf-命令了解-linux-可执行文件" class="headerlink" title="通过 readelf 命令了解 linux 可执行文件"></a>通过 readelf 命令了解 linux 可执行文件</h3><ul>
+<li>section<blockquote>
+<p>目标代码文件的内容是由section组成的,.text，.bss，.data这些指示，都指的是section。</p>
+<ul>
+<li>section header table</li>
+</ul>
+</blockquote>
+</li>
+<li>segment<blockquote>
+<p>可执行文件的内容是由segment组成的。</p>
+<ul>
+<li>program header table</li>
+</ul>
+</blockquote>
+</li>
+<li>Magic number<blockquote>
+<p>Magic number一般是指硬写到代码里的整数常量，数值是编程者自己指定的，其他人不知道数值有什么具体意义，表示不明觉厉，就称作magic number。</p>
+</blockquote>
+</li>
+<li>Magic number 作用<blockquote>
+<p>file命令是一个很神奇的命令。它能够根据文件中魔数来判断文件类型。这比根据后缀来判断文件类型要靠谱一点。比如，即使把一张位图文件后缀名改为.jpg，file命令依然大公无私地告诉你它是一张bmp图片。<br>ELF文件头会写入一个magic number，检查这个数和自己预想的是否一致可以判断文件是否损坏。<br>在缓冲区数组旁放一个magic number（称作canary金丝雀），通过检查是否一致可检测缓冲区溢出攻击。</p>
+<figure class="highlight vala"><table><tr><td class="code"><pre><span class="line"><span class="meta"># 查看segment 和 section 对应关系</span></span><br><span class="line">readelf -l /usr/bin/sleep</span><br><span class="line"></span><br><span class="line"><span class="meta"># 反编译</span></span><br><span class="line">readelf -S nginx1.o</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="meta">## 反汇编工具 objdump</span></span><br><span class="line">&gt; objdump是用查看目标文件或者可执行的目标文件的构成</span><br><span class="line"></span><br><span class="line">* 符号表</span><br><span class="line">    &gt;在计算机科学中，符号表是一种用于语言翻译器（例如编译器和解释器）中的数据结构。</span><br><span class="line">    &gt;在符号表中，程序源代码中的每个标识符都和它的声明或使用信息绑定在一起，比如其数据类型、作用域以及内存地址。</span><br><span class="line">    &gt;散列表是用来实现符号表的一种常用技术。</span><br><span class="line">    &gt;编译器可能会使用一个很大的符号表来包含所有的符号，或是针对不同的作用域使用层次结构的多个独立的符号表。</span><br><span class="line">    * </span><br><span class="line">* 文件头</span><br></pre></td></tr></table></figure>
+<p>objdump -f nginx1.o</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p>nginx1.o:     file format elf64-x86-64<br>architecture: i386:x86-64, flags 0x00000011:<br>HAS_RELOC, HAS_SYMS</p>
+<h2 id="start-address-0x0000000000000000"><a href="#start-address-0x0000000000000000" class="headerlink" title="start address 0x0000000000000000"></a>start address 0x0000000000000000</h2><p>```</p>
+]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+      <tags>
+        <tag>计算机语言编译</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx</title>
+    <url>/blog.githup.io/2020/05/nginx/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.kancloud.cn/digest/understandingnginx/202599" target="_blank" rel="noopener">理解 nginx 源码</a></p>
+<h2 id="nginx-代码结构"><a href="#nginx-代码结构" class="headerlink" title="nginx 代码结构"></a>nginx 代码结构</h2><figure class="highlight cs"><table><tr><td class="code"><pre><span class="line">.</span><br><span class="line">├── core  <span class="meta"># Nginx的核心源代码，包括常用数据结构的以及Nginx 内核实现的核心代码；</span></span><br><span class="line">├── <span class="keyword">event</span> <span class="meta"># Nginx事件驱动模型，以及定时器的实现相关代码；</span></span><br><span class="line">├── http  <span class="meta"># Nginx 实现http 服务器相关的代码；</span></span><br><span class="line">├── mail  <span class="meta"># Nginx 实现邮件代理服务器相关的代码；</span></span><br><span class="line">├── misc  <span class="meta"># 辅助代码，测试C++头 的兼容性，以及对Google_PerfTools 的支持；</span></span><br><span class="line">├── os    <span class="meta"># 不同体系统结构所提供的系统函数的封装，提供对外统一的系统调用接口；</span></span><br><span class="line">└── stream <span class="meta">#</span></span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>多语言helloworld示例</title>
+    <url>/blog.githup.io/2020/05/%E5%A4%9A%E8%AF%AD%E8%A8%80helloworld%E7%A4%BA%E4%BE%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="多语言helloworld示例"><a href="#多语言helloworld示例" class="headerlink" title="多语言helloworld示例"></a>多语言helloworld示例</h1><p><a href="https://www.runoob.com/w3cnote/hello-world-programs-of-24-programing-language.html" target="_blank" rel="noopener">runoob 示例</a></p>
+<h3 id="python-示例"><a href="#python-示例" class="headerlink" title="python 示例"></a>python 示例</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="C-示例"><a href="#C-示例" class="headerlink" title="C 示例"></a>C 示例</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">include <span class="string">"stdio.h"</span> <span class="comment">// 头文件</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;  <span class="comment">// 入口函数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World\n"</span>) <span class="comment">// 输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="C-示例-1"><a href="#C-示例-1" class="headerlink" title="C++ 示例"></a>C++ 示例</h3><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; <span class="comment">// 命名空间</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123; <span class="comment">// 类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123; <span class="comment">// 入口函数</span></span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>); <span class="comment">// 输出</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="golang-示例"><a href="#golang-示例" class="headerlink" title="golang 示例"></a>golang 示例</h3><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 命名空间</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span> <span class="comment">// 输出包</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World"</span>) <span class="comment">// 输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+      <tags>
+        <tag>hello world</tag>
+        <tag>指令集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java环境准备</title>
+    <url>/blog.githup.io/2020/05/Java%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="JDK-安装"><a href="#JDK-安装" class="headerlink" title="JDK 安装"></a>JDK 安装</h2><ul>
+<li><a href="https://www.oracle.com/java/" target="_blank" rel="noopener">Java</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/14/" target="_blank" rel="noopener">JDK docs</a></li>
+</ul>
+<h3 id="下载-JDK-包"><a href="#下载-JDK-包" class="headerlink" title="下载 JDK 包"></a>下载 JDK 包</h3><ul>
+<li><a href="https://www.oracle.com/java/technologies/javase-jdk14-downloads.html" target="_blank" rel="noopener">Oracle JDK</a></li>
+<li><a href="https://openjdk.java.net/" target="_blank" rel="noopener">OPENJDK</a></li>
+</ul>
+<h3 id="JAVA-开发工具"><a href="#JAVA-开发工具" class="headerlink" title="JAVA 开发工具"></a>JAVA 开发工具</h3><ul>
+<li><a href="https://www.eclipse.org/downloads/" target="_blank" rel="noopener">Eclipse</a></li>
+<li><a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">Idea</a></li>
+</ul>
+<h3 id="Java-框架"><a href="#Java-框架" class="headerlink" title="Java 框架"></a>Java 框架</h3><p><a href="https://spring.io/" target="_blank" rel="noopener">Spring family</a></p>
+<h3 id="配置三个变量"><a href="#配置三个变量" class="headerlink" title="配置三个变量"></a>配置三个变量</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">JAVA_HOME <span class="comment"># 安装java目录</span></span><br><span class="line">CLASSPATH <span class="comment"># java 类库</span></span><br><span class="line">PATH      <span class="comment"># java 可执行路径</span></span><br></pre></td></tr></table></figure>
+<h3 id="hello-world-示例"><a href="#hello-world-示例" class="headerlink" title="hello world 示例"></a>hello world 示例</h3><p>新建一个 Helloworld.class 文件<br><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// java 类声明</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 入口函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// java 输出语句</span></span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="hello-world-示例-1"><a href="#hello-world-示例-1" class="headerlink" title="hello world 示例"></a>hello world 示例</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="C-示例"><a href="#C-示例" class="headerlink" title="C 示例"></a>C 示例</h3><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">include <span class="string">"stdio.h"</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World\n"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="golang-示例"><a href="#golang-示例" class="headerlink" title="golang 示例"></a>golang 示例</h3><figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
   </entry>
   <entry>
     <title>markdown数学公式</title>
@@ -1250,6 +1519,7 @@
 <li><a href="https://tech.youzan.com/" target="_blank" rel="noopener">有赞技术团队</a></li>
 <li><a href="https://www.hi-linux.com/" target="_blank" rel="noopener">运维之美</a></li>
 <li><a href="http://www.178linux.com/" target="_blank" rel="noopener">Linux 运维部落</a></li>
+<li><a href="https://linuxtools-rst.readthedocs.io/" target="_blank" rel="noopener">Linux工具快速教程</a></li>
 </ul>
 <h2 id="网站资源"><a href="#网站资源" class="headerlink" title="网站资源"></a>网站资源</h2><ul>
 <li><a href="https://access.redhat.com/documentation/en-us/" target="_blank" rel="noopener"> Red Hat Container Development  </a></li>
@@ -1687,6 +1957,15 @@
       </categories>
   </entry>
   <entry>
+    <title>python编程</title>
+    <url>/blog.githup.io/2020/05/python%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.runoob.com/python3/python3-tutorial.html" target="_blank" rel="noopener">Python 入门</a></p>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+  </entry>
+  <entry>
     <title>python高级编程</title>
     <url>/blog.githup.io/2020/05/python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
@@ -1698,15 +1977,6 @@
 <h4 id="字符串断言"><a href="#字符串断言" class="headerlink" title="字符串断言"></a>字符串断言</h4><p>isalpha         # 字母<br>isidentifier    # 标识符<br>isspace         # 空格<br>isascii         # ascii 码<br>islower         # 小写<br>isupper         # 大写<br>istitle         # 标题 “Abc”<br>isdecimal       # 十进制数<br>isnumeric       # 数字<br>isalnum         # 字母和数字<br>isdigit         # 数字<br>isprintable     # 可打印字符 “\n”                     </p>
 <h4 id="字符串常用的操作"><a href="#字符串常用的操作" class="headerlink" title="字符串常用的操作"></a>字符串常用的操作</h4><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>l = list(range(3))</p>
 <h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><h1 id="迭代器与生产器"><a href="#迭代器与生产器" class="headerlink" title="迭代器与生产器"></a>迭代器与生产器</h1><h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><h1 id="命名空间-作用域"><a href="#命名空间-作用域" class="headerlink" title="命名空间/作用域"></a>命名空间/作用域</h1><h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1>]]></content>
-      <categories>
-        <category>编程语言</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>python编程</title>
-    <url>/blog.githup.io/2020/05/python%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.runoob.com/python3/python3-tutorial.html" target="_blank" rel="noopener">Python 入门</a></p>
-]]></content>
       <categories>
         <category>编程语言</category>
       </categories>
@@ -1727,6 +1997,7 @@
 <li><a href="https://www.runoob.com/go/go-tutorial.html" target="_blank" rel="noopener"> 菜鸟教程 golang  </a></li>
 <li><a href="https://github.com/golang/go" target="_blank" rel="noopener"> Golang 源码 </a></li>
 <li><a href="https://github.com/avelino/awesome-go" target="_blank" rel="noopener"> awesome-go </a></li>
+<li><a href="https://draveness.me/golang/docs/part1-prerequisite/ch02-compile/golang-compile-intro/" target="_blank" rel="noopener">Go 语言设计与实现</a></li>
 </ul>
 <figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 包定义</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入模块</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 变量定义</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	i <span class="keyword">int</span></span><br><span class="line">	k <span class="keyword">int</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常量定义</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	city <span class="keyword">string</span> = <span class="string">"beijing"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 入口函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 变量 := 变量 + 字面常量</span></span><br><span class="line">	sum := i + <span class="number">10</span></span><br><span class="line">	<span class="comment">// 输出</span></span><br><span class="line">	fmt.Println(sum)</span><br><span class="line">	<span class="comment">// 浮点计算</span></span><br><span class="line">	fdiv := <span class="number">10</span> / <span class="number">0.3</span></span><br><span class="line">	fmt.Println(fdiv)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 把数值转成字符串</span></span><br><span class="line">	<span class="comment">// 使用 strconv 库来转换</span></span><br><span class="line">	fmt.Println(strconv.FormatFloat(fdiv, <span class="string">'f'</span>, <span class="number">-1</span>, <span class="number">64</span>))</span><br><span class="line">	<span class="comment">// 打印到屏幕</span></span><br><span class="line">	fmt.Printf(<span class="string">"x = %.15f\n"</span>, fdiv)</span><br><span class="line">	<span class="comment">// 以返回值形式返回</span></span><br><span class="line">	fmt.Println(fmt.Sprintf(<span class="string">"%.15f"</span>, fdiv))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//把字符串转成数值</span></span><br><span class="line">	fmt.Println(strconv.Atoi(<span class="string">"0.333333"</span>))</span><br><span class="line">	fmt.Println(strconv.Atoi(<span class="string">"12345"</span>))</span><br><span class="line">	fmt.Println(strconv.Atoi(<span class="string">"123ead"</span>))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 取余运算</span></span><br><span class="line">	fmt.Println(<span class="number">1</span> % <span class="number">7</span>) <span class="comment">// 比余数小取本身</span></span><br><span class="line">	fmt.Println(<span class="number">16</span> % <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"------------"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用按位与位(乘法运算)获得循环数，相与数必须是：1，3，7，31，2^n-1</span></span><br><span class="line">	<span class="comment">// 00001001  9</span></span><br><span class="line">	<span class="comment">// 00000111  7</span></span><br><span class="line">	<span class="comment">//         = 0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">20</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i, i&amp;<span class="number">3</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用移位算乘法,因为字长为64，所以到第63次时变负值，64次溢出</span></span><br><span class="line">	<span class="keyword">var</span> i <span class="keyword">uint64</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">1</span>; i &lt; <span class="number">65</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i, <span class="number">1</span>&lt;&lt;i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight golang"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 包定义</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 入口函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 循环</span></span><br><span class="line">	<span class="comment">// 一重循环算法复杂度为 O(n)+1</span></span><br><span class="line">	<span class="keyword">var</span> i <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 二重循环 算法复杂度为 O(n^2) +2</span></span><br><span class="line">	<span class="keyword">var</span> k, j <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++ &#123;</span><br><span class="line">			fmt.Println(k, j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 二重循环</span></span><br><span class="line">	<span class="comment">// 逐步递减</span></span><br><span class="line">	<span class="keyword">var</span> m, n <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> m = <span class="number">1</span>; m &lt; <span class="number">10</span>; m++ &#123;</span><br><span class="line">		<span class="keyword">for</span> n = <span class="number">0</span>; n &lt; <span class="number">10</span>/m; n++ &#123;</span><br><span class="line">			<span class="comment">// strings 库 提供对字符串的各种处理方法</span></span><br><span class="line">			fmt.Printf(<span class="string">"%d %s"</span>, n, strings.Repeat(<span class="string">"*"</span>, n))</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 逐步递增</span></span><br><span class="line">	<span class="keyword">var</span> c, d <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> c = <span class="number">0</span>; c &lt; <span class="number">10</span>; c++ &#123;</span><br><span class="line">		<span class="keyword">for</span> d = <span class="number">0</span>; d &lt; <span class="number">2</span>*c; d++ &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"%d %s"</span>, d, strings.Repeat(<span class="string">"*"</span>, d))</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 二分法猜数</span></span><br><span class="line">	<span class="keyword">var</span> num, g <span class="keyword">int</span></span><br><span class="line">	g = <span class="number">231</span></span><br><span class="line">	fmt.Println(<span class="string">"猜一个1000以内的数"</span>)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		fmt.Scan(&amp;num)</span><br><span class="line">		<span class="keyword">if</span> num &gt; g &#123;</span><br><span class="line">			fmt.Println(<span class="string">"猜的数大了"</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> num == g &#123;</span><br><span class="line">			fmt.Println(<span class="string">"猜中了"</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"猜的数小了"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println(num)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
