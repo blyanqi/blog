@@ -51,6 +51,25 @@
       </tags>
   </entry>
   <entry>
+    <title>容器技术原理</title>
+    <url>/blog.githup.io/2020/05/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="namespace-隔离"><a href="#namespace-隔离" class="headerlink" title="namespace 隔离"></a>namespace 隔离</h2><h2 id="分层文件系统-overlay"><a href="#分层文件系统-overlay" class="headerlink" title="分层文件系统 overlay"></a>分层文件系统 overlay</h2>]]></content>
+      <categories>
+        <category>容器技术</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>linux-kernel</title>
+    <url>/blog.githup.io/2020/05/linux-kernel/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.kernel.org/doc/html/latest/" target="_blank" rel="noopener">kernel</a><br><a href="https://www.ibm.com/developerworks/cn/linux/kernel/syscall/part1/appendix.html" target="_blank" rel="noopener">Linux系统调用列表</a><br><a href="https://cmake.org/cmake/help/latest/" target="_blank" rel="noopener">cmake</a></p>
+<h3 id="kernel-source-directory"><a href="#kernel-source-directory" class="headerlink" title="kernel source directory"></a>kernel source directory</h3><hr>
+<figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line">linux-<span class="number">5.6</span>.<span class="number">13</span>/</span><br><span class="line">├── COPYING</span><br><span class="line">├── CREDITS</span><br><span class="line">├── Documentation</span><br><span class="line">├── Kbuild</span><br><span class="line">├── Kconfig</span><br><span class="line">├── LICENSES</span><br><span class="line">├── MAINTAINERS</span><br><span class="line">├── Makefile</span><br><span class="line">├── README</span><br><span class="line">├── arch            <span class="comment"># 体系结构相关的代码，例如arm, x86等等。</span></span><br><span class="line">├── block           <span class="comment"># 提供块设备的层次。</span></span><br><span class="line">├── certs           <span class="comment"># </span></span><br><span class="line">├── crypto          <span class="comment"># 加密、解密相关的库函数</span></span><br><span class="line">├── drivers         <span class="comment"># 设备驱动</span></span><br><span class="line">├── fs              <span class="comment"># VFS子系统</span></span><br><span class="line">├── <span class="keyword">include</span>         <span class="comment"># 内核头文件，需要提供给外部模块（例如用户空间代码）使用</span></span><br><span class="line">├── init            <span class="comment"># Linux系统启动初始化相关的代码</span></span><br><span class="line">├── ipc             <span class="comment"># IPC（进程间通信）子系统</span></span><br><span class="line">├── kernel          <span class="comment"># Linux内核的核心代码，包含了3.2小节所描述的进程调度子系统，以及和进程调度相关的模块。</span></span><br><span class="line">├── <span class="class"><span class="keyword">lib</span>             <span class="comment"># 实现需要在内核中使用的库函数</span></span></span><br><span class="line">├── mm              <span class="comment"># 内存管理子系统</span></span><br><span class="line">├── net             <span class="comment"># 不包括网络设备驱动的网络子系统</span></span><br><span class="line">├── samples         <span class="comment"># 示例代码</span></span><br><span class="line">├── scripts         <span class="comment"># 用于内核编译的配置文件、脚本等。</span></span><br><span class="line">├── security        <span class="comment"># 提供安全特性（SELinux）</span></span><br><span class="line">├── sound           <span class="comment"># 音频相关的驱动及子系统，可以看作“音频子系统”。</span></span><br><span class="line">├── tools           <span class="comment"># 一些常用工具，如性能剖析、自测试等</span></span><br><span class="line">├── usr             <span class="comment"># 用于生成initramfs的代码</span></span><br><span class="line">└── virt            <span class="comment"># 提供虚拟机技术（KVM等）的支持</span></span><br></pre></td></tr></table></figure>
+<h3 id="kernel-实现功能"><a href="#kernel-实现功能" class="headerlink" title="kernel 实现功能"></a>kernel 实现功能</h3><figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"><span class="bullet">* </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>进程管理</span><br><span class="line"><span class="bullet">    * </span>调度策略</span><br><span class="line"><span class="bullet">    * </span>架构特定的调度</span><br><span class="line"><span class="bullet">    * </span>架构独立的调度</span><br><span class="line"><span class="bullet">    * </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>内存管理</span><br><span class="line"><span class="bullet">    * </span>架构相关管理</span><br><span class="line"><span class="bullet">    * </span>架构独立管理</span><br><span class="line"><span class="bullet">    * </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>虚拟文件系统</span><br><span class="line"><span class="bullet">* </span>网络堆栈</span><br><span class="line"><span class="bullet">    * </span>网络设备驱动</span><br><span class="line"><span class="bullet">    * </span>设备独立接口</span><br><span class="line"><span class="bullet">    * </span>网络协议</span><br><span class="line"><span class="bullet">    * </span>协议独立接口</span><br><span class="line"><span class="bullet">    * </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>设备驱动程序</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>计算机</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Linux操作系统原理</title>
     <url>/blog.githup.io/2020/05/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
@@ -3191,12 +3210,168 @@
   <entry>
     <title>计算机英语1500词</title>
     <url>/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD1500%E8%AF%8D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>directory n. 目录，索引簿<br>file n. 文件；v. 保存文件<br>procedure n. 过程，程序，工序<br>program n. 程序<br>parameter n. 参数，参变量<br>variable a. 可变的；n. 变量<br>value n. 值<br>button n. 按钮<br>tab n. 制表键<br>index n. 索引，变址，指数<br>string n. 行，字符串<br>mode n. 态，方式，模<br>function n. 函数，功能，操作<br>make vt. 制造，形成，接通<br>control v. 控制，支配，管理 </p>
-<p>area n. (区)域，面积，方面<br>topic n. 题目，论题<br>name n. 名，名称；vt. 命名<br>set v. 设置，n. 集合<br>list n. 列表，显示，v. 打印<br>item n. 项，项目，条款<br>format n. 格式<br>type n. 型，类型；v. 打印<br>field n. 字段，域，栏，场 </p>
-<p>word n. 字(词)，单词<br>character n. 字符，符号，特性<br>text n. 正文，文本<br>number n. 数字，号码；vt. 编号</p>
-<p>line n. (数据，程序)行，线路<br>message n. 信息，消息，电文<br>information n. 信息，情报<br>database n. 数据库<br>window n. 窗口<br>dialog n. &amp; vt. 对话<br>example n. 例子，实例</p>
-<p>display vt. 显示，显示器<br>see v. 看，看出，查看<br>key n. 键，关键字，关键码<br>press v. 按，压<br>current n. 电流<br>disk n. 盘，磁盘<br>screen n. 屏幕，屏；v. 屏蔽<br>drive v. 驱动；n. 驱动器<br>memory n. 记忆存储，存储器<br>shell n. 壳，外壳</p>
-<p>box n. 箱，匣，(逻辑)框<br>margin n. 余量，边缘，边际 </p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/blog.githup.io/assets/css/APlayer.min.css"><script src="/blog.githup.io/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h5 id="list-1"><a href="#list-1" class="headerlink" title="list 1"></a>list 1</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+<th>explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>directory</td>
+<td>n. 目录，索引簿 </td>
+</tr>
+<tr>
+<td>file</td>
+<td>n. 文件；v. 保存文件</td>
+</tr>
+<tr>
+<td>name</td>
+<td>n. 名，名称；vt. 命名</td>
+</tr>
+<tr>
+<td>format</td>
+<td>n. 格式</td>
+</tr>
+<tr>
+<td>topic</td>
+<td>n. 题目，论题</td>
+</tr>
+<tr>
+<td>string</td>
+<td>n. 行，字符串</td>
+</tr>
+<tr>
+<td>word</td>
+<td>n. 字(词)，单词</td>
+</tr>
+<tr>
+<td>character</td>
+<td>n. 字符，符号，特性</td>
+</tr>
+<tr>
+<td>text</td>
+<td>n. 正文，文本</td>
+</tr>
+<tr>
+<td>number</td>
+<td>n. 数字，号码；vt. 编号</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="list-2"><a href="#list-2" class="headerlink" title="list 2"></a>list 2</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+<th>explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>program</td>
+<td>n. 程序</td>
+</tr>
+<tr>
+<td>type</td>
+<td>n. 型，类型；v. 打印</td>
+</tr>
+<tr>
+<td>field</td>
+<td>n. 字段，域，栏，场 </td>
+</tr>
+<tr>
+<td>variable</td>
+<td>a. 可变的；n. 变量</td>
+</tr>
+<tr>
+<td>value</td>
+<td>n. 值 </td>
+</tr>
+<tr>
+<td>function</td>
+<td>n. 函数，功能，操作 </td>
+</tr>
+<tr>
+<td>parameter</td>
+<td>n. 参数，参变量 </td>
+</tr>
+<tr>
+<td>set</td>
+<td>v. 设置，n. 集合</td>
+</tr>
+<tr>
+<td>list</td>
+<td>n. 列表，显示，v. 打印</td>
+</tr>
+<tr>
+<td>index</td>
+<td>n. 索引，变址，指数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="list-3"><a href="#list-3" class="headerlink" title="list 3"></a>list 3</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+<th>explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>display</td>
+<td>vt. 显示，显示器</td>
+</tr>
+<tr>
+<td>area</td>
+<td>n. (区)域，面积，方面 </td>
+</tr>
+<tr>
+<td>item</td>
+<td>n. 项，项目，条款</td>
+</tr>
+<tr>
+<td>window</td>
+<td>n. 窗口</td>
+</tr>
+<tr>
+<td>dialog</td>
+<td>n. &amp; vt. 对话</td>
+</tr>
+<tr>
+<td>mode</td>
+<td>n. 态，方式，模 </td>
+</tr>
+<tr>
+<td>box</td>
+<td>n. 箱，匣，(逻辑)框</td>
+</tr>
+<tr>
+<td>button</td>
+<td>n. 按钮</td>
+</tr>
+<tr>
+<td>tab</td>
+<td>n. 制表键</td>
+</tr>
+<tr>
+<td>line</td>
+<td>n. (数据，程序)行，线路</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>produce v. 生产，制造<br>procedure n. 过程，程序，工序<br>make vt. 制造，形成，接通<br>control v. 控制，支配，管理 </p>
+<p>message n. 信息，消息，电文<br>information n. 信息，情报<br>database n. 数据库</p>
+<p>example n. 例子，实例<br>see v. 看，看出，查看<br>key n. 键，关键字，关键码<br>press v. 按，压<br>current n. 电流<br>disk n. 盘，磁盘<br>screen n. 屏幕，屏；v. 屏蔽<br>drive v. 驱动；n. 驱动器<br>memory n. 记忆存储，存储器<br>shell n. 壳，外壳<br>margin n. 余量，边缘，边际 </p>
 <p>use v. 使用，用途<br>command n. 命令，指令<br>do v. 做，干；n. 循环</p>
 <p>menu n. 菜单，目录<br>cursor n. 光标<br>option n. 任选，选择，可选项</p>
 <p>if conj. 如果<br>by prep. 凭，靠，沿<br>with prep. 用，与，随着<br>from prep. 从，来自，以来</p>
@@ -3768,9 +3943,10 @@
 <li>copyright n. 版权 </li>
 <li>description n. 描述 </li>
 <li>retrieve v. 检索 </li>
-<li>mistake n. 错误 </li>
-<li>produce v. 生产，制造 </li>
-<li>ram 随机存取存储器 </li>
+<li><p>mistake n. 错误 </p>
+</li>
+<li><p>ram 随机存取存储器 </p>
+</li>
 <li><p>exception n. 例外，异常，异议 </p>
 </li>
 <li><p>reverse v. &amp; a. 反向的，逆 </p>
