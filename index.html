@@ -452,6 +452,317 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-title-link" itemprop="url">配置国内镜像源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-20 17:50:25 / 修改时间：17:55:37" itemprop="dateCreated datePublished" datetime="2020-05-20T17:50:25+08:00">2020-05-20</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>582</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="删除所有源"><a href="#删除所有源" class="headerlink" title="删除所有源"></a>删除所有源</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rm</span>  <span class="string">/etc/yum.repos.d/* -rf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新缓存</span></span><br><span class="line"><span class="attr">yum</span> <span class="string">clean all &amp;&amp; yum makecache</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看源</span></span><br><span class="line"><span class="attr">yum</span> <span class="string">repolist all</span></span><br></pre></td></tr></table></figure>
+<h2 id="centos-镜像源"><a href="#centos-镜像源" class="headerlink" title="centos 镜像源"></a>centos 镜像源</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Aliyun 源</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-<span class="module-access"><span class="module"><span class="identifier">Base</span>.</span></span>repo http:<span class="comment">//mirrors.aliyun.com/repo/Centos-7.repo</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-<span class="module-access"><span class="module"><span class="identifier">Base</span>.</span></span>repo http:<span class="comment">//mirrors.aliyun.com/repo/Centos-8.repo</span></span><br></pre></td></tr></table></figure>
+<h2 id="docker-镜像源"><a href="#docker-镜像源" class="headerlink" title="docker 镜像源"></a>docker 镜像源</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//mirrors.aliyun.<span class="keyword">com</span>/docker-<span class="keyword">ce</span>/linux/centos/docker-<span class="keyword">ce</span>.repo -O /etc/yum.repos.d/docker-<span class="keyword">ce</span>.repo</span><br></pre></td></tr></table></figure>
+<h2 id="docker-registry-源"><a href="#docker-registry-源" class="headerlink" title="docker registry 源"></a>docker registry 源</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 加载 reload</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl reload docker</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-20 12:23:18 / 修改时间：12:23:36" itemprop="dateCreated datePublished" datetime="2020-05-20T12:23:18+08:00">2020-05-20</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="数据结构概念"><a href="#数据结构概念" class="headerlink" title="数据结构概念"></a>数据结构概念</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Consul%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/Consul%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Consul安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-20 12:10:13 / 修改时间：12:19:31" itemprop="dateCreated datePublished" datetime="2020-05-20T12:10:13+08:00">2020-05-20</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>64</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href>consul</a></li>
+</ul>
+<h2 id="Consul-conceptual"><a href="#Consul-conceptual" class="headerlink" title="Consul conceptual"></a>Consul conceptual</h2><ul>
+<li>微服务</li>
+<li>服务网格</li>
+<li>服务发现</li>
+<li>服务间调用</li>
+<li>限流</li>
+<li>熔断</li>
+<li>监控</li>
+</ul>
+<h2 id="Consul-集群安装"><a href="#Consul-集群安装" class="headerlink" title="Consul 集群安装"></a>Consul 集群安装</h2><h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><h2 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h2><h2 id="熔断"><a href="#熔断" class="headerlink" title="熔断"></a>熔断</h2><h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/kong%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/kong%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">kong安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-20 12:10:01 / 修改时间：12:22:53" itemprop="dateCreated datePublished" datetime="2020-05-20T12:10:01+08:00">2020-05-20</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>29</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://docs.konghq.com/" target="_blank" rel="noopener">Kong docs </a></li>
+</ul>
+<h2 id="kong-consul"><a href="#kong-consul" class="headerlink" title="kong consul"></a>kong consul</h2><ul>
+<li>nginx</li>
+<li>lua</li>
+<li>API</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/gitlab%E8%BF%81%E7%A7%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -770,543 +1081,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组成原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-19 15:32:45" itemprop="dateCreated datePublished" datetime="2020-05-19T15:32:45+08:00">2020-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-20 08:22:15" itemprop="dateModified" datetime="2020-05-20T08:22:15+08:00">2020-05-20</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h2><ul>
-<li><p><a href="https://zh.wikipedia.org/wiki/%E5%A4%8D%E6%9D%82%E6%8C%87%E4%BB%A4%E9%9B%86" target="_blank" rel="noopener">CISC 复杂指令集</a></p>
-<ul>
-<li>X86架构 (<a href="http://www.zhaoxin.com/" target="_blank" rel="noopener">兆芯</a>)<ul>
-<li><a href="https://zh.wikipedia.org/wiki/X86" target="_blank" rel="noopener">X86</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a href="https://zh.wikipedia.org/wiki/%E7%B2%BE%E7%AE%80%E6%8C%87%E4%BB%A4%E9%9B%86" target="_blank" rel="noopener">RISC 精简指令集</a></p>
-<ul>
-<li>ARM架构 (<a href="https://e.huawei.com/cn/solutions/hic" target="_blank" rel="noopener">华为</a>)<ul>
-<li><a href="https://zh.wikipedia.org/wiki/ARM%E6%9E%B6%E6%A7%8B" target="_blank" rel="noopener">ARM</a></li>
-</ul>
-</li>
-<li>MIPS架构(<a href="http://www.loongson.cn/index.html" target="_blank" rel="noopener">龙芯</a>)<ul>
-<li><a href="https://zh.wikipedia.org/wiki/MIPS%E6%9E%B6%E6%A7%8B" target="_blank" rel="noopener">MIPS</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="计算机组成"><a href="#计算机组成" class="headerlink" title="计算机组成"></a>计算机组成</h2><ul>
-<li>CPU</li>
-<li>MEMORY</li>
-<li>DISK</li>
-<li><p>IO</p>
-<ul>
-<li>GPU</li>
-<li>NET</li>
-</ul>
-</li>
-<li><p>主板</p>
-<ul>
-<li>北桥<ul>
-<li>CPU</li>
-<li>MEMORY</li>
-<li>GPU</li>
-<li>PCIE</li>
-</ul>
-</li>
-<li>南桥<ul>
-<li>DISK</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="hello-world-工作流程"><a href="#hello-world-工作流程" class="headerlink" title="hello world 工作流程"></a>hello world 工作流程</h2><p><a href="https://yangwang.hk/?p=281" target="_blank" rel="noopener">引用：用机器码写hello world</a></p>
-<p>加电 -&gt; BIOS -&gt; 读取第一扇区 -&gt; bootloader -&gt; 操作系统</p>
-<ul>
-<li>加电</li>
-<li>BIOS<ul>
-<li>电池</li>
-<li>只读 ROM</li>
-</ul>
-</li>
-<li><p>第一扇区</p>
-<ul>
-<li>MBR（ Master Boot Record，主引导记录 ）<ul>
-<li>466字节的引导程序</li>
-<li>64字节的分区表<blockquote>
-<p>为什么一块硬盘上最多只能有四个主分区的原因——第五个主分区放不下…</p>
-</blockquote>
-</li>
-<li>2字节的校验位</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>实模式</p>
-</li>
-<li><p>保护模式</p>
-<ul>
-<li>286架构<blockquote>
-<p>段寄存器保存的数据不再是内存物理地址，而是称作选择器（selector）</p>
-<ul>
-<li>选择器<ul>
-<li>高13位指向描述符表</li>
-<li>最低的两位数据定义了请求的权限，从0到3，0是最高权限，3是最低权限；</li>
-<li>剩下的一位表示是使用全局描述符表（GDT）还是局部描述符表（LDT）。</li>
-</ul>
-</li>
-<li>全局描述表（GDT Global Descriptor Table)</li>
-</ul>
-</blockquote>
-</li>
-<li>386架构 （CPU开创的分页内存管理）<ul>
-<li>页目（page directory）</li>
-<li>页表（page table）<blockquote>
-<p>CR3寄存器保存了进程的页目的物理地址。页目与页表中每4字节为一个单元，是一个32位的值，当页目项第0位为1时，表明页表已经在物理内存中；当页表项第0位为1时，表明访问的数据已经在内存中。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>0x7c00</p>
-<blockquote>
-<p>8086设计出了20位的寻址总线(16位集群器寻20位地址)<br>16位最大是65536，也就是64kb。2^20=1MB。</p>
-</blockquote>
-</li>
-<li>段寄存器（16位）一级<ul>
-<li>段地址</li>
-</ul>
-</li>
-<li><p>指针寄存器（4位）二级</p>
-<ul>
-<li>偏移地址</li>
-</ul>
-</li>
-<li><p>显示器</p>
-<ul>
-<li>点距<blockquote>
-<p>像素之间的距离</p>
-</blockquote>
-</li>
-<li><p>分辨率</p>
-<blockquote>
-<p>显示分辨率（屏幕分辨率）是屏幕图像的精密度，是指显示器所能显示的像素有多少。</p>
-</blockquote>
-<ul>
-<li>ppi（像素每英寸）</li>
-<li>dpi（点每英寸）用于打印机    </li>
-</ul>
-</li>
-<li>频率<blockquote>
-<p>刷新率指每秒钟出现新图像的数量</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>显卡<blockquote>
-<p>控制像素点显示，显卡有一块内存，叫显存。只需要把字符写入显存，显卡就会帮助我们将他显示在屏幕上。</p>
-</blockquote>
-</li>
-<li>内存映射(会把显存映射到内存)</li>
-<li>显示字符<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">086</span>下<span class="number">0X00000</span><span class="number">-0X9FFFF</span>是留给普通内存的，后面的<span class="number">0XF0000</span>-FFFFF则是存放BIOS的芯片。</span><br><span class="line">中间<span class="number">0XA0000</span>-EFFFFF的<span class="number">320</span>k字节，则由各种外围设备提供，比如显卡。</span><br><span class="line">显存的范围是<span class="number">0xB8000</span><span class="number">-0XBFFF</span></span><br><span class="line">显卡在启动后，会自动的被初始化为<span class="number">80</span>×<span class="number">25</span>的文本模式，一共两千个字符。</span><br><span class="line"><span class="number">0xB8000</span>就对应屏幕的左上角第一个字符，然后是往右依次类推</span><br><span class="line"></span><br><span class="line">一个字符并不是占用一个字节，而是两个。</span><br><span class="line">第一个字节是字符的ASCII，第二个字节指定了字符的显示属性，比如颜色，是否闪烁。</span><br><span class="line">颜色分为前景色和背景色（前四bit，后四bit）</span><br><span class="line">前四：K RGB K,控制是否闪烁</span><br><span class="line">后四：I RGB I,控制颜色深浅</span><br><span class="line"></span><br><span class="line">屏幕黑色时，显存里是空格。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">计算机语言编译过程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-19 15:14:18" itemprop="dateCreated datePublished" datetime="2020-05-19T15:14:18+08:00">2020-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-20 08:23:53" itemprop="dateModified" datetime="2020-05-20T08:23:53+08:00">2020-05-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h2><a href="/blog.githup.io/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" title="计算机组成原理">计算机组成原理</a>
-<h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><blockquote>
-<p>不同的指令集对应不同的汇编器</p>
-</blockquote>
-<ul>
-<li><a href="https://www.ibm.com/developerworks/cn/linux/l-assembly/index.html" target="_blank" rel="noopener">Linux 汇编语言开发指南</a></li>
-</ul>
-<h2 id="C-语言编译过程"><a href="#C-语言编译过程" class="headerlink" title="C 语言编译过程"></a>C 语言编译过程</h2><ul>
-<li>预处理<ul>
-<li>处理预编译指令，例如 #define，#if，#ifdefine 等。</li>
-<li>将 #include 包含文件插入到该预编译指令的位置</li>
-<li>删除所有的注析 // 、/**/</li>
-</ul>
-</li>
-<li>编译<ul>
-<li>把预处理过的代码编译成汇编代码</li>
-</ul>
-</li>
-<li>汇编<ul>
-<li>把汇编代码编译成目标代码</li>
-</ul>
-</li>
-<li>链接<ul>
-<li>把目标代码链接成可执行文件</li>
-</ul>
-</li>
-</ul>
-<h2 id="以-nginx-代码为例，使用-gcc-编译器了解一下编译过程。"><a href="#以-nginx-代码为例，使用-gcc-编译器了解一下编译过程。" class="headerlink" title="以 nginx 代码为例，使用 gcc 编译器了解一下编译过程。"></a>以 nginx 代码为例，使用 gcc 编译器了解一下编译过程。</h2><h3 id="下载-nginx-代码"><a href="#下载-nginx-代码" class="headerlink" title="下载 nginx 代码"></a>下载 nginx 代码</h3><p><a href="http://nginx.org/download/nginx-1.17.10.tar.gz" target="_blank" rel="noopener">nginx 源码</a></p>
-<h3 id="使用-gcc-编译器-gcc-version-4-8-5"><a href="#使用-gcc-编译器-gcc-version-4-8-5" class="headerlink" title="使用 gcc 编译器 (gcc version 4.8.5)"></a>使用 gcc 编译器 (gcc version 4.8.5)</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gcc -v # 显示编译过程</span><br><span class="line">gcc -### # 选项和命令不执行</span><br><span class="line">gcc -E # 预处理</span><br><span class="line">gcc -S # 编译成汇编代码</span><br><span class="line">gcc -c # 编译、汇编，不链接</span><br></pre></td></tr></table></figure>
-<h3 id="gcc-编译过程"><a href="#gcc-编译过程" class="headerlink" title="gcc 编译过程"></a>gcc 编译过程</h3><a href="/blog.githup.io/2020/05/nginx/" title="nginx源码分析">nginx源码分析</a>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.17.10.tar.gz</span><br><span class="line">tar -zxf nginx-1.17.10.tar.gz</span><br><span class="line"><span class="built_in">cd</span> /root/nginx-1.17.10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先执行 configure 配置一下整个环境。因为要生成一些文件</span></span><br><span class="line">./configure --prefix=/opt/nginx</span><br><span class="line"><span class="built_in">cd</span> /src/core</span><br><span class="line"><span class="comment"># 备份一下源码</span></span><br><span class="line">cp nginx.c nginx.c.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># -I 用于预处理时，指定头文件</span></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core \</span><br><span class="line">-I../../objs/ \</span><br><span class="line">-I../../src/os/unix/ \</span><br><span class="line">-E nginx.c</span><br><span class="line"></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core -I../../objs/ -I../../src/os/unix/ -E nginx.c &gt;nginx1.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理前后的对比</span></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core -I../../objs/ -I../../src/os/unix/ -E nginx.c |less -N</span><br><span class="line">less -N nginx.c.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">gcc -S nginx1.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 汇编</span></span><br><span class="line">gcc -c nginx1.s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接</span></span><br><span class="line">gcc nginx1.o -o nginx1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译后文件大小(行)</span></span><br><span class="line">1590 nginx.c.bak    <span class="comment"># 源码</span></span><br><span class="line">13535 nginx1.c      <span class="comment"># 预处理后代码，把所有需要的头文件都 include 进来</span></span><br><span class="line">3726 nginx1.s       <span class="comment"># 编译后汇编代码</span></span><br><span class="line">139 nginx1.o        <span class="comment"># 编译成目标文件</span></span><br></pre></td></tr></table></figure>
-<h2 id="linux-可执行文件介绍"><a href="#linux-可执行文件介绍" class="headerlink" title="linux 可执行文件介绍"></a>linux 可执行文件介绍</h2><blockquote>
-<p>ELF 是Executable and Linking Format的缩写，即可执行和可链接的格式，是Unix/Linux系统ABI (Application Binary Interface)规范的一部分。</p>
-</blockquote>
-<h3 id="usr-include-elf-h"><a href="#usr-include-elf-h" class="headerlink" title="/usr/include/elf.h"></a>/usr/include/elf.h</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"># 定义了数据类型</span><br><span class="line"> <span class="number">30</span> <span class="comment">/* Type for a 16-bit quantity.  */</span></span><br><span class="line">  <span class="number">31</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf32_Half;</span><br><span class="line">  <span class="number">32</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf64_Half;</span><br><span class="line">  <span class="number">33</span> </span><br><span class="line">  <span class="number">34</span> <span class="comment">/* Types for signed and unsigned 32-bit quantities.  */</span></span><br><span class="line">  <span class="number">35</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Word;</span><br><span class="line">  <span class="number">36</span> <span class="keyword">typedef</span> <span class="built_in">int</span>32_t  Elf32_Sword;</span><br><span class="line">  <span class="number">37</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf64_Word;</span><br><span class="line">  <span class="number">38</span> <span class="keyword">typedef</span> <span class="built_in">int</span>32_t  Elf64_Sword;</span><br><span class="line">  <span class="number">39</span> </span><br><span class="line">  <span class="number">40</span> <span class="comment">/* Types for signed and unsigned 64-bit quantities.  */</span></span><br><span class="line">  <span class="number">41</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf32_Xword;</span><br><span class="line">  <span class="number">42</span> <span class="keyword">typedef</span> <span class="built_in">int</span>64_t  Elf32_Sxword;</span><br><span class="line">  <span class="number">43</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Xword;</span><br><span class="line">  <span class="number">44</span> <span class="keyword">typedef</span> <span class="built_in">int</span>64_t  Elf64_Sxword;</span><br><span class="line">  <span class="number">45</span> </span><br><span class="line">  <span class="number">46</span> <span class="comment">/* Type of addresses.  */</span></span><br><span class="line">  <span class="number">47</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Addr;</span><br><span class="line">  <span class="number">48</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Addr;</span><br><span class="line">  <span class="number">49</span> </span><br><span class="line">  <span class="number">50</span> <span class="comment">/* Type of file offsets.  */</span></span><br><span class="line">  <span class="number">51</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Off;</span><br><span class="line">  <span class="number">52</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Off;</span><br><span class="line">  <span class="number">53</span> </span><br><span class="line">  <span class="number">54</span> <span class="comment">/* Type for section indices, which are 16-bit quantities.  */</span></span><br><span class="line">  <span class="number">55</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf32_Section;</span><br><span class="line">  <span class="number">56</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf64_Section;</span><br><span class="line">  <span class="number">57</span> </span><br><span class="line">  <span class="number">58</span> <span class="comment">/* Type for version symbol information.  */</span></span><br><span class="line">  <span class="number">59</span> <span class="keyword">typedef</span> Elf32_Half Elf32_Versym;</span><br><span class="line">  <span class="number">60</span> <span class="keyword">typedef</span> Elf64_Half Elf64_Versym;</span><br><span class="line"></span><br><span class="line"># 定义了结构体</span><br><span class="line">  <span class="number">67</span> <span class="keyword">typedef</span> struct</span><br><span class="line">  <span class="number">68</span> &#123;</span><br><span class="line">  <span class="number">69</span>   unsigned char e_ident[EI_NIDENT];     <span class="comment">/* Magic number and other info */</span></span><br><span class="line">  <span class="number">70</span>   Elf32_Half    e_type;                 <span class="comment">/* Object file type */</span></span><br><span class="line">  <span class="number">71</span>   Elf32_Half    e_machine;              <span class="comment">/* Architecture */</span></span><br><span class="line">  <span class="number">72</span>   Elf32_Word    e_version;              <span class="comment">/* Object file version */</span></span><br><span class="line">  <span class="number">73</span>   Elf32_Addr    e_entry;                <span class="comment">/* Entry point virtual address */</span></span><br><span class="line">  <span class="number">74</span>   Elf32_Off     e_phoff;                <span class="comment">/* Program header table file offset */</span></span><br><span class="line">  <span class="number">75</span>   Elf32_Off     e_shoff;                <span class="comment">/* Section header table file offset */</span></span><br><span class="line">  <span class="number">76</span>   Elf32_Word    e_flags;                <span class="comment">/* Processor-specific flags */</span></span><br><span class="line">  <span class="number">77</span>   Elf32_Half    e_ehsize;               <span class="comment">/* ELF header size in bytes */</span></span><br><span class="line">  <span class="number">78</span>   Elf32_Half    e_phentsize;            <span class="comment">/* Program header table entry size */</span></span><br><span class="line">  <span class="number">79</span>   Elf32_Half    e_phnum;                <span class="comment">/* Program header table entry count */</span></span><br><span class="line">  <span class="number">80</span>   Elf32_Half    e_shentsize;            <span class="comment">/* Section header table entry size */</span></span><br><span class="line">  <span class="number">81</span>   Elf32_Half    e_shnum;                <span class="comment">/* Section header table entry count */</span></span><br><span class="line">  <span class="number">82</span>   Elf32_Half    e_shstrndx;             <span class="comment">/* Section header string table index */</span></span><br><span class="line">  <span class="number">83</span> &#125; Elf32_Ehdr;</span><br><span class="line">  <span class="number">84</span> </span><br><span class="line">  <span class="number">85</span> <span class="keyword">typedef</span> struct</span><br><span class="line">  <span class="number">86</span> &#123;</span><br><span class="line">  <span class="number">87</span>   unsigned char e_ident[EI_NIDENT];     <span class="comment">/* Magic number and other info */</span></span><br><span class="line">  <span class="number">88</span>   Elf64_Half    e_type;                 <span class="comment">/* Object file type */</span></span><br><span class="line">  <span class="number">89</span>   Elf64_Half    e_machine;              <span class="comment">/* Architecture */</span></span><br><span class="line">  <span class="number">90</span>   Elf64_Word    e_version;              <span class="comment">/* Object file version */</span></span><br><span class="line">  <span class="number">91</span>   Elf64_Addr    e_entry;                <span class="comment">/* Entry point virtual address */</span></span><br><span class="line">  <span class="number">92</span>   Elf64_Off     e_phoff;                <span class="comment">/* Program header table file offset */</span></span><br><span class="line">  <span class="number">93</span>   Elf64_Off     e_shoff;                <span class="comment">/* Section header table file offset */</span></span><br><span class="line">  <span class="number">94</span>   Elf64_Word    e_flags;                <span class="comment">/* Processor-specific flags */</span></span><br><span class="line">  <span class="number">95</span>   Elf64_Half    e_ehsize;               <span class="comment">/* ELF header size in bytes */</span></span><br><span class="line">  <span class="number">96</span>   Elf64_Half    e_phentsize;            <span class="comment">/* Program header table entry size */</span></span><br><span class="line">  <span class="number">97</span>   Elf64_Half    e_phnum;                <span class="comment">/* Program header table entry count */</span></span><br><span class="line">  <span class="number">98</span>   Elf64_Half    e_shentsize;            <span class="comment">/* Section header table entry size */</span></span><br><span class="line">  <span class="number">99</span>   Elf64_Half    e_shnum;                <span class="comment">/* Section header table entry count */</span></span><br><span class="line"> <span class="number">100</span>   Elf64_Half    e_shstrndx;             <span class="comment">/* Section header string table index */</span></span><br><span class="line"> <span class="number">101</span> &#125; Elf64_Ehdr;</span><br><span class="line"></span><br><span class="line"># 解释了数值表示的意义</span><br><span class="line"> <span class="number">160</span> <span class="comment">/* Legal values for e_type (object file type).  */</span></span><br><span class="line"> <span class="number">161</span> </span><br><span class="line"> <span class="number">162</span> #define ET_NONE         <span class="number">0</span>               <span class="comment">/* No file type */</span></span><br><span class="line"> <span class="number">163</span> #define ET_REL          <span class="number">1</span>               <span class="comment">/* Relocatable file */</span></span><br><span class="line"> <span class="number">164</span> #define ET_EXEC         <span class="number">2</span>               <span class="comment">/* Executable file */</span></span><br><span class="line"> <span class="number">165</span> #define ET_DYN          <span class="number">3</span>               <span class="comment">/* Shared object file */</span></span><br><span class="line"> <span class="number">166</span> #define ET_CORE         <span class="number">4</span>               <span class="comment">/* Core file */</span></span><br><span class="line"> <span class="number">167</span> #define ET_NUM          <span class="number">5</span>               <span class="comment">/* Number of defined types */</span></span><br><span class="line"> <span class="number">168</span> #define ET_LOOS         <span class="number">0xfe00</span>          <span class="comment">/* OS-specific range start */</span></span><br><span class="line"> <span class="number">169</span> #define ET_HIOS         <span class="number">0xfeff</span>          <span class="comment">/* OS-specific range end */</span></span><br><span class="line"> <span class="number">170</span> #define ET_LOPROC       <span class="number">0xff00</span>          <span class="comment">/* Processor-specific range start */</span></span><br><span class="line"> <span class="number">171</span> #define ET_HIPROC       <span class="number">0xffff</span>          <span class="comment">/* Processor-specific range end */</span></span><br></pre></td></tr></table></figure>
-<h3 id="通过-readelf-命令了解-linux-可执行文件"><a href="#通过-readelf-命令了解-linux-可执行文件" class="headerlink" title="通过 readelf 命令了解 linux 可执行文件"></a>通过 readelf 命令了解 linux 可执行文件</h3><ul>
-<li>section<blockquote>
-<p>目标代码文件的内容是由section组成的,.text，.bss，.data这些指示，都指的是section。</p>
-<ul>
-<li>section header table</li>
-</ul>
-</blockquote>
-</li>
-<li>segment<blockquote>
-<p>可执行文件的内容是由segment组成的。</p>
-<ul>
-<li>program header table</li>
-</ul>
-</blockquote>
-</li>
-<li>Magic number<blockquote>
-<p>Magic number一般是指硬写到代码里的整数常量，数值是编程者自己指定的，其他人不知道数值有什么具体意义，表示不明觉厉，就称作magic number。</p>
-</blockquote>
-</li>
-<li>Magic number 作用<blockquote>
-<p>file命令是一个很神奇的命令。它能够根据文件中魔数来判断文件类型。这比根据后缀来判断文件类型要靠谱一点。比如，即使把一张位图文件后缀名改为.jpg，file命令依然大公无私地告诉你它是一张bmp图片。<br>ELF文件头会写入一个magic number，检查这个数和自己预想的是否一致可以判断文件是否损坏。<br>在缓冲区数组旁放一个magic number（称作canary金丝雀），通过检查是否一致可检测缓冲区溢出攻击。</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看segment 和 section 对应关系</span></span><br><span class="line"><span class="attr">readelf</span> <span class="string">-l /usr/bin/sleep</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 反编译</span></span><br><span class="line"><span class="attr">readelf</span> <span class="string">-S nginx1.o</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<h2 id="反汇编工具-objdump"><a href="#反汇编工具-objdump" class="headerlink" title="反汇编工具 objdump"></a>反汇编工具 objdump</h2><blockquote>
-<p>objdump是用查看目标文件或者可执行的目标文件的构成</p>
-</blockquote>
-<ul>
-<li><p>符号表</p>
-<blockquote>
-<p>在计算机科学中，符号表是一种用于语言翻译器（例如编译器和解释器）中的数据结构。<br>在符号表中，程序源代码中的每个标识符都和它的声明或使用信息绑定在一起，比如其数据类型、作用域以及内存地址。<br>散列表是用来实现符号表的一种常用技术。<br>编译器可能会使用一个很大的符号表来包含所有的符号，或是针对不同的作用域使用层次结构的多个独立的符号表。</p>
-</blockquote>
-</li>
-<li><p>文件头</p>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">objdump</span> <span class="string">-f</span> <span class="string">nginx1.o</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">nginx1.o:</span>     <span class="string">file</span> <span class="string">format</span> <span class="string">elf64-x86-64</span></span><br><span class="line"><span class="attr">architecture:</span> <span class="string">i386:x86-64,</span> <span class="attr">flags 0x00000011:</span></span><br><span class="line"><span class="string">HAS_RELOC,</span> <span class="string">HAS_SYMS</span></span><br><span class="line"><span class="string">start</span> <span class="string">address</span> <span class="number">0x0000000000000000</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/nginx/" class="post-title-link" itemprop="url">nginx</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-19 11:09:39 / 修改时间：11:12:55" itemprop="dateCreated datePublished" datetime="2020-05-19T11:09:39+08:00">2020-05-19</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>259</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.kancloud.cn/digest/understandingnginx/202599" target="_blank" rel="noopener">理解 nginx 源码</a></p>
-<h2 id="nginx-代码结构"><a href="#nginx-代码结构" class="headerlink" title="nginx 代码结构"></a>nginx 代码结构</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── core  <span class="meta"># Nginx的核心源代码，包括常用数据结构的以及Nginx 内核实现的核心代码；</span></span><br><span class="line">├── <span class="keyword">event</span> <span class="meta"># Nginx事件驱动模型，以及定时器的实现相关代码；</span></span><br><span class="line">├── http  <span class="meta"># Nginx 实现http 服务器相关的代码；</span></span><br><span class="line">├── mail  <span class="meta"># Nginx 实现邮件代理服务器相关的代码；</span></span><br><span class="line">├── misc  <span class="meta"># 辅助代码，测试C++头 的兼容性，以及对Google_PerfTools 的支持；</span></span><br><span class="line">├── os    <span class="meta"># 不同体系统结构所提供的系统函数的封装，提供对外统一的系统调用接口；</span></span><br><span class="line">└── stream <span class="meta">#</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E5%A4%9A%E8%AF%AD%E8%A8%80helloworld%E7%A4%BA%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/%E5%A4%9A%E8%AF%AD%E8%A8%80helloworld%E7%A4%BA%E4%BE%8B/" class="post-title-link" itemprop="url">多语言helloworld示例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-19 09:57:04 / 修改时间：15:15:52" itemprop="dateCreated datePublished" datetime="2020-05-19T09:57:04+08:00">2020-05-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>491</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="多语言helloworld示例"><a href="#多语言helloworld示例" class="headerlink" title="多语言helloworld示例"></a>多语言helloworld示例</h1><p><a href="https://www.runoob.com/w3cnote/hello-world-programs-of-24-programing-language.html" target="_blank" rel="noopener">runoob 示例</a></p>
-<h3 id="python-示例"><a href="#python-示例" class="headerlink" title="python 示例"></a>python 示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="C-示例"><a href="#C-示例" class="headerlink" title="C 示例"></a>C 示例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">include <span class="string">"stdio.h"</span> <span class="comment">// 头文件</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;  <span class="comment">// 入口函数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World\n"</span>) <span class="comment">// 输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="C-示例-1"><a href="#C-示例-1" class="headerlink" title="C++ 示例"></a>C++ 示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; <span class="comment">// 命名空间</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123; <span class="comment">// 类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123; <span class="comment">// 入口函数</span></span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>); <span class="comment">// 输出</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="golang-示例"><a href="#golang-示例" class="headerlink" title="golang 示例"></a>golang 示例</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 命名空间</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span> <span class="comment">// 输出包</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World"</span>) <span class="comment">// 输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1376,7 +1150,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">53</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1426,7 +1200,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">184k</span>
+    <span title="站点总字数">185k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
