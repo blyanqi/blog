@@ -190,6 +190,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/NFS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/NFS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">NFS安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-14 09:25:43 / 修改时间：09:28:01" itemprop="dateCreated datePublished" datetime="2020-05-14T09:25:43+08:00">2020-05-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/Storages/" itemprop="url" rel="index"><span itemprop="name">Storages</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">配置文件 <span class="regexp">/etc/</span>exports</span><br><span class="line">NFS 进程</span><br><span class="line">rpc.portmap <span class="comment"># portmap进程的主要功能是把RPC程序号转化为Internet的端口号。</span></span><br><span class="line"></span><br><span class="line">rpc.mountd</span><br><span class="line">rpc.nfsd</span><br><span class="line">rpc.statd</span><br><span class="line">rpc.lockd</span><br><span class="line">rpc.rquotad</span><br></pre></td></tr></table></figure>
+<h2 id="安装-NFS-server"><a href="#安装-NFS-server" class="headerlink" title="安装 NFS server"></a>安装 NFS server</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">yum</span> <span class="string">-y install nfs-utils</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">restart nfs</span></span><br><span class="line"><span class="comment"># 重新载入配置</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">reload nfs</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置-NFS-server"><a href="#配置-NFS-server" class="headerlink" title="配置 NFS server"></a>配置 NFS server</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1. </span><br><span class="line">mkdir /data</span><br><span class="line"><span class="comment"># 默认登录进来使用 nfsnobody 用户</span></span><br><span class="line">chmod 777 /data/nfs</span><br><span class="line"></span><br><span class="line">2. <span class="builtin-name">set</span><span class="built_in"> config </span></span><br><span class="line"><span class="comment"># directory machine1(option11,option12)</span></span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;/etc/exports</span><br><span class="line">/data/nfs 192.168.0.0/255.255.255.0(rw,sync)</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># optinos</span></span><br><span class="line">ro : read only</span><br><span class="line">rw : read <span class="keyword">and</span> write</span><br><span class="line">no_root_squash : 使用 nobody 作为客户端用户</span><br><span class="line">no_subtree_check : </span><br><span class="line">sync : write is complete</span><br></pre></td></tr></table></figure>
+<h2 id="通过-host-deny-限制访问"><a href="#通过-host-deny-限制访问" class="headerlink" title="通过 host deny 限制访问"></a>通过 host deny 限制访问</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/etc/hosts.deny</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># service: host [or network/netmask] , host [or network/netmask]</span></span><br><span class="line"><span class="string">/etc/hosts.allow</span></span><br><span class="line"><span class="attr">portmap:</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.1</span> <span class="string">,</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
+<h2 id="检查-nfs-是否启动"><a href="#检查-nfs-是否启动" class="headerlink" title="检查 nfs 是否启动"></a>检查 nfs 是否启动</h2><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>exportfs -v</span><br><span class="line"><span class="variable">$ </span>rpcinfo -p</span><br></pre></td></tr></table></figure>
+<h2 id="client-配置"><a href="#client-配置" class="headerlink" title="client 配置"></a>client 配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 nfs client</span></span><br><span class="line"><span class="string">yum</span> <span class="string">-y</span> <span class="string">install</span> <span class="string">nfs-utils</span></span><br><span class="line"><span class="comment"># 查看可以挂载的目录</span></span><br><span class="line"><span class="string">showmount</span> <span class="string">-e</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span></span><br><span class="line"><span class="comment"># 挂载</span></span><br><span class="line"><span class="comment"># 只读挂载</span></span><br><span class="line"><span class="string">mount</span> <span class="string">-r</span> <span class="string">-t</span> <span class="string">nfs</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span><span class="string">:/data/nfs</span> <span class="string">/mnt</span> </span><br><span class="line"><span class="comment"># 可写挂载</span></span><br><span class="line"><span class="string">mount</span> <span class="string">-w</span> <span class="string">-t</span> <span class="string">nfs</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span><span class="string">:/data/nfs</span> <span class="string">/mnt</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入 /etc/fstab（指定端口）</span></span><br><span class="line"><span class="string">localhost:/home</span>  <span class="string">/mnt/home</span>  <span class="string">nfs</span>  <span class="string">rw,hard,intr,port=250,mountport=251</span>  <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;'EOF'</span> <span class="string">&gt;&gt;/etc/fstab</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span><span class="string">:/data/nfs</span>  <span class="string">/mnt</span>    <span class="string">nfs</span>          <span class="string">rw</span>            <span class="number">0</span>    <span class="number">0</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<h2 id="NFS-优化"><a href="#NFS-优化" class="headerlink" title="NFS 优化"></a>NFS 优化</h2><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置块大小提供传输速度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 网络数据包大小</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 输入队列大小</span></span><br><span class="line">echo <span class="number">262144</span> &gt; <span class="regexp">/proc/sys</span><span class="regexp">/net/core</span><span class="regexp">/rmem_default</span></span><br><span class="line"><span class="regexp">echo 262144 &gt; /proc</span><span class="regexp">/sys/net</span><span class="regexp">/core/rmem</span>_max</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/mac%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -933,7 +1020,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-21 08:34:26" itemprop="dateModified" datetime="2020-05-21T08:34:26+08:00">2020-05-21</time>
+                <time title="修改时间：2020-05-21 12:59:17" itemprop="dateModified" datetime="2020-05-21T12:59:17+08:00">2020-05-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -951,7 +1038,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.4k</span>
+              <span>5.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -976,8 +1063,8 @@
 <h3 id="KVM-添加磁盘"><a href="#KVM-添加磁盘" class="headerlink" title="KVM 添加磁盘"></a>KVM 添加磁盘</h3><blockquote>
 <p>qcow2是集各种技术为一体的超级镜像格式，支持内部快照，加密，压缩等一系列功能，访问性能也在不断提高。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建磁盘</span></span><br><span class="line">qemu-img create -h</span><br><span class="line">qemu-img create -f qcow2 img hello_data.img 50G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘格式转换</span></span><br><span class="line">qemu-img convert -p -t directsync -O qcow2 test.raw test.qcow2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line">virsh list</span><br><span class="line">---</span><br><span class="line"> 11    yfgitlab                       running</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘挂到虚拟机</span></span><br><span class="line"><span class="comment"># virsh 添加磁盘   虚拟机名           磁盘位置             虚拟机中盘名  是否缓存</span></span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none</span><br><span class="line"></span><br><span class="line"><span class="comment"># 到虚拟机中查看磁盘</span></span><br><span class="line">fdisk -l</span><br><span class="line">---</span><br><span class="line">Disk /dev/vdb: 53.7 GB, 53695545344 bytes, 104874112 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化</span></span><br><span class="line">mkfs.ext4 /dev/vdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载目录</span></span><br><span class="line">mkdir /data</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">df -h</span><br><span class="line">---</span><br><span class="line">/dev/vdb                  50G   53M   47G   1% /data</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写到挂载文件 /etc/fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/vdb /data ext4 defaults 0 0"</span> &gt;&gt;/etc/fstab</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
-<h3 id="KVM-扩磁盘大小"><a href="#KVM-扩磁盘大小" class="headerlink" title="KVM 扩磁盘大小"></a>KVM 扩磁盘大小</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line">virsh shutdown xp_4_test</span><br><span class="line">qemu-img resize hello_data.img +150M</span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line">virsh start xp_4_test</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建磁盘</span></span><br><span class="line">qemu-img create -h</span><br><span class="line">qemu-img create -f qcow2 yfgitlab2.img 50G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘格式转换 （raw 占用磁盘空间，qcow2 不占用磁盘空间）</span></span><br><span class="line">qemu-img convert -p -t directsync -O qcow2 test.raw test.qcow2 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line">virsh list</span><br><span class="line">---</span><br><span class="line"> 11    yfgitlab                       running</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘挂到虚拟机</span></span><br><span class="line"><span class="comment"># virsh 添加磁盘   虚拟机名           磁盘位置             虚拟机中盘名  是否缓存</span></span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2</span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2 --config</span><br><span class="line"></span><br><span class="line">--config   会把文件写入配置文件（下次启动有效）</span><br><span class="line">--live     直接有效</span><br><span class="line">--current  当前有效</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line"><span class="comment"># /etc/libvirt/qemu/yfgitlab.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载磁盘</span></span><br><span class="line">virsh detach-disk yfgitlab /data/img1/yfgitlab-data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 到虚拟机中查看磁盘</span></span><br><span class="line">fdisk -l</span><br><span class="line">---</span><br><span class="line">Disk /dev/vdb: 53.7 GB, 53695545344 bytes, 104874112 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化</span></span><br><span class="line">mkfs.ext4 /dev/vdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载目录</span></span><br><span class="line">mkdir /data</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">df -h</span><br><span class="line">---</span><br><span class="line">/dev/vdb                  50G   53M   47G   1% /data</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写到挂载文件 /etc/fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/vdb /data ext4 defaults 0 0"</span> &gt;&gt;/etc/fstab</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
+<h3 id="KVM-扩磁盘大小"><a href="#KVM-扩磁盘大小" class="headerlink" title="KVM 扩磁盘大小"></a>KVM 扩磁盘大小</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭虚拟机</span></span><br><span class="line">virsh shutdown xp_4_test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩容磁盘文件</span></span><br><span class="line">qemu-img resize hello_data.img +150M</span><br><span class="line"></span><br><span class="line"><span class="comment"># 缩容</span></span><br><span class="line">qemu-img resize hello_data.img -150M --shrink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start xp_4_test</span><br></pre></td></tr></table></figure>
 <h2 id="KVM-安装配置"><a href="#KVM-安装配置" class="headerlink" title="KVM 安装配置"></a>KVM 安装配置</h2><h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><ul>
 <li>操作系统：centos7.x</li>
 <li>内核版本：3.10.0-327.el7.x86_64</li>
@@ -1054,7 +1141,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-21 08:01:24" itemprop="dateModified" datetime="2020-05-21T08:01:24+08:00">2020-05-21</time>
+                <time title="修改时间：2020-05-21 16:11:43" itemprop="dateModified" datetime="2020-05-21T16:11:43+08:00">2020-05-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1072,7 +1159,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1092,7 +1179,8 @@
 
       
           <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p><a href="https://docs.docker.com/engine/" target="_blank" rel="noopener">docker doc </a><br><a href="https://docs.docker.com/reference/" target="_blank" rel="noopener">docker 参考文档</a></p>
-<h2 id="安装-Docker-CE"><a href="#安装-Docker-CE" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">sudo yum -y remove docker \</span><br><span class="line">docker-client \</span><br><span class="line">docker-client-latest \</span><br><span class="line">docker-common \</span><br><span class="line">docker-latest \</span><br><span class="line">docker-latest-logrotate \</span><br><span class="line">docker-logrotate \</span><br><span class="line">docker-engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新系统</span></span><br><span class="line">yum -y <span class="keyword">update</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装所需包</span></span><br><span class="line">yum -y <span class="keyword">install</span> yum-utils device-mapper-persistent-<span class="keyword">data</span> lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 Docker 仓库。</span></span><br><span class="line">yum-config-manager \</span><br><span class="line">  <span class="comment">--add-repo \</span></span><br><span class="line">  https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Docker CE.</span></span><br><span class="line">yum -y <span class="keyword">install</span> docker-ce</span><br><span class="line"></span><br><span class="line"><span class="comment">### 创建 /etc/docker 目录。</span></span><br><span class="line">mkdir /etc/docker</span><br><span class="line"></span><br><span class="line"><span class="comment">### 设置 daemon。</span></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"exec-opts"</span>: [<span class="string">"native.cgroupdriver=systemd"</span>],</span><br><span class="line">  <span class="string">"log-driver"</span>: <span class="string">"json-file"</span>,</span><br><span class="line">  <span class="string">"log-opts"</span>: &#123;</span><br><span class="line">    <span class="string">"max-size"</span>: <span class="string">"100m"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"storage-driver"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">  <span class="string">"storage-opts"</span>: [</span><br><span class="line">    <span class="string">"overlay2.override_kernel_check=true"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 启动服务</span></span><br><span class="line">systemctl <span class="keyword">start</span> docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># mkdir -p /etc/systemd/system/docker.service.d</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker compose install</span></span><br><span class="line">sudo curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)"</span> -o /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">sudo <span class="keyword">ln</span> -s /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose /usr/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">docker-compose <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
+<h2 id="Docker-维护"><a href="#Docker-维护" class="headerlink" title="Docker 维护"></a>Docker 维护</h2><h3 id="docker-容器镜像导出导入"><a href="#docker-容器镜像导出导入" class="headerlink" title="docker 容器镜像导出导入"></a>docker 容器镜像导出导入</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 查看容器ID</span></span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line"><span class="meta"># 导出容器镜像</span></span><br><span class="line">docker export 容器ID &gt; <span class="keyword">container</span>`<span class="keyword">date</span> <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 导入容器镜像</span></span><br><span class="line">docker import - 镜像名 &lt; <span class="keyword">container</span>.tar</span><br></pre></td></tr></table></figure>
+<h3 id="docker-镜像导出导入"><a href="#docker-镜像导出导入" class="headerlink" title="docker 镜像导出导入"></a>docker 镜像导出导入</h3><h2 id><a href="#" class="headerlink" title></a><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 查看镜像</span></span><br><span class="line">docker image ls</span><br><span class="line">or (old version)</span><br><span class="line">docker images </span><br><span class="line"></span><br><span class="line"><span class="meta"># 导出镜像</span></span><br><span class="line">docker save 镜像ID &gt; image`date <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 导入镜像</span></span><br><span class="line">docker load &lt; image`date <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 打上tag</span></span><br><span class="line"><span class="meta">#           镜像ID            repo        :tag</span></span><br><span class="line">docker tag <span class="number">21</span>de6f73b9ac sameersbn/gitlab:<span class="number">8.14</span><span class="number">.4</span></span><br></pre></td></tr></table></figure></h2><h2 id="安装-Docker-CE"><a href="#安装-Docker-CE" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">sudo yum -y remove docker \</span><br><span class="line">docker-client \</span><br><span class="line">docker-client-latest \</span><br><span class="line">docker-common \</span><br><span class="line">docker-latest \</span><br><span class="line">docker-latest-logrotate \</span><br><span class="line">docker-logrotate \</span><br><span class="line">docker-engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新系统</span></span><br><span class="line">yum -y <span class="keyword">update</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装所需包</span></span><br><span class="line">yum -y <span class="keyword">install</span> yum-utils device-mapper-persistent-<span class="keyword">data</span> lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 Docker 仓库。</span></span><br><span class="line">yum-config-manager \</span><br><span class="line">  <span class="comment">--add-repo \</span></span><br><span class="line">  https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Docker CE.</span></span><br><span class="line">yum -y <span class="keyword">install</span> docker-ce</span><br><span class="line"></span><br><span class="line"><span class="comment">### 创建 /etc/docker 目录。</span></span><br><span class="line">mkdir /etc/docker</span><br><span class="line"></span><br><span class="line"><span class="comment">### 设置 daemon。</span></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"exec-opts"</span>: [<span class="string">"native.cgroupdriver=systemd"</span>],</span><br><span class="line">  <span class="string">"log-driver"</span>: <span class="string">"json-file"</span>,</span><br><span class="line">  <span class="string">"log-opts"</span>: &#123;</span><br><span class="line">    <span class="string">"max-size"</span>: <span class="string">"100m"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"storage-driver"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">  <span class="string">"storage-opts"</span>: [</span><br><span class="line">    <span class="string">"overlay2.override_kernel_check=true"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 启动服务</span></span><br><span class="line">systemctl <span class="keyword">start</span> docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># mkdir -p /etc/systemd/system/docker.service.d</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker compose install</span></span><br><span class="line">sudo curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)"</span> -o /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">sudo <span class="keyword">ln</span> -s /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose /usr/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">docker-compose <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
 <h3 id="重启-Docker"><a href="#重启-Docker" class="headerlink" title="重启 Docker"></a>重启 Docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
 <h3 id="使用脚本"><a href="#使用脚本" class="headerlink" title="使用脚本"></a>使用脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sudo sh get-docker.sh</span><br></pre></td></tr></table></figure>
 <h3 id="Docker-镜像加速"><a href="#Docker-镜像加速" class="headerlink" title="Docker 镜像加速"></a>Docker 镜像加速</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="params">&lt;&lt;'EOF' &gt;</span><span class="meta-keyword">/etc/</span>docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">systemctl reload docker</span><br><span class="line"></span><br><span class="line"><span class="meta"># 如果重启报错，查看这个文件是不是已经注册了 registry</span></span><br><span class="line">cat <span class="meta-keyword">/etc/</span>systemd<span class="meta-keyword">/system/</span>docker.service.d/docker-options.conf</span><br><span class="line"></span><br><span class="line">rm -rf <span class="meta-keyword">/etc/</span>docker/daemon.json</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
@@ -1202,134 +1290,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">编程方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-14 08:34:21 / 修改时间：08:41:18" itemprop="dateCreated datePublished" datetime="2020-05-14T08:34:21+08:00">2020-05-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>表达式<ul>
-<li>常量</li>
-<li>变量</li>
-<li>运算符</li>
-</ul>
-</li>
-<li>控制流程<ul>
-<li>分支</li>
-<li>循环</li>
-</ul>
-</li>
-<li>容器<ul>
-<li>数组</li>
-<li>切片</li>
-<li>Map</li>
-</ul>
-</li>
-<li>函数<ul>
-<li>参数</li>
-<li>返回值</li>
-<li>闭包</li>
-<li>递归函数</li>
-</ul>
-</li>
-<li>面向对象<ul>
-<li>接口</li>
-<li>结构体</li>
-<li>指针</li>
-</ul>
-</li>
-<li>设计模式<ul>
-<li>单例模式</li>
-<li>工厂模式</li>
-</ul>
-</li>
-<li>Golang 并发<ul>
-<li>Channel</li>
-<li>sync</li>
-</ul>
-</li>
-<li>错误处理</li>
-<li>日志记录</li>
-<li>常用包</li>
-<li>包管理</li>
-<li>基本库</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1399,7 +1359,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1449,13 +1409,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">188k</span>
+    <span title="站点总字数">184k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:51</span>
+    <span title="站点阅读时长">2:48</span>
 </div>
 
         
