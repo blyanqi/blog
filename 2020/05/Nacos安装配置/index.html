@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"blyanqi.github.io","root":"/blog.githup.io/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Nacos docs">
+  <meta name="description" content="Nacos docs conceptual 配置中心 发布配置 获取最新配置 更新通知 spring cloud,apollo,nacos     服务发现 服务治理 动态配置管理 动态DNS服务 服务和元数据管理  安装Nacos docker 1234567891011121314151617181920212223242526272829303132333435363738394041424">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nacos安装配置">
 <meta property="og:url" content="https://blyanqi.github.io/blog.githup.io/2020/05/Nacos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="Nacos docs">
+<meta property="og:description" content="Nacos docs conceptual 配置中心 发布配置 获取最新配置 更新通知 spring cloud,apollo,nacos     服务发现 服务治理 动态配置管理 动态DNS服务 服务和元数据管理  安装Nacos docker 1234567891011121314151617181920212223242526272829303132333435363738394041424">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-21T08:58:45.000Z">
-<meta property="article:modified_time" content="2020-05-21T09:09:12.456Z">
+<meta property="article:modified_time" content="2020-05-22T09:41:01.645Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -215,10 +215,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-21 16:58:45 / 修改时间：17:09:12" itemprop="dateCreated datePublished" datetime="2020-05-21T16:58:45+08:00">2020-05-21</time>
+              <time title="创建时间：2020-05-21 16:58:45" itemprop="dateCreated datePublished" datetime="2020-05-21T16:58:45+08:00">2020-05-21</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-22 17:41:01" itemprop="dateModified" datetime="2020-05-22T17:41:01+08:00">2020-05-22</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -226,7 +232,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -246,7 +252,24 @@
 
       
         <p><a href="https://nacos.io/en-us/docs/quick-start.html" target="_blank" rel="noopener">Nacos docs</a></p>
-
+<h2 id="conceptual"><a href="#conceptual" class="headerlink" title="conceptual"></a>conceptual</h2><ul>
+<li>配置中心<ul>
+<li>发布配置</li>
+<li>获取最新配置</li>
+<li>更新通知<blockquote>
+<p>spring cloud,apollo,nacos</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>服务发现</li>
+<li>服务治理</li>
+<li>动态配置管理</li>
+<li>动态DNS服务</li>
+<li>服务和元数据管理</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://nacos.io/zh-cn/docs/quick-start-docker.html" target="_blank" rel="noopener">Nacos docker</a></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 安装</span></span><br><span class="line">git clone https:<span class="comment">//github.com/nacos-group/nacos-docker.git</span></span><br><span class="line">cd nacos-docker/example</span><br><span class="line"></span><br><span class="line"><span class="meta"># docker-compose 配置 docker-compose.yml</span></span><br><span class="line">cat <span class="params">&lt;&lt;'EOF' &gt;</span>docker-compose.yml</span><br><span class="line"><span class="symbol">version:</span> <span class="string">"2"</span></span><br><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  nacos:</span></span><br><span class="line"><span class="symbol">    image:</span> nacos/nacos-server:latest</span><br><span class="line"><span class="symbol">    container_name:</span> nacos-standalone-mysql</span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line">      - PREFER_HOST_MODE=hostname</span><br><span class="line">      - MODE=standalone</span><br><span class="line">      - SPRING_DATASOURCE_PLATFORM=mysql</span><br><span class="line">      - MYSQL_SERVICE_HOST=mysql</span><br><span class="line">      - MYSQL_SERVICE_DB_NAME=nacos_dev</span><br><span class="line">      - MYSQL_SERVICE_PORT=<span class="number">3306</span></span><br><span class="line">      - MYSQL_SERVICE_USER=nacos</span><br><span class="line">      - MYSQL_SERVICE_PASSWORD=nacos<span class="meta">#123</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="meta-keyword">/data/</span>nacos-volume<span class="meta-keyword">/standalone-logs/</span>:<span class="meta-keyword">/home/</span>nacos/logs</span><br><span class="line">      - ./init.d/custom.properties:<span class="meta-keyword">/home/</span>nacos/init.d/custom.properties</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"8848:8848"</span></span><br><span class="line">      - <span class="string">"9555:9555"</span></span><br><span class="line"><span class="symbol">    depends_on:</span></span><br><span class="line">      - mysql</span><br><span class="line"><span class="symbol">    restart:</span> on-failure</span><br><span class="line"><span class="symbol">  mysql:</span></span><br><span class="line"><span class="symbol">    container_name:</span> mysql</span><br><span class="line"><span class="symbol">    image:</span> nacos/nacos-mysql:<span class="number">5.7</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line">      - MYSQL_ROOT_PASSWORD=root</span><br><span class="line">      - MYSQL_DATABASE=nacos_dev</span><br><span class="line">      - MYSQL_USER=nacos</span><br><span class="line">      - MYSQL_PASSWORD=nacos<span class="meta">#123</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="meta-keyword">/data/</span>nacos-volume/mysql:<span class="meta-keyword">/var/</span>lib/mysql</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"3306:3306"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta"># 启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="meta"># 启动日志</span></span><br><span class="line">tail <span class="number">-200</span>f <span class="meta-keyword">/data/</span>nacos-volume<span class="meta-keyword">/standalone-logs/</span>start.out</span><br><span class="line"></span><br><span class="line"><span class="meta"># 查看</span></span><br><span class="line">curl http:<span class="comment">//192.168.0.70:8848/nacos</span></span><br><span class="line"><span class="meta"># user nacos，pwd nacos</span></span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -326,6 +349,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#conceptual"><span class="nav-number">1.</span> <span class="nav-text">conceptual</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -339,7 +363,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -389,13 +413,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">192k</span>
+    <span title="站点总字数">194k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:55</span>
+    <span title="站点阅读时长">2:57</span>
 </div>
 
         

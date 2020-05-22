@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"blyanqi.github.io","root":"/blog.githup.io/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="KVM 维护创建快照 raw 格式盘不支持快照12345678# 列出当前快照virsh snapshot-list yfgitlab# virsh snapshot-create-as 虚拟机名称     快照名称     快照描述virsh snapshot-create-as yfgitlab yfgitlab&#96;date &quot;+%F_%T&quot;&#96; &quot;test&quot;# 还原快照virsh snapsho">
+  <meta name="description" content="KVM 安装配置环境介绍 操作系统：centos7.x 内核版本：3.10.0-327.el7.x86_64 IP地址：192.168.1.1  检查CPU 和Xen不同，KVM需要有CPU的支持（IntelVT)或(AMDSVM) 在安装KVM之前检查一下CPU是否提供了虚拟技术的支持1egrep&#39;vmx|svm&#39; &#x2F; proc &#x2F; cpuinfo   安装KVM安装虚拟化的组件123yum -">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KVM">
-<meta property="og:url" content="https://blyanqi.github.io/blog.githup.io/2020/05/KVM/index.html">
+<meta property="og:title" content="KVM安装">
+<meta property="og:url" content="https://blyanqi.github.io/blog.githup.io/2020/05/KVM%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="KVM 维护创建快照 raw 格式盘不支持快照12345678# 列出当前快照virsh snapshot-list yfgitlab# virsh snapshot-create-as 虚拟机名称     快照名称     快照描述virsh snapshot-create-as yfgitlab yfgitlab&#96;date &quot;+%F_%T&quot;&#96; &quot;test&quot;# 还原快照virsh snapsho">
+<meta property="og:description" content="KVM 安装配置环境介绍 操作系统：centos7.x 内核版本：3.10.0-327.el7.x86_64 IP地址：192.168.1.1  检查CPU 和Xen不同，KVM需要有CPU的支持（IntelVT)或(AMDSVM) 在安装KVM之前检查一下CPU是否提供了虚拟技术的支持1egrep&#39;vmx|svm&#39; &#x2F; proc &#x2F; cpuinfo   安装KVM安装虚拟化的组件123yum -">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-05-14T00:40:29.000Z">
-<meta property="article:modified_time" content="2020-05-21T04:59:17.191Z">
+<meta property="article:published_time" content="2020-05-22T08:13:01.000Z">
+<meta property="article:modified_time" content="2020-05-22T08:13:47.709Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://blyanqi.github.io/blog.githup.io/2020/05/KVM/">
+<link rel="canonical" href="https://blyanqi.github.io/blog.githup.io/2020/05/KVM%E5%AE%89%E8%A3%85/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>KVM | blyanqi@163.com</title>
+  <title>KVM安装 | blyanqi@163.com</title>
   
 
 
@@ -193,7 +193,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/KVM/">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/KVM%E5%AE%89%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
@@ -206,7 +206,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          KVM
+          KVM安装
         </h1>
 
         <div class="post-meta">
@@ -215,16 +215,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-05-14 08:40:29" itemprop="dateCreated datePublished" datetime="2020-05-14T08:40:29+08:00">2020-05-14</time>
+              <time title="创建时间：2020-05-22 16:13:01 / 修改时间：16:13:47" itemprop="dateCreated datePublished" datetime="2020-05-22T16:13:01+08:00">2020-05-22</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-21 12:59:17" itemprop="dateModified" datetime="2020-05-21T12:59:17+08:00">2020-05-21</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -241,14 +235,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.8k</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -260,15 +254,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="KVM-维护"><a href="#KVM-维护" class="headerlink" title="KVM 维护"></a>KVM 维护</h2><h3 id="创建快照"><a href="#创建快照" class="headerlink" title="创建快照"></a>创建快照</h3><blockquote>
-<p>raw 格式盘不支持快照<br><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-list yfgitlab</span><br><span class="line"></span><br><span class="line"># virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> 虚拟机名称     快照名称     快照描述</span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> yfgitlab yfgitlab`<span class="type">date</span> "+%F_%T"` "test"</span><br><span class="line"></span><br><span class="line"># 还原快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-revert <span class="comment">--domain yfgitlab yfgitlab2017-05-21_08:34:12</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="KVM-添加磁盘"><a href="#KVM-添加磁盘" class="headerlink" title="KVM 添加磁盘"></a>KVM 添加磁盘</h3><blockquote>
-<p>qcow2是集各种技术为一体的超级镜像格式，支持内部快照，加密，压缩等一系列功能，访问性能也在不断提高。</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建磁盘</span></span><br><span class="line">qemu-img create -h</span><br><span class="line">qemu-img create -f qcow2 yfgitlab2.img 50G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘格式转换 （raw 占用磁盘空间，qcow2 不占用磁盘空间）</span></span><br><span class="line">qemu-img convert -p -t directsync -O qcow2 test.raw test.qcow2 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line">virsh list</span><br><span class="line">---</span><br><span class="line"> 11    yfgitlab                       running</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘挂到虚拟机</span></span><br><span class="line"><span class="comment"># virsh 添加磁盘   虚拟机名           磁盘位置             虚拟机中盘名  是否缓存</span></span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2</span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2 --config</span><br><span class="line"></span><br><span class="line">--config   会把文件写入配置文件（下次启动有效）</span><br><span class="line">--live     直接有效</span><br><span class="line">--current  当前有效</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line"><span class="comment"># /etc/libvirt/qemu/yfgitlab.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载磁盘</span></span><br><span class="line">virsh detach-disk yfgitlab /data/img1/yfgitlab-data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 到虚拟机中查看磁盘</span></span><br><span class="line">fdisk -l</span><br><span class="line">---</span><br><span class="line">Disk /dev/vdb: 53.7 GB, 53695545344 bytes, 104874112 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化</span></span><br><span class="line">mkfs.ext4 /dev/vdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载目录</span></span><br><span class="line">mkdir /data</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">df -h</span><br><span class="line">---</span><br><span class="line">/dev/vdb                  50G   53M   47G   1% /data</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写到挂载文件 /etc/fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/vdb /data ext4 defaults 0 0"</span> &gt;&gt;/etc/fstab</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure>
-<h3 id="KVM-扩磁盘大小"><a href="#KVM-扩磁盘大小" class="headerlink" title="KVM 扩磁盘大小"></a>KVM 扩磁盘大小</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭虚拟机</span></span><br><span class="line">virsh shutdown xp_4_test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩容磁盘文件</span></span><br><span class="line">qemu-img resize hello_data.img +150M</span><br><span class="line"></span><br><span class="line"><span class="comment"># 缩容</span></span><br><span class="line">qemu-img resize hello_data.img -150M --shrink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start xp_4_test</span><br></pre></td></tr></table></figure>
-<h2 id="KVM-安装配置"><a href="#KVM-安装配置" class="headerlink" title="KVM 安装配置"></a>KVM 安装配置</h2><h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><ul>
+        <h2 id="KVM-安装配置"><a href="#KVM-安装配置" class="headerlink" title="KVM 安装配置"></a>KVM 安装配置</h2><h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><ul>
 <li>操作系统：centos7.x</li>
 <li>内核版本：3.10.0-327.el7.x86_64</li>
 <li>IP地址：192.168.1.1</li>
@@ -309,13 +295,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog.githup.io/2020/05/Docker/" rel="prev" title="Docker">
-      <i class="fa fa-chevron-left"></i> Docker
+    <a href="/blog.githup.io/2020/05/Docker%E5%AE%89%E8%A3%85/" rel="prev" title="Docker安装">
+      <i class="fa fa-chevron-left"></i> Docker安装
     </a></div>
-      <div class="post-nav-item">
-    <a href="/blog.githup.io/2020/05/OpenStack/" rel="next" title="OpenStack">
-      OpenStack <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -374,7 +357,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM-维护"><span class="nav-number">1.</span> <span class="nav-text">KVM 维护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建快照"><span class="nav-number">1.1.</span> <span class="nav-text">创建快照</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVM-添加磁盘"><span class="nav-number">1.2.</span> <span class="nav-text">KVM 添加磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KVM-扩磁盘大小"><span class="nav-number">1.3.</span> <span class="nav-text">KVM 扩磁盘大小</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM-安装配置"><span class="nav-number">2.</span> <span class="nav-text">KVM 安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境介绍"><span class="nav-number">2.1.</span> <span class="nav-text">环境介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查CPU"><span class="nav-number">2.2.</span> <span class="nav-text">检查CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装KVM"><span class="nav-number">2.3.</span> <span class="nav-text">安装KVM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装虚拟化的组件"><span class="nav-number">2.3.1.</span> <span class="nav-text">安装虚拟化的组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程管理配置"><span class="nav-number">2.3.2.</span> <span class="nav-text">远程管理配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#virsh控制台"><span class="nav-number">2.3.3.</span> <span class="nav-text">virsh控制台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对vnc的设置"><span class="nav-number">2.3.4.</span> <span class="nav-text">对vnc的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#确认一下是否kvm安装成功"><span class="nav-number">2.3.5.</span> <span class="nav-text">确认一下是否kvm安装成功</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看是否启动"><span class="nav-number">2.3.6.</span> <span class="nav-text">查看是否启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看kvm模块是否正常加载"><span class="nav-number">2.3.7.</span> <span class="nav-text">查看kvm模块是否正常加载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置网桥连接"><span class="nav-number">2.3.7.1.</span> <span class="nav-text">配置网桥连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重启网络"><span class="nav-number">2.3.7.2.</span> <span class="nav-text">重启网络</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看网络连接"><span class="nav-number">2.3.7.3.</span> <span class="nav-text">查看网络连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#检查ip转发是否开启"><span class="nav-number">2.3.7.4.</span> <span class="nav-text">检查ip转发是否开启</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装虚拟机"><span class="nav-number">2.4.</span> <span class="nav-text">安装虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vnc-连接虚拟机"><span class="nav-number">2.5.</span> <span class="nav-text">vnc 连接虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用操作"><span class="nav-number">2.6.</span> <span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看镜像信息"><span class="nav-number">2.7.</span> <span class="nav-text">查看镜像信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入系统镜像"><span class="nav-number">2.8.</span> <span class="nav-text">导入系统镜像</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#KVM-安装配置"><span class="nav-number">1.</span> <span class="nav-text">KVM 安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境介绍"><span class="nav-number">1.1.</span> <span class="nav-text">环境介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查CPU"><span class="nav-number">1.2.</span> <span class="nav-text">检查CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装KVM"><span class="nav-number">1.3.</span> <span class="nav-text">安装KVM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装虚拟化的组件"><span class="nav-number">1.3.1.</span> <span class="nav-text">安装虚拟化的组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#远程管理配置"><span class="nav-number">1.3.2.</span> <span class="nav-text">远程管理配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#virsh控制台"><span class="nav-number">1.3.3.</span> <span class="nav-text">virsh控制台</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对vnc的设置"><span class="nav-number">1.3.4.</span> <span class="nav-text">对vnc的设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#确认一下是否kvm安装成功"><span class="nav-number">1.3.5.</span> <span class="nav-text">确认一下是否kvm安装成功</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看是否启动"><span class="nav-number">1.3.6.</span> <span class="nav-text">查看是否启动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看kvm模块是否正常加载"><span class="nav-number">1.3.7.</span> <span class="nav-text">查看kvm模块是否正常加载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置网桥连接"><span class="nav-number">1.3.7.1.</span> <span class="nav-text">配置网桥连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重启网络"><span class="nav-number">1.3.7.2.</span> <span class="nav-text">重启网络</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看网络连接"><span class="nav-number">1.3.7.3.</span> <span class="nav-text">查看网络连接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#检查ip转发是否开启"><span class="nav-number">1.3.7.4.</span> <span class="nav-text">检查ip转发是否开启</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装虚拟机"><span class="nav-number">1.4.</span> <span class="nav-text">安装虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vnc-连接虚拟机"><span class="nav-number">1.5.</span> <span class="nav-text">vnc 连接虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用操作"><span class="nav-number">1.6.</span> <span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看镜像信息"><span class="nav-number">1.7.</span> <span class="nav-text">查看镜像信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入系统镜像"><span class="nav-number">1.8.</span> <span class="nav-text">导入系统镜像</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -388,7 +371,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">60</span>
+          <span class="site-state-item-count">64</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -438,13 +421,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">192k</span>
+    <span title="站点总字数">194k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">2:55</span>
+    <span title="站点阅读时长">2:57</span>
 </div>
 
         
