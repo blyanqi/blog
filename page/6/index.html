@@ -190,6 +190,208 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/chrome-headless/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/chrome-headless/" class="post-title-link" itemprop="url">chrome-headless</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-15 08:41:28 / 修改时间：09:41:33" itemprop="dateCreated datePublished" datetime="2020-05-15T08:41:28+08:00">2020-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>348</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="MAC-系统中"><a href="#MAC-系统中" class="headerlink" title="MAC 系统中"></a>MAC 系统中</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/Applications/Google</span>\ Chrome.app/Contents/MacOS</span><br><span class="line">ln -s <span class="string">./Google</span>\ Chrome <span class="string">./chrome</span></span><br><span class="line"><span class="string">./chrome</span> <span class="params">--headless</span> <span class="params">--disable-gpu</span> <span class="params">--dump-dom</span> http:<span class="string">//www.baidu.com</span></span><br><span class="line"><span class="params">--headless</span> 不显示窗体</span><br><span class="line"><span class="params">--disable-gpu</span> 关闭GPU</span><br><span class="line"><span class="params">--dump-dom</span> 把 dom 元素输出来</span><br></pre></td></tr></table></figure>
+<h3 id="chrome-相关"><a href="#chrome-相关" class="headerlink" title="chrome 相关"></a>chrome 相关</h3><ul>
+<li><a href="https://www.chromium.org/" target="_blank" rel="noopener">Chromium</a><ul>
+<li>Chromium是由Google主导开发的网页浏览器。</li>
+</ul>
+</li>
+<li>CDB<ul>
+<li>chrome debug protocol，简称cdp。一个让devtools和浏览器内核交换数据的通道</li>
+</ul>
+</li>
+<li><a href="https://chromedevtools.github.io/devtools-protocol/" target="_blank" rel="noopener">devtools</a><ul>
+<li>对chrome 进行调试的工具。</li>
+</ul>
+</li>
+<li><a href="https://github.com/chromedp" target="_blank" rel="noopener">chromedb</a><ul>
+<li>golang语言中利用CDB驱动浏览器包。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E4%B8%87%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E7%BB%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/%E4%B8%87%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E7%BB%B4/" class="post-title-link" itemprop="url">万台服务器运维</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-14 17:02:28" itemprop="dateCreated datePublished" datetime="2020-05-14T17:02:28+08:00">2020-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-15 10:34:46" itemprop="dateModified" datetime="2020-05-15T10:34:46+08:00">2020-05-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1万台服务器的计算量和成本核算"><a href="#1万台服务器的计算量和成本核算" class="headerlink" title="1万台服务器的计算量和成本核算"></a>1万台服务器的计算量和成本核算</h2><p>按照当前主流的机架两U服务器来配置(参考 Dell R740)</p>
+<blockquote>
+<p>需要单独 1000台 来做 Ceph 云存储</p>
+</blockquote>
+<pre><code>* 单 4210 CPU 10核 20线程
+* 内存 320G
+* 磁盘 SSD 500G
+</code></pre><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">整体计算量：</span><br><span class="line">CPU cores = <span class="number">10000</span> * <span class="number">40</span>核 = <span class="number">40</span>w 核心</span><br><span class="line">Memory    = <span class="number">10000</span> * <span class="number">320</span>G = <span class="number">3</span> PB</span><br><span class="line">本地 Disk  = <span class="number">10000</span> * <span class="number">500</span>G = <span class="number">4.7</span> PB</span><br><span class="line">云盘       = <span class="number">1000</span> * <span class="number">96</span>T = <span class="number">96</span> PB</span><br><span class="line"></span><br><span class="line">每台虚机按（ <span class="number">4</span>cores，<span class="number">32</span>G，<span class="number">200</span>GB ） 可以约开 <span class="number">10</span>w台虚拟机</span><br><span class="line"><span class="number">4</span>C * <span class="number">10</span>w = <span class="number">40</span>w 核心</span><br><span class="line"><span class="number">32</span>G * <span class="number">10</span>w = <span class="number">3</span> PB</span><br><span class="line">(系统盘)<span class="number">40</span>G * <span class="number">10</span>w = <span class="number">4</span> PB</span><br><span class="line">(云盘)<span class="number">200</span>G * <span class="number">10</span>w = <span class="number">19</span> PB * <span class="number">3</span> 两个副本 = <span class="number">57</span> PB &lt; 云盘 <span class="number">96</span> PB</span><br><span class="line"></span><br><span class="line">机房成本核算：</span><br><span class="line">一个<span class="number">42</span>U机柜大概可以放<span class="number">12</span>台设备。</span><br><span class="line"><span class="number">11000</span>台/<span class="number">12</span> = <span class="number">916</span> 机柜</span><br><span class="line">机柜托管费用大约<span class="number">5000</span>一年</span><br><span class="line"><span class="number">916</span> * <span class="number">5000</span> = <span class="number">458</span>w/年</span><br><span class="line"></span><br><span class="line"><span class="number">11000</span>台物理服务器成本：</span><br><span class="line"><span class="number">11000</span>台 * <span class="number">5</span>w = <span class="number">5.5</span> 亿</span><br><span class="line"></span><br><span class="line">网络设备计算：</span><br><span class="line">  业务端：万兆以太网交换机</span><br><span class="line">    <span class="number">11000</span>/<span class="number">46</span> * <span class="number">2</span> = <span class="number">480</span> 台 * <span class="number">3</span>w = <span class="number">1440</span>w</span><br><span class="line">  管理端：千兆以太网交换机</span><br><span class="line">    <span class="number">11000</span>/<span class="number">46</span>     = <span class="number">240</span> 台 * <span class="number">2</span>k = <span class="number">48</span>w</span><br><span class="line"></span><br><span class="line">按照阿里云的报价计算：</span><br><span class="line">按月计费：</span><br><span class="line">（ <span class="number">4</span>cores，<span class="number">32</span>G，<span class="number">200</span>GB ） ~= <span class="number">800</span> 元/月 </span><br><span class="line"><span class="number">800</span> * <span class="number">100000</span> * <span class="number">12</span>月 = <span class="number">9.6</span>亿/年</span><br><span class="line"></span><br><span class="line">按使用量(<span class="number">1.68</span>/时)计费：</span><br><span class="line">（ <span class="number">4</span>cores，<span class="number">32</span>G，<span class="number">200</span>GB ） ~= <span class="number">1200</span>元/月  </span><br><span class="line"><span class="number">1200</span> * <span class="number">100000</span> * <span class="number">12</span>月 = <span class="number">14.4</span> 亿/年</span><br><span class="line"></span><br><span class="line">带宽费用：略</span><br><span class="line"></span><br><span class="line">人力成本： 百台/人</span><br><span class="line"><span class="number">11000</span>/<span class="number">100</span> = <span class="number">110</span> 人 * <span class="number">20</span>w(平均年薪) = <span class="number">2200</span>w</span><br><span class="line"></span><br><span class="line">运维复杂度估算：</span><br><span class="line">AN: application类别数量</span><br><span class="line">LN: application层级</span><br><span class="line">SN: 服务器数量</span><br><span class="line">E: 调整因子</span><br><span class="line">OPCOMPLEX:运维复杂度</span><br></pre></td></tr></table></figure>
+<p>承载的服务量<br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">web 服务计算量：</span><br><span class="line">依照 <span class="number">163.</span>com首页 计算 <span class="number">128</span>kb静态页请求</span><br><span class="line"><span class="number">10</span>GB带宽跑满可以接受 <span class="number">9960</span>个/秒</span><br></pre></td></tr></table></figure></p>
+<h2 id="备份和容灾设计"><a href="#备份和容灾设计" class="headerlink" title="备份和容灾设计"></a>备份和容灾设计</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">备份采用同城双节点，对数据进行实时备份。</span><br><span class="line">同城机房容灾需要使用专线来保证数据完整。进行热数据实时迁移减小数据量。</span><br><span class="line"></span><br><span class="line">异地节点进行容灾。异步数据同步，主要数据进行同步。</span><br></pre></td></tr></table></figure>
+<h2 id="云计算设计"><a href="#云计算设计" class="headerlink" title="云计算设计"></a>云计算设计</h2><h3 id="5000台搭建-openstack-集群"><a href="#5000台搭建-openstack-集群" class="headerlink" title="5000台搭建 openstack 集群"></a>5000台搭建 openstack 集群</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">openstack</span></span><br></pre></td></tr></table></figure>
+<h3 id="4000台搭建-kubernetes-容器云"><a href="#4000台搭建-kubernetes-容器云" class="headerlink" title="4000台搭建 kubernetes 容器云"></a>4000台搭建 kubernetes 容器云</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="1000-台配置成裸金属"><a href="#1000-台配置成裸金属" class="headerlink" title="1000 台配置成裸金属"></a>1000 台配置成裸金属</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="技术人员组成-110-人"><a href="#技术人员组成-110-人" class="headerlink" title="技术人员组成(110 人)"></a>技术人员组成(110 人)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="技术人员管理"><a href="#技术人员管理" class="headerlink" title="技术人员管理"></a>技术人员管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Redis%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1067,204 +1269,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/KVM%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/KVM%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">KVM</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 08:40:29" itemprop="dateCreated datePublished" datetime="2020-05-14T08:40:29+08:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-22 17:40:44" itemprop="dateModified" datetime="2020-05-22T17:40:44+08:00">2020-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">虚拟化</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="KVM-维护"><a href="#KVM-维护" class="headerlink" title="KVM 维护"></a>KVM 维护</h2><a href="/blog.githup.io/2020/05/KVM%E5%AE%89%E8%A3%85/" title="KVM安装">KVM安装</a>
-<h3 id="修改虚拟机内存，cpu-core"><a href="#修改虚拟机内存，cpu-core" class="headerlink" title="修改虚拟机内存，cpu core"></a>修改虚拟机内存，cpu core</h3><blockquote>
-<p>扩大内存，cpu个数需要重启生效<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span> <span class="string">--help</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span> <span class="string">-all</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑配置文件</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">edit</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="string">&lt;memory</span> <span class="string">unit='KiB'&gt;16777216&lt;/memory&gt;</span></span><br><span class="line"><span class="string">&lt;currentMemory</span> <span class="string">unit='KiB'&gt;16777216&lt;/currentMemory&gt;</span></span><br><span class="line"><span class="string">&lt;vcpu</span> <span class="string">placement='static'&gt;4&lt;/vcpu&gt;</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启虚拟机</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">reboot</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="string">or</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">shutdown</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">start</span> <span class="string">yfgitlab</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="动态调整（虚拟机内存，cpu-core）"><a href="#动态调整（虚拟机内存，cpu-core）" class="headerlink" title="动态调整（虚拟机内存，cpu core）"></a>动态调整（虚拟机内存，cpu core）</h2><blockquote>
-<p>KVM虚拟机可以动态增加和删除vCPU，但是前提条件是，必须在虚拟机offline模式下先设置好最大vCPU数量。<br><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调整内存</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">setmaxmem devstack 32G</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整cpu core</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">setvcpus devstack 4</span></span><br><span class="line"><span class="comment"># error: unsupported configuration: failed to find appropriate hotpluggable vcpus to reach the desired target vcpu count</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<hr>
-<h3 id="创建快照"><a href="#创建快照" class="headerlink" title="创建快照"></a>创建快照</h3><blockquote>
-<p>raw 格式盘不支持快照</p>
-<h2 id><a href="#" class="headerlink" title></a><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-list yfgitlab</span><br><span class="line"></span><br><span class="line"># virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> 虚拟机名称     快照名称     快照描述</span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> yfgitlab yfgitlab`<span class="type">date</span> "+%F_%T"` "test"</span><br><span class="line"></span><br><span class="line"># 还原快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-revert <span class="comment">--domain yfgitlab yfgitlab2017-05-21_08:34:12</span></span><br></pre></td></tr></table></figure></h2><h3 id="KVM-添加磁盘"><a href="#KVM-添加磁盘" class="headerlink" title="KVM 添加磁盘"></a>KVM 添加磁盘</h3><a href="/blog.githup.io/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/" title="LVM逻辑卷管理">LVM逻辑卷管理</a>
-<p>qcow2是集各种技术为一体的超级镜像格式，支持内部快照，加密，压缩等一系列功能，访问性能也在不断提高。</p>
-</blockquote>
-<h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建磁盘</span></span><br><span class="line">qemu-img create -h</span><br><span class="line">qemu-img create -f qcow2 yfgitlab2.img 50G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘格式转换 （raw 占用磁盘空间，qcow2 不占用磁盘空间）</span></span><br><span class="line">qemu-img convert -p -t directsync -O qcow2 test.raw test.qcow2 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line">virsh list</span><br><span class="line">---</span><br><span class="line"> 11    yfgitlab                       running</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘挂到虚拟机</span></span><br><span class="line"><span class="comment"># virsh 添加磁盘   虚拟机名           磁盘位置             虚拟机中盘名  是否缓存</span></span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2</span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2 --config</span><br><span class="line"></span><br><span class="line">--config   会把文件写入配置文件（下次启动有效）</span><br><span class="line">--live     直接有效</span><br><span class="line">--current  当前有效</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line"><span class="comment"># /etc/libvirt/qemu/yfgitlab.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载磁盘</span></span><br><span class="line">virsh detach-disk yfgitlab /data/img1/yfgitlab-data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 到虚拟机中查看磁盘</span></span><br><span class="line">fdisk -l</span><br><span class="line">---</span><br><span class="line">Disk /dev/vdb: 53.7 GB, 53695545344 bytes, 104874112 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化</span></span><br><span class="line">mkfs.ext4 /dev/vdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载目录</span></span><br><span class="line">mkdir /data</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">df -h</span><br><span class="line">---</span><br><span class="line">/dev/vdb                  50G   53M   47G   1% /data</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写到挂载文件 /etc/fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/vdb /data ext4 defaults 0 0"</span> &gt;&gt;/etc/fstab</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure></h2><h3 id="KVM-扩磁盘大小"><a href="#KVM-扩磁盘大小" class="headerlink" title="KVM 扩磁盘大小"></a>KVM 扩磁盘大小</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭虚拟机</span></span><br><span class="line">virsh shutdown xp_4_test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩容磁盘文件</span></span><br><span class="line">qemu-img resize hello_data.img +150M</span><br><span class="line"></span><br><span class="line"><span class="comment"># 缩容</span></span><br><span class="line">qemu-img resize hello_data.img -150M --shrink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start xp_4_test</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/Docker/" class="post-title-link" itemprop="url">Docker</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 08:40:25" itemprop="dateCreated datePublished" datetime="2020-05-14T08:40:25+08:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-22 16:40:36" itemprop="dateModified" datetime="2020-05-22T16:40:36+08:00">2020-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p><a href="https://docs.docker.com/engine/" target="_blank" rel="noopener">docker doc </a><br><a href="https://docs.docker.com/reference/" target="_blank" rel="noopener">docker 参考文档</a></p>
-<h2 id="Docker-维护"><a href="#Docker-维护" class="headerlink" title="Docker 维护"></a>Docker 维护</h2><a href="/blog.githup.io/2020/05/Docker%E5%AE%89%E8%A3%85/" title="Docker安装">Docker安装</a>
-<h3 id="docker-容器镜像导出导入"><a href="#docker-容器镜像导出导入" class="headerlink" title="docker 容器镜像导出导入"></a>docker 容器镜像导出导入</h3><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 查看容器ID</span></span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line"><span class="meta"># 导出容器镜像</span></span><br><span class="line">docker export 容器ID &gt; <span class="keyword">container</span>`<span class="keyword">date</span> <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 导入容器镜像</span></span><br><span class="line">docker import - 镜像名 &lt; <span class="keyword">container</span>.tar</span><br></pre></td></tr></table></figure>
-<h3 id="docker-镜像导出导入"><a href="#docker-镜像导出导入" class="headerlink" title="docker 镜像导出导入"></a>docker 镜像导出导入</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 查看镜像</span></span><br><span class="line">docker image ls</span><br><span class="line">or (old version)</span><br><span class="line">docker images </span><br><span class="line"></span><br><span class="line"><span class="meta"># 导出镜像</span></span><br><span class="line">docker save 镜像ID &gt; image`date <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 同时打包多个镜像</span></span><br><span class="line">docker save -o images.tar postgres:<span class="number">9.6</span> mongo:<span class="number">3.4</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 导入镜像</span></span><br><span class="line">docker load &lt; image`date <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 打上tag</span></span><br><span class="line"><span class="meta">#           镜像ID            repo        :tag</span></span><br><span class="line">docker tag <span class="number">21</span>de6f73b9ac sameersbn/gitlab:<span class="number">8.14</span><span class="number">.4</span></span><br></pre></td></tr></table></figure>
-<h3 id="通过-registry-来进行镜像同步"><a href="#通过-registry-来进行镜像同步" class="headerlink" title="通过 registry 来进行镜像同步"></a>通过 registry 来进行镜像同步</h3><a href="/blog.githup.io/2020/05/Harbor%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Harbor安装配置">Harbor安装配置</a>
-<hr>
-<h3 id="Docker-使用"><a href="#Docker-使用" class="headerlink" title="Docker 使用"></a>Docker 使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker help</span></span><br><span class="line"><span class="comment"># docker image help</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索镜像</span></span><br><span class="line">docker search busybox</span><br><span class="line"></span><br><span class="line"><span class="comment"># 去镜像库拉镜像</span></span><br><span class="line">docker image pull busybox</span><br><span class="line">docker image ls</span><br><span class="line">docker image inspect busybox</span><br><span class="line">docker image <span class="keyword">create</span> <span class="comment">--name b1 busybox</span></span><br><span class="line">docker <span class="keyword">container</span> ps -a</span><br><span class="line">docker <span class="keyword">container</span> <span class="keyword">start</span> b1 -d</span><br><span class="line">docker <span class="keyword">container</span> exec -it b1 /<span class="keyword">bin</span>/bash</span><br><span class="line">docker <span class="keyword">container</span> <span class="keyword">logs</span> b1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker <span class="keyword">container</span> run <span class="comment">--name b1 -it busybox</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看本地镜像</span></span><br><span class="line">docker image ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看运行的容器</span></span><br><span class="line">docker <span class="keyword">container</span> ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看容器信息</span></span><br><span class="line">docker <span class="keyword">container</span> inspect b1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有容器</span></span><br><span class="line">docker <span class="keyword">container</span> ps -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除容器</span></span><br><span class="line">docker rm b1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制删除容器</span></span><br><span class="line">docker <span class="keyword">container</span> rm b13c1f94e78c <span class="comment">--force</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一次删除所有容器</span></span><br><span class="line">docker ps -a |cut -d <span class="string">" "</span> -f <span class="number">1</span> |xargs docker <span class="keyword">container</span> rm <span class="comment">--force</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看日志</span></span><br><span class="line">docker <span class="keyword">logs</span> b1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互状态进入容器</span></span><br><span class="line">docker exec -it b1 /<span class="keyword">bin</span>/sh</span><br><span class="line"><span class="comment"># or 新式命令</span></span><br><span class="line">docker <span class="keyword">container</span> exec -it b1 /<span class="keyword">bin</span>/sh</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog.githup.io/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog.githup.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog.githup.io/page/7/">7</a><a class="page-number" href="/blog.githup.io/page/8/">8</a><a class="extend next" rel="next" href="/blog.githup.io/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog.githup.io/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog.githup.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/blog.githup.io/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/9/">9</a><a class="extend next" rel="next" href="/blog.githup.io/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1330,7 +1338,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1380,13 +1388,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">200k</span>
+    <span title="站点总字数">218k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:02</span>
+    <span title="站点阅读时长">3:18</span>
 </div>
 
         

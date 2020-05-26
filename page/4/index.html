@@ -190,6 +190,187 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/gitlab%E8%BF%81%E7%A7%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/gitlab%E8%BF%81%E7%A7%BB/" class="post-title-link" itemprop="url">gitlab迁移</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-20 11:11:18" itemprop="dateCreated datePublished" datetime="2020-05-20T11:11:18+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-21 16:18:59" itemprop="dateModified" datetime="2020-05-21T16:18:59+08:00">2020-05-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="docker-方式迁移"><a href="#docker-方式迁移" class="headerlink" title="docker 方式迁移"></a>docker 方式迁移</h1><a href="/blog.githup.io/2020/05/gitlab%E5%AE%89%E8%A3%85/" title="gitlab安装">gitlab安装</a>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line"><span class="comment"># docker container exec -it d0ff23550e14 bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 compose 目录</span></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/root/gitlab-container</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份</span></span><br><span class="line">docker-compose run <span class="params">--rm</span> gitlab app<span class="function">:rake</span> gitlab<span class="function">:backup</span><span class="function">:create</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看备份</span></span><br><span class="line"><span class="keyword">ls</span> <span class="string">/data/volumn-docker/gitlab/backups/</span></span><br></pre></td></tr></table></figure>
+<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 授权备份文件</span></span><br><span class="line">chmod 777 /data/volumn-docker/gitlab/backups/1590004949_gitlab_backup.tar</span><br><span class="line"></span><br><span class="line">docker-compose <span class="builtin-name">run</span> --rm gitlab app:rake gitlab:backup:restore <span class="attribute">BACKUP</span>=1590023823_2020_05_21_12.10.6</span><br><span class="line"><span class="comment"># 两次 entry yes</span></span><br></pre></td></tr></table></figure>
+<h3 id="gitlab-版本不一致处理"><a href="#gitlab-版本不一致处理" class="headerlink" title="gitlab 版本不一致处理"></a>gitlab 版本不一致处理</h3><blockquote>
+<p>把镜像导出来，在新环境中导入进去。</p>
+</blockquote>
+<a href="/blog.githup.io/2020/05/Docker/" title="Docker使用">Docker使用</a>
+<hr>
+<h1 id="demo-方式迁移"><a href="#demo-方式迁移" class="headerlink" title="demo 方式迁移"></a>demo 方式迁移</h1><h2 id="一、备份"><a href="#一、备份" class="headerlink" title="一、备份"></a>一、备份</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭 nginx</span></span><br><span class="line">gitlab-ctl stop nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份</span></span><br><span class="line">gitlab-rake gitlab:backup:create</span><br><span class="line">---</span><br><span class="line">Dumping database ... </span><br><span class="line">Dumping PostgreSQL database gitlabhq_production ... [DONE]</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Dumping repositories ...</span><br><span class="line"> ...</span><br><span class="line"> * stool/wx-azf-app.wiki ...  [SKIPPED]</span><br><span class="line"> * go-meta/go-meta-web ... [DONE]</span><br><span class="line"> * go-meta/go-meta-web.wiki ...  [SKIPPED]</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Dumping uploads ... </span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Dumping builds ... </span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Dumping artifacts ... </span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Dumping pages ... </span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Dumping lfs objects ... </span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Dumping container registry images ... </span><br><span class="line">[DISABLED]</span><br><span class="line">Creating backup archive: 1589946460_2020_05_20_10.2.1_gitlab_backup.tar ... <span class="keyword">done</span></span><br><span class="line">Uploading backup archive to remote storage  ... skipped</span><br><span class="line">Deleting tmp directories ... <span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Deleting old backups ... skipping</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 /var/opt/gitlab/backups 生成备份文件</span></span><br><span class="line">ls /var/opt/gitlab/backups</span><br><span class="line">---</span><br><span class="line">-rw------- 1 git git 372561920 May 20 11:47 1589946460_2020_05_20_10.2.1_gitlab_backup.tar</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份配置文件</span></span><br><span class="line">cp /etc/gitlab/gitlab.rb gitlab.rb`date <span class="string">"+%F"</span>`</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份nginx配置文件</span></span><br><span class="line">cp /var/opt/gitlab/nginx/conf/gitlab-http.conf gitlab-http.conf`date <span class="string">"+%F"</span>`</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份邮件配置</span></span><br><span class="line">cp /etc/postfix/main.cf main.cf`date <span class="string">"+%F"</span>`</span><br><span class="line"></span><br><span class="line"><span class="comment"># [可修改备份文件目录]</span></span><br><span class="line">gitlab_rails[<span class="string">'backup_path'</span>] = <span class="string">"/var/opt/gitlab/backups"</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、将文件复制到新机器"><a href="#二、将文件复制到新机器" class="headerlink" title="二、将文件复制到新机器"></a>二、将文件复制到新机器</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 复制相关文件到新服务器</span></span><br><span class="line">scp <span class="regexp">/var/</span>opt<span class="regexp">/gitlab/</span>backups<span class="regexp">/*_gitlab_backup.tar newserver:/</span>var<span class="regexp">/opt/gi</span>tlab<span class="regexp">/backups/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 授权</span></span><br><span class="line">chmod <span class="number">777</span> <span class="regexp">/var/</span>opt<span class="regexp">/gitlab/</span>backups<span class="regexp">/*_gitlab_backup.tar</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、恢复"><a href="#三、恢复" class="headerlink" title="三、恢复"></a>三、恢复</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭 nginx</span></span><br><span class="line">gitlab-ctl <span class="keyword">stop</span> nginx</span><br><span class="line"></span><br><span class="line"><span class="comment">#停止相关数据连接服务</span></span><br><span class="line">gitlab-ctl <span class="keyword">stop</span> unicorn</span><br><span class="line">gitlab-ctl <span class="keyword">stop</span> sidekiq</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将备份文件复制到 new server：/var/opt/gitlab/backups/ 下</span></span><br><span class="line"><span class="comment"># 文件日期串</span></span><br><span class="line">gitlab-rake gitlab:<span class="keyword">backup</span>:<span class="keyword">restore</span> <span class="keyword">BACKUP</span>=文件日期串</span><br><span class="line"><span class="comment"># 两次 entry yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动相关数据连接服务</span></span><br><span class="line">gitlab-ctl <span class="keyword">start</span> unicorn</span><br><span class="line">gitlab-ctl <span class="keyword">start</span> sidekiq</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 nginx</span></span><br><span class="line">gitlab-ctl <span class="keyword">start</span> nginx</span><br></pre></td></tr></table></figure>
+<h1 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭 nginx</span></span><br><span class="line"><span class="string">gitlab-ctl</span> <span class="string">stop</span> <span class="string">nginx</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份</span></span><br><span class="line"><span class="string">gitlab-rake</span> <span class="string">gitlab:backup:create</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 停服务</span></span><br><span class="line"><span class="string">gitlab-ctl</span> <span class="string">stop</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">ok: down: gitaly:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: gitlab-monitor:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: gitlab-workhorse:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: logrotate:</span> <span class="string">1s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: nginx:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: node-exporter:</span> <span class="string">1s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: postgres-exporter:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: postgresql:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: prometheus:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: redis:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: redis-exporter:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: sidekiq:</span> <span class="string">0s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="attr">ok: down: unicorn:</span> <span class="string">1s,</span> <span class="string">normally</span> <span class="string">up</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+<h2 id="安装升级包"><a href="#安装升级包" class="headerlink" title="安装升级包"></a>安装升级包</h2><a href="/blog.githup.io/2020/05/gitlab%E5%AE%89%E8%A3%85/" title="gitlab安装">gitlab安装</a>
+<h2 id="启动-gitlab"><a href="#启动-gitlab" class="headerlink" title="启动 gitlab"></a>启动 gitlab</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新加载配置并启动</span></span><br><span class="line"><span class="string">gitlab-ctl</span> <span class="string">reconfigure</span></span><br><span class="line"><span class="string">gitlab-ctl</span> <span class="string">restart</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动gitlab</span></span><br><span class="line"><span class="string">gitlab-ctl</span> <span class="string">start</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">ok: run: gitaly:</span> <span class="string">(pid</span> <span class="number">22544</span><span class="string">)</span> <span class="string">1s</span></span><br><span class="line"><span class="attr">ok: run: gitlab-monitor:</span> <span class="string">(pid</span> <span class="number">22546</span><span class="string">)</span> <span class="string">0s</span></span><br><span class="line"><span class="attr">ok: run: gitlab-workhorse:</span> <span class="string">(pid</span> <span class="number">22552</span><span class="string">)</span> <span class="string">1s</span></span><br><span class="line"><span class="attr">ok: run: logrotate:</span> <span class="string">(pid</span> <span class="number">22566</span><span class="string">)</span> <span class="string">0s</span></span><br><span class="line"><span class="attr">ok: run: nginx:</span> <span class="string">(pid</span> <span class="number">22578</span><span class="string">)</span> <span class="string">1s</span></span><br><span class="line"><span class="attr">ok: run: node-exporter:</span> <span class="string">(pid</span> <span class="number">22583</span><span class="string">)</span> <span class="string">0s</span></span><br><span class="line"><span class="attr">ok: run: postgres-exporter:</span> <span class="string">(pid</span> <span class="number">22588</span><span class="string">)</span> <span class="string">0s</span></span><br><span class="line"><span class="attr">ok: run: postgresql:</span> <span class="string">(pid</span> <span class="number">22593</span><span class="string">)</span> <span class="string">1s</span></span><br><span class="line"><span class="attr">ok: run: prometheus:</span> <span class="string">(pid</span> <span class="number">22601</span><span class="string">)</span> <span class="string">0s</span></span><br><span class="line"><span class="attr">ok: run: redis:</span> <span class="string">(pid</span> <span class="number">22609</span><span class="string">)</span> <span class="string">1s</span></span><br><span class="line"><span class="attr">ok: run: redis-exporter:</span> <span class="string">(pid</span> <span class="number">22613</span><span class="string">)</span> <span class="string">0s</span></span><br><span class="line"><span class="attr">ok: run: sidekiq:</span> <span class="string">(pid</span> <span class="number">22618</span><span class="string">)</span> <span class="string">0s</span></span><br><span class="line"><span class="attr">ok: run: unicorn:</span> <span class="string">(pid</span> <span class="number">22625</span><span class="string">)</span> <span class="string">1s</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">容器技术原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-19 23:52:13 / 修改时间：23:53:04" itemprop="dateCreated datePublished" datetime="2020-05-19T23:52:13+08:00">2020-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>24</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="namespace-隔离"><a href="#namespace-隔离" class="headerlink" title="namespace 隔离"></a>namespace 隔离</h2><h2 id="分层文件系统-overlay"><a href="#分层文件系统-overlay" class="headerlink" title="分层文件系统 overlay"></a>分层文件系统 overlay</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/linux-kernel/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1866,189 +2047,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/python%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/python%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/" class="post-title-link" itemprop="url">python环境准备</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-18 16:14:45 / 修改时间：16:36:13" itemprop="dateCreated datePublished" datetime="2020-05-18T16:14:45+08:00">2020-05-18</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>834</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="https://www.python.org/" target="_blank" rel="noopener">Python</a></li>
-<li><a href="https://www.python.org/doc/" target="_blank" rel="noopener">Python docs</a><blockquote>
-<p>练习时使用最新版，部署时尽量不要使用最新版。很多开发库没跟上。</p>
-<p>对于初学者建议不要选用太多自动化的工具。云里雾里遇到问题就歇菜。</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
-<p>数据分析，直接选用 anaconda</p>
-<p>数据分析也常用 jupter 工具</p>
-<ul>
-<li><a href="https://www.anaconda.com/products/individual#Downloads" target="_blank" rel="noopener">Anaconda</a></li>
-<li><a href="https://jupyter.org/install" target="_blank" rel="noopener">jupter</a></li>
-</ul>
-</blockquote>
-<ul>
-<li><a href="https://pypi.org/project/pip/" target="_blank" rel="noopener">包管理工具 pip</a></li>
-</ul>
-<blockquote>
-<p>交互工具选用 ipython<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipython</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="安装-Python-3-8-2"><a href="#安装-Python-3-8-2" class="headerlink" title="安装 Python 3.8.2"></a>安装 Python 3.8.2</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//www.<span class="keyword">python</span>.org/ftp/<span class="keyword">python</span>/<span class="number">3.8</span>.<span class="number">2</span>/Python-<span class="number">3.8</span>.<span class="number">2</span>.tgz</span><br><span class="line">tar -zxf Python-<span class="number">3.8</span>.<span class="number">2</span>.tgz </span><br><span class="line"><span class="keyword">cd</span> Python-<span class="number">3.8</span>.<span class="number">2</span></span><br><span class="line">./configure  --prefix /usr/local/<span class="keyword">python</span></span><br><span class="line"><span class="keyword">make</span> -<span class="keyword">j</span> $(/proc/cpuinfo |<span class="keyword">grep</span> cores|wc -<span class="keyword">l</span>)</span><br><span class="line"><span class="keyword">make</span> install</span><br><span class="line"></span><br><span class="line"># 配置国内镜像源</span><br><span class="line"><span class="built_in">mkdir</span> ~/.pip</span><br><span class="line"><span class="keyword">cat</span> &lt;&lt;<span class="string">'EOF'</span> &gt;~/.pip/pip.<span class="keyword">conf</span> </span><br><span class="line">[<span class="keyword">global</span>]</span><br><span class="line"><span class="built_in">index</span>-url = http://pypi.douban.<span class="keyword">com</span>/simple</span><br><span class="line">extra-<span class="built_in">index</span>-url=http<span class="variable">s:</span>//mirrors.aliyun.<span class="keyword">com</span>/pypi/simple</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 配置虚拟环境</span><br><span class="line">/usr/local/<span class="keyword">python</span>/bin/pip3 install --upgrade pip</span><br><span class="line">/usr/local/<span class="keyword">python</span>/bin/pip3 install virtualenv</span><br><span class="line">/usr/local/<span class="keyword">python</span>/bin/virtualenv demo</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> <span class="string">". demo/bin/activate"</span> &gt;&gt;~/.bash_profile</span><br><span class="line">. demo/bin/activate</span><br><span class="line">pip install django</span><br><span class="line"></span><br><span class="line"><span class="keyword">python</span> --<span class="keyword">version</span></span><br><span class="line"># <span class="keyword">verbose</span> (跟踪导入的语句 trace import statements)</span><br><span class="line"><span class="keyword">python</span> -v</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Rancher%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/Rancher%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Rancher安装配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-18 14:40:02 / 修改时间：16:03:40" itemprop="dateCreated datePublished" datetime="2020-05-18T14:40:02+08:00">2020-05-18</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://rancher2.docs.rancher.cn/" target="_blank" rel="noopener"> rander 2.x 新文档 </a></p>
-<h2 id="Rancher-2-X-docker-安装"><a href="#Rancher-2-X-docker-安装" class="headerlink" title="Rancher 2.X docker 安装"></a>Rancher 2.X docker 安装</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载最新的镜像</span></span><br><span class="line"><span class="string">docker</span> <span class="string">pull</span> <span class="string">rancher/rancher</span></span><br><span class="line"><span class="string">docker</span> <span class="string">image</span> <span class="string">ls</span></span><br><span class="line"><span class="comment"># 查看镜像详情</span></span><br><span class="line"><span class="string">docker</span> <span class="string">inspect</span> <span class="string">rancher/rancher:latest</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"> <span class="attr">"Volumes":</span> <span class="string">&#123;</span></span><br><span class="line">                <span class="string">"/var/lib/rancher"</span><span class="string">:</span> <span class="string">&#123;&#125;,</span></span><br><span class="line">                <span class="string">"/var/log/auditlog"</span><span class="string">:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">            <span class="string">&#125;,</span></span><br><span class="line">            <span class="attr">"WorkingDir":</span> <span class="string">"/var/lib/rancher"</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment"># 创建 pvc</span></span><br><span class="line"><span class="string">mkdir</span> <span class="string">-p</span> <span class="string">/docker_volume/rancher_home/rancher</span></span><br><span class="line"><span class="string">mkdir</span> <span class="string">-p</span> <span class="string">/docker_volume/rancher_home/auditlog</span></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line"><span class="string">docker</span> <span class="string">run</span> <span class="string">-d</span> <span class="string">--restart=unless-stopped</span> <span class="string">-p</span> <span class="number">80</span><span class="string">:80</span> <span class="string">-p</span> <span class="number">443</span><span class="string">:443</span> <span class="string">\</span></span><br><span class="line"><span class="string">-v</span> <span class="string">/docker_volume/rancher_home/rancher:/var/lib/rancher</span> <span class="string">\</span></span><br><span class="line"><span class="string">-v</span> <span class="string">/docker_volume/rancher_home/auditlog:/var/log/auditlog</span> <span class="string">\</span></span><br><span class="line"><span class="string">--name</span> <span class="string">rancher</span> <span class="string">rancher/rancher</span>  </span><br><span class="line"><span class="comment"># 查看容器</span></span><br><span class="line"><span class="string">docker</span> <span class="string">container</span> <span class="string">ls</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line"><span class="string">http://192.168.0.61</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 admin 密码</span></span><br><span class="line"><span class="string">admin@123456.com</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 选择页面底部 设置语言</span></span><br></pre></td></tr></table></figure>
-<h2 id="导入现有的-kubernetes-集群"><a href="#导入现有的-kubernetes-集群" class="headerlink" title="导入现有的 kubernetes 集群"></a>导入现有的 kubernetes 集群</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加集群 -&gt; 导入现有集群 -&gt; 名称 -&gt; 导入命令 -&gt; 完成 </span></span><br><span class="line"><span class="comment"># 需要 kubernetes 管理员权限，已经有了无需执行</span></span><br><span class="line">kubectl create clusterrolebinding cluster-admin-binding --clusterrole cluster-admin --user [USER_ACCOUNT]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 kubernetes 集群执行</span></span><br><span class="line"><span class="comment"># 有证书</span></span><br><span class="line">kubectl apply -f https://192.168.0.61/v3/import/d2nkw8bzktbzrtsnfcdbxdzjbxqpbn8gwbhntxcpprwpf7jq9t9689.yaml</span><br><span class="line"><span class="comment"># 绕过证书检查</span></span><br><span class="line">curl --insecure -sfL https://192.168.0.61/v3/import/d2nkw8bzktbzrtsnfcdbxdzjbxqpbn8gwbhntxcpprwpf7jq9t9689.yaml | kubectl apply -f -</span><br><span class="line"></span><br><span class="line"><span class="comment"># 会在kubernetes 上所有节点上创建 </span></span><br><span class="line">cattle-node-agent</span><br><span class="line"><span class="comment"># 在 master 上创建两个 pod</span></span><br><span class="line">cattle-cluster-agent</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog.githup.io/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog.githup.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog.githup.io/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/8/">8</a><a class="extend next" rel="next" href="/blog.githup.io/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog.githup.io/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog.githup.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/blog.githup.io/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/9/">9</a><a class="extend next" rel="next" href="/blog.githup.io/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2114,7 +2116,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-count">81</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2164,13 +2166,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">200k</span>
+    <span title="站点总字数">218k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:02</span>
+    <span title="站点阅读时长">3:18</span>
 </div>
 
         
