@@ -190,6 +190,591 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E4%BB%BFhexo%E7%9A%84golang%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/%E4%BB%BFhexo%E7%9A%84golang%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">仿hexo的golang实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-15 11:01:23 / 修改时间：11:31:56" itemprop="dateCreated datePublished" datetime="2020-05-15T11:01:23+08:00">2020-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>15k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>^^最近想写一下博客。顺便把自己的文档给整理一下。<br>gitee pages 提供静态页的空间。把这个过程也纪录一下。<br>选择 gitee 主要原因是国内访问比较快。<br>githup pages 需要的话导出一份放上去就可以很方便。</p>
+<p>实现功能</p>
+<pre><code>1、通过模板生成静态页
+2、定义网站结构，一次性生成
+3、把 markdown文件保存到 md 目录，用来生成文章
+4、定义文章结构，把文章生成后加到list页面里。
+</code></pre><p>实现完之后三步搞定</p>
+<pre><code>1、执行命令生成网站
+2、对 md 目录下的文章自动生成
+3、发布到 gitee
+</code></pre><p>最后写个 deply.sh 一键发布</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><h4 id="发布的目录结构"><a href="#发布的目录结构" class="headerlink" title="发布的目录结构"></a>发布的目录结构</h4><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">blog #类似hexo public</span><br><span class="line">	|-&gt; artcles </span><br><span class="line">		|-&gt; modules #把文章分类</span><br><span class="line">			|-&gt; artcle</span><br><span class="line">	|-&gt; static # 静态文件</span><br><span class="line">		|-&gt; css</span><br><span class="line">		|-&gt; js</span><br><span class="line">		|-&gt; images</span><br></pre></td></tr></table></figure>
+<h4 id="待发布的目录结构"><a href="#待发布的目录结构" class="headerlink" title="待发布的目录结构"></a>待发布的目录结构</h4><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">blog</span><br><span class="line">	|-&gt; templates</span><br><span class="line">		|-&gt; static       	<span class="comment">#存放静态文件</span></span><br><span class="line">            |-&gt; css</span><br><span class="line">            |-&gt; js</span><br><span class="line">            |-&gt; images</span><br><span class="line">		|-&gt; nav.tpl 		<span class="comment">#导航条</span></span><br><span class="line">		|-&gt; index.tpl 		<span class="comment">#首页</span></span><br><span class="line">		|-&gt; header.tpl 		<span class="comment">#page 头部</span></span><br><span class="line">		|-&gt; content.tpl 	<span class="comment">#page 内容部分</span></span><br><span class="line">		|-&gt; footer.tpl		<span class="comment">#page 尾部</span></span><br><span class="line">		|-&gt; md 				<span class="comment">#用来存放文章</span></span><br><span class="line">            |-&gt;cloud        <span class="comment">#支持文章分类，文章太多后容易查找</span></span><br><span class="line">		|-&gt; <span class="keyword">list</span>.tpl		<span class="comment">#列表页</span></span><br><span class="line">		|-&gt; listcontent.tpl <span class="comment">#列表内容部分 </span></span><br><span class="line">	|-&gt; main.go</span><br><span class="line">	|-&gt; go.mod</span><br></pre></td></tr></table></figure>
+<h3 id="主程序-main-go"><a href="#主程序-main-go" class="headerlink" title="主程序 main.go"></a>主程序 main.go</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/PuerkitoBio/goquery"</span> <span class="comment">//用来处理dom</span></span><br><span class="line">	<span class="string">"os/exec"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"path/filepath"</span></span><br><span class="line">	<span class="string">"regexp"</span> <span class="comment">//正则主要是匹配 tab</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"html/template"</span> <span class="comment">// html 模板</span></span><br><span class="line">	<span class="string">"io/ioutil"</span> <span class="comment">// 文件操作</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义网站结构</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	ROOT          = <span class="string">"blog"</span></span><br><span class="line">	TEMP          = <span class="string">"templates"</span></span><br><span class="line">	ARTCLEDIR     = ROOT + <span class="string">"/artcle"</span></span><br><span class="line">	STATICDIR     = ROOT + <span class="string">"/static"</span></span><br><span class="line">	TEMPMD        = TEMP + <span class="string">"/md"</span></span><br><span class="line">	TEMPSTATICDIR = TEMP + <span class="string">"/static"</span></span><br><span class="line">	INDEX         = ROOT + <span class="string">"/index.html"</span></span><br><span class="line">	LIST          = <span class="string">"/list.html"</span></span><br><span class="line">	TEMPLATES     = <span class="string">"templates"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 页面名称</span></span><br><span class="line"><span class="keyword">type</span> Page <span class="keyword">struct</span> &#123;</span><br><span class="line">	title <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 标签颜色 color</span></span><br><span class="line"><span class="keyword">type</span> tagColor <span class="keyword">struct</span> &#123;</span><br><span class="line">	colorn <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 文章的属性</span></span><br><span class="line"><span class="keyword">type</span> Artcle <span class="keyword">struct</span> &#123;</span><br><span class="line">	name     <span class="keyword">string</span></span><br><span class="line">	date     <span class="keyword">string</span></span><br><span class="line">	catagory <span class="keyword">string</span></span><br><span class="line">	tag      <span class="keyword">string</span></span><br><span class="line">	tagColor</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 文件列表--感觉这点golang不如python好操作</span></span><br><span class="line"><span class="keyword">var</span> fileList []<span class="keyword">string</span></span><br><span class="line"><span class="keyword">var</span> staticfileList []<span class="keyword">string</span></span><br><span class="line"><span class="keyword">var</span> mdfileList []<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 程序入口</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 生成blog</span></span><br><span class="line">	TpltoBlog()</span><br><span class="line">	<span class="comment">// 把 static 拷贝到blog</span></span><br><span class="line">	staticToBlog()</span><br><span class="line">	<span class="comment">// 把文章发表出去，对md进行处理</span></span><br><span class="line">	mdHandler2()</span><br><span class="line">	<span class="comment">//遍历 artcle 目录，把生成 html 文章 加到list.html中</span></span><br><span class="line">	htmlToList()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把html 加入list.html中</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">htmlToList</span><span class="params">()</span></span> &#123;</span><br><span class="line">	GetAllFile(ARTCLEDIR)</span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> fileList &#123;</span><br><span class="line">		fmt.Println(f)</span><br><span class="line">		addList(f)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理 md 底下的文件（废弃）</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mdHandler</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 遍历一下目录</span></span><br><span class="line">	files, _ := ioutil.ReadDir(TEMPMD)</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		filename := file.Name()</span><br><span class="line">		<span class="keyword">if</span> file.IsDir() &#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// 处理 md to html</span></span><br><span class="line">			<span class="keyword">if</span> strings.Contains(filename, <span class="string">".md"</span>) &#123;</span><br><span class="line">				<span class="comment">//fmt.Println(filename)</span></span><br><span class="line">				htmlfilename := strings.Replace(filename, <span class="string">".md"</span>, <span class="string">".html"</span>, <span class="number">-1</span>)</span><br><span class="line">				fmt.Println(TEMPMD+<span class="string">"/"</span>+filename, TEMPMD+<span class="string">"/"</span>+htmlfilename)</span><br><span class="line">                <span class="comment">// 通过外部命令实现</span></span><br><span class="line">				cmd := exec.Command(<span class="string">"./mdtohtml"</span>, <span class="string">"-css"</span>, <span class="string">"blog/static/css/base.css"</span>, TEMPMD+<span class="string">"/"</span>+filename, TEMPMD+<span class="string">"/"</span>+htmlfilename)</span><br><span class="line">				cmd.Run()</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理 md 底下的文件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">mdHandler2</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 生成 md 文件列表</span></span><br><span class="line">	getMD(<span class="string">"templates/md"</span>)</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> mdfileList &#123;</span><br><span class="line">		<span class="keyword">if</span> strings.Contains(file, <span class="string">".md"</span>) &#123;</span><br><span class="line">			htmlfilename := strings.Replace(file, <span class="string">".md"</span>, <span class="string">".html"</span>, <span class="number">-1</span>)</span><br><span class="line">			fmt.Println(file, htmlfilename)</span><br><span class="line">			cmd := exec.Command(<span class="string">"./mdtohtml"</span>, <span class="string">"-css"</span>, <span class="string">"blog/static/css/base.css"</span>, file, htmlfilename)</span><br><span class="line">			cmd.Run()</span><br><span class="line">			_, err := os.Stat(htmlfilename)</span><br><span class="line">			<span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> strings.Contains(htmlfilename, <span class="string">".html"</span>) &#123;</span><br><span class="line">					fmt.Println(htmlfilename)</span><br><span class="line">					HtmltoBlog(htmlfilename) <span class="comment">// 对 html 的进行处理</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历 md</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getMD</span><span class="params">(filename <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	files, _ := ioutil.ReadDir(filename)</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		f := file.Name()</span><br><span class="line">		<span class="keyword">if</span> file.IsDir() &#123;</span><br><span class="line">			<span class="comment">//fmt.Println(filename + "/" + f)</span></span><br><span class="line">			getMD(filename + <span class="string">"/"</span> + f)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">//fmt.Println(f)</span></span><br><span class="line">		mdfileList = <span class="built_in">append</span>(mdfileList, filename+<span class="string">"/"</span>+f)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理md底下html文件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">htmlHandler</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 遍历一下目录</span></span><br><span class="line">	files, _ := ioutil.ReadDir(TEMPMD)</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		filename := file.Name()</span><br><span class="line">		<span class="keyword">if</span> file.IsDir() &#123;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="comment">// html to modules(/blog/artcle/*)</span></span><br><span class="line">			<span class="keyword">if</span> strings.Contains(filename, <span class="string">".html"</span>) &#123;</span><br><span class="line">				fmt.Println(filename)</span><br><span class="line">				HtmltoBlog(filename) <span class="comment">// 对 html 的进行处理</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把 static 拷贝到blog</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">staticToBlog</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> tempfile <span class="keyword">string</span></span><br><span class="line">	staticToList(TEMPSTATICDIR)</span><br><span class="line">	<span class="keyword">for</span> _, f := <span class="keyword">range</span> staticfileList &#123;</span><br><span class="line">		tempfile = strings.Replace(f, <span class="string">"templates/"</span>, <span class="string">"blog/"</span>, <span class="number">-1</span>)</span><br><span class="line">		fmt.Println(f, tempfile)</span><br><span class="line">		t, _ := ioutil.ReadFile(f)</span><br><span class="line">		ioutil.WriteFile(tempfile, t, os.ModePerm)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 寻找静态文件</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">staticToList</span><span class="params">(pathname <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	files, _ := ioutil.ReadDir(pathname)</span><br><span class="line">	<span class="keyword">for</span> _, file := <span class="keyword">range</span> files &#123;</span><br><span class="line">		filename := file.Name()</span><br><span class="line">		<span class="comment">//fmt.Println(filename)</span></span><br><span class="line">		<span class="keyword">if</span> file.IsDir() &#123;</span><br><span class="line">			staticToList(pathname + <span class="string">"/"</span> + filename)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			staticfileList = <span class="built_in">append</span>(staticfileList, pathname+<span class="string">"/"</span>+filename)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归目录</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">GetAllFile</span><span class="params">(pathname <span class="keyword">string</span>)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	rd, err := ioutil.ReadDir(pathname)</span><br><span class="line">	<span class="keyword">for</span> _, fi := <span class="keyword">range</span> rd &#123;</span><br><span class="line">		<span class="keyword">if</span> fi.IsDir() &#123;</span><br><span class="line">			<span class="comment">//fmt.Printf("[%s]\n", pathname+"/"+fi.Name())</span></span><br><span class="line">			GetAllFile(pathname + <span class="string">"/"</span> + fi.Name())</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> fi.Name() != <span class="string">"list.html"</span> &#123;</span><br><span class="line">				<span class="comment">//fmt.Println(pathname + "/" + fi.Name())</span></span><br><span class="line">				fileList = <span class="built_in">append</span>(fileList, pathname+<span class="string">"/"</span>+fi.Name())</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据模板生成html</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">TpltoBlog</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 创建目录和文件</span></span><br><span class="line">	os.MkdirAll(ARTCLEDIR+<span class="string">"/bigdata"</span>, os.ModePerm)</span><br><span class="line">	os.MkdirAll(ARTCLEDIR+<span class="string">"/cloud"</span>, os.ModePerm)</span><br><span class="line">	os.MkdirAll(STATICDIR+<span class="string">"/css"</span>, os.ModePerm)</span><br><span class="line">	os.Mkdir(STATICDIR+<span class="string">"/images"</span>, os.ModePerm)</span><br><span class="line">	os.Mkdir(STATICDIR+<span class="string">"/scripts"</span>, os.ModePerm)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 生成模块</span></span><br><span class="line">	ArtcleDir := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		<span class="string">"bigdata"</span>: <span class="string">"大数据"</span>,</span><br><span class="line">		<span class="string">"cloud"</span>:   <span class="string">"云计算"</span>,</span><br><span class="line">		<span class="string">"devops"</span>:  <span class="string">"DevOps"</span>,</span><br><span class="line">		<span class="string">"develop"</span>: <span class="string">"开发技术"</span>,</span><br><span class="line">		<span class="string">"pmp"</span>:     <span class="string">"PMP"</span>,</span><br><span class="line">		<span class="string">"system"</span>:  <span class="string">"系统管理"</span>,</span><br><span class="line">		<span class="string">"lookfor"</span>: <span class="string">"速查表"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	ArtcleMap := <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">string</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> dir, name := <span class="keyword">range</span> ArtcleDir &#123;</span><br><span class="line">		os.MkdirAll(ARTCLEDIR+<span class="string">"/"</span>+dir, os.ModePerm)</span><br><span class="line">		ArtcleMap[ARTCLEDIR+<span class="string">"/"</span>+dir+LIST] = name</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 生成主页</span></span><br><span class="line">	t1, _ := template.ParseFiles(<span class="string">"templates/index.tpl"</span>, <span class="string">"templates/header.tpl"</span>, <span class="string">"templates/nav.tpl"</span>, <span class="string">"templates/content.tpl"</span>, <span class="string">"templates/footer.tpl"</span>)</span><br><span class="line">	<span class="comment">// p := Page&#123;"主页"&#125;</span></span><br><span class="line">	indexFile1, _ := os.Create(INDEX)</span><br><span class="line">	t1.Execute(indexFile1, ArtcleMap)</span><br><span class="line">	indexFile1.Close()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 生成列表页</span></span><br><span class="line">	t2, _ := template.ParseFiles(<span class="string">"templates/list.tpl"</span>, <span class="string">"templates/header.tpl"</span>, <span class="string">"templates/nav.tpl"</span>, <span class="string">"templates/listcontent.tpl"</span>, <span class="string">"templates/footer.tpl"</span>)</span><br><span class="line">	<span class="comment">// p1 := Page&#123;"列表"&#125;</span></span><br><span class="line">	<span class="keyword">for</span> dir, _ := <span class="keyword">range</span> ArtcleDir &#123;</span><br><span class="line">		fmt.Println(ARTCLEDIR + <span class="string">"/"</span> + dir + LIST)</span><br><span class="line">		listFile, err := os.Create(ARTCLEDIR + <span class="string">"/"</span> + dir + LIST)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(err)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// 把对列表页进行html渲染</span></span><br><span class="line">		t2.Execute(listFile, ArtcleMap)</span><br><span class="line">		listFile.Close()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 生成 404 页面</span></span><br><span class="line">	t404, _ := template.ParseFiles(<span class="string">"templates/404.tpl"</span>)</span><br><span class="line">	p := Page&#123;<span class="string">"404"</span>&#125;</span><br><span class="line">	indexFile404, _ := os.Create(ROOT + <span class="string">"/404.html"</span>)</span><br><span class="line">	t404.Execute(indexFile404, p)</span><br><span class="line">	indexFile404.Close()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> ArtcleMap &#123;</span><br><span class="line">		fmt.Println(k, v)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把文章添加到列表</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">addList</span><span class="params">(filename <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 获取目录</span></span><br><span class="line">	listDir := filepath.Dir(filename)</span><br><span class="line">	listFile := listDir + <span class="string">"/list.html"</span></span><br><span class="line">	fmt.Println(listDir, listFile, filename)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 判断有没有 list.html</span></span><br><span class="line">	_, err := os.Stat(listFile)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 获取文件</span></span><br><span class="line">	text, _ := ioutil.ReadFile(filename)</span><br><span class="line">	r := regexp.MustCompile(<span class="string">`&lt;!--(.*)--&gt;`</span>)</span><br><span class="line">	b := r.FindAllStringSubmatch(<span class="keyword">string</span>(text), <span class="number">-1</span>)</span><br><span class="line">	atl := Artcle&#123;&#125;</span><br><span class="line">    <span class="comment">// 定义文章分类的颜色</span></span><br><span class="line">	Color := <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>&#123;</span><br><span class="line">		<span class="number">1</span>: <span class="string">"rgba(0,0,255,0.8)"</span>,</span><br><span class="line">		<span class="number">2</span>: <span class="string">"rgba(255,0,0,0.8)"</span>,</span><br><span class="line">		<span class="number">3</span>: <span class="string">"rgba(0,255,0,0.8)"</span>,</span><br><span class="line">		<span class="number">4</span>: <span class="string">"rgba(100,100,100,0.8)"</span>,</span><br><span class="line">		<span class="number">5</span>: <span class="string">"rgba(125,200,120,0.8)"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	atl.colorn = <span class="number">5</span></span><br><span class="line">	atl.tag = <span class="string">"其他"</span></span><br><span class="line">	atl.date = <span class="string">"2010-02-08"</span></span><br><span class="line">	<span class="comment">// 查找 html 标签信息</span></span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> b &#123;</span><br><span class="line">		<span class="comment">//fmt.Println(v)</span></span><br><span class="line">		tmp := v[<span class="number">1</span>]</span><br><span class="line">		<span class="keyword">if</span> strings.Contains(tmp, <span class="string">"title:"</span>) &#123;</span><br><span class="line">			atl.name = purhcontent(<span class="string">"title:"</span>, tmp)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> strings.Contains(tmp, <span class="string">"tag:"</span>) &#123;</span><br><span class="line">			atl.tag = purhcontent(<span class="string">"tag:"</span>, tmp)</span><br><span class="line">			<span class="keyword">if</span> <span class="built_in">len</span>(atl.tag) &lt; <span class="number">1</span> &#123;</span><br><span class="line">				atl.tag = <span class="string">"其他"</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> strings.Contains(tmp, <span class="string">"date:"</span>) &#123;</span><br><span class="line">			atl.date = purhcontent(<span class="string">"date:"</span>, tmp)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> strings.Contains(tmp, <span class="string">"catagory:"</span>) &#123;</span><br><span class="line">			atl.catagory = purhcontent(<span class="string">"catagory:"</span>, tmp)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> strings.Contains(tmp, <span class="string">"color:"</span>) &#123;</span><br><span class="line">			atl.colorn, err = strconv.Atoi(purhcontent(<span class="string">"color:"</span>, tmp))</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 对列表页进行生成</span></span><br><span class="line">	domname := <span class="string">".list dl"</span></span><br><span class="line">	htmltag := <span class="string">`&lt;dd&gt;&lt;a href="`</span> + atl.name + <span class="string">`.html"&gt;`</span> + atl.name +</span><br><span class="line">		<span class="string">`&lt;/a&gt;&lt;span class="tag"&gt;&lt;span style="background-color: `</span> +</span><br><span class="line">		Color[atl.colorn] + <span class="string">` !important;"&gt;`</span> + atl.tag + <span class="string">`&lt;/span&gt;&lt;span&gt;`</span> +</span><br><span class="line">		atl.date + <span class="string">`&lt;/span&gt;&lt;/span&gt;&lt;/dd&gt;`</span></span><br><span class="line">	fmt.Println(domname, htmltag)</span><br><span class="line">	artcleTolist(listFile, domname, htmltag)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对md 标签进行操作</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">HtmltoBlog</span><span class="params">(filename <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	newDir := ARTCLEDIR + <span class="string">"/"</span></span><br><span class="line">	<span class="comment">// md 下的 html 进行处理，并分类保存到 blog 下</span></span><br><span class="line">	text, _ := ioutil.ReadFile(filename)</span><br><span class="line">	r := regexp.MustCompile(<span class="string">`&lt;!--(.*)--&gt;`</span>)</span><br><span class="line">	b := r.FindAllStringSubmatch(<span class="keyword">string</span>(text), <span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line">	atl := Artcle&#123;&#125;</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> b &#123;</span><br><span class="line">		<span class="comment">//fmt.Println(v)</span></span><br><span class="line">		tmp := v[<span class="number">1</span>]</span><br><span class="line">		<span class="keyword">if</span> strings.Contains(tmp, <span class="string">"title:"</span>) &#123;</span><br><span class="line">			atl.name = purhcontent(<span class="string">"title:"</span>, tmp)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> strings.Contains(tmp, <span class="string">"tag:"</span>) &#123;</span><br><span class="line">			atl.tag = purhcontent(<span class="string">"tag:"</span>, tmp)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> strings.Contains(tmp, <span class="string">"date:"</span>) &#123;</span><br><span class="line">			atl.date = purhcontent(<span class="string">"date:"</span>, tmp)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> strings.Contains(tmp, <span class="string">"catagory:"</span>) &#123;</span><br><span class="line">			atl.catagory = purhcontent(<span class="string">"catagory:"</span>, tmp)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	oldFile := filename</span><br><span class="line">	newFile := newDir + atl.catagory + <span class="string">"/"</span> + atl.name + <span class="string">".html"</span></span><br><span class="line">	fmt.Println(oldFile)</span><br><span class="line">	fmt.Println(newFile)</span><br><span class="line">	os.Rename(oldFile, newFile)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输入key提取value</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">purhcontent</span><span class="params">(k <span class="keyword">string</span>, v <span class="keyword">string</span>)</span> <span class="params">(value <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	tmp := v</span><br><span class="line">	<span class="keyword">if</span> strings.Contains(tmp, k) &#123;</span><br><span class="line">		v1 := strings.Split(tmp, <span class="string">":"</span>)</span><br><span class="line">		value = strings.TrimSpace(v1[<span class="number">1</span>])</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在 list.html 插入文章节点</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">artcleTolist</span><span class="params">(filename, domname, htmltag <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	f, err := os.OpenFile(filename, os.O_RDONLY, os.ModePerm)</span><br><span class="line">	<span class="keyword">defer</span> f.Close()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 从文件中转doc</span></span><br><span class="line">	doc, err := goquery.NewDocumentFromReader(f)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(err)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 查找 dom 节点</span></span><br><span class="line">	s := doc.Find(domname)</span><br><span class="line">	<span class="comment">// 文章已经存在就不添加</span></span><br><span class="line">	tmps, _ := s.Html()</span><br><span class="line">	<span class="keyword">if</span> strings.Contains(tmps, htmltag) &#123;</span><br><span class="line">		<span class="comment">//fmt.Println("匹配到了")</span></span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	s = s.AppendHtml(htmltag)</span><br><span class="line">	<span class="comment">// 将doc 转 html</span></span><br><span class="line">	html, _ := doc.Html()</span><br><span class="line">	f1, _ := os.OpenFile(filename, os.O_WRONLY, os.ModePerm)</span><br><span class="line">	<span class="keyword">defer</span> f1.Close()</span><br><span class="line">	f1.WriteString(html)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="需要使用-markdown-to-html-的模块"><a href="#需要使用-markdown-to-html-的模块" class="headerlink" title="需要使用 markdown to html 的模块"></a>需要使用 markdown to html 的模块</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Blackfriday Markdown Processor</span></span><br><span class="line"><span class="comment">// Available at http://github.com/russross/blackfriday</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Copyright © 2011 Russ Ross &lt;russ@russross.com&gt;.</span></span><br><span class="line"><span class="comment">// Distributed under the Simplified BSD License.</span></span><br><span class="line"><span class="comment">// See README.md for details.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// Example front-end for command-line use</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"flag"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/russross/blackfriday"</span></span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"runtime/pprof"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> DEFAULT_TITLE = <span class="string">""</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// parse command-line options</span></span><br><span class="line">	<span class="keyword">var</span> page, toc, toconly, xhtml, latex, smartypants, latexdashes, fractions <span class="keyword">bool</span></span><br><span class="line">	<span class="keyword">var</span> css, cpuprofile <span class="keyword">string</span></span><br><span class="line">	<span class="keyword">var</span> repeat <span class="keyword">int</span></span><br><span class="line">	flag.BoolVar(&amp;page, <span class="string">"page"</span>, <span class="literal">false</span>,</span><br><span class="line">		<span class="string">"Generate a standalone HTML page (implies -latex=false)"</span>)</span><br><span class="line">	flag.BoolVar(&amp;toc, <span class="string">"toc"</span>, <span class="literal">false</span>,</span><br><span class="line">		<span class="string">"Generate a table of contents (implies -latex=false)"</span>)</span><br><span class="line">	flag.BoolVar(&amp;toconly, <span class="string">"toconly"</span>, <span class="literal">false</span>,</span><br><span class="line">		<span class="string">"Generate a table of contents only (implies -toc)"</span>)</span><br><span class="line">	flag.BoolVar(&amp;xhtml, <span class="string">"xhtml"</span>, <span class="literal">true</span>,</span><br><span class="line">		<span class="string">"Use XHTML-style tags in HTML output"</span>)</span><br><span class="line">	flag.BoolVar(&amp;latex, <span class="string">"latex"</span>, <span class="literal">false</span>,</span><br><span class="line">		<span class="string">"Generate LaTeX output instead of HTML"</span>)</span><br><span class="line">	flag.BoolVar(&amp;smartypants, <span class="string">"smartypants"</span>, <span class="literal">true</span>,</span><br><span class="line">		<span class="string">"Apply smartypants-style substitutions"</span>)</span><br><span class="line">	flag.BoolVar(&amp;latexdashes, <span class="string">"latexdashes"</span>, <span class="literal">true</span>,</span><br><span class="line">		<span class="string">"Use LaTeX-style dash rules for smartypants"</span>)</span><br><span class="line">	flag.BoolVar(&amp;fractions, <span class="string">"fractions"</span>, <span class="literal">true</span>,</span><br><span class="line">		<span class="string">"Use improved fraction rules for smartypants"</span>)</span><br><span class="line">	flag.StringVar(&amp;css, <span class="string">"css"</span>, <span class="string">""</span>,</span><br><span class="line">		<span class="string">"Link to a CSS stylesheet (implies -page)"</span>)</span><br><span class="line">	flag.StringVar(&amp;cpuprofile, <span class="string">"cpuprofile"</span>, <span class="string">""</span>,</span><br><span class="line">		<span class="string">"Write cpu profile to a file"</span>)</span><br><span class="line">	flag.IntVar(&amp;repeat, <span class="string">"repeat"</span>, <span class="number">1</span>,</span><br><span class="line">		<span class="string">"Process the input multiple times (for benchmarking)"</span>)</span><br><span class="line">	flag.Usage = <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Fprintf(os.Stderr, <span class="string">"Blackfriday Markdown Processor v"</span>+blackfriday.VERSION+</span><br><span class="line">			<span class="string">"\nAvailable at http://github.com/russross/blackfriday\n\n"</span>+</span><br><span class="line">			<span class="string">"Copyright © 2011 Russ Ross &lt;russ@russross.com&gt;\n"</span>+</span><br><span class="line">			<span class="string">"Distributed under the Simplified BSD License\n"</span>+</span><br><span class="line">			<span class="string">"See website for details\n\n"</span>+</span><br><span class="line">			<span class="string">"Usage:\n"</span>+</span><br><span class="line">			<span class="string">"  %s [options] [inputfile [outputfile]]\n\n"</span>+</span><br><span class="line">			<span class="string">"Options:\n"</span>,</span><br><span class="line">			os.Args[<span class="number">0</span>])</span><br><span class="line">		flag.PrintDefaults()</span><br><span class="line">	&#125;</span><br><span class="line">	flag.Parse()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// enforce implied options</span></span><br><span class="line">	<span class="keyword">if</span> css != <span class="string">""</span> &#123;</span><br><span class="line">		css = <span class="string">"/"</span> + css</span><br><span class="line">		page = <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> page &#123;</span><br><span class="line">		latex = <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> toconly &#123;</span><br><span class="line">		toc = <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> toc &#123;</span><br><span class="line">		latex = <span class="literal">false</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// turn on profiling?</span></span><br><span class="line">	<span class="keyword">if</span> cpuprofile != <span class="string">""</span> &#123;</span><br><span class="line">		f, err := os.Create(cpuprofile)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Fprintln(os.Stderr, err)</span><br><span class="line">		&#125;</span><br><span class="line">		pprof.StartCPUProfile(f)</span><br><span class="line">		<span class="keyword">defer</span> pprof.StopCPUProfile()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// read the input</span></span><br><span class="line">	<span class="keyword">var</span> input []<span class="keyword">byte</span></span><br><span class="line">	<span class="keyword">var</span> err error</span><br><span class="line">	args := flag.Args()</span><br><span class="line">	<span class="keyword">switch</span> <span class="built_in">len</span>(args) &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">		<span class="comment">//if input, err = ioutil.ReadAll(os.Stdin); err != nil &#123;</span></span><br><span class="line">		<span class="comment">//	fmt.Fprintln(os.Stderr, "Error reading from Stdin:", err)</span></span><br><span class="line">		<span class="comment">//	os.Exit(-1)</span></span><br><span class="line">		<span class="comment">//&#125;</span></span><br><span class="line">		flag.Usage()</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span>, <span class="number">2</span>:</span><br><span class="line">		<span class="keyword">if</span> input, err = ioutil.ReadFile(args[<span class="number">0</span>]); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Fprintln(os.Stderr, <span class="string">"Error reading from"</span>, args[<span class="number">0</span>], <span class="string">":"</span>, err)</span><br><span class="line">			os.Exit(<span class="number">-1</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		flag.Usage()</span><br><span class="line">		os.Exit(<span class="number">-1</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// set up options</span></span><br><span class="line">	extensions := <span class="number">0</span></span><br><span class="line">	extensions |= blackfriday.EXTENSION_NO_INTRA_EMPHASIS</span><br><span class="line">	extensions |= blackfriday.EXTENSION_TABLES</span><br><span class="line">	extensions |= blackfriday.EXTENSION_FENCED_CODE</span><br><span class="line">	extensions |= blackfriday.EXTENSION_AUTOLINK</span><br><span class="line">	extensions |= blackfriday.EXTENSION_STRIKETHROUGH</span><br><span class="line">	extensions |= blackfriday.EXTENSION_SPACE_HEADERS</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> renderer blackfriday.Renderer</span><br><span class="line">	<span class="keyword">if</span> latex &#123;</span><br><span class="line">		<span class="comment">// render the data into LaTeX</span></span><br><span class="line">		renderer = blackfriday.LatexRenderer(<span class="number">0</span>)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="comment">// render the data into HTML</span></span><br><span class="line">		htmlFlags := <span class="number">0</span></span><br><span class="line">		<span class="keyword">if</span> xhtml &#123;</span><br><span class="line">			htmlFlags |= blackfriday.HTML_USE_XHTML</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> smartypants &#123;</span><br><span class="line">			htmlFlags |= blackfriday.HTML_USE_SMARTYPANTS</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> fractions &#123;</span><br><span class="line">			htmlFlags |= blackfriday.HTML_SMARTYPANTS_FRACTIONS</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> latexdashes &#123;</span><br><span class="line">			htmlFlags |= blackfriday.HTML_SMARTYPANTS_LATEX_DASHES</span><br><span class="line">		&#125;</span><br><span class="line">		title := <span class="string">""</span></span><br><span class="line">		<span class="keyword">if</span> page &#123;</span><br><span class="line">			htmlFlags |= blackfriday.HTML_COMPLETE_PAGE</span><br><span class="line">			title = getTitle(input)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> toconly &#123;</span><br><span class="line">			htmlFlags |= blackfriday.HTML_OMIT_CONTENTS</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> toc &#123;</span><br><span class="line">			htmlFlags |= blackfriday.HTML_TOC</span><br><span class="line">		&#125;</span><br><span class="line">		renderer = blackfriday.HtmlRenderer(htmlFlags, title, css)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// parse and render</span></span><br><span class="line">	<span class="keyword">var</span> output []<span class="keyword">byte</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; repeat; i++ &#123;</span><br><span class="line">		output = blackfriday.Markdown(input, renderer, extensions)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// output the result</span></span><br><span class="line">	<span class="keyword">var</span> out *os.File</span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(args) == <span class="number">2</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> out, err = os.Create(args[<span class="number">1</span>]); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Fprintf(os.Stderr, <span class="string">"Error creating %s: %v"</span>, args[<span class="number">1</span>], err)</span><br><span class="line">			os.Exit(<span class="number">-1</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">defer</span> out.Close()</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		out = os.Stdout</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> _, err = out.Write(output); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Fprintln(os.Stderr, <span class="string">"Error writing output:"</span>, err)</span><br><span class="line">		os.Exit(<span class="number">-1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// try to guess the title from the input buffer</span></span><br><span class="line"><span class="comment">// just check if it starts with an &lt;h1&gt; element and use that</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">getTitle</span><span class="params">(input []<span class="keyword">byte</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	i := <span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// skip blank lines</span></span><br><span class="line">	<span class="keyword">for</span> i &lt; <span class="built_in">len</span>(input) &amp;&amp; (input[i] == <span class="string">'\n'</span> || input[i] == <span class="string">'\r'</span>) &#123;</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> i &gt;= <span class="built_in">len</span>(input) &#123;</span><br><span class="line">		<span class="keyword">return</span> DEFAULT_TITLE</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> input[i] == <span class="string">'\r'</span> &amp;&amp; i+<span class="number">1</span> &lt; <span class="built_in">len</span>(input) &amp;&amp; input[i+<span class="number">1</span>] == <span class="string">'\n'</span> &#123;</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// find the first line</span></span><br><span class="line">	start := i</span><br><span class="line">	<span class="keyword">for</span> i &lt; <span class="built_in">len</span>(input) &amp;&amp; input[i] != <span class="string">'\n'</span> &amp;&amp; input[i] != <span class="string">'\r'</span> &#123;</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">	line1 := input[start:i]</span><br><span class="line">	<span class="keyword">if</span> input[i] == <span class="string">'\r'</span> &amp;&amp; i+<span class="number">1</span> &lt; <span class="built_in">len</span>(input) &amp;&amp; input[i+<span class="number">1</span>] == <span class="string">'\n'</span> &#123;</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">	i++</span><br><span class="line"></span><br><span class="line">	<span class="comment">// check for a prefix header</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(line1) &gt;= <span class="number">3</span> &amp;&amp; line1[<span class="number">0</span>] == <span class="string">'#'</span> &amp;&amp; (line1[<span class="number">1</span>] == <span class="string">' '</span> || line1[<span class="number">1</span>] == <span class="string">'\t'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> strings.TrimSpace(<span class="keyword">string</span>(line1[<span class="number">2</span>:]))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// check for an underlined header</span></span><br><span class="line">	<span class="keyword">if</span> i &gt;= <span class="built_in">len</span>(input) || input[i] != <span class="string">'='</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> DEFAULT_TITLE</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i &lt; <span class="built_in">len</span>(input) &amp;&amp; input[i] == <span class="string">'='</span> &#123;</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> i &lt; <span class="built_in">len</span>(input) &amp;&amp; (input[i] == <span class="string">' '</span> || input[i] == <span class="string">'\t'</span>) &#123;</span><br><span class="line">		i++</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> i &gt;= <span class="built_in">len</span>(input) || (input[i] != <span class="string">'\n'</span> &amp;&amp; input[i] != <span class="string">'\r'</span>) &#123;</span><br><span class="line">		<span class="keyword">return</span> DEFAULT_TITLE</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> strings.TrimSpace(<span class="keyword">string</span>(line1))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="部署脚本-deploy-sh"><a href="#部署脚本-deploy-sh" class="headerlink" title="部署脚本 deploy.sh"></a>部署脚本 deploy.sh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">go run main.go</span><br><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">git add ./*</span><br><span class="line">git commit -m <span class="string">"file update"</span></span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/chrome-headless/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/chrome-headless/" class="post-title-link" itemprop="url">chrome-headless</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-15 08:41:28 / 修改时间：09:41:33" itemprop="dateCreated datePublished" datetime="2020-05-15T08:41:28+08:00">2020-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>348</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="MAC-系统中"><a href="#MAC-系统中" class="headerlink" title="MAC 系统中"></a>MAC 系统中</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/Applications/Google</span>\ Chrome.app/Contents/MacOS</span><br><span class="line">ln -s <span class="string">./Google</span>\ Chrome <span class="string">./chrome</span></span><br><span class="line"><span class="string">./chrome</span> <span class="params">--headless</span> <span class="params">--disable-gpu</span> <span class="params">--dump-dom</span> http:<span class="string">//www.baidu.com</span></span><br><span class="line"><span class="params">--headless</span> 不显示窗体</span><br><span class="line"><span class="params">--disable-gpu</span> 关闭GPU</span><br><span class="line"><span class="params">--dump-dom</span> 把 dom 元素输出来</span><br></pre></td></tr></table></figure>
+<h3 id="chrome-相关"><a href="#chrome-相关" class="headerlink" title="chrome 相关"></a>chrome 相关</h3><ul>
+<li><a href="https://www.chromium.org/" target="_blank" rel="noopener">Chromium</a><ul>
+<li>Chromium是由Google主导开发的网页浏览器。</li>
+</ul>
+</li>
+<li>CDB<ul>
+<li>chrome debug protocol，简称cdp。一个让devtools和浏览器内核交换数据的通道</li>
+</ul>
+</li>
+<li><a href="https://chromedevtools.github.io/devtools-protocol/" target="_blank" rel="noopener">devtools</a><ul>
+<li>对chrome 进行调试的工具。</li>
+</ul>
+</li>
+<li><a href="https://github.com/chromedp" target="_blank" rel="noopener">chromedb</a><ul>
+<li>golang语言中利用CDB驱动浏览器包。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E4%B8%87%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E7%BB%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/%E4%B8%87%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%90%E7%BB%B4/" class="post-title-link" itemprop="url">万台服务器运维</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-14 17:02:28" itemprop="dateCreated datePublished" datetime="2020-05-14T17:02:28+08:00">2020-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-15 10:34:46" itemprop="dateModified" datetime="2020-05-15T10:34:46+08:00">2020-05-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1万台服务器的计算量和成本核算"><a href="#1万台服务器的计算量和成本核算" class="headerlink" title="1万台服务器的计算量和成本核算"></a>1万台服务器的计算量和成本核算</h2><p>按照当前主流的机架两U服务器来配置(参考 Dell R740)</p>
+<blockquote>
+<p>需要单独 1000台 来做 Ceph 云存储</p>
+</blockquote>
+<pre><code>* 单 4210 CPU 10核 20线程
+* 内存 320G
+* 磁盘 SSD 500G
+</code></pre><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">整体计算量：</span><br><span class="line">CPU cores = <span class="number">10000</span> * <span class="number">40</span>核 = <span class="number">40</span>w 核心</span><br><span class="line">Memory    = <span class="number">10000</span> * <span class="number">320</span>G = <span class="number">3</span> PB</span><br><span class="line">本地 Disk  = <span class="number">10000</span> * <span class="number">500</span>G = <span class="number">4.7</span> PB</span><br><span class="line">云盘       = <span class="number">1000</span> * <span class="number">96</span>T = <span class="number">96</span> PB</span><br><span class="line"></span><br><span class="line">每台虚机按（ <span class="number">4</span>cores，<span class="number">32</span>G，<span class="number">200</span>GB ） 可以约开 <span class="number">10</span>w台虚拟机</span><br><span class="line"><span class="number">4</span>C * <span class="number">10</span>w = <span class="number">40</span>w 核心</span><br><span class="line"><span class="number">32</span>G * <span class="number">10</span>w = <span class="number">3</span> PB</span><br><span class="line">(系统盘)<span class="number">40</span>G * <span class="number">10</span>w = <span class="number">4</span> PB</span><br><span class="line">(云盘)<span class="number">200</span>G * <span class="number">10</span>w = <span class="number">19</span> PB * <span class="number">3</span> 两个副本 = <span class="number">57</span> PB &lt; 云盘 <span class="number">96</span> PB</span><br><span class="line"></span><br><span class="line">机房成本核算：</span><br><span class="line">一个<span class="number">42</span>U机柜大概可以放<span class="number">12</span>台设备。</span><br><span class="line"><span class="number">11000</span>台/<span class="number">12</span> = <span class="number">916</span> 机柜</span><br><span class="line">机柜托管费用大约<span class="number">5000</span>一年</span><br><span class="line"><span class="number">916</span> * <span class="number">5000</span> = <span class="number">458</span>w/年</span><br><span class="line"></span><br><span class="line"><span class="number">11000</span>台物理服务器成本：</span><br><span class="line"><span class="number">11000</span>台 * <span class="number">5</span>w = <span class="number">5.5</span> 亿</span><br><span class="line"></span><br><span class="line">网络设备计算：</span><br><span class="line">  业务端：万兆以太网交换机</span><br><span class="line">    <span class="number">11000</span>/<span class="number">46</span> * <span class="number">2</span> = <span class="number">480</span> 台 * <span class="number">3</span>w = <span class="number">1440</span>w</span><br><span class="line">  管理端：千兆以太网交换机</span><br><span class="line">    <span class="number">11000</span>/<span class="number">46</span>     = <span class="number">240</span> 台 * <span class="number">2</span>k = <span class="number">48</span>w</span><br><span class="line"></span><br><span class="line">按照阿里云的报价计算：</span><br><span class="line">按月计费：</span><br><span class="line">（ <span class="number">4</span>cores，<span class="number">32</span>G，<span class="number">200</span>GB ） ~= <span class="number">800</span> 元/月 </span><br><span class="line"><span class="number">800</span> * <span class="number">100000</span> * <span class="number">12</span>月 = <span class="number">9.6</span>亿/年</span><br><span class="line"></span><br><span class="line">按使用量(<span class="number">1.68</span>/时)计费：</span><br><span class="line">（ <span class="number">4</span>cores，<span class="number">32</span>G，<span class="number">200</span>GB ） ~= <span class="number">1200</span>元/月  </span><br><span class="line"><span class="number">1200</span> * <span class="number">100000</span> * <span class="number">12</span>月 = <span class="number">14.4</span> 亿/年</span><br><span class="line"></span><br><span class="line">带宽费用：略</span><br><span class="line"></span><br><span class="line">人力成本： 百台/人</span><br><span class="line"><span class="number">11000</span>/<span class="number">100</span> = <span class="number">110</span> 人 * <span class="number">20</span>w(平均年薪) = <span class="number">2200</span>w</span><br><span class="line"></span><br><span class="line">运维复杂度估算：</span><br><span class="line">AN: application类别数量</span><br><span class="line">LN: application层级</span><br><span class="line">SN: 服务器数量</span><br><span class="line">E: 调整因子</span><br><span class="line">OPCOMPLEX:运维复杂度</span><br></pre></td></tr></table></figure>
+<p>承载的服务量<br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">web 服务计算量：</span><br><span class="line">依照 <span class="number">163.</span>com首页 计算 <span class="number">128</span>kb静态页请求</span><br><span class="line"><span class="number">10</span>GB带宽跑满可以接受 <span class="number">9960</span>个/秒</span><br></pre></td></tr></table></figure></p>
+<h2 id="备份和容灾设计"><a href="#备份和容灾设计" class="headerlink" title="备份和容灾设计"></a>备份和容灾设计</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">备份采用同城双节点，对数据进行实时备份。</span><br><span class="line">同城机房容灾需要使用专线来保证数据完整。进行热数据实时迁移减小数据量。</span><br><span class="line"></span><br><span class="line">异地节点进行容灾。异步数据同步，主要数据进行同步。</span><br></pre></td></tr></table></figure>
+<h2 id="云计算设计"><a href="#云计算设计" class="headerlink" title="云计算设计"></a>云计算设计</h2><h3 id="5000台搭建-openstack-集群"><a href="#5000台搭建-openstack-集群" class="headerlink" title="5000台搭建 openstack 集群"></a>5000台搭建 openstack 集群</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">openstack</span></span><br></pre></td></tr></table></figure>
+<h3 id="4000台搭建-kubernetes-容器云"><a href="#4000台搭建-kubernetes-容器云" class="headerlink" title="4000台搭建 kubernetes 容器云"></a>4000台搭建 kubernetes 容器云</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="1000-台配置成裸金属"><a href="#1000-台配置成裸金属" class="headerlink" title="1000 台配置成裸金属"></a>1000 台配置成裸金属</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="技术人员组成-110-人"><a href="#技术人员组成-110-人" class="headerlink" title="技术人员组成(110 人)"></a>技术人员组成(110 人)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="技术人员管理"><a href="#技术人员管理" class="headerlink" title="技术人员管理"></a>技术人员管理</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Redis%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/Redis%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Redis使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-14 09:29:04" itemprop="dateCreated datePublished" datetime="2020-05-14T09:29:04+08:00">2020-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 23:19:29" itemprop="dateModified" datetime="2020-05-26T23:19:29+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/Service/" itemprop="url" rel="index"><span itemprop="name">Service</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>107</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://redis.io/documentation" target="_blank" rel="noopener"> Redis docs </a></li>
+<li><a href="http://www.redis.cn/" target="_blank" rel="noopener"> redis cn </a></li>
+</ul>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><ul>
+<li>key</li>
+<li><p>value</p>
+</li>
+<li><p>type</p>
+<ul>
+<li>String</li>
+<li>Hash</li>
+<li>List</li>
+<li>Set</li>
+<li>Sorted Set</li>
+<li>bitmaps</li>
+<li>hyperloglogs</li>
+<li>geospatial</li>
+</ul>
+</li>
+<li><p>复制</p>
+</li>
+<li>LUA</li>
+<li>LRU</li>
+<li>事务</li>
+<li>持久化</li>
+<li>哨兵</li>
+<li>自动分区</li>
+<li>高可用</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/NFS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/NFS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">NFS安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-14 09:25:43 / 修改时间：09:28:01" itemprop="dateCreated datePublished" datetime="2020-05-14T09:25:43+08:00">2020-05-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/Storages/" itemprop="url" rel="index"><span itemprop="name">Storages</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">配置文件 <span class="regexp">/etc/</span>exports</span><br><span class="line">NFS 进程</span><br><span class="line">rpc.portmap <span class="comment"># portmap进程的主要功能是把RPC程序号转化为Internet的端口号。</span></span><br><span class="line"></span><br><span class="line">rpc.mountd</span><br><span class="line">rpc.nfsd</span><br><span class="line">rpc.statd</span><br><span class="line">rpc.lockd</span><br><span class="line">rpc.rquotad</span><br></pre></td></tr></table></figure>
+<h2 id="安装-NFS-server"><a href="#安装-NFS-server" class="headerlink" title="安装 NFS server"></a>安装 NFS server</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">yum</span> <span class="string">-y install nfs-utils</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">restart nfs</span></span><br><span class="line"><span class="comment"># 重新载入配置</span></span><br><span class="line"><span class="attr">systemctl</span> <span class="string">reload nfs</span></span><br></pre></td></tr></table></figure>
+<h2 id="配置-NFS-server"><a href="#配置-NFS-server" class="headerlink" title="配置 NFS server"></a>配置 NFS server</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1. </span><br><span class="line">mkdir /data</span><br><span class="line"><span class="comment"># 默认登录进来使用 nfsnobody 用户</span></span><br><span class="line">chmod 777 /data/nfs</span><br><span class="line"></span><br><span class="line">2. <span class="builtin-name">set</span><span class="built_in"> config </span></span><br><span class="line"><span class="comment"># directory machine1(option11,option12)</span></span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;/etc/exports</span><br><span class="line">/data/nfs 192.168.0.0/255.255.255.0(rw,sync)</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># optinos</span></span><br><span class="line">ro : read only</span><br><span class="line">rw : read <span class="keyword">and</span> write</span><br><span class="line">no_root_squash : 使用 nobody 作为客户端用户</span><br><span class="line">no_subtree_check : </span><br><span class="line">sync : write is complete</span><br></pre></td></tr></table></figure>
+<h2 id="通过-host-deny-限制访问"><a href="#通过-host-deny-限制访问" class="headerlink" title="通过 host deny 限制访问"></a>通过 host deny 限制访问</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/etc/hosts.deny</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># service: host [or network/netmask] , host [or network/netmask]</span></span><br><span class="line"><span class="string">/etc/hosts.allow</span></span><br><span class="line"><span class="attr">portmap:</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.1</span> <span class="string">,</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.2</span></span><br></pre></td></tr></table></figure>
+<h2 id="检查-nfs-是否启动"><a href="#检查-nfs-是否启动" class="headerlink" title="检查 nfs 是否启动"></a>检查 nfs 是否启动</h2><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>exportfs -v</span><br><span class="line"><span class="variable">$ </span>rpcinfo -p</span><br></pre></td></tr></table></figure>
+<h2 id="client-配置"><a href="#client-配置" class="headerlink" title="client 配置"></a>client 配置</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 nfs client</span></span><br><span class="line"><span class="string">yum</span> <span class="string">-y</span> <span class="string">install</span> <span class="string">nfs-utils</span></span><br><span class="line"><span class="comment"># 查看可以挂载的目录</span></span><br><span class="line"><span class="string">showmount</span> <span class="string">-e</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span></span><br><span class="line"><span class="comment"># 挂载</span></span><br><span class="line"><span class="comment"># 只读挂载</span></span><br><span class="line"><span class="string">mount</span> <span class="string">-r</span> <span class="string">-t</span> <span class="string">nfs</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span><span class="string">:/data/nfs</span> <span class="string">/mnt</span> </span><br><span class="line"><span class="comment"># 可写挂载</span></span><br><span class="line"><span class="string">mount</span> <span class="string">-w</span> <span class="string">-t</span> <span class="string">nfs</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span><span class="string">:/data/nfs</span> <span class="string">/mnt</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入 /etc/fstab（指定端口）</span></span><br><span class="line"><span class="string">localhost:/home</span>  <span class="string">/mnt/home</span>  <span class="string">nfs</span>  <span class="string">rw,hard,intr,port=250,mountport=251</span>  <span class="number">0</span> <span class="number">0</span></span><br><span class="line"><span class="string">cat</span> <span class="string">&lt;&lt;'EOF'</span> <span class="string">&gt;&gt;/etc/fstab</span></span><br><span class="line"><span class="number">192.168</span><span class="number">.0</span><span class="number">.105</span><span class="string">:/data/nfs</span>  <span class="string">/mnt</span>    <span class="string">nfs</span>          <span class="string">rw</span>            <span class="number">0</span>    <span class="number">0</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+<h2 id="NFS-优化"><a href="#NFS-优化" class="headerlink" title="NFS 优化"></a>NFS 优化</h2><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置块大小提供传输速度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 网络数据包大小</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 输入队列大小</span></span><br><span class="line">echo <span class="number">262144</span> &gt; <span class="regexp">/proc/sys</span><span class="regexp">/net/core</span><span class="regexp">/rmem_default</span></span><br><span class="line"><span class="regexp">echo 262144 &gt; /proc</span><span class="regexp">/sys/net</span><span class="regexp">/core/rmem</span>_max</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/mac%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/mac%E5%91%BD%E4%BB%A4%E8%A1%8C%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">mac命令行操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-14 09:24:17 / 修改时间：09:24:45" itemprop="dateCreated datePublished" datetime="2020-05-14T09:24:17+08:00">2020-05-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/mactools/" itemprop="url" rel="index"><span itemprop="name">mactools</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>915</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://support.apple.com/zh-cn/guide/terminal/trmlshtcts/mac" target="_blank" rel="noopener">命令行快捷键</a><br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">新建窗口（new）:<span class="keyword">Command</span>-N</span><br><span class="line">使用相同命令新建窗口:Control-<span class="keyword">Command</span>-N</span><br><span class="line">新建标签页（tab）：<span class="keyword">Command</span>-T</span><br><span class="line">使用相同命令新建标签页（tab）：Control-<span class="keyword">Command</span>-T</span><br><span class="line">显示或隐藏标签页栏：Shift-<span class="keyword">Command</span>-T</span><br><span class="line">显示所有标签页或退出标签页概览：Shift-<span class="keyword">Command</span>-反斜杠 (\)</span><br><span class="line">新建命令：Shift-<span class="keyword">Command</span>-N</span><br><span class="line">新建远程连接：Shift-<span class="keyword">Command</span>-K</span><br><span class="line">显示或隐藏检查器(inspect)：<span class="keyword">Command</span>-I</span><br><span class="line"></span><br><span class="line">编辑标题：Shift-<span class="keyword">Command</span>-I</span><br><span class="line">编辑背景颜色：<span class="keyword">Option</span>-<span class="keyword">Command</span>-I</span><br><span class="line">放大字体：<span class="keyword">Command</span>-加号键 (+)</span><br><span class="line">缩小字体：<span class="keyword">Command</span>-减号键 (–)</span><br><span class="line">下一个窗口：<span class="keyword">Command</span>-重音符键 (`)</span><br><span class="line">上一个窗口：<span class="keyword">Command</span>-Shift-波浪符号 (~)</span><br><span class="line">下一个标签页：Control-Tab</span><br><span class="line">上一个标签页：Control-Shift-Tab</span><br><span class="line"></span><br><span class="line">将窗口拆分为两个面板：<span class="keyword">Command</span>-D</span><br><span class="line">关闭拆分面板：Shift-<span class="keyword">Command</span>-D</span><br><span class="line"></span><br><span class="line">关闭标签页：<span class="keyword">Command</span>-W</span><br><span class="line">关闭窗口：Shift-<span class="keyword">Command</span>-W</span><br><span class="line"></span><br><span class="line">关闭其他标签页：<span class="keyword">Option</span>-<span class="keyword">Command</span>-W</span><br><span class="line">全部关闭：<span class="keyword">Option</span>-Shift-<span class="keyword">Command</span>-W</span><br><span class="line"></span><br><span class="line">滚动到顶部：<span class="keyword">Command</span>-Home</span><br><span class="line">滚动到底部：<span class="keyword">Command</span>-End</span><br><span class="line"></span><br><span class="line">上一页：<span class="keyword">Command</span>-Page Up</span><br><span class="line">下一页：<span class="keyword">Command</span>-Page Down</span><br><span class="line">上一行：<span class="keyword">Option</span>-<span class="keyword">Command</span>-Page Up</span><br><span class="line">下一行：<span class="keyword">Option</span>-<span class="keyword">Command</span>-Page Down</span><br></pre></td></tr></table></figure></p>
+<h3 id="MAC-命令行翻墙"><a href="#MAC-命令行翻墙" class="headerlink" title="MAC 命令行翻墙"></a>MAC 命令行翻墙</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">lsof -i :1086</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt;~/.bash_profile</span><br><span class="line">alias <span class="attribute">proxy</span>=<span class="string">'export all_proxy=socks5://127.0.0.1:1086'</span></span><br><span class="line">alias <span class="attribute">unproxy</span>=<span class="string">'unset all_proxy'</span></span><br><span class="line">EOF</span><br><span class="line">source ~/.bash_profile</span><br><span class="line"></span><br><span class="line">proxy</span><br><span class="line">curl ip.sb</span><br><span class="line"></span><br><span class="line">unproxy</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Homebrew%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -744,621 +1329,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/OpenStack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/OpenStack/" class="post-title-link" itemprop="url">OpenStack</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 08:40:41" itemprop="dateCreated datePublished" datetime="2020-05-14T08:40:41+08:00">2020-05-14</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/KVM%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/KVM%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">KVM</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 08:40:29" itemprop="dateCreated datePublished" datetime="2020-05-14T08:40:29+08:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-22 17:40:44" itemprop="dateModified" datetime="2020-05-22T17:40:44+08:00">2020-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">虚拟化</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="KVM-维护"><a href="#KVM-维护" class="headerlink" title="KVM 维护"></a>KVM 维护</h2><a href="/blog.githup.io/2020/05/KVM%E5%AE%89%E8%A3%85/" title="KVM安装">KVM安装</a>
-<h3 id="修改虚拟机内存，cpu-core"><a href="#修改虚拟机内存，cpu-core" class="headerlink" title="修改虚拟机内存，cpu core"></a>修改虚拟机内存，cpu core</h3><blockquote>
-<p>扩大内存，cpu个数需要重启生效<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span> <span class="string">--help</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span> <span class="string">-all</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑配置文件</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">edit</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="string">&lt;memory</span> <span class="string">unit='KiB'&gt;16777216&lt;/memory&gt;</span></span><br><span class="line"><span class="string">&lt;currentMemory</span> <span class="string">unit='KiB'&gt;16777216&lt;/currentMemory&gt;</span></span><br><span class="line"><span class="string">&lt;vcpu</span> <span class="string">placement='static'&gt;4&lt;/vcpu&gt;</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启虚拟机</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">reboot</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="string">or</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">shutdown</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">start</span> <span class="string">yfgitlab</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h2 id="动态调整（虚拟机内存，cpu-core）"><a href="#动态调整（虚拟机内存，cpu-core）" class="headerlink" title="动态调整（虚拟机内存，cpu core）"></a>动态调整（虚拟机内存，cpu core）</h2><blockquote>
-<p>KVM虚拟机可以动态增加和删除vCPU，但是前提条件是，必须在虚拟机offline模式下先设置好最大vCPU数量。<br><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调整内存</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">setmaxmem devstack 32G</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整cpu core</span></span><br><span class="line"><span class="attr">virsh</span> <span class="string">setvcpus devstack 4</span></span><br><span class="line"><span class="comment"># error: unsupported configuration: failed to find appropriate hotpluggable vcpus to reach the desired target vcpu count</span></span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<hr>
-<h3 id="创建快照"><a href="#创建快照" class="headerlink" title="创建快照"></a>创建快照</h3><blockquote>
-<p>raw 格式盘不支持快照</p>
-<h2 id><a href="#" class="headerlink" title></a><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-list yfgitlab</span><br><span class="line"></span><br><span class="line"># virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> 虚拟机名称     快照名称     快照描述</span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> yfgitlab yfgitlab`<span class="type">date</span> "+%F_%T"` "test"</span><br><span class="line"></span><br><span class="line"># 还原快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-revert <span class="comment">--domain yfgitlab yfgitlab2017-05-21_08:34:12</span></span><br></pre></td></tr></table></figure></h2><h3 id="KVM-添加磁盘"><a href="#KVM-添加磁盘" class="headerlink" title="KVM 添加磁盘"></a>KVM 添加磁盘</h3><a href="/blog.githup.io/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/" title="LVM逻辑卷管理">LVM逻辑卷管理</a>
-<p>qcow2是集各种技术为一体的超级镜像格式，支持内部快照，加密，压缩等一系列功能，访问性能也在不断提高。</p>
-</blockquote>
-<h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建磁盘</span></span><br><span class="line">qemu-img create -h</span><br><span class="line">qemu-img create -f qcow2 yfgitlab2.img 50G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘格式转换 （raw 占用磁盘空间，qcow2 不占用磁盘空间）</span></span><br><span class="line">qemu-img convert -p -t directsync -O qcow2 test.raw test.qcow2 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line">virsh list</span><br><span class="line">---</span><br><span class="line"> 11    yfgitlab                       running</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘挂到虚拟机</span></span><br><span class="line"><span class="comment"># virsh 添加磁盘   虚拟机名           磁盘位置             虚拟机中盘名  是否缓存</span></span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2</span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2 --config</span><br><span class="line"></span><br><span class="line">--config   会把文件写入配置文件（下次启动有效）</span><br><span class="line">--live     直接有效</span><br><span class="line">--current  当前有效</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line"><span class="comment"># /etc/libvirt/qemu/yfgitlab.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载磁盘</span></span><br><span class="line">virsh detach-disk yfgitlab /data/img1/yfgitlab-data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 到虚拟机中查看磁盘</span></span><br><span class="line">fdisk -l</span><br><span class="line">---</span><br><span class="line">Disk /dev/vdb: 53.7 GB, 53695545344 bytes, 104874112 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化</span></span><br><span class="line">mkfs.ext4 /dev/vdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载目录</span></span><br><span class="line">mkdir /data</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">df -h</span><br><span class="line">---</span><br><span class="line">/dev/vdb                  50G   53M   47G   1% /data</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写到挂载文件 /etc/fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/vdb /data ext4 defaults 0 0"</span> &gt;&gt;/etc/fstab</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure></h2><h3 id="KVM-扩磁盘大小"><a href="#KVM-扩磁盘大小" class="headerlink" title="KVM 扩磁盘大小"></a>KVM 扩磁盘大小</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭虚拟机</span></span><br><span class="line">virsh shutdown xp_4_test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩容磁盘文件</span></span><br><span class="line">qemu-img resize hello_data.img +150M</span><br><span class="line"></span><br><span class="line"><span class="comment"># 缩容</span></span><br><span class="line">qemu-img resize hello_data.img -150M --shrink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start xp_4_test</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/Docker/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/Docker/" class="post-title-link" itemprop="url">Docker</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 08:40:25" itemprop="dateCreated datePublished" datetime="2020-05-14T08:40:25+08:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-27 11:43:15" itemprop="dateModified" datetime="2020-05-27T11:43:15+08:00">2020-05-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p><a href="https://www.redhat.com/zh/topics/containers/whats-a-linux-container" target="_blank" rel="noopener">容器原理</a><br><a href="https://docs.docker.com/engine/" target="_blank" rel="noopener">docker doc </a><br><a href="https://docs.docker.com/reference/" target="_blank" rel="noopener">docker 参考文档</a></p>
-<a href="/blog.githup.io/2020/05/Docker%E5%AE%89%E8%A3%85/" title="Docker安装">Docker安装</a>
-<h2 id="Docker-维护"><a href="#Docker-维护" class="headerlink" title="Docker 维护"></a>Docker 维护</h2><ul>
-<li>镜像<ul>
-<li>使用 Dockerfile 制作镜像</li>
-<li>使用 tag 制作新的镜像</li>
-<li>使用 commit 把容器制作成镜像</li>
-<li>公共的镜像仓库</li>
-<li>使用 harbor 搭建私有镜像仓库</li>
-</ul>
-</li>
-<li>容器<ul>
-<li>使用 docker run 创建容器  </li>
-<li>使用 docker-compose 进行编排容器<ul>
-<li>compose file 格式</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>overlay文件系统</p>
-</li>
-<li><p>CLI 使用</p>
-</li>
-<li><p>API 使用</p>
-</li>
-</ul>
-<h2 id="Docker-原理"><a href="#Docker-原理" class="headerlink" title="Docker 原理"></a>Docker 原理</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># docker Namespaces 隔离</span></span><br><span class="line"><span class="meta"># </span></span><br><span class="line"></span><br><span class="line"><span class="meta"># docker 四种网络模式</span></span><br><span class="line"><span class="meta"># host</span></span><br><span class="line"><span class="meta"># contianer</span></span><br><span class="line"><span class="meta"># none</span></span><br><span class="line"><span class="meta"># bridge</span></span><br></pre></td></tr></table></figure>
-<h3 id="docker-容器修改"><a href="#docker-容器修改" class="headerlink" title="docker 容器修改"></a>docker 容器修改</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件修改</span></span><br><span class="line"><span class="comment">## 获取id</span></span><br><span class="line">docker inspect e32ee41a614b |grep -i id</span><br><span class="line"></span><br><span class="line"><span class="comment">## mac 系统中使用轻量级虚拟机 hyperkit</span></span><br><span class="line">/var/lib/docker/containers/[hash_of_the_container]/hostconfig.json</span><br></pre></td></tr></table></figure>
-<h3 id="docker-容器镜像导出导入"><a href="#docker-容器镜像导出导入" class="headerlink" title="docker 容器镜像导出导入"></a>docker 容器镜像导出导入</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看容器ID</span></span><br><span class="line">docker ps -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导出容器镜像</span></span><br><span class="line">docker <span class="built_in">export</span> 容器ID &gt; container`date <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入容器镜像</span></span><br><span class="line">docker import - 镜像名 &lt; container.tar</span><br></pre></td></tr></table></figure>
-<h3 id="docker-镜像导出导入"><a href="#docker-镜像导出导入" class="headerlink" title="docker 镜像导出导入"></a>docker 镜像导出导入</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 查看镜像</span></span><br><span class="line">docker image ls</span><br><span class="line">or (old version)</span><br><span class="line">docker images </span><br><span class="line"></span><br><span class="line"><span class="meta"># 导出镜像</span></span><br><span class="line">docker save 镜像ID &gt; image`date <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 同时打包多个镜像</span></span><br><span class="line">docker save -o images.tar postgres:<span class="number">9.6</span> mongo:<span class="number">3.4</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 导入镜像</span></span><br><span class="line">docker load &lt; image`date <span class="string">"%F_%T"</span>`.tar</span><br><span class="line"></span><br><span class="line"><span class="meta"># 打上tag</span></span><br><span class="line"><span class="meta">#           镜像ID            repo        :tag</span></span><br><span class="line">docker tag <span class="number">21</span>de6f73b9ac sameersbn/gitlab:<span class="number">8.14</span><span class="number">.4</span></span><br></pre></td></tr></table></figure>
-<h3 id="通过-registry-来进行镜像同步"><a href="#通过-registry-来进行镜像同步" class="headerlink" title="通过 registry 来进行镜像同步"></a>通过 registry 来进行镜像同步</h3><a href="/blog.githup.io/2020/05/Harbor%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Harbor安装配置">Harbor安装配置</a>
-<hr>
-<h3 id="Docker-使用"><a href="#Docker-使用" class="headerlink" title="Docker 使用"></a>Docker 使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker help</span></span><br><span class="line"><span class="comment"># docker image help</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索镜像</span></span><br><span class="line">docker search busybox</span><br><span class="line"></span><br><span class="line"><span class="comment"># 去镜像库拉镜像</span></span><br><span class="line">docker image pull busybox</span><br><span class="line">docker image ls</span><br><span class="line">docker image inspect busybox</span><br><span class="line">docker image <span class="keyword">create</span> <span class="comment">--name b1 busybox</span></span><br><span class="line">docker <span class="keyword">container</span> ps -a</span><br><span class="line">docker <span class="keyword">container</span> <span class="keyword">start</span> b1 -d</span><br><span class="line">docker <span class="keyword">container</span> exec -it b1 /<span class="keyword">bin</span>/bash</span><br><span class="line">docker <span class="keyword">container</span> <span class="keyword">logs</span> b1</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">docker <span class="keyword">container</span> run <span class="comment">--name b1 -it busybox</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看本地镜像</span></span><br><span class="line">docker image ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看运行的容器</span></span><br><span class="line">docker <span class="keyword">container</span> ps</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看容器信息</span></span><br><span class="line">docker <span class="keyword">container</span> inspect b1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有容器</span></span><br><span class="line">docker <span class="keyword">container</span> ps -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除容器</span></span><br><span class="line">docker rm b1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制删除容器</span></span><br><span class="line">docker <span class="keyword">container</span> rm b13c1f94e78c <span class="comment">--force</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一次删除所有容器</span></span><br><span class="line">docker <span class="keyword">container</span> prune</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看日志</span></span><br><span class="line">docker <span class="keyword">logs</span> b1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交互状态进入容器</span></span><br><span class="line">docker exec -it b1 /<span class="keyword">bin</span>/sh</span><br><span class="line"><span class="comment"># or 新式命令</span></span><br><span class="line">docker <span class="keyword">container</span> exec -it b1 /<span class="keyword">bin</span>/sh</span><br></pre></td></tr></table></figure>
-<h2 id="Docker-API-使用"><a href="#Docker-API-使用" class="headerlink" title="Docker API 使用"></a>Docker API 使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># go </span></span><br><span class="line">go get github.com/docker/docker/client</span><br><span class="line"></span><br><span class="line"><span class="comment"># python</span></span><br><span class="line">pip install docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># curl</span></span><br><span class="line"><span class="comment"># 创建容器</span></span><br><span class="line">$ curl --unix-socket /var/run/docker.sock -H <span class="string">"Content-Type: application/json"</span> \</span><br><span class="line">  -d <span class="string">'&#123;"Image": "alpine", "Cmd": ["echo", "hello world"]&#125;'</span> \</span><br><span class="line">  -X POST http:/v1.24/containers/create</span><br><span class="line"><span class="comment"># 返回容器id</span></span><br><span class="line">&#123;<span class="string">"Id"</span>:<span class="string">"1c6594faf5"</span>,<span class="string">"Warnings"</span>:null&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">$ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594faf5/start</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">$ curl --unix-socket /var/run/docker.sock -X POST http:/v1.24/containers/1c6594faf5/<span class="built_in">wait</span></span><br><span class="line">&#123;<span class="string">"StatusCode"</span>:0&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看日志</span></span><br><span class="line">$ curl --unix-socket /var/run/docker.sock <span class="string">"http:/v1.24/containers/1c6594faf5/logs?stdout=1"</span></span><br><span class="line">hello world</span><br></pre></td></tr></table></figure>
-<h3 id="Docker-go-API"><a href="#Docker-go-API" class="headerlink" title="Docker go API"></a>Docker go API</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"io"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line"></span><br><span class="line">	<span class="string">"github.com/docker/docker/api/types"</span></span><br><span class="line">	<span class="string">"github.com/docker/docker/api/types/container"</span></span><br><span class="line">	<span class="string">"github.com/docker/docker/client"</span></span><br><span class="line">	<span class="string">"github.com/docker/docker/pkg/stdcopy"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// "github.com/docker/docker/client"</span></span><br><span class="line">    ctx := context.Background()</span><br><span class="line">    cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 拉取镜像</span></span><br><span class="line">    reader, err := cli.ImagePull(ctx, <span class="string">"docker.io/library/alpine"</span>, types.ImagePullOptions&#123;&#125;)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    io.Copy(os.Stdout, reader)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建容器</span></span><br><span class="line">    resp, err := cli.ContainerCreate(ctx, &amp;container.Config&#123;</span><br><span class="line">        Image: <span class="string">"alpine"</span>,</span><br><span class="line">        Cmd:   []<span class="keyword">string</span>&#123;<span class="string">"echo"</span>, <span class="string">"hello world"</span>&#125;,</span><br><span class="line">    &#125;, <span class="literal">nil</span>, <span class="literal">nil</span>, <span class="string">""</span>)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动容器</span></span><br><span class="line">    <span class="keyword">if</span> err := cli.ContainerStart(ctx, resp.ID, types.ContainerStartOptions&#123;&#125;); err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看状态</span></span><br><span class="line">    statusCh, errCh := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)</span><br><span class="line">    <span class="keyword">select</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> err := &lt;-errCh:</span><br><span class="line">        <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="built_in">panic</span>(err)</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">case</span> &lt;-statusCh:</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查看日志</span></span><br><span class="line">    out, err := cli.ContainerLogs(ctx, resp.ID, types.ContainerLogsOptions&#123;ShowStdout: <span class="literal">true</span>&#125;)</span><br><span class="line">    <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">        <span class="built_in">panic</span>(err)</span><br><span class="line">    &#125;</span><br><span class="line">    stdcopy.StdCopy(os.Stdout, os.Stderr, out)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/jinkens/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/jinkens/" class="post-title-link" itemprop="url">jinkens</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 08:38:02" itemprop="dateCreated datePublished" datetime="2020-05-14T08:38:02+08:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-27 09:23:39" itemprop="dateModified" datetime="2020-05-27T09:23:39+08:00">2020-05-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.jenkins.io/" target="_blank" rel="noopener">jenkins</a></p>
-<h2 id="jenkins-conceptual"><a href="#jenkins-conceptual" class="headerlink" title="jenkins conceptual"></a>jenkins conceptual</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">item        <span class="comment"># 工程</span></span><br><span class="line">pipeline    <span class="comment"># 流水线</span></span><br><span class="line">build       <span class="comment"># 构建</span></span><br><span class="line">hook        <span class="comment"># 钩子</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义执行环境</span></span><br><span class="line">workspace   <span class="comment"># 工作空间，包含来自远程仓库的文件和一些用于Pipeline的工作文件</span></span><br><span class="line">agent       <span class="comment">#</span></span><br><span class="line">stages      <span class="comment"># 块</span></span><br><span class="line">    stage(<span class="string">'Build'</span>)   <span class="comment">#</span></span><br><span class="line">    stage(<span class="string">'Test'</span>)    <span class="comment">#</span></span><br><span class="line">    stage(<span class="string">'Deploy'</span>)  <span class="comment">#</span></span><br><span class="line">        steps   <span class="comment"># 步骤</span></span><br><span class="line">executor    <span class="comment"># 执行器</span></span><br><span class="line"> </span><br><span class="line">environment <span class="comment"># 定义环境变量</span></span><br><span class="line">post        <span class="comment"># </span></span><br><span class="line">    always      <span class="comment">#</span></span><br><span class="line">    success     <span class="comment">#</span></span><br><span class="line">    unstable    <span class="comment">#</span></span><br><span class="line">    failure     <span class="comment">#</span></span><br><span class="line">    changed     <span class="comment">#</span></span><br><span class="line"><span class="comment"># 通知</span></span><br><span class="line">mail to:        <span class="comment">#</span></span><br><span class="line"><span class="comment"># 部署</span></span><br></pre></td></tr></table></figure>
-<h2 id="jenkins-安装"><a href="#jenkins-安装" class="headerlink" title="jenkins 安装"></a>jenkins 安装</h2><p><a href="http://mirrors.jenkins.io/war-stable/latest/jenkins.war" target="_blank" rel="noopener">jenkins 下载</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行jenkins</span></span><br><span class="line">java -jar jenkins.war --httpPort=8080.</span><br><span class="line"><span class="comment"># 访问</span></span><br><span class="line">http://localhost:8080</span><br></pre></td></tr></table></figure></p>
-<h2 id="docker-镜像安装"><a href="#docker-镜像安装" class="headerlink" title="docker 镜像安装"></a>docker 镜像安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查找镜像</span></span><br><span class="line">docker search jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载</span></span><br><span class="line">docker pull jenkins/jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建容器</span></span><br><span class="line">docker container create --name=jenkins -p 8080:8080 jenkins/jenkins</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看容器</span></span><br><span class="line">docker container ps -a</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动容器</span></span><br><span class="line">docker container start e32ee41a614b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改容器资源</span></span><br><span class="line">docker container update --cpus 2  e32ee41a614b</span><br></pre></td></tr></table></figure>
-<h2 id="配置jenkins"><a href="#配置jenkins" class="headerlink" title="配置jenkins"></a>配置jenkins</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 密码路径</span></span><br><span class="line">/var/jenkins_home/secrets/initialAdminPassword</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置时区</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装Role Strategy Plugin插件</span></span><br><span class="line"><span class="comment"># 实现不同用户组显示对应视图views中不同的jobs</span></span><br></pre></td></tr></table></figure>
-<h2 id="pipeline-指令"><a href="#pipeline-指令" class="headerlink" title="pipeline 指令"></a>pipeline 指令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">    agent any</span><br><span class="line">    stages &#123;</span><br><span class="line">        stage(&#39;Build&#39;) &#123;</span><br><span class="line">            steps &#123;</span><br><span class="line">                sh &#39;echo &quot;Hello World&quot;&#39;</span><br><span class="line">                sh &#39;&#39;&#39;</span><br><span class="line">                    echo &quot;Multiline shell steps works too&quot;</span><br><span class="line">                    ls -lah</span><br><span class="line">                &#39;&#39;&#39;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/%E7%BC%96%E7%A8%8B%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">编程方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-14 08:34:21 / 修改时间：08:41:18" itemprop="dateCreated datePublished" datetime="2020-05-14T08:34:21+08:00">2020-05-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>表达式<ul>
-<li>常量</li>
-<li>变量</li>
-<li>运算符</li>
-</ul>
-</li>
-<li>控制流程<ul>
-<li>分支</li>
-<li>循环</li>
-</ul>
-</li>
-<li>容器<ul>
-<li>数组</li>
-<li>切片</li>
-<li>Map</li>
-</ul>
-</li>
-<li>函数<ul>
-<li>参数</li>
-<li>返回值</li>
-<li>闭包</li>
-<li>递归函数</li>
-</ul>
-</li>
-<li>面向对象<ul>
-<li>接口</li>
-<li>结构体</li>
-<li>指针</li>
-</ul>
-</li>
-<li>设计模式<ul>
-<li>单例模式</li>
-<li>工厂模式</li>
-</ul>
-</li>
-<li>Golang 并发<ul>
-<li>Channel</li>
-<li>sync</li>
-</ul>
-</li>
-<li>错误处理</li>
-<li>日志记录</li>
-<li>常用包</li>
-<li>包管理</li>
-<li>基本库</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/shell%E7%BC%96%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/blog.githup.io/2020/05/shell%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">shell编程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-14 08:33:21" itemprop="dateCreated datePublished" datetime="2020-05-14T08:33:21+08:00">2020-05-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-26 19:09:44" itemprop="dateModified" datetime="2020-05-26T19:09:44+08:00">2020-05-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html" target="_blank" rel="noopener">bash docs</a></li>
-<li><a href="http://tldp.org/LDP/abs/html/index.html" target="_blank" rel="noopener">Advanced Bash-Scripting Guide</a></li>
-</ul>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="shell-输入、输出"><a href="#shell-输入、输出" class="headerlink" title="shell 输入、输出"></a>shell 输入、输出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">read</span> var <span class="comment">#输入</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span> <span class="comment">#输出</span></span><br></pre></td></tr></table></figure>
-<h3 id="shell-变量"><a href="#shell-变量" class="headerlink" title="shell 变量"></a>shell 变量</h3><blockquote>
-<p>shell中变量值都是字符串类型<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 声明</span></span><br><span class="line">var=2</span><br><span class="line">var=<span class="string">"hello world"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$var</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 高级用法</span></span><br><span class="line">var=<span class="string">"ls"</span></span><br><span class="line"><span class="built_in">eval</span> <span class="variable">$var</span> <span class="comment"># 将字符串变成命令</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用变量进行字符串截取</span></span><br><span class="line">var=<span class="string">"hello world"</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var%*o&#125;</span>  <span class="comment"># 保留o左边字符</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var%%o*&#125;</span> <span class="comment"># 贪婪匹配</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var#o*&#125;</span>  <span class="comment"># 保留o右边字符</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;var##*o&#125;</span> <span class="comment">#贪婪匹配</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 变量判断</span></span><br><span class="line"><span class="variable">$&#123;parameter:=word&#125;</span> <span class="comment"># （无值替换）</span></span><br><span class="line"><span class="variable">$&#123;parameter:+word&#125;</span> <span class="comment"># （有值才替换）</span></span><br><span class="line"><span class="variable">$&#123;parameter:-word&#125;</span> <span class="comment"># （为空替换）</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$&#123;parameter:?word&#125;</span> <span class="comment"># </span></span><br><span class="line"><span class="variable">$&#123;parameter:offset&#125;</span> <span class="comment"># 获取偏移字符</span></span><br><span class="line"><span class="variable">$&#123;parameter:offset:length&#125;</span></span><br></pre></td></tr></table></figure><br><a href="https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion" target="_blank" rel="noopener">Shell-Parameter-Expansion</a></p>
-</blockquote>
-<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># ((...))</span><br><span class="line">(( expression ))</span><br><span class="line"></span><br><span class="line"># let</span><br><span class="line">let <span class="string">"expression"</span></span><br><span class="line"></span><br><span class="line"># <span class="string">[[…]]</span></span><br><span class="line"><span class="string">[[ expression ]]</span></span><br><span class="line"></span><br><span class="line"># 模式匹配 ‘aab’ <span class="keyword">and</span> ‘ aaaaaab’ 会被匹配</span><br><span class="line"><span class="string">[[ $line =~ [[:space:]]*?(a)b ]]</span></span><br><span class="line"></span><br><span class="line"># 提高优先级使用小括号</span><br><span class="line">( expression )</span><br><span class="line"></span><br><span class="line"># 取反</span><br><span class="line">! expression</span><br><span class="line"></span><br><span class="line"># 取与</span><br><span class="line">expression1 &amp;&amp; expression2</span><br><span class="line"></span><br><span class="line"># 取或</span><br><span class="line">expression1 || expression2</span><br></pre></td></tr></table></figure>
-<h3 id="shell-控制流程"><a href="#shell-控制流程" class="headerlink" title="shell 控制流程"></a>shell 控制流程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># if # 判断</span></span><br><span class="line">i=10</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$i</span> -gt 20 ];<span class="keyword">then</span> <span class="comment"># 数值比较</span></span><br><span class="line">        <span class="built_in">echo</span> gt 20</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> lt 20</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"mm"</span> == <span class="string">"m1"</span> ];<span class="keyword">then</span>  <span class="comment"># 字符串比较</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"some strings"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"different strings"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ls /datamm 2&gt;/dev/null ;<span class="keyword">then</span> <span class="comment"># 命令处理</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"list file ok"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"file is not exist"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">------------------------------</span><br><span class="line"><span class="comment"># case in</span></span><br><span class="line"><span class="comment"># 常用 case in 制作菜单</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">read</span> var <span class="comment"># 读入字符串</span></span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$var</span> <span class="keyword">in</span> <span class="comment"># 判断</span></span><br><span class="line">        dog|cat)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"animal"</span></span><br><span class="line">        ;;</span><br><span class="line">        1|2)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"number"</span></span><br><span class="line">        ;;</span><br><span class="line">        q)</span><br><span class="line">        <span class="built_in">exit</span> 0 <span class="comment"># 退出</span></span><br><span class="line">        ;;</span><br><span class="line">        *)  <span class="comment"># 不匹配输出</span></span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"entry dog|cat|1|2"</span></span><br><span class="line">        ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">------------------------------</span><br><span class="line"><span class="comment"># for</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> <span class="string">"abc bcd"</span> <span class="comment"># 空格分隔</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$x</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (( i=0;i&lt;10;i++ )) <span class="comment"># 计数 </span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> ((;;)) <span class="comment"># 死循环</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> for..ok</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">------------------------------</span><br><span class="line"></span><br><span class="line"><span class="comment"># while</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="comment"># 死循环</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> while..ok</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line">A=<span class="variable">$IFS</span></span><br><span class="line">IFS=$<span class="string">":"</span> <span class="comment"># 改变分隔符</span></span><br><span class="line"><span class="keyword">while</span> <span class="built_in">read</span> line1 line2 <span class="comment"># 把一行读成两个字段</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$line1</span></span><br><span class="line"><span class="keyword">done</span> &lt;&gt;/etc/passwd</span><br><span class="line">IFS=<span class="variable">$A</span></span><br><span class="line"></span><br><span class="line">A=<span class="variable">$IFS</span></span><br><span class="line">IFS=$<span class="string">":"</span></span><br><span class="line">cat /etc/passwd| <span class="keyword">while</span> <span class="built_in">read</span> line1 <span class="comment"># 通过输出重定向读入</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$line1</span></span><br><span class="line"><span class="comment">#echo $line1 $line2</span></span><br><span class="line"><span class="keyword">done</span> </span><br><span class="line">IFS=<span class="variable">$A</span></span><br><span class="line"></span><br><span class="line">i=2</span><br><span class="line"><span class="keyword">while</span> ((i&lt;10)) <span class="comment"># 比较数值大小</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$i</span></span><br><span class="line">i=$(expr <span class="variable">$i</span> + 1) <span class="comment"># 自增</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># while 跟 for 的区别</span></span><br><span class="line">seq 60 62|<span class="keyword">while</span> <span class="built_in">read</span> n</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">ssh 192.168.0.<span class="variable">$n</span> <span class="string">"echo ok"</span> <span class="comment"># 只会执行一次</span></span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">---</span><br><span class="line"><span class="keyword">for</span> n <span class="keyword">in</span> `seq 60 62`;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">ssh 192.168.0.<span class="variable">$n</span> <span class="string">"echo ok"</span> <span class="comment"># 会依次执行</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/blog.githup.io/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog.githup.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog.githup.io/page/8/">8</a><a class="page-number" href="/blog.githup.io/page/9/">9</a><a class="extend next" rel="next" href="/blog.githup.io/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/blog.githup.io/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog.githup.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/blog.githup.io/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/10/">10</a><a class="extend next" rel="next" href="/blog.githup.io/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1424,7 +1398,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1474,13 +1448,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">225k</span>
+    <span title="站点总字数">227k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:25</span>
+    <span title="站点阅读时长">3:26</span>
 </div>
 
         

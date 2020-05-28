@@ -20,13 +20,15 @@
     var CONFIG = {"hostname":"blyanqi.github.io","root":"/blog.githup.io/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="作为在运维领域工作了10多年的人来说。经历了中国互联网的高速发展，也经历了运维工作的小到大的规模变化。从基础的网线水晶头做起。一直到现在云计算、大数据、DevOps、容器云等层出不穷的技术。俗话说万变不离其宗。这个宗旨应该是对资源的成本的考量。当运维粒度为服务器时存在大量计算资源被浪费。每个企业各自为政，自己建IDC。但是有大量的计算资源被闲置，成本居高不下。因此催生了虚拟化技术。当以虚拟机为">
+<meta property="og:type" content="article">
 <meta property="og:title" content="运维">
 <meta property="og:url" content="https://blyanqi.github.io/blog.githup.io/2020/05/%E8%BF%90%E7%BB%B4/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="作为在运维领域工作了10多年的人来说。经历了中国互联网的高速发展，也经历了运维工作的小到大的规模变化。从基础的网线水晶头做起。一直到现在云计算、大数据、DevOps、容器云等层出不穷的技术。俗话说万变不离其宗。这个宗旨应该是对资源的成本的考量。当运维粒度为服务器时存在大量计算资源被浪费。每个企业各自为政，自己建IDC。但是有大量的计算资源被闲置，成本居高不下。因此催生了虚拟化技术。当以虚拟机为">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-22T16:09:03.000Z">
-<meta property="article:modified_time" content="2020-05-22T16:09:23.783Z">
+<meta property="article:modified_time" content="2020-05-28T04:47:33.784Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -213,10 +215,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-23 00:09:03 / 修改时间：00:09:23" itemprop="dateCreated datePublished" datetime="2020-05-23T00:09:03+08:00">2020-05-23</time>
+              <time title="创建时间：2020-05-23 00:09:03" itemprop="dateCreated datePublished" datetime="2020-05-23T00:09:03+08:00">2020-05-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-28 12:47:33" itemprop="dateModified" datetime="2020-05-28T12:47:33+08:00">2020-05-28</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -233,7 +241,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
+              <span>874</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -252,7 +260,26 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>  作为在运维领域工作了10多年的人来说。经历了中国互联网的高速发展，也经历了运维工作的小到大的规模变化。<br>从基础的网线水晶头做起。一直到现在云计算、大数据、DevOps、容器云等层出不穷的技术。<br>俗话说万变不离其宗。这个宗旨应该是对资源的成本的考量。<br>当运维粒度为服务器时存在大量计算资源被浪费。每个企业各自为政，自己建IDC。但是有大量的计算资源被闲置，成本居高不下。因此催生了虚拟化技术。<br>当以虚拟机为颗粒度，云计算的概念被提出。虽然云计算对资源进行了整合提出了按量计费。但虚拟化中也存在大量主机负载不足的问题。还有就是虚拟化过程中存在性能损耗。<br>很快容器(资源隔离进程)的概念被提出，容器云计算也开始充斥着各个领域。容器减少了负载不足的问题，同时也解决了虚拟化的性能损耗，但增加的是运维复杂度。<br>这一切并未结束无服务器(serverless)的概念又兴起。提出以app为中心，以云函数、云存储的方式对外提供。<br>运维颗粒度在运维的发展中不断变细。使得运维的效率不断的提升。同时也深化了运维的技术深度。<br>以资源利用为轴线持续的细化下去，可以理解运维为什么是这样的发展过程。</p>
+<p>运维的工作的需要从几个维度来看。<br>首先是运维规模，运维规模大小决定运维工作的侧重点不同。运维规模小时侧重业务服务运维层级不清晰。运维规模大侧重于精细运维层级清晰。目前的技术水平大概是每百台/人配置。<br>其次是运维粒度，运维颗粒度越细运维工作量越大。从简单的服务器上下架到SRE。越细运维所需技术和精力越多。当然人力成本越来越大，因此AIops被提出。<br>再者是运维成本，当资源的投入远大于业务规模时，运维工作也会变得简单。不稳定的可能性越低。比如银行、政府的运维工作相对来说要轻松的多。</p>
+<p>衡量运维系统的好坏，可以通过以下指标来衡量<br>  稳定性  (系统数/总系统数 x 总发生故障时间 /总服务时间)，比所谓几个9要精细些。毕竟有些服务根本不需要高保障。否则会有大量人力、资源浪费。<br>  伸缩性 （增量/总量 x 所需时间/总服务时间）)<br>  可维护性 (服务器总量/总维护人数)</p>
+<ul>
+<li><a href="/blog.githup.io/2020/05/%E8%BF%90%E7%BB%B4%E7%9B%91%E6%8E%A7/" title="运维监控">运维监控</a>
+</li>
+<li><a href="/blog.githup.io/2020/05/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/" title="运维自动化">运维自动化</a>
+</li>
+<li><a href="/blog.githup.io/2020/05/%E8%BF%90%E7%BB%B4%E5%BC%80%E5%8F%91/" title="运维开发">运维开发</a>
+</li>
+<li><a href="/blog.githup.io/2020/05/DevOps/" title="DevOps">DevOps</a>
+</li>
+<li><a href="/blog.githup.io/2020/05/%E4%BA%91%E8%AE%A1%E7%AE%97/" title="云计算">云计算</a>
+</li>
+<li><a href="/blog.githup.io/2020/05/%E5%A4%A7%E6%95%B0%E6%8D%AE/" title="大数据">大数据</a>
+</li>
+<li><a href="/blog.githup.io/2020/05/AIops/" title="AIops">AIops</a>
+</li>
+</ul>
+
     </div>
 
     
@@ -345,7 +372,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/blog.githup.io/archives/">
         
-          <span class="site-state-item-count">86</span>
+          <span class="site-state-item-count">92</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -395,13 +422,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">225k</span>
+    <span title="站点总字数">227k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:25</span>
+    <span title="站点阅读时长">3:26</span>
 </div>
 
         
