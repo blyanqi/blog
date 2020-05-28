@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog.githup.io/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog.githup.io/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog.githup.io/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog.githup.io/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog.githup.io/css/main.css">
+
+
+<link rel="stylesheet" href="/blog.githup.io/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blyanqi.github.io","root":"/blog.githup.io/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="blyanqi@163.com">
+<meta property="og:url" content="https://blyanqi.github.io/blog.githup.io/page/11/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://blyanqi.github.io/blog.githup.io/page/11/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>blyanqi@163.com</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog.githup.io/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog.githup.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/blog.githup.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog.githup.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog.githup.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog.githup.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://blyanqi.github.io/blog.githup.io/2020/05/kubernetes%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/blog.githup.io/2020/05/kubernetes%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">kubernetes安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-13 18:08:48 / 修改时间：18:22:43" itemprop="dateCreated datePublished" datetime="2020-05-13T18:08:48+08:00">2020-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog.githup.io/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Kubernetes-Architecture"><a href="#Kubernetes-Architecture" class="headerlink" title="Kubernetes Architecture"></a>Kubernetes Architecture</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">api-server</span></span><br><span class="line"><span class="string">scheduler</span></span><br><span class="line"><span class="string">kebelet</span>       <span class="string">kubelet</span>   <span class="string">kube-proxy</span></span><br><span class="line"><span class="string">---Master---</span> <span class="string">--------Work</span> <span class="string">node-------</span></span><br><span class="line"><span class="string">---etcd---</span></span><br><span class="line"><span class="string">***********</span> <span class="string">DOCKER</span> <span class="string">Engine</span> <span class="string">***********</span></span><br><span class="line"><span class="string">Host</span> <span class="string">OS</span></span><br><span class="line"><span class="string">Infrastructure</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://kubernetes.io/zh/docs/home/" target="_blank" rel="noopener"> Kubernetes 官网 </a></p>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>提供5台 linux 系统(Centos 7) 主机</p>
+<p>主机IP如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">master1:192.168.0.55</span></span><br><span class="line"><span class="string">master2:192.168.0.56</span></span><br><span class="line"><span class="string">master3:192.168.0.57</span></span><br><span class="line"></span><br><span class="line"><span class="string">work1:192.168.0.59</span></span><br><span class="line"><span class="string">work2:192.168.0.60</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果同时检测到 docker 和 containerd，则优先选择 docker。</p>
+<p>在集群中,所有计算机之间的完全网络连接。</p>
+<p>每台设备对系统中所有节点的 SSH 访问。</p>
+<p>在所有机器上安装 kubeadm 和 kubelet。</p>
+</blockquote>
+<h2 id="安装前基本配置"><a href="#安装前基本配置" class="headerlink" title="安装前基本配置"></a>安装前基本配置</h2><h3 id="设置主机名"><a href="#设置主机名" class="headerlink" title="设置主机名"></a>设置主机名</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">ssh</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.55</span> <span class="string">" hostnamectl set-hostname k8s-1"</span></span><br><span class="line"><span class="string">ssh</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.56</span> <span class="string">" hostnamectl set-hostname k8s-2"</span></span><br><span class="line"><span class="string">ssh</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.57</span> <span class="string">" hostnamectl set-hostname k8s-3"</span></span><br></pre></td></tr></table></figure>
+<h3 id="设置主机名解析"><a href="#设置主机名解析" class="headerlink" title="设置主机名解析"></a>设置主机名解析</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">"192.168.0.55 k8s-1</span></span><br><span class="line"><span class="string">192.168.0.56 k8s-2</span></span><br><span class="line"><span class="string">192.168.0.57 k8s-3"</span>&gt;&gt;/etc/hosts</span><br></pre></td></tr></table></figure>
+<h3 id="生成ssh-key"><a href="#生成ssh-key" class="headerlink" title="生成ssh key"></a>生成ssh key</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">ssh-keygen</span></span><br><span class="line"><span class="string">ssh-copy-id</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.55</span></span><br><span class="line"><span class="string">ssh-copy-id</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.56</span></span><br><span class="line"><span class="string">ssh-copy-id</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.57</span></span><br><span class="line"></span><br><span class="line"><span class="string">SSHVerify</span></span><br><span class="line"><span class="string">for</span> <span class="string">x</span> <span class="string">in</span> <span class="string">`grep</span> <span class="string">-o</span> <span class="string">k8s-.*</span> <span class="string">/etc/hosts`;do</span> <span class="string">echo</span> <span class="string">$x;</span> <span class="string">ssh</span> <span class="string">$x</span> <span class="string">"free"</span><span class="string">;done</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>for x in <code>grep -o k8s-.* /etc/hosts</code>;do echo $x; ssh-copy-id $x ;done</p>
+</blockquote>
+<h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">iptables -L -n</span><br></pre></td></tr></table></figure>
+<h3 id="关闭-selinux"><a href="#关闭-selinux" class="headerlink" title="关闭 selinux"></a>关闭 selinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">"s/^SELINUX=enforcing/SELINUX=disabled/g"</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<h3 id="关闭-swap"><a href="#关闭-swap" class="headerlink" title="关闭 swap"></a>关闭 swap</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br><span class="line">swapoff -a sed -i <span class="string">'s/.*swap.*/#&amp;/'</span> /etc/fstab</span><br></pre></td></tr></table></figure>
+<h2 id="NTP-配置"><a href="#NTP-配置" class="headerlink" title="NTP 配置"></a>NTP 配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install chrony -y</span><br><span class="line"><span class="comment"># vim /etc/chrony.conf</span></span><br><span class="line">sed -i <span class="string">"/^server/d"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp1.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp2.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf </span><br><span class="line">sed -i <span class="string">"/#allow/s/#//"</span> /etc/chrony.conf</span><br><span class="line">systemctl <span class="built_in">enable</span> chronyd.service;systemctl start chronyd.service</span><br></pre></td></tr></table></figure>
+<h3 id="配置国内yum-源"><a href="#配置国内yum-源" class="headerlink" title="配置国内yum 源"></a>配置国内yum 源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget;</span><br><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Aliyun 源</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 配置国内Kubernetes源</span></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 配置 docker 源</span></span><br><span class="line">wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 更新缓存</span></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br></pre></td></tr></table></figure>
+<h2 id="Docker-install"><a href="#Docker-install" class="headerlink" title="Docker install"></a>Docker install</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 Docker CE</span></span><br><span class="line"><span class="comment"># 安装所需包</span></span><br><span class="line">yum install yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 Docker 仓库。</span></span><br><span class="line"><span class="comment">#yum-config-manager --add-repo \</span></span><br><span class="line"><span class="comment"># https://download.docker.com/linux/centos/docker-ce.repo</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Docker CE.</span></span><br><span class="line">yum update &amp;&amp; yum install docker-ce-18.06.2.ce</span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建 /etc/docker 目录。</span></span><br><span class="line">mkdir /etc/docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 daemon。</span></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"exec-opts"</span>: [<span class="string">"native.cgroupdriver=systemd"</span>],</span><br><span class="line">  <span class="string">"log-driver"</span>: <span class="string">"json-file"</span>,</span><br><span class="line">  <span class="string">"log-opts"</span>: &#123;</span><br><span class="line">    <span class="string">"max-size"</span>: <span class="string">"100m"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"storage-driver"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">  <span class="string">"storage-opts"</span>: [</span><br><span class="line">    <span class="string">"overlay2.override_kernel_check=true"</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启 Docker</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h3 id="配置-docker-镜像加速器"><a href="#配置-docker-镜像加速器" class="headerlink" title="配置 docker 镜像加速器"></a>配置 docker 镜像加速器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<h2 id="安装-kubeadm、kubelet-和-kubectl"><a href="#安装-kubeadm、kubelet-和-kubectl" class="headerlink" title="安装 kubeadm、kubelet 和 kubectl"></a>安装 kubeadm、kubelet 和 kubectl</h2><blockquote>
+<p>kubeadm：用来初始化集群的指令。</p>
+<p>kubelet：在集群中的每个节点上用来启动 pod 和容器等。</p>
+<p>kubectl：用来与集群通信的命令行工具。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装指定版本</span></span><br><span class="line"><span class="comment"># yum install -y kubelet-&lt;version&gt; kubectl-&lt;version&gt; kubeadm-&lt;version&gt;</span></span><br><span class="line"><span class="comment"># example：yum install -y kubelet-1.17.2 kubeadm-1.17.2 kubectl-1.17.2 --disableexcludes=kubernetes</span></span><br><span class="line">yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes</span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart kubelet</span><br></pre></td></tr></table></figure>
+<h2 id="创建单主集群"><a href="#创建单主集群" class="headerlink" title="创建单主集群"></a>创建单主集群</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">服务重启</span><br><span class="line">systemctl <span class="built_in">enable</span> kubelet docker</span><br><span class="line">systemctl restart  kubelet docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装出错，重置了再装</span></span><br><span class="line"><span class="comment"># kubeadm reset</span></span><br><span class="line"></span><br><span class="line">kubeadm version</span><br><span class="line"></span><br><span class="line">kubeadm init \</span><br><span class="line">--kubernetes-version=$(kubectl version |grep -P -o <span class="string">'GitVersion:"(.*?)"'</span>|grep -oP <span class="string">"[\d|\.]&#123;1,6&#125;"</span>)  \</span><br><span class="line">--apiserver-advertise-address=xxx.xxx.xxx.xxx \</span><br><span class="line">--control-plane-endpoint <span class="string">"xxx.xxx.xxx.xxx:6443"</span> \</span><br><span class="line">--image-repository registry.aliyuncs.com/google_containers \</span><br><span class="line">--service-cidr=10.10.0.0/16 --pod-network-cidr=10.20.0.0/16 \</span><br><span class="line">--upload-certs</span><br><span class="line"></span><br><span class="line"><span class="comment"># --upload-certs 上传证书</span></span><br><span class="line"><span class="comment"># --control-plane-endpoint "192.168.0.55:6443"</span></span><br><span class="line"><span class="comment"># --image-repository registry.aliyuncs.com/google_containers</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 需要等几分钟才能创建好</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 记录 token </span></span><br><span class="line"><span class="comment"># controller 节点加入</span></span><br><span class="line">kubeadm join 192.168.0.55:6443 --token 72jo7w.5yicrzyn8edcvpu0 \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:1e67abc92cf649e18941e24c2c18835f7b09d127fde632f3982d41e582346e65 \</span><br><span class="line">    --control-plane --certificate-key 712fcf5a2ffd9a0cd8bee3518475dca3ca3168fb49ee0c937686537141dff2ff</span><br><span class="line"></span><br><span class="line"><span class="comment"># worker 节点加入</span></span><br><span class="line">kubeadm join 192.168.0.55:6443 --token 72jo7w.5yicrzyn8edcvpu0 \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:1e67abc92cf649e18941e24c2c18835f7b09d127fde632f3982d41e582346e65</span><br></pre></td></tr></table></figure>
+<h3 id="安装-Pod-网络插件"><a href="#安装-Pod-网络插件" class="headerlink" title="安装 Pod 网络插件"></a>安装 Pod 网络插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">由于地址总变，把地址写死</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"206.189.89.118 docs.projectcalico.org"</span> &gt;&gt; /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> KUBECONFIG=/etc/kubernetes/admin.conf</span><br><span class="line">kubectl apply -f https://docs.projectcalico.org/v3.11/manifests/calico.yaml</span><br></pre></td></tr></table></figure>
+<h3 id="操作集群"><a href="#操作集群" class="headerlink" title="操作集群"></a>操作集群</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># kubernetes 集群重置</span></span><br><span class="line"><span class="comment"># kubeadm reset</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> KUBECONFIG=/etc/kubernetes/admin.conf</span><br><span class="line"><span class="comment"># 获取node</span></span><br><span class="line">kubectl get nodes</span><br><span class="line"><span class="comment"># 获取命名空间</span></span><br><span class="line">kubectl get namespace</span><br><span class="line"><span class="comment"># 获取pod</span></span><br><span class="line">kubectl get pod --all-namespaces</span><br><span class="line">kubectl get pod -A -o wide</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取 container</span></span><br><span class="line">docker ps</span><br><span class="line"><span class="comment"># 获取本地镜像</span></span><br><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<h2 id="配置多主集群"><a href="#配置多主集群" class="headerlink" title="配置多主集群"></a>配置多主集群</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重新生成token</span></span><br><span class="line">kubeadm token create --<span class="built_in">print</span>-join-command|sed <span class="string">'s/$&#123;LOCAL_IP&#125;/$&#123;VIP&#125;/g'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 证书有效期延长为一年,所有的节点都执行一次</span></span><br><span class="line">kubeadm alpha certs renew all </span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用master token 加入master集群</span></span><br><span class="line">kubeadm join -h <span class="comment">#使用命令帮助</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在其他主节点执行</span></span><br><span class="line">kubeadm join 192.168.0.55:6443 --token 72jo7w.5yicrzyn8edcvpu0 \</span><br><span class="line">    --discovery-token-ca-cert-hash sha256:1e67abc92cf649e18941e24c2c18835f7b09d127fde632f3982d41e582346e65 \</span><br><span class="line">    --control-plane --certificate-key 712fcf5a2ffd9a0cd8bee3518475dca3ca3168fb49ee0c937686537141dff2ff</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使master 同时做 work 节点</span></span><br><span class="line"><span class="comment"># kubectl taint nodes --all node-role.kubernetes.io/master-</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看节点</span></span><br><span class="line">kubectl get nodes</span><br><span class="line">kubectl get pods -o wide -A</span><br><span class="line"></span><br><span class="line"><span class="comment"># 退出集群</span></span><br><span class="line"><span class="comment"># 在 (master1）执行删除</span></span><br><span class="line">kubectl delete node k8s-2</span><br><span class="line"><span class="comment"># 在 master2 重置 kubernetes </span></span><br><span class="line">kubeadm reset</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 master 上申请join token</span></span><br><span class="line">kubeadm token list</span><br><span class="line">kubeadm token create --<span class="built_in">print</span>-join-command</span><br></pre></td></tr></table></figure>
+<h3 id="安装-Dashboard"><a href="#安装-Dashboard" class="headerlink" title="安装 Dashboard"></a>安装 Dashboard</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://github.com/kubernetes/dashboard</span></span><br><span class="line"></span><br><span class="line">kubectl apply -f \</span><br><span class="line">https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑 service 配置 把 type: ClusterIP 改为 type: NodePort</span></span><br><span class="line">kubectl --namespace=kubernetes-dashboard edit service kubernetes-dashboard</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 service</span></span><br><span class="line">kubectl -n kubernetes-dashboard get service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建用户</span></span><br><span class="line">cat &lt;&lt;EOF &gt;dashboard-adminuser.yaml</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: ServiceAccount</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl apply -f dashboard-adminuser.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create ClusterRole</span></span><br><span class="line">cat &lt;&lt;EOF &gt;dashboard-adminrole.yaml</span><br><span class="line">apiVersion: rbac.authorization.k8s.io/v1</span><br><span class="line">kind: ClusterRoleBinding</span><br><span class="line">metadata:</span><br><span class="line">  name: admin-user</span><br><span class="line">roleRef:</span><br><span class="line">  apiGroup: rbac.authorization.k8s.io</span><br><span class="line">  kind: ClusterRole</span><br><span class="line">  name: cluster-admin</span><br><span class="line">subjects:</span><br><span class="line">- kind: ServiceAccount</span><br><span class="line">  name: admin-user</span><br><span class="line">  namespace: kubernetes-dashboard</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">kubectl apply -f dashboard-adminrole.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看用户</span></span><br><span class="line">kubectl -n kubernetes-dashboard get secret | grep admin-user</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 user 的token</span></span><br><span class="line">kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk <span class="string">'&#123;print $1&#125;'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以使用 token 登录了</span></span><br></pre></td></tr></table></figure>
+<h2 id="在work-node-上执行脚本安装"><a href="#在work-node-上执行脚本安装" class="headerlink" title="在work node 上执行脚本安装"></a>在work node 上执行脚本安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除没用的镜像</span></span><br><span class="line">docker image ls|awk <span class="string">'&#123;print $3&#125;'</span>|xargs docker rmi -f</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">'GEOF'</span> &gt;install.sh</span><br><span class="line">kubeadm reset  -f</span><br><span class="line">docker image ls|awk <span class="string">'&#123;print $3&#125;'</span>|xargs docker rmi -f</span><br><span class="line"></span><br><span class="line">systemctl stop firewalld</span><br><span class="line">iptables -L -n</span><br><span class="line"></span><br><span class="line">swapoff -a</span><br><span class="line">swapoff -a</span><br><span class="line">sed -i <span class="string">'s/.*swap.*/#&amp;/'</span> /etc/fstab</span><br><span class="line"></span><br><span class="line">yum install chrony -y</span><br><span class="line"> </span><br><span class="line"><span class="comment">#vim /etc/chrony.conf</span></span><br><span class="line"></span><br><span class="line">sed -i <span class="string">"/^server/d"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp1.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp2.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf </span><br><span class="line">sed -i <span class="string">"/#allow/s/#//"</span> /etc/chrony.conf</span><br><span class="line">systemctl <span class="built_in">enable</span> chronyd.service;</span><br><span class="line">systemctl start chronyd.service</span><br><span class="line"></span><br><span class="line">yum install -y wget curl;</span><br><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line">centos=$(cat /etc/redhat-release |grep -oP <span class="string">"\d"</span>|sed -n <span class="string">"1p"</span>)</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-<span class="variable">$&#123;centos&#125;</span>.repo</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el<span class="variable">$&#123;centos&#125;</span>-x86_64/</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span><br><span class="line"></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br><span class="line"></span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"></span><br><span class="line">yum -y update &amp;&amp; yum install -y \</span><br><span class="line">  containerd.io-1.2.10 \</span><br><span class="line">  docker-ce-19.03.4 \</span><br><span class="line">  docker-ce-cli-19.03.4</span><br><span class="line"></span><br><span class="line">mkdir /etc/docker</span><br><span class="line"></span><br><span class="line">tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>],</span><br><span class="line">  <span class="string">"exec-opts"</span>: [<span class="string">"native.cgroupdriver=systemd"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># "exec-opts": ["native.cgroupdriver=systemd"]</span></span><br><span class="line">mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line"></span><br><span class="line"><span class="comment"># Restart Docker</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s/^SELINUX=enforcing$/SELINUX=permissive/'</span> /etc/selinux/config</span><br><span class="line">yum remove -y kubelet kubeadm kubectl</span><br><span class="line"></span><br><span class="line">yum install -y kubelet-1.17.2 kubeadm-1.17.2 kubectl-1.17.2 --disableexcludes=kubernetes</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span> --now kubelet</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt;  /etc/sysctl.d/k8s.conf</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables = 1</span><br><span class="line">net.bridge.bridge-nf-call-iptables = 1</span><br><span class="line">EOF</span><br><span class="line">sysctl --system</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart kubelet</span><br><span class="line">systemctl <span class="built_in">enable</span> kubelet docker</span><br><span class="line">GEOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行脚本</span></span><br><span class="line">sh -x install.sh</span><br></pre></td></tr></table></figure>
+<h3 id="Work-ndoe-加入集群"><a href="#Work-ndoe-加入集群" class="headerlink" title="Work ndoe 加入集群"></a>Work ndoe 加入集群</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">kubeadm join 192.168.0.55:6443 --token iq64nb.dq81b1vxczkkrx8i \</span><br><span class="line">--discovery-token-ca-cert-hash \</span><br><span class="line">sha256:1e67abc92cf649e18941e24c2c18835f7b09d127fde632f3982d41e582346e65</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog.githup.io/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/blog.githup.io/">1</a><span class="space">&hellip;</span><a class="page-number" href="/blog.githup.io/page/10/">10</a><span class="page-number current">11</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog.githup.io/archives/">
+        
+          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog.githup.io/categories/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog.githup.io/tags/">
+          
+        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">232k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3:31</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog.githup.io/lib/anime.min.js"></script>
+  <script src="/blog.githup.io/lib/velocity/velocity.min.js"></script>
+  <script src="/blog.githup.io/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog.githup.io/js/utils.js"></script>
+
+<script src="/blog.githup.io/js/motion.js"></script>
+
+
+<script src="/blog.githup.io/js/schemes/pisces.js"></script>
+
+
+<script src="/blog.githup.io/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog.githup.io/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
