@@ -3544,6 +3544,15 @@
       </tags>
   </entry>
   <entry>
+    <title>python编程</title>
+    <url>/2020/05/python%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.runoob.com/python3/python3-tutorial.html" target="_blank" rel="noopener">Python 入门</a></p>
+]]></content>
+      <categories>
+        <category>编程语言</category>
+      </categories>
+  </entry>
+  <entry>
     <title>python高级编程</title>
     <url>/2020/05/python%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><blockquote>
@@ -3555,15 +3564,6 @@
 <h4 id="字符串断言"><a href="#字符串断言" class="headerlink" title="字符串断言"></a>字符串断言</h4><p>isalpha         # 字母<br>isidentifier    # 标识符<br>isspace         # 空格<br>isascii         # ascii 码<br>islower         # 小写<br>isupper         # 大写<br>istitle         # 标题 “Abc”<br>isdecimal       # 十进制数<br>isnumeric       # 数字<br>isalnum         # 字母和数字<br>isdigit         # 数字<br>isprintable     # 可打印字符 “\n”                     </p>
 <h4 id="字符串常用的操作"><a href="#字符串常用的操作" class="headerlink" title="字符串常用的操作"></a>字符串常用的操作</h4><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>l = list(range(3))</p>
 <h3 id="字典"><a href="#字典" class="headerlink" title="字典"></a>字典</h3><h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><h1 id="迭代器与生产器"><a href="#迭代器与生产器" class="headerlink" title="迭代器与生产器"></a>迭代器与生产器</h1><h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><h1 id="命名空间-作用域"><a href="#命名空间-作用域" class="headerlink" title="命名空间/作用域"></a>命名空间/作用域</h1><h1 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h1>]]></content>
-      <categories>
-        <category>编程语言</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>python编程</title>
-    <url>/2020/05/python%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><a href="https://www.runoob.com/python3/python3-tutorial.html" target="_blank" rel="noopener">Python 入门</a></p>
-]]></content>
       <categories>
         <category>编程语言</category>
       </categories>
