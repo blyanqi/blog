@@ -571,6 +571,186 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E4%BD%BF%E7%94%A8flask-admin%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%90%8E%E5%8F%B0%E6%A1%86%E6%9E%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E4%BD%BF%E7%94%A8flask-admin%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%90%8E%E5%8F%B0%E6%A1%86%E6%9E%B6/" class="post-title-link" itemprop="url">使用flask_admin快速构建后台框架</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-29 22:58:41 / 修改时间：23:07:52" itemprop="dateCreated datePublished" datetime="2020-05-29T22:58:41+08:00">2020-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%90%E7%BB%B4%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">运维开发</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Config</span>:</span></span><br><span class="line">    MYSQLURI = <span class="string">'mysql+pymysql://yanqi:Bdp_288@127.0.0.1:3306/deployadmin?charset=utf8mb4&amp;autocommit=true'</span></span><br></pre></td></tr></table></figure>
+<h2 id="主程序"><a href="#主程序" class="headerlink" title="主程序"></a>主程序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask,url_for</span><br><span class="line"><span class="keyword">from</span> flask_admin <span class="keyword">import</span> Admin,BaseView,expose</span><br><span class="line"><span class="keyword">from</span> flask_admin.contrib.sqla <span class="keyword">import</span> ModelView</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"><span class="keyword">from</span> flask_admin.contrib <span class="keyword">import</span> sqla</span><br><span class="line"><span class="keyword">from</span> flask_babelex <span class="keyword">import</span> Babel</span><br><span class="line"><span class="keyword">from</span> manager <span class="keyword">import</span> (CataHost,SysMenu,SysHost,SysSer)</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> Config</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 app</span></span><br><span class="line">app = Flask(__name__,template_folder=<span class="string">'templates'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create dummy secrey key so we can use sessions</span></span><br><span class="line">app.config[<span class="string">'SECRET_KEY'</span>] = <span class="string">'123456790'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 国际化</span></span><br><span class="line">babel = Babel(app)</span><br><span class="line">app.config[<span class="string">'BABEL_DEFAULT_LOCALE'</span>] = <span class="string">'zh_CN'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create database</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = Config.MYSQLURI</span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_ECHO'</span>] = <span class="literal">True</span></span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line"></span><br><span class="line"><span class="comment"># set optional bootswatch theme</span></span><br><span class="line">app.config[<span class="string">'FLASK_ADMIN_SWATCH'</span>] = <span class="string">'cerulean'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Add administrative views here</span></span><br><span class="line">admin = Admin(app,name=<span class="string">u'后台管理系统'</span>, template_mode=<span class="string">'bootstrap3'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里类似于app.route()，处理url请求</span></span><br><span class="line"><span class="comment"># 普通视图</span></span><br><span class="line"><span class="comment"># class MyView(BaseView):</span></span><br><span class="line"><span class="comment">#     @expose('/')</span></span><br><span class="line"><span class="comment">#     def index(self):</span></span><br><span class="line"><span class="comment">#         return self.render('myview.html')</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定制数据库模型视图</span></span><br><span class="line"><span class="comment"># 在这里初始化Flask Flask-SQLAlchemy Flask-Admin</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SysMenuModelView</span><span class="params">(sqla.ModelView)</span>:</span></span><br><span class="line">    <span class="comment"># 这三个变量定义管理员是否可以增删改，默认为True</span></span><br><span class="line">    <span class="comment"># can_delete = False</span></span><br><span class="line">    <span class="comment"># can_edit = False</span></span><br><span class="line">    <span class="comment"># can_create = False</span></span><br><span class="line">    <span class="comment"># 分页</span></span><br><span class="line">    page_size = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这里是为了自定义显示的column名字</span></span><br><span class="line">    column_labels = dict(</span><br><span class="line">        name=<span class="string">u'名称'</span>,</span><br><span class="line">        alias_name=<span class="string">u'别称'</span>,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果不想显示某些字段，可以重载这个变量</span></span><br><span class="line">    column_exclude_list = (</span><br><span class="line">        <span class="string">'password'</span>,</span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 认证</span></span><br><span class="line">    <span class="comment"># def is_accessible(self):</span></span><br><span class="line">    <span class="comment">#     return login.current_user.is_authenticated</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HostModelView</span><span class="params">(sqla.ModelView)</span>:</span></span><br><span class="line">    page_size = <span class="number">100</span></span><br><span class="line">    column_labels = dict(</span><br><span class="line">        hostname=<span class="string">u'主机名'</span>,</span><br><span class="line">        innerip=<span class="string">u'内网IP'</span>,</span><br><span class="line">    )</span><br><span class="line">    column_sortable_list = (<span class="string">'hostname'</span>, <span class="string">'innerip'</span>,<span class="string">'outerip'</span>,<span class="string">'memtotal'</span>,<span class="string">'cpucore'</span>)</span><br><span class="line">    column_exclude_list = (</span><br><span class="line">        <span class="string">'password'</span>,</span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 是否显示主键</span></span><br><span class="line">    <span class="comment"># column_display_pk = True</span></span><br><span class="line">    column_editable_list = (<span class="string">'status'</span>,<span class="string">'cpucore'</span>,<span class="string">'outerip'</span>)</span><br><span class="line">    column_searchable_list = (<span class="string">'hostname'</span>, <span class="string">'innerip'</span>,<span class="string">'outerip'</span>)</span><br><span class="line">    can_export = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    column_list = (<span class="string">'hostname'</span>, <span class="string">'innerip'</span>,<span class="string">'outerip'</span>,<span class="string">'memtotal'</span>,<span class="string">'cpucore'</span>,<span class="string">'status'</span>)</span><br><span class="line">    <span class="comment"># 如果不想显示某些字段，可以重载这个变量</span></span><br><span class="line">    column_exclude_list = (</span><br><span class="line">        <span class="string">'password'</span>,</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CataHostModelView</span><span class="params">(sqla.ModelView)</span>:</span></span><br><span class="line">    page_size = <span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SysSerModelView</span><span class="params">(sqla.ModelView)</span>:</span></span><br><span class="line">    page_size = <span class="number">200</span></span><br><span class="line">    column_labels = dict(</span><br><span class="line">        businesstype=<span class="string">u'业务类型'</span>,</span><br><span class="line">        innerip=<span class="string">u'内网IP'</span>,</span><br><span class="line">        outurl=<span class="string">u'外网地址'</span>,</span><br><span class="line">        remark=<span class="string">u'备注'</span>,</span><br><span class="line">        hostname=<span class="string">u'主机名'</span>,</span><br><span class="line">    )</span><br><span class="line">    column_sortable_list = (<span class="string">'otasite'</span>,<span class="string">'outurl'</span>,<span class="string">'ipcc'</span>,<span class="string">'cid'</span>,<span class="string">'sername'</span>,<span class="string">'innerip'</span>)</span><br><span class="line">    column_exclude_list = (</span><br><span class="line">        <span class="string">'password'</span>,</span><br><span class="line">    )</span><br><span class="line">    column_editable_list = (<span class="string">'otasite'</span>,<span class="string">'outurl'</span>,<span class="string">'ipcc'</span>,<span class="string">'cid'</span>,<span class="string">'businesstype'</span>,<span class="string">'remark'</span>)</span><br><span class="line">    column_searchable_list = (<span class="string">'hostname'</span>,<span class="string">'otasite'</span>,<span class="string">'outurl'</span>,<span class="string">'ipcc'</span>,<span class="string">'cid'</span>,<span class="string">'appname'</span>,<span class="string">'innerip'</span>,<span class="string">'sername'</span>)</span><br><span class="line">    can_export = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 装载视图</span></span><br><span class="line"><span class="comment"># admin.add_view(MyView(name='myview', endpoint='myview'))</span></span><br><span class="line">admin.add_view(SysMenuModelView(SysMenu, db.session,name=<span class="string">u'导航管理'</span>, category=<span class="string">u'资源管理'</span>))</span><br><span class="line">admin.add_view(HostModelView(SysHost, db.session,name=<span class="string">u'主机管理'</span>, category=<span class="string">u'资源管理'</span>))</span><br><span class="line">admin.add_view(CataHostModelView(CataHost, db.session,name=<span class="string">u'主机分组'</span>, category=<span class="string">u'资源管理'</span>))</span><br><span class="line">admin.add_view(SysSerModelView(SysSer, db.session,name=<span class="string">u'服务管理'</span>, category=<span class="string">u'资源管理'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 文件上传</span></span><br><span class="line"><span class="keyword">from</span> flask_admin.contrib.fileadmin <span class="keyword">import</span> FileAdmin</span><br><span class="line"><span class="keyword">import</span> os.path <span class="keyword">as</span> op</span><br><span class="line">file_path = op.join(op.dirname(__file__), <span class="string">'static'</span>)</span><br><span class="line">admin.add_view(FileAdmin(file_path, <span class="string">'/temp/'</span>, name=<span class="string">'文件'</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app.run(host=<span class="string">'0.0.0.0'</span>,port=<span class="number">8088</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="model"><a href="#model" class="headerlink" title="model"></a>model</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding:utf-8</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"><span class="keyword">from</span> flask_script <span class="keyword">import</span> Manager</span><br><span class="line"><span class="keyword">from</span> flask_migrate <span class="keyword">import</span> Migrate, MigrateCommand</span><br><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> Config</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = Config.MYSQLURI</span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_ECHO'</span>] = <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line">migrate = Migrate(app, db)</span><br><span class="line"></span><br><span class="line">manager = Manager(app)</span><br><span class="line">manager.add_command(<span class="string">'db'</span>, MigrateCommand)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建导航表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SysMenu</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    name = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    alias_name = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    link = db.Column(db.String(<span class="number">1024</span>))</span><br><span class="line">    status = db.Column(db.INTEGER, default=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主机分组表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CataHost</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="literal">True</span>)</span><br><span class="line">    cataname = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    aliasname = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    pid = db.Column(db.INTEGER,default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.cataname</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建主机表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SysHost</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    hostname = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    innerip = db.Column(db.String(<span class="number">18</span>))</span><br><span class="line">    loadavg = db.Column(db.FLOAT)</span><br><span class="line">    memuse = db.Column(db.FLOAT)</span><br><span class="line">    ethnet0 = db.Column(db.INTEGER)</span><br><span class="line">    ethnet1 = db.Column(db.INTEGER)</span><br><span class="line">    tcptotal = db.Column(db.INTEGER)</span><br><span class="line">    outerip = db.Column(db.String(<span class="number">18</span>))</span><br><span class="line">    memtotal = db.Column(db.INTEGER)</span><br><span class="line">    cpucore = db.Column(db.INTEGER)</span><br><span class="line">    uptime = db.Column(db.DateTime)</span><br><span class="line">    status = db.Column(db.INTEGER, default=<span class="number">1</span>)</span><br><span class="line">    cataid = db.Column(db.INTEGER,db.ForeignKey(<span class="string">'cata_host.id'</span>))</span><br><span class="line">    cata = db.relationship(<span class="string">"CataHost"</span>, backref=db.backref(<span class="string">'hostname'</span>,lazy=<span class="string">'dynamic'</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    __table_args__ = (</span><br><span class="line">        db.UniqueConstraint(<span class="string">'hostname'</span>, <span class="string">'innerip'</span>, name=<span class="string">'hostname_innerip'</span>),</span><br><span class="line">        db.Index(<span class="string">'hostname_innerip'</span>, <span class="string">'hostname'</span>, <span class="string">'innerip'</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.hostname</span><br><span class="line"></span><br><span class="line"><span class="comment"># 服务表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SysSer</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer,primary_key=<span class="literal">True</span>)</span><br><span class="line">    otasite = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    cid = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    outurl = db.Column(db.String(<span class="number">200</span>))</span><br><span class="line">    businesstype = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    ipcc = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    sername = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    hostname = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    innerip = db.Column(db.String(<span class="number">18</span>))</span><br><span class="line">    appname = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    port = db.Column(db.INTEGER)</span><br><span class="line">    remark = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line">    __table_args__ = (</span><br><span class="line">        db.UniqueConstraint(<span class="string">'sername'</span>, <span class="string">'innerip'</span>, name=<span class="string">'sername_innerip'</span>),</span><br><span class="line">        db.Index(<span class="string">'sername_innerip'</span>, <span class="string">'sername'</span>, <span class="string">'innerip'</span>),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.sername</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统日志</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Syslog</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    id = db.Column(db.Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    cur_date = db.Column(db.DateTime)</span><br><span class="line">    user = db.Column(db.String(<span class="number">100</span>) )</span><br><span class="line">    utype = db.Column(db.String(<span class="number">100</span>))</span><br><span class="line">    event = db.Column(db.TEXT )</span><br><span class="line"></span><br><span class="line"><span class="comment"># migrate_tab</span></span><br><span class="line"><span class="comment"># class AlembicVersion(db.Model):</span></span><br><span class="line"><span class="comment">#     pass</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@manager.command</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_db</span><span class="params">()</span>:</span></span><br><span class="line">    db.drop_all()</span><br><span class="line">    db.create_all()</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@manager.command</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">deltab</span> <span class="params">(tabname)</span>:</span></span><br><span class="line">    db.session.delete(tabname)</span><br><span class="line">    db.session.commit()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    manager.run()</span><br><span class="line"></span><br><span class="line"><span class="comment"># $ python manage.py db init</span></span><br><span class="line"><span class="comment"># $ python manage.py db migrate</span></span><br><span class="line"><span class="comment"># $ python manage.py db upgrade 第一次会创建表</span></span><br><span class="line"><span class="comment"># $ python manage.py db --help</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/golang%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/golang%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">golang微服务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-29 22:01:44 / 修改时间：22:47:59" itemprop="dateCreated datePublished" datetime="2020-05-29T22:01:44+08:00">2020-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="golang-微服务"><a href="#golang-微服务" class="headerlink" title="golang 微服务"></a>golang 微服务</h2><ul>
+<li>go-micro</li>
+<li>Protobuf</li>
+<li>Etcd</li>
+</ul>
+<p>Install go-micro<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=<span class="string">"/Users/alert/go"</span></span><br><span class="line"><span class="built_in">export</span> GOROOT=<span class="string">"/usr/local/go"</span></span><br><span class="line"><span class="built_in">export</span> GOPROXY=https://goproxy.io</span><br><span class="line"><span class="comment"># enable go modules</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GO111MODULE=on</span><br><span class="line"><span class="comment"># initialise go modules in your app</span></span><br><span class="line">go mod init</span><br><span class="line"><span class="comment"># now go get</span></span><br><span class="line"></span><br><span class="line">go get github.com/micro/protoc-gen-micro/v2</span><br></pre></td></tr></table></figure></p>
+<h1 id="INSTALL-Protobuf"><a href="#INSTALL-Protobuf" class="headerlink" title="INSTALL Protobuf"></a>INSTALL Protobuf</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-osx-x86_64.zip</span><br><span class="line"><span class="built_in">cd</span> protoc-3.6.1-osx-x86_64</span><br><span class="line">cp -r include/ /usr/<span class="built_in">local</span>/include/</span><br><span class="line">cp -r bin/ /usr/<span class="built_in">local</span>/bin/</span><br><span class="line">protoc</span><br><span class="line"></span><br><span class="line">go get -u github.com/golang/protobuf/protoc-gen-go</span><br><span class="line">protoc --proto_path=<span class="variable">$GOPATH</span>/src:. --micro_out=. --go_out=. greeter.proto</span><br></pre></td></tr></table></figure>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├──<span class="built_in"> client </span> # 客户端</span><br><span class="line">│   ├── client</span><br><span class="line">│   └── client.go</span><br><span class="line">├── go.mod</span><br><span class="line">├── go.sum</span><br><span class="line">├──<span class="built_in"> server </span> # 服务端</span><br><span class="line">│   ├── server</span><br><span class="line">│   └── server.go</span><br><span class="line">└──<span class="built_in"> service </span># 协议</span><br><span class="line">    ├── greeter.pb.go</span><br><span class="line">    ├── greeter.pb.micro.go</span><br><span class="line">    └── greeter.proto</span><br></pre></td></tr></table></figure>
+<h3 id="生成协议-Proto"><a href="#生成协议-Proto" class="headerlink" title="生成协议 Proto"></a>生成协议 Proto</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --proto_path=<span class="variable">$GOPATH</span>/src:. --micro_out=. --go_out=. path/to/greeter.proto</span><br></pre></td></tr></table></figure>
+<h3 id="创建服务端"><a href="#创建服务端" class="headerlink" title="创建服务端"></a>创建服务端</h3><blockquote>
+<p>server -&gt; server.go<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">	micro <span class="string">"github.com/micro/go-micro/v2"</span></span><br><span class="line">	proto <span class="string">"mygomicro/service"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Greeter <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *Greeter)</span> <span class="title">Hello</span><span class="params">(ctx context.Context, req *proto.Request, rsp *proto.Response)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	rsp.Greeting = <span class="string">"Hello "</span> + req.Name</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Create a new service. Optionally include some options here.</span></span><br><span class="line">	service := micro.NewService(</span><br><span class="line">		micro.Name(<span class="string">"greeter"</span>),</span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Init will parse the command line flags.</span></span><br><span class="line">	service.Init()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Register handler</span></span><br><span class="line">	proto.RegisterGreeterHandler(service.Server(), <span class="built_in">new</span>(Greeter))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Run the server</span></span><br><span class="line">	<span class="keyword">if</span> err := service.Run(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="创建客户端"><a href="#创建客户端" class="headerlink" title="创建客户端"></a>创建客户端</h3><blockquote>
+<p>client -&gt; client.go<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">	micro <span class="string">"github.com/micro/go-micro/v2"</span></span><br><span class="line">	proto <span class="string">"mygomicro/service"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Create a new service</span></span><br><span class="line">	service := micro.NewService(micro.Name(<span class="string">"greeter.client"</span>))</span><br><span class="line">	<span class="comment">// Initialise the client and parse command line flags</span></span><br><span class="line">	service.Init()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create new greeter client</span></span><br><span class="line">	greeter := proto.NewGreeterService(<span class="string">"greeter"</span>, service.Client())</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Call the greeter</span></span><br><span class="line">	rsp, err := greeter.Hello(context.TODO(), &amp;proto.Request&#123;Name: <span class="string">"John"</span>&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Print response</span></span><br><span class="line">	fmt.Println(rsp.Greeting)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="Run-Service"><a href="#Run-Service" class="headerlink" title="Run Service"></a>Run Service</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行服务端</span></span><br><span class="line">go run server.go</span><br><span class="line"><span class="comment"># 运行客户端</span></span><br><span class="line">go run client.go</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E4%B8%BAblog%E5%8A%A0%E9%80%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -596,7 +776,7 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-29 16:26:57 / 修改时间：19:34:53" itemprop="dateCreated datePublished" datetime="2020-05-29T16:26:57+08:00">2020-05-29</time>
+              <time title="创建时间：2020-05-29 16:26:57 / 修改时间：19:50:25" itemprop="dateCreated datePublished" datetime="2020-05-29T16:26:57+08:00">2020-05-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -650,6 +830,8 @@ var _hmt = _hmt || [];
 <h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">npm</span> <span class="string">install hexo-generator-sitemap</span></span><br><span class="line"><span class="attr">npm</span> <span class="string">install hexo-generator-baidu-sitemap --save</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">_config.yml</span></span><br><span class="line">  <span class="attr">sitemap</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">path</span>: <span class="string">sitemap.xml</span></span><br></pre></td></tr></table></figure>
 <h2 id="在线生成站点地图"><a href="#在线生成站点地图" class="headerlink" title="在线生成站点地图"></a>在线生成站点地图</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http<span class="variable">s:</span>//<span class="keyword">help</span>.bj.<span class="keyword">cn</span>/</span><br><span class="line"></span><br><span class="line">把生成的文件下载到 themes/<span class="keyword">next</span>/<span class="keyword">source</span>/</span><br></pre></td></tr></table></figure>
 <h2 id="主动推送"><a href="#主动推送" class="headerlink" title="主动推送"></a>主动推送</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">npm</span> <span class="string">install hexo-baidu-url-submit --save</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">_config.yml</span></span><br><span class="line"><span class="attr">baidu_url_submit</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">count</span>: <span class="string">100</span></span><br><span class="line">  <span class="attr">host</span>: <span class="string">blog.yanqi.cf</span></span><br><span class="line">  <span class="attr">token</span>: <span class="string">8OGYxxxxxx</span></span><br><span class="line">  <span class="attr">path</span>: <span class="string">baidu_urls.txt #文档的地址， 新链接会保存在此文本文档里</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy</span>:<span class="string"></span></span><br><span class="line"> <span class="meta">-</span> <span class="string">type:baidu_url_submitter</span></span><br></pre></td></tr></table></figure>
+<h2 id="在线提交"><a href="#在线提交" class="headerlink" title="在线提交"></a>在线提交</h2><p><a href="http://www.sousuoyinqingtijiao.com/" target="_blank" rel="noopener">搜索引擎在线提交</a></p>
+
       
     </div>
 
@@ -982,159 +1164,6 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/CMDB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/CMDB/" class="post-title-link" itemprop="url">CMDB</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-28 13:32:45" itemprop="dateCreated datePublished" datetime="2020-05-28T13:32:45+08:00">2020-05-28</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Cobbler/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/Cobbler/" class="post-title-link" itemprop="url">Cobbler</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-28 13:26:09 / 修改时间：13:36:56" itemprop="dateCreated datePublished" datetime="2020-05-28T13:26:09+08:00">2020-05-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>7</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="所需服务"><a href="#所需服务" class="headerlink" title="所需服务"></a>所需服务</h2><p>  PXE</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1204,20 +1233,20 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">41</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1254,13 +1283,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">234k</span>
+    <span title="站点总字数">243k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:32</span>
+    <span title="站点阅读时长">3:41</span>
 </div>
 
         
