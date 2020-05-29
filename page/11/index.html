@@ -199,6 +199,422 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E5%85%A8%E6%96%87%E7%B4%A2%E5%BC%95%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">全文索引原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-13 19:08:07 / 修改时间：19:11:16" itemprop="dateCreated datePublished" datetime="2020-05-13T19:08:07+08:00">2020-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>592</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://www.elastic.co/guide/cn/elasticsearch/guide/current/index.html" target="_blank" rel="noopener">Elasticsearch: 权威指南</a></p>
+<h3 id="概念-Concepts"><a href="#概念-Concepts" class="headerlink" title="概念 Concepts"></a>概念 Concepts</h3><ul>
+<li>全文搜索<ul>
+<li>倒排索引<ul>
+<li>分词</li>
+<li>建立索引</li>
+</ul>
+</li>
+<li>相关性评分<ul>
+<li>布尔模型</li>
+<li>评分函数<ul>
+<li>单词评分<ul>
+<li>词频</li>
+<li>逆向词频</li>
+<li>字段长度归一值</li>
+</ul>
+</li>
+<li>多词评分<ul>
+<li>向量空间模型<ul>
+<li>维数</li>
+<li>TF/IDF算法</li>
+<li>余弦近似度</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="倒排索引"><a href="#倒排索引" class="headerlink" title="倒排索引"></a>倒排索引</h3><blockquote>
+<p>一个倒排索引由文档中所有不重复词的列表构成。</p>
+<p>中文的词是词语（我们）中文词语间没有空格需要先分词。<br>英文的词是单词(example)</p>
+</blockquote>
+<p>在倒排索引中，词叫做 tokens。每个文档都被拆分成由不同词组成。</p>
+<h3 id="相关性评分"><a href="#相关性评分" class="headerlink" title="相关性评分"></a>相关性评分</h3><p>布尔模型用来找出匹配的文档。</p>
+<p>评分函数用来对文档相关性排序。</p>
+<ul>
+<li>词频 tf</li>
+</ul>
+<p>词在文档中出现的频度是多少？频度越高，权重 越高 。</p>
+<blockquote>
+<p>tf(t in d) = √frequency</p>
+<p>词 t 在文档 d 的词频（ tf ）是该词在文档中出现次数的平方根。</p>
+</blockquote>
+<ul>
+<li>逆向文档频率</li>
+</ul>
+<p>词在集合所有文档里出现的频率是多少？频次越高，权重 越低 。</p>
+<blockquote>
+<p>idf(t) = 1 + log ( numDocs / (docFreq + 1))</p>
+<p>词 t 的逆向文档频率（ idf ）是：索引中文档数量除以所有包含该词的文档数，然后求其对数。</p>
+</blockquote>
+<ul>
+<li>字段的长度归一值</li>
+</ul>
+<p>字段的长度是多少？字段越短，字段的权重 越高 。</p>
+<blockquote>
+<p>norm(d) = 1 / √numTerms</p>
+<p>字段长度归一值（ norm ）是字段中词数平方根的倒数。</p>
+<p>以下三个因素是在索引时计算并存储的。</p>
+</blockquote>
+<ul>
+<li>向量空间模型</li>
+</ul>
+<p>进行多查询时，根据每个词的权重组成一个向量。然后和文档的向量比较。角度越相似，评分越高。</p>
+<p><a href="https://www.ruanyifeng.com/blog/2013/03/cosine_similarity.html" target="_blank" rel="noopener">余弦近似度</a></p>
+<h3 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h3><p><a href="https://blog.csdn.net/Kevin_cc98/article/details/73742037" target="_blank" rel="noopener">欧式距离、标准化欧式距离、马氏距离、余弦距离</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Ansible%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/Ansible%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Ansible使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-13 18:58:53 / 修改时间：19:00:18" itemprop="dateCreated datePublished" datetime="2020-05-13T18:58:53+08:00">2020-05-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">运维自动化</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p><a href="https://docs.ansible.com/" target="_blank" rel="noopener"> Ansible </a></p>
+<p><a href="http://www.ansible.com.cn/" target="_blank" rel="noopener"> Ansible 中文  </a></p>
+<p><a href="https://github.com/ansible/ansible.git" target="_blank" rel="noopener"> Ansible 源码</a></p>
+</blockquote>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install ansible</span><br><span class="line"></span><br><span class="line"><span class="comment"># git 源码</span></span><br><span class="line">git clone https:<span class="string">//github.com/ansible/ansible.git</span></span><br><span class="line"><span class="keyword">cd</span> <span class="string">./ansible</span></span><br><span class="line">make rpm</span><br><span class="line">sudo rpm -Uvh <span class="string">./rpm-build/ansible-</span>*<span class="string">.noarch.rpm</span></span><br></pre></td></tr></table></figure>
+<h2 id="主配置文件-INI-格式"><a href="#主配置文件-INI-格式" class="headerlink" title="主配置文件 INI 格式"></a>主配置文件 INI 格式</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 、; 为注释</span></span><br><span class="line">key = <span class="built_in">value</span> 格式</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面指定的这几种方式顺序访问，配置遵循先到先得，后面的全部忽略。</span></span><br><span class="line">ANSIBLE_CONFIG (environment <span class="built_in">variable</span> <span class="keyword">if</span> <span class="built_in">set</span>)</span><br><span class="line">ansible.cfg (<span class="keyword">in</span> <span class="keyword">the</span> current <span class="built_in">directory</span>)</span><br><span class="line">~/.ansible.cfg (<span class="keyword">in</span> <span class="keyword">the</span> home <span class="built_in">directory</span>)</span><br><span class="line">/etc/ansible/ansible.cfg</span><br></pre></td></tr></table></figure>
+<p><a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings" target="_blank" rel="noopener"> ansible 配置变量查询</a></p>
+<h2 id="相关概念-Concepts"><a href="#相关概念-Concepts" class="headerlink" title="相关概念 Concepts"></a>相关概念 Concepts</h2><ul>
+<li>控制节点 control node</li>
+<li>被管节点 managed nodes</li>
+<li>主机列表 Inventory</li>
+<li>模块 modules</li>
+<li>任务 tasks</li>
+<li><p>剧本 Playbooks</p>
+</li>
+<li><p>工作流程 workflow</p>
+<ul>
+<li>选择主机 selecting hosts</li>
+<li>连接远程节点 connecting to remote nodes</li>
+<li>执行模块 executing modules</li>
+<li>下一步 next steps</li>
+</ul>
+</li>
+</ul>
+<p>使用方法<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/etc/ansible/hosts  # 默认的 inventory (-i 指定 inventory)</span><br><span class="line">ansible all -m<span class="built_in"> ping </span># 尝试连通</span><br><span class="line">ansible all -a <span class="string">"/bin/echo hello"</span> # 执行 command </span><br><span class="line">ansible all -m<span class="built_in"> ping </span>-u bruce # 使用 bruce 用户 </span><br><span class="line">ansible all -m<span class="built_in"> ping </span>-u bruce --become # sudo</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">## 主机列表 Inventory</span></span><br><span class="line">* Inventory</span><br><span class="line">    * 主机与组</span><br><span class="line">    * 主机变量</span><br><span class="line">    * 组的变量</span><br><span class="line">    * 子组</span><br><span class="line"></span><br><span class="line">* INI 格式</span><br></pre></td></tr></table></figure><br>192.168.0.2<br>www.example.com<br>[group1]<br>192.168.0.5<br>192.168.0.6<br><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>YAML 格式</span><br></pre></td></tr></table></figure><br>all:<br>    hosts:<br>        192.168.0.2:<br>    children:<br>        group1:<br>            hosts:<br>              192.168.0.5:<br>              192.168.0.6:<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 默认的组是<span class="keyword">all</span></span><br><span class="line"></span><br><span class="line">添加一堆主机（模式匹配）</span><br></pre></td></tr></table></figure><br>[group1]<br>www[01:50].blyanqi.com<br>[databases]<br>db-[a:f].example.com<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在 Inventory 使用变量</span><br><span class="line"></span><br><span class="line"><span class="bullet">* </span>主机变量</span><br><span class="line"><span class="bullet">    * </span>ansible_connection=ssh</span><br><span class="line"><span class="bullet">    * </span>ansible_user=ansible</span><br><span class="line"><span class="bullet">* </span>连接变量</span><br><span class="line"><span class="bullet">    * </span>ansible_port</span><br><span class="line"><span class="bullet">    * </span>ansible_host</span><br><span class="line"><span class="bullet">* </span>别名</span><br></pre></td></tr></table></figure></p>
+<h1 id="主机变量"><a href="#主机变量" class="headerlink" title="主机变量"></a>主机变量</h1><p>[group1]<br>host1 http_port=80 maxRequestPerChild=808<br>host1 http_port=303 maxRequestPerChild=909</p>
+<h1 id="连接变量"><a href="#连接变量" class="headerlink" title="连接变量"></a>连接变量</h1><p>[group2]<br>other1.example.com ansible_connection=ssh ansible_user=myuser</p>
+<h1 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h1><p>jumper ansible_port=5555 ansible_host=192.168.0.50</p>
+<h1 id="共享变量"><a href="#共享变量" class="headerlink" title="共享变量"></a>共享变量</h1><p>[webserver]<br>host1<br>host2<br>[webserver:vars] # 此处是共享的变量<br>ntp_server=ntp.blyanqi.com</p>
+<h1 id="多组"><a href="#多组" class="headerlink" title="多组"></a>多组</h1><p>[web1]<br>host1<br>host2<br>[web2]<br>host3<br>host4</p>
+<p>[web:children] # 包含多个组<br>web1<br>web2</p>
+<p>[web:vars] # 组共享变量<br>halon_system_timeout=30</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">合并多个变量</span><br><span class="line"></span><br><span class="line">&gt; all<span class="built_in"> group </span>-&gt; parent<span class="built_in"> group </span>-&gt;child<span class="built_in"> group </span>-&gt;host</span><br></pre></td></tr></table></figure>
+<h1 id="默认合并按照字母表顺序，"><a href="#默认合并按照字母表顺序，" class="headerlink" title="默认合并按照字母表顺序，"></a>默认合并按照字母表顺序，</h1><h1 id="或者-最近节点优先原则覆盖之前的"><a href="#或者-最近节点优先原则覆盖之前的" class="headerlink" title="或者 最近节点优先原则覆盖之前的"></a>或者 最近节点优先原则覆盖之前的</h1><p>for example： # b_group 覆盖 a_group<br>a_group:<br>    testvar: a<br>    ansible_group_priority: 10<br>b_group:<br>    testvar: b<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">指定多个 Inventory 源</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用-i-选项"><a href="#使用-i-选项" class="headerlink" title="使用 -i 选项"></a>使用 -i 选项</h1><p>ansible-playbook get_logs.yml -i staging -i production</p>
+<h1 id="指定目录-动态的-Inventory"><a href="#指定目录-动态的-Inventory" class="headerlink" title="指定目录 动态的 Inventory"></a>指定目录 动态的 Inventory</h1><p>inventory/<br>  openstack.yml          # configure inventory plugin to get hosts from Openstack cloud<br>  dynamic-inventory.py   # add additional hosts with dynamic inventory script<br>  static-inventory       # add static hosts and groups<br>  group_vars/<br>    all.yml              # assign variables to all hosts</p>
+<p>ansible-playbook example.yml -i inventory<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### [ansible Inventory 变量](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#connecting-to-hosts-behavioral-inventory-parameters)</span></span><br><span class="line"></span><br><span class="line">*<span class="built_in"> connection </span>变量</span><br><span class="line">* ssh<span class="built_in"> connection </span>变量</span><br><span class="line">* 远程主机环境参数</span><br><span class="line">* 非 ssh 连接类型</span><br><span class="line"></span><br><span class="line"><span class="comment">### [ansible Inventory 插件](https://docs.ansible.com/ansible/latest/plugins/inventory.html#inventory-plugins)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### [ 动态的 Inventory ](https://docs.ansible.com/ansible/latest/user_guide/intro_dynamic_inventory.html#intro-dynamic-inventory)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">### ad-hoc Command</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="pattern-匹配主机"><a href="#pattern-匹配主机" class="headerlink" title="pattern 匹配主机"></a>pattern 匹配主机</h1><p>$ ansible [pattern] -m [module] -a “[module options]”<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"><span class="comment"># 对 atlanta 主机组 进行reboot</span></span><br><span class="line"><span class="comment"># -f 10 并发10个 process</span></span><br><span class="line"><span class="comment"># -u 使用的用户</span></span><br><span class="line"><span class="comment"># --become sudo 方式执行</span></span><br><span class="line"><span class="comment"># --ask-become-pass 提示方式执行</span></span><br><span class="line">ansible atlanta -a <span class="string">"/sbin/reboot"</span> -f 10 -u username --become [--ask-become-pass]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 shell 模块</span></span><br><span class="line">ansible raleigh -m shell -a <span class="string">'echo $TERM'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 copy 模块</span></span><br><span class="line"><span class="comment"># src 是源文件</span></span><br><span class="line"><span class="comment"># dest 目的文件</span></span><br><span class="line">ansible atlanta -m copy -a <span class="string">"src=/etc/hosts dest=/tmp/hosts"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># file 模块 设置权限，所有者，属组</span></span><br><span class="line">ansible webservers -m file -a <span class="string">"dest=/srv/foo/b.txt mode=600 owner=mdehaan group=mdehaan"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line">ansible webservers -m file -a <span class="string">"dest=/path/to/c mode=755 owner=mdehaan group=mdehaan state=directory"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除目录或文件</span></span><br><span class="line">ansible webservers -m file -a <span class="string">"dest=/path/to/c state=absent"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 包管理 使用 yum 模块</span></span><br><span class="line"><span class="comment"># name 是包名</span></span><br><span class="line"><span class="comment"># state 是状态：present，latest，absent</span></span><br><span class="line">ansible webservers -m yum -a <span class="string">"name=acme state=present"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理用户和组 user 模块</span></span><br><span class="line">ansible all -m<span class="built_in"> user </span>-a <span class="string">"name=foo password=&lt;crypted password here&gt;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 管理服务 service 模块</span></span><br><span class="line"><span class="comment"># state：started，restarted，stopped 启动，重启，停止</span></span><br><span class="line">ansible webservers -m<span class="built_in"> service </span>-a <span class="string">"name=httpd state=started"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看系统信息</span></span><br><span class="line">ansible all -m setup</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>Playbook</p>
+<ul>
+<li>主机 hosts:<ul>
+<li>变量 vars:</li>
+<li>排序 order: inventory | reverse_inventory |sorted |reverse_sorted |shuffle</li>
+<li>用户 remote_user:</li>
+<li>任务组 tasks:<ul>
+<li>名称 name:</li>
+<li>模块 module:<ul>
+<li>name:</li>
+<li>state:</li>
+</ul>
+</li>
+<li>when:</li>
+<li>become: yes</li>
+<li>become_method: sudo</li>
+</ul>
+</li>
+<li>操作 handlers:</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>变量</p>
+</li>
+<li>模板</li>
+<li>条件</li>
+<li>循环</li>
+<li>块</li>
+<li>高级用法</li>
+<li>plays<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span></span><br><span class="line">  <span class="attr">order:</span> <span class="string">sorted</span></span><br><span class="line">  <span class="attr">gather_facts:</span> <span class="literal">False</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">debug:</span></span><br><span class="line">        <span class="attr">var:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">enable</span> <span class="string">selinux</span></span><br><span class="line">        <span class="attr">command:</span> <span class="string">/sbin/setenforce</span> <span class="number">1</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">run</span> <span class="string">this</span> <span class="string">command</span> <span class="string">and</span> <span class="string">ignore</span> <span class="string">the</span> <span class="string">result</span></span><br><span class="line">        <span class="attr">shell:</span> <span class="string">/usr/bin/somecommand</span> <span class="string">||</span> <span class="string">/bin/true</span></span><br><span class="line">        <span class="attr">ignore_errors:</span> <span class="literal">True</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">create</span> <span class="string">a</span> <span class="string">virtual</span> <span class="string">host</span> <span class="string">file</span> <span class="string">for</span> <span class="string">&#123;&#123;</span> <span class="string">vhost</span> <span class="string">&#125;&#125;</span></span><br><span class="line">        <span class="attr">template:</span></span><br><span class="line">          <span class="attr">src:</span> <span class="string">somefile.j2</span></span><br><span class="line">          <span class="attr">dest:</span> <span class="string">/etc/httpd/conf.d/&#123;&#123;</span> <span class="string">vhost</span> <span class="string">&#125;&#125;</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">template</span> <span class="string">configuration</span> <span class="string">file</span></span><br><span class="line">      <span class="attr">template:</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">template.j2</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/etc/foo.conf</span></span><br><span class="line">      <span class="attr">notify:</span></span><br><span class="line">         <span class="bullet">-</span> <span class="string">restart</span> <span class="string">memcached</span></span><br><span class="line">         <span class="bullet">-</span> <span class="string">restart</span> <span class="string">apache</span></span><br><span class="line">  <span class="attr">handlers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">memcached</span></span><br><span class="line">        <span class="attr">service:</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">memcached</span></span><br><span class="line">          <span class="attr">state:</span> <span class="string">restarted</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">restart</span> <span class="string">apache</span></span><br><span class="line">        <span class="attr">service:</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">apache</span></span><br><span class="line">          <span class="attr">state:</span> <span class="string">restarted</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>检查 Playbooks<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ansible-lint</span> <span class="selector-tag">verify-apache</span><span class="selector-class">.yml</span></span><br><span class="line"><span class="selector-tag">ansible-playbook</span> <span class="selector-tag">playbook</span><span class="selector-class">.yml</span> <span class="selector-tag">--list-hosts</span></span><br></pre></td></tr></table></figure></p>
+<p>执行 Playbooks<br><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible-playbook playbook.yml -f <span class="number">10</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Conventional Module<ul>
+<li>Commands<ul>
+<li>shell</li>
+<li>command</li>
+<li>script</li>
+</ul>
+</li>
+<li>Files<ul>
+<li>copy</li>
+<li>file</li>
+<li>find</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/ArchitectureDesign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/ArchitectureDesign/" class="post-title-link" itemprop="url">ArchitectureDesign</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-13 18:45:30" itemprop="dateCreated datePublished" datetime="2020-05-13T18:45:30+08:00">2020-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-22 22:00:56" itemprop="dateModified" datetime="2020-05-22T22:00:56+08:00">2020-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>867</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="web-业务架构演变"><a href="#web-业务架构演变" class="headerlink" title="web 业务架构演变"></a>web 业务架构演变</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">webserver</span> <span class="string">-&gt;</span> <span class="string">db</span></span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB</span> <span class="string">-&gt;</span> <span class="string">webserver</span> <span class="string">-&gt;</span> <span class="string">redis</span> <span class="string">-&gt;</span> <span class="string">db</span></span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB</span> <span class="string">-&gt;</span> <span class="string">webserver</span> <span class="string">-&gt;</span> <span class="string">app(type1)</span> <span class="string">-&gt;</span> <span class="string">redis</span> <span class="string">-&gt;</span> <span class="string">db</span></span><br><span class="line">                          <span class="string">-&gt;</span> <span class="string">app(type2)</span> </span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">webserver(pool)</span> <span class="string">-&gt;</span> <span class="string">app(pool)</span> <span class="string">-&gt;</span> <span class="string">redis(pool)</span> <span class="string">-&gt;</span> <span class="string">db(read,write)</span></span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">webserver(pool)</span> <span class="string">-&gt;</span> <span class="string">app(pool)</span> <span class="string">-&gt;</span> <span class="string">redis(pool)</span> <span class="string">-&gt;</span> <span class="string">db(read,write)</span></span><br><span class="line">                                                                  <span class="string">-&gt;</span> <span class="string">mongodb</span> <span class="string">(read,write)</span></span><br></pre></td></tr></table></figure>
+<h2 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">API</span> <span class="string">网关</span> <span class="string">-&gt;</span> <span class="string">服务注册/发现</span></span><br><span class="line">                              <span class="string">-&gt;</span> <span class="string">配置中心</span></span><br><span class="line">                              <span class="string">-&gt;</span> <span class="string">业务服务</span></span><br></pre></td></tr></table></figure>
+<h2 id="容器化-web-业务架构"><a href="#容器化-web-业务架构" class="headerlink" title="容器化 web 业务架构"></a>容器化 web 业务架构</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">Ingress</span> <span class="string">pod</span> <span class="string">-&gt;</span> <span class="string">service</span> <span class="string">-&gt;</span> <span class="string">app</span> <span class="string">pod(label)</span> <span class="string">-&gt;</span> <span class="string">db</span> <span class="string">pod</span></span><br><span class="line">                                             <span class="string">-&gt;</span> <span class="string">sidecar</span> <span class="string">pod(proxy)</span></span><br><span class="line"><span class="string">--------------------------------</span> <span class="string">storage</span> <span class="string">-------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="attr">App pod:</span></span><br><span class="line">    <span class="string">nginx</span> <span class="string">container</span></span><br><span class="line">    <span class="string">tomcat</span> <span class="string">container</span></span><br><span class="line">        <span class="string">springboot</span></span><br><span class="line">    <span class="string">sidecar</span> <span class="string">container</span></span><br><span class="line">    <span class="string">redis</span> <span class="string">container</span></span><br><span class="line">    <span class="string">db</span> <span class="string">container</span></span><br></pre></td></tr></table></figure>
+<h2 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">githup</span> <span class="string">-&gt;</span> <span class="string">hook</span> <span class="string">-&gt;</span> <span class="string">jenkins</span> <span class="string">-&gt;</span> <span class="string">开发环境</span></span><br><span class="line"><span class="string">gitlab</span>                    <span class="string">-&gt;</span> <span class="string">测试环境</span></span><br><span class="line"><span class="string">svn</span>                       <span class="string">-&gt;</span> <span class="string">生产环境</span> <span class="string">-&gt;</span> <span class="string">ansible</span></span><br><span class="line">                                     <span class="string">-&gt;</span> <span class="string">saltstack</span></span><br></pre></td></tr></table></figure>
+<h2 id="EX-F-L-K日志分析"><a href="#EX-F-L-K日志分析" class="headerlink" title="EX(F,L)K日志分析"></a>EX(F,L)K日志分析</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">metric</span> <span class="string">-&gt;</span> <span class="string">kafka</span> <span class="string">-&gt;</span> <span class="string">Elasticsearch</span> <span class="string">-&gt;</span> <span class="string">kibana</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/flutter%E8%B7%A8%E7%BB%88%E7%AB%AF%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -866,14 +1282,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">107</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -916,13 +1332,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">243k</span>
+    <span title="站点总字数">254k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:41</span>
+    <span title="站点阅读时长">3:51</span>
 </div>
 
         

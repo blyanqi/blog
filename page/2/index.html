@@ -199,6 +199,234 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/docker-compose/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/docker-compose/" class="post-title-link" itemprop="url">docker-compose</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-28 14:06:27 / 修改时间：23:18:26" itemprop="dateCreated datePublished" datetime="2020-05-28T14:06:27+08:00">2020-05-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>442</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://docs.docker.com/compose/install/" target="_blank" rel="noopener">compose docs</a><br><a href="https://docs.docker.com/compose/compose-file/" target="_blank" rel="noopener">compose file 参考</a></p>
+<h3 id="yaml-配置文件"><a href="#yaml-配置文件" class="headerlink" title="yaml 配置文件"></a>yaml 配置文件</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3.8"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">db</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">redis</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">redis</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mariadb</span></span><br></pre></td></tr></table></figure>
+<h4 id="volume"><a href="#volume" class="headerlink" title="volume"></a>volume</h4><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">version:</span> <span class="string">"3.8"</span></span><br><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  web:</span></span><br><span class="line"><span class="symbol">    build:</span> .</span><br><span class="line"><span class="symbol">    depends_on:</span></span><br><span class="line">      - db</span><br><span class="line">      - redis</span><br><span class="line"><span class="symbol">  redis:</span></span><br><span class="line"><span class="symbol">    image:</span> redis</span><br><span class="line"><span class="symbol">  db:</span></span><br><span class="line"><span class="symbol">    image:</span> mariadb</span><br></pre></td></tr></table></figure>
+<p>network_mode：设置网络模式<br>network_mode: “bridge”<br>network_mode: “host”<br>network_mode: “none”<br>network_mode: “service:[service name]”<br>network_mode: “container:[container name/id]”</p>
+<p>links<br>服务之间可以使用服务名称相互访问，links 允许定义一个别名，从而使用该别名访问其它服务</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86/" class="post-title-link" itemprop="url">系统信息采集</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-28 13:34:43" itemprop="dateCreated datePublished" datetime="2020-05-28T13:34:43+08:00">2020-05-28</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95/" class="post-title-link" itemprop="url">系统登录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-28 13:33:40" itemprop="dateCreated datePublished" datetime="2020-05-28T13:33:40+08:00">2020-05-28</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/CMDB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -721,420 +949,6 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/AIops/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/AIops/" class="post-title-link" itemprop="url">AIops</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-28 09:23:22" itemprop="dateCreated datePublished" datetime="2020-05-28T09:23:22+08:00">2020-05-28</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E8%BF%90%E7%BB%B4%E5%BC%80%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E8%BF%90%E7%BB%B4%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">运维开发</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-28 09:23:07" itemprop="dateCreated datePublished" datetime="2020-05-28T09:23:07+08:00">2020-05-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-29 23:12:16" itemprop="dateModified" datetime="2020-05-29T23:12:16+08:00">2020-05-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>746</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>运维开发的本质是对由于运维复杂度提升导致资源分散的整合</p>
-<h2 id="开发演变"><a href="#开发演变" class="headerlink" title="开发演变"></a>开发演变</h2><figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">url</span>-&gt;</span>功能模块-&gt;数据库</span><br><span class="line"><span class="function"><span class="title">view</span>-&gt;</span><span class="function"><span class="title">control</span>-&gt;</span><span class="function"><span class="title">model</span>-&gt;</span>数据库</span><br><span class="line">路由-&gt;<span class="function"><span class="title">services</span>-&gt;</span>数据库</span><br><span class="line">API网关-&gt;<span class="function"><span class="title">microservices</span>-&gt;</span>数据库</span><br></pre></td></tr></table></figure>
-<h2 id="开发概念"><a href="#开发概念" class="headerlink" title="开发概念"></a>开发概念</h2><ul>
-<li>ESB Enterprise Service Bus 企业服务总线</li>
-<li>SOA Service-Oriented Architecture 面向服务的架构<ul>
-<li>web service</li>
-<li>microsevices</li>
-</ul>
-</li>
-<li>Service Mesh 服务网格<ul>
-<li>data plane 数据平面</li>
-<li>control plane 控制平面</li>
-<li>sidecar</li>
-</ul>
-</li>
-<li>企业应用架构模式</li>
-<li>UML Unified Modeling Language 统一建模语言<ul>
-<li>功能模型</li>
-<li>对象模型</li>
-<li>动态模型</li>
-</ul>
-</li>
-<li>API 网关</li>
-</ul>
-<h2 id="运维开发概念"><a href="#运维开发概念" class="headerlink" title="运维开发概念"></a>运维开发概念</h2><ul>
-<li>CMDB 运维配置数据库<ul>
-<li>主机</li>
-<li>系统</li>
-<li>网络</li>
-<li>服务</li>
-<li>平台 API(主要用于各系统间的整合)</li>
-</ul>
-</li>
-<li>多租户<ul>
-<li>企业空间（原子单位）<ul>
-<li>区域(规模大的企业还会引入区域的概念)</li>
-<li>项目</li>
-<li>角色</li>
-<li>用户</li>
-<li>管理员</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>单租户（企业）</p>
-<ul>
-<li>项目</li>
-<li>角色</li>
-<li>用户</li>
-<li>管理员</li>
-</ul>
-</li>
-<li><p>项目</p>
-<ul>
-<li>应用<ul>
-<li>应用框架</li>
-<li>插件（插件接口是一个协议）<ul>
-<li>通用插件接口<ul>
-<li>初始化</li>
-<li>反初始化</li>
-<li>启动</li>
-<li>停止</li>
-</ul>
-</li>
-<li>专用插件接口</li>
-<li>插件A</li>
-<li>插件B</li>
-</ul>
-</li>
-<li>公共函数库</li>
-</ul>
-</li>
-<li>选型</li>
-<li>源代码管理</li>
-<li>三方接口</li>
-<li>发布</li>
-<li>升级</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>接口（定义协议）</li>
-<li>类 （定义功能）<ul>
-<li>类&lt;-接口-&gt;类（实现依赖，设计模式产生）</li>
-</ul>
-</li>
-<li>方法 (定义实现)</li>
-<li>初始化方法 (对功能参数初始化)</li>
-<li><p>属性 (定义功能的参数，机器学习本质不停调整参数，使之达到收敛)</p>
-</li>
-<li><p>抽象(抽象最简单的理解：把大象装冰箱需要几步？任何东西都可以这样抽象，再解构)</p>
-</li>
-<li><p>系统</p>
-<ul>
-<li>部分A</li>
-<li>部分B …</li>
-<li>部分间相互依赖 （最复杂的依赖关系：笛卡尔集）<ul>
-<li>强依赖（多次依赖）</li>
-<li>弱依赖（一次依赖）</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构">数据结构</a>
-</li>
-<li><a href="/2020/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">设计模式</a>
-</li>
-</ul>
-<h2 id="运维开发实践"><a href="#运维开发实践" class="headerlink" title="运维开发实践"></a>运维开发实践</h2><ul>
-<li><a href="/2020/05/%E4%BD%BF%E7%94%A8flask-admin%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BA%E5%90%8E%E5%8F%B0%E6%A1%86%E6%9E%B6/" title="使用flask_admin快速构建后台框架">使用flask_admin快速构建后台框架</a></li>
-<li><a href="/2020/05/golang%E5%BE%AE%E6%9C%8D%E5%8A%A1/" title="使用golang构建微服务">使用golang构建微服务</a>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E8%BF%90%E7%BB%B4%E8%87%AA%E5%8A%A8%E5%8C%96/" class="post-title-link" itemprop="url">运维自动化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-28 08:08:12 / 修改时间：13:35:50" itemprop="dateCreated datePublished" datetime="2020-05-28T08:08:12+08:00">2020-05-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>218</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="运维自动化概念"><a href="#运维自动化概念" class="headerlink" title="运维自动化概念"></a>运维自动化概念</h2><ul>
-<li>安装自动化<ul>
-<li>PXE</li>
-<li>DHCP</li>
-<li>TFTP</li>
-<li>传输镜像</li>
-</ul>
-</li>
-<li>CMDB 配置管理数据库</li>
-<li>系统登录</li>
-<li>系统信息采集</li>
-<li>Jobs<ul>
-<li>Schdule Jobs</li>
-<li>cron Jobs</li>
-</ul>
-</li>
-<li>系统部署自动化<ul>
-<li>系统配置管理</li>
-<li>包管理</li>
-<li>系统升级</li>
-<li>包依赖关系</li>
-<li>命令执行</li>
-</ul>
-</li>
-<li>业务部署自动化<ul>
-<li>源代码</li>
-<li>构建</li>
-<li>发布<ul>
-<li>开发环境</li>
-<li>测试环境</li>
-<li>生产环境</li>
-</ul>
-</li>
-<li>发布方式<ul>
-<li>金丝雀发布(灰度发布)</li>
-<li>滚动发布</li>
-<li>AB发布</li>
-</ul>
-</li>
-<li>服务监控<ul>
-<li>服务状态</li>
-</ul>
-</li>
-<li>服务负载监控<ul>
-<li>服务路由</li>
-<li>服务熔断</li>
-<li>服务降级</li>
-</ul>
-</li>
-<li>服务扩缩容</li>
-<li>服务回滚</li>
-</ul>
-</li>
-</ul>
-<h2 id="运维自动化实践"><a href="#运维自动化实践" class="headerlink" title="运维自动化实践"></a>运维自动化实践</h2><ul>
-<li><a href="/2020/05/Cobbler/" title="Cobbler">Cobbler</a></li>
-<li><a href="/2020/05/CMDB/" title="CMDB">CMDB</a></li>
-<li><a href="/2020/05/%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95/" title="系统登录">系统登录</a></li>
-<li><a href="/2020/05/%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86/" title="系统信息采集">系统信息采集</a></li>
-<li><a href="/2020/05/DevOps/" title="DevOps">DevOps</a>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1204,14 +1018,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">107</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1254,13 +1068,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">243k</span>
+    <span title="站点总字数">254k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:41</span>
+    <span title="站点阅读时长">3:51</span>
 </div>
 
         
