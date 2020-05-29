@@ -473,7 +473,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-20 12:06:09" itemprop="dateModified" datetime="2020-05-20T12:06:09+08:00">2020-05-20</time>
+                <time title="修改时间：2020-05-29 19:25:14" itemprop="dateModified" datetime="2020-05-29T19:25:14+08:00">2020-05-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -596,7 +596,7 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-29 16:26:57 / 修改时间：18:29:47" itemprop="dateCreated datePublished" datetime="2020-05-29T16:26:57+08:00">2020-05-29</time>
+              <time title="创建时间：2020-05-29 16:26:57 / 修改时间：19:34:53" itemprop="dateCreated datePublished" datetime="2020-05-29T16:26:57+08:00">2020-05-29</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -614,7 +614,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>623</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -640,8 +640,16 @@ var _hmt = _hmt || [];
 <h2 id="添加-CNAME类型-DNS-解析"><a href="#添加-CNAME类型-DNS-解析" class="headerlink" title="添加 CNAME类型 DNS 解析"></a>添加 CNAME类型 DNS 解析</h2><p>blog CNAME blyanqi.github.io</p>
 <h2 id="修改-hexo-配置"><a href="#修改-hexo-配置" class="headerlink" title="修改 hexo 配置"></a>修改 hexo 配置</h2><p>url: <a href="http://blog.yanqi.cf/">http://blog.yanqi.cf/</a><br>root: /</p>
 <h2 id="为-blog-添加统计分析"><a href="#为-blog-添加统计分析" class="headerlink" title="为 blog 添加统计分析"></a>为 blog 添加统计分析</h2><p>使用百度统计</p>
-<p>新加网站<br><a href="https://blog.yanqi.cf/">https://blog.yanqi.cf/</a><br><a href="https://blog.yanqi.cf/index.html">https://blog.yanqi.cf/index.html</a></p>
-
+<p>添加网站-&gt; 获取代码<br>blog.yanqi.cf<br><a href="https://blog.yanqi.cf/index.html">https://blog.yanqi.cf/index.html</a></p>
+<p>获取key,把这一行？后的key 添加到主题配置文件<br>hm.src = “<a href="https://hm.baidu.com/hm.js?" target="_blank" rel="noopener">https://hm.baidu.com/hm.js?</a>“;</p>
+<p>修改主题配置文件  themes/next/_config.yml<br>baidu_analytics: ‘829697829f3xxxxxxx’</p>
+<p>修改百度分析文件<br>themes/next/layout/_third-party/analytics/baidu-analytics.njk<br>直接把代码复制到这个文件，否则直接加key。百度统计检查不出来。</p>
+<p>通过浏览器devtools查看<br>有一个hm.js，三个hm.gif文件</p>
+<h2 id="Baidu-Analytics"><a href="#Baidu-Analytics" class="headerlink" title="Baidu Analytics"></a>Baidu Analytics</h2><p>获取代码<br>查看报告 -&gt; 查看实时报告</p>
+<h2 id="更新，发布"><a href="#更新，发布" class="headerlink" title="更新，发布"></a>更新，发布</h2><p>hexo clean<br>hexo d</p>
+<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">npm</span> <span class="string">install hexo-generator-sitemap</span></span><br><span class="line"><span class="attr">npm</span> <span class="string">install hexo-generator-baidu-sitemap --save</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">_config.yml</span></span><br><span class="line">  <span class="attr">sitemap</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">path</span>: <span class="string">sitemap.xml</span></span><br></pre></td></tr></table></figure>
+<h2 id="在线生成站点地图"><a href="#在线生成站点地图" class="headerlink" title="在线生成站点地图"></a>在线生成站点地图</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http<span class="variable">s:</span>//<span class="keyword">help</span>.bj.<span class="keyword">cn</span>/</span><br><span class="line"></span><br><span class="line">把生成的文件下载到 themes/<span class="keyword">next</span>/<span class="keyword">source</span>/</span><br></pre></td></tr></table></figure>
+<h2 id="主动推送"><a href="#主动推送" class="headerlink" title="主动推送"></a>主动推送</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">npm</span> <span class="string">install hexo-baidu-url-submit --save</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">_config.yml</span></span><br><span class="line"><span class="attr">baidu_url_submit</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">count</span>: <span class="string">100</span></span><br><span class="line">  <span class="attr">host</span>: <span class="string">blog.yanqi.cf</span></span><br><span class="line">  <span class="attr">token</span>: <span class="string">8OGYxxxxxx</span></span><br><span class="line">  <span class="attr">path</span>: <span class="string">baidu_urls.txt #文档的地址， 新链接会保存在此文本文档里</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy</span>:<span class="string"></span></span><br><span class="line"> <span class="meta">-</span> <span class="string">type:baidu_url_submitter</span></span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -1246,7 +1254,7 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">233k</span>
+    <span title="站点总字数">234k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+       http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"
+>
+
+<url>
+ <loc>http://blog.yanqi.cf/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/about/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/tags/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/archives/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E8%25BF%2590%25E7%25BB%25B4/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/%25E8%25BF%2590%25E7%25BB%25B4/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E8%25BF%2590%25E7%25BB%25B4%25E7%259B%2591%25E6%258E%25A7/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E8%25BF%2590%25E7%25BB%25B4%25E8%2587%25AA%25E5%258A%25A8%25E5%258C%2596/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E8%25BF%2590%25E7%25BB%25B4%25E5%25BC%2580%25E5%258F%2591/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/DevOps/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E4%25BA%2591%25E8%25AE%25A1%25E7%25AE%2597/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E5%25A4%25A7%25E6%2595%25B0%25E6%258D%25AE/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/AIops/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/AwesomeNavigation/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/%25E5%2588%2586%25E7%25B1%25BB%25E5%25AF%25BC%25E8%2588%25AA/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://www.infoq.cn/topic/operation</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://www.178linux.com/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://linuxtools-rst.readthedocs.io/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://tech.youzan.com/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://access.redhat.com/documentation/en-us/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://edu.aliyun.com/developer</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://e.huawei.com/cn/material/MaterialList</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://www.kcsou.com/s_kubesphere/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/prakhar1989/awesome-courses</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/xingshaocheng/architect-awesome</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/awesome-selfhosted/awesome-selfhosted</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/fffaraz/awesome-cpp</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/akullpp/awesome-java</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/vinta/awesome-python</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/jobbole/awesome-python-cn</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/avelino/awesome-go</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/sindresorhus/awesome-nodejs</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/alebcay/awesome-shell</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/vuejs/awesome-vue</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://c.biancheng.net/c/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/josephmisiti/awesome-machine-learning</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/MaximAbramchuck/awesome-interview-questions</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/Hack-with-Github/Awesome-Hacking</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/kahun/awesome-sysadmin</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/veggiemonk/awesome-docker</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/jaywcjlove/awesome-mac</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/herrbischoff/awesome-macos-command-line</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/viatsko/awesome-vscode</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/fighting41love/funNLP</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/hexo%25E5%25AE%2589%25E8%25A3%2585%25E9%2585%258D%25E7%25BD%25AE/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/develop/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://nodejs.org/en/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://hexo.io/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://guides.github.com/features/pages/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://hexo-theme-next.netlify.app/docs/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/grzhan/hexo-tag-aplayer</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://github.com/NextMoe/hexo-tag-dplayer</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E4%25B8%25BAblog%25E5%258A%25A0%25E9%2580%259F/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/%25E8%25BF%2590%25E7%25BB%25B4/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/hexo%25E5%25AE%2589%25E8%25A3%2585%25E9%2585%258D%25E7%25BD%25AE/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://my.freenom.com</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://www.dnspod.cn/Products/DNS</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://help.github.com/cn/github/working-with-github-pages/about-custom-domains-and-github-pages</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://blog.yanqi.cf/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://blog.yanqi.cf/index.html</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/Dockerfile/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/%25E5%25AE%25B9%25E5%2599%25A8%25E6%258A%2580%25E6%259C%25AF/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://hub.docker.com/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://www.dockerinfo.net/docker-compose-%25e9%25a1%25b9%25e7%259b%25ae</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/docker-compose/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/%25E5%25AE%25B9%25E5%2599%25A8%25E6%258A%2580%25E6%259C%25AF/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://docs.docker.com/compose/install/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>https://docs.docker.com/compose/compose-file/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E7%25B3%25BB%25E7%25BB%259F%25E4%25BF%25A1%25E6%2581%25AF%25E9%2587%2587%25E9%259B%2586/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/%25E7%25B3%25BB%25E7%25BB%259F%25E7%2599%25BB%25E5%25BD%2595/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/CMDB/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/2020/05/Cobbler/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/%25E8%25BF%2590%25E7%25BB%25B4/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/page/2/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/page/11/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/archives/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/categories/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+<url>
+ <loc>http://blog.yanqi.cf/tags/</loc>
+ <priority>0.5</priority>
+ <lastmod>2020-5-29</lastmod>
+ <changefreq>weekly</changefreq>
+</url>
+</urlset>
