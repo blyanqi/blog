@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 4.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog.githup.io/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog.githup.io/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog.githup.io/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog.githup.io/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog.githup.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog.githup.io/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/blog.githup.io/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="KVM 维护KVM安装 修改虚拟机内存，cpu core 扩大内存，cpu个数需要重启生效123456789101112131415161718# 列出虚拟机virsh list --helpvirsh listvirsh list -all# 编辑配置文件virsh edit yfgitlab---&lt;memory unit&#x3D;&#39;KiB&#39;&gt;16777216&lt;&#x2F;memory&gt;&amp;">
@@ -95,7 +95,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog.githup.io/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">blyanqi@163.com</h1>
       <span class="logo-line-after"><i></i></span>
@@ -115,27 +115,27 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog.githup.io/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-about">
 
-    <a href="/blog.githup.io/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog.githup.io/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog.githup.io/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog.githup.io/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -196,7 +196,7 @@
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/KVM%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog.githup.io/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="yan qi">
       <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
     </span>
@@ -231,7 +231,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog.githup.io/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">虚拟化</span></a>
+                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">虚拟化</span></a>
                 </span>
             </span>
 
@@ -260,7 +260,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="KVM-维护"><a href="#KVM-维护" class="headerlink" title="KVM 维护"></a>KVM 维护</h2><a href="/blog.githup.io/2020/05/KVM%E5%AE%89%E8%A3%85/" title="KVM安装">KVM安装</a>
+        <h2 id="KVM-维护"><a href="#KVM-维护" class="headerlink" title="KVM 维护"></a>KVM 维护</h2><a href="/2020/05/KVM%E5%AE%89%E8%A3%85/" title="KVM安装">KVM安装</a>
 <h3 id="修改虚拟机内存，cpu-core"><a href="#修改虚拟机内存，cpu-core" class="headerlink" title="修改虚拟机内存，cpu core"></a>修改虚拟机内存，cpu core</h3><blockquote>
 <p>扩大内存，cpu个数需要重启生效<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span> <span class="string">--help</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">list</span> <span class="string">-all</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑配置文件</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">edit</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="string">&lt;memory</span> <span class="string">unit='KiB'&gt;16777216&lt;/memory&gt;</span></span><br><span class="line"><span class="string">&lt;currentMemory</span> <span class="string">unit='KiB'&gt;16777216&lt;/currentMemory&gt;</span></span><br><span class="line"><span class="string">&lt;vcpu</span> <span class="string">placement='static'&gt;4&lt;/vcpu&gt;</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重启虚拟机</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">reboot</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="string">or</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">shutdown</span> <span class="string">yfgitlab</span></span><br><span class="line"><span class="string">virsh</span> <span class="string">start</span> <span class="string">yfgitlab</span></span><br></pre></td></tr></table></figure></p>
 </blockquote>
@@ -270,7 +270,7 @@
 <hr>
 <h3 id="创建快照"><a href="#创建快照" class="headerlink" title="创建快照"></a>创建快照</h3><blockquote>
 <p>raw 格式盘不支持快照</p>
-<h2 id><a href="#" class="headerlink" title></a><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-list yfgitlab</span><br><span class="line"></span><br><span class="line"># virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> 虚拟机名称     快照名称     快照描述</span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> yfgitlab yfgitlab`<span class="type">date</span> "+%F_%T"` "test"</span><br><span class="line"></span><br><span class="line"># 还原快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-revert <span class="comment">--domain yfgitlab yfgitlab2017-05-21_08:34:12</span></span><br></pre></td></tr></table></figure></h2><h3 id="KVM-添加磁盘"><a href="#KVM-添加磁盘" class="headerlink" title="KVM 添加磁盘"></a>KVM 添加磁盘</h3><a href="/blog.githup.io/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/" title="LVM逻辑卷管理">LVM逻辑卷管理</a>
+<h2 id><a href="#" class="headerlink" title></a><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 列出当前快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-list yfgitlab</span><br><span class="line"></span><br><span class="line"># virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> 虚拟机名称     快照名称     快照描述</span><br><span class="line">virsh <span class="keyword">snapshot</span>-<span class="keyword">create</span>-<span class="keyword">as</span> yfgitlab yfgitlab`<span class="type">date</span> "+%F_%T"` "test"</span><br><span class="line"></span><br><span class="line"># 还原快照</span><br><span class="line">virsh <span class="keyword">snapshot</span>-revert <span class="comment">--domain yfgitlab yfgitlab2017-05-21_08:34:12</span></span><br></pre></td></tr></table></figure></h2><h3 id="KVM-添加磁盘"><a href="#KVM-添加磁盘" class="headerlink" title="KVM 添加磁盘"></a>KVM 添加磁盘</h3><a href="/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/" title="LVM逻辑卷管理">LVM逻辑卷管理</a>
 <p>qcow2是集各种技术为一体的超级镜像格式，支持内部快照，加密，压缩等一系列功能，访问性能也在不断提高。</p>
 </blockquote>
 <h2 id="-1"><a href="#-1" class="headerlink" title></a><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建磁盘</span></span><br><span class="line">qemu-img create -h</span><br><span class="line">qemu-img create -f qcow2 yfgitlab2.img 50G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘格式转换 （raw 占用磁盘空间，qcow2 不占用磁盘空间）</span></span><br><span class="line">qemu-img convert -p -t directsync -O qcow2 test.raw test.qcow2 </span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出虚拟机</span></span><br><span class="line">virsh list</span><br><span class="line">---</span><br><span class="line"> 11    yfgitlab                       running</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 磁盘挂到虚拟机</span></span><br><span class="line"><span class="comment"># virsh 添加磁盘   虚拟机名           磁盘位置             虚拟机中盘名  是否缓存</span></span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2</span><br><span class="line">virsh attach-disk yfgitlab /data/img1/yfgitlab-data.img vdb --cache none --subdriver=qcow2 --config</span><br><span class="line"></span><br><span class="line">--config   会把文件写入配置文件（下次启动有效）</span><br><span class="line">--live     直接有效</span><br><span class="line">--current  当前有效</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line"><span class="comment"># /etc/libvirt/qemu/yfgitlab.xml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载磁盘</span></span><br><span class="line">virsh detach-disk yfgitlab /data/img1/yfgitlab-data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 到虚拟机中查看磁盘</span></span><br><span class="line">fdisk -l</span><br><span class="line">---</span><br><span class="line">Disk /dev/vdb: 53.7 GB, 53695545344 bytes, 104874112 sectors</span><br><span class="line">Units = sectors of 1 * 512 = 512 bytes</span><br><span class="line">Sector size (logical/physical): 512 bytes / 512 bytes</span><br><span class="line">I/O size (minimum/optimal): 512 bytes / 512 bytes</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化</span></span><br><span class="line">mkfs.ext4 /dev/vdb</span><br><span class="line"></span><br><span class="line"><span class="comment"># 挂载目录</span></span><br><span class="line">mkdir /data</span><br><span class="line">mount /dev/vdb /data</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">df -h</span><br><span class="line">---</span><br><span class="line">/dev/vdb                  50G   53M   47G   1% /data</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写到挂载文件 /etc/fstab</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"/dev/vdb /data ext4 defaults 0 0"</span> &gt;&gt;/etc/fstab</span><br><span class="line">mount -a</span><br></pre></td></tr></table></figure></h2><h3 id="KVM-扩磁盘大小"><a href="#KVM-扩磁盘大小" class="headerlink" title="KVM 扩磁盘大小"></a>KVM 扩磁盘大小</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘格式</span></span><br><span class="line">file hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭虚拟机</span></span><br><span class="line">virsh shutdown xp_4_test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扩容磁盘文件</span></span><br><span class="line">qemu-img resize hello_data.img +150M</span><br><span class="line"></span><br><span class="line"><span class="comment"># 缩容</span></span><br><span class="line">qemu-img resize hello_data.img -150M --shrink</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看磁盘信息</span></span><br><span class="line">qemu-img info hello_data.img</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start xp_4_test</span><br></pre></td></tr></table></figure>
@@ -289,11 +289,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog.githup.io/2020/05/Docker/" rel="prev" title="Docker">
+    <a href="/2020/05/Docker/" rel="prev" title="Docker">
       <i class="fa fa-chevron-left"></i> Docker
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog.githup.io/2020/05/OpenStack/" rel="next" title="OpenStack">
+    <a href="/2020/05/OpenStack/" rel="next" title="OpenStack">
       OpenStack <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -494,20 +494,20 @@ mount -a
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog.githup.io/archives/">
+          <a href="/archives/">
         
           <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog.githup.io/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">24</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog.githup.io/tags/">
+            <a href="/tags/">
           
         <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span></a>
@@ -569,30 +569,30 @@ mount -a
   </div>
 
   
-  <script src="/blog.githup.io/lib/anime.min.js"></script>
-  <script src="/blog.githup.io/lib/velocity/velocity.min.js"></script>
-  <script src="/blog.githup.io/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog.githup.io/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog.githup.io/js/motion.js"></script>
-
-
-<script src="/blog.githup.io/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/blog.githup.io/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
-
-
-  
+<script src="/js/next-boot.js"></script>
 
 
 
 
   
-<script src="/blog.githup.io/js/local-search.js"></script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
