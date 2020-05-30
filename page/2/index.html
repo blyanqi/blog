@@ -199,6 +199,201 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/golang%E5%BE%AE%E6%9C%8D%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/golang%E5%BE%AE%E6%9C%8D%E5%8A%A1/" class="post-title-link" itemprop="url">golang微服务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-29 22:01:44 / 修改时间：22:47:59" itemprop="dateCreated datePublished" datetime="2020-05-29T22:01:44+08:00">2020-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" itemprop="url" rel="index"><span itemprop="name">微服务</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="golang-微服务"><a href="#golang-微服务" class="headerlink" title="golang 微服务"></a>golang 微服务</h2><ul>
+<li>go-micro</li>
+<li>Protobuf</li>
+<li>Etcd</li>
+</ul>
+<p>Install go-micro<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOPATH=<span class="string">"/Users/alert/go"</span></span><br><span class="line"><span class="built_in">export</span> GOROOT=<span class="string">"/usr/local/go"</span></span><br><span class="line"><span class="built_in">export</span> GOPROXY=https://goproxy.io</span><br><span class="line"><span class="comment"># enable go modules</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> GO111MODULE=on</span><br><span class="line"><span class="comment"># initialise go modules in your app</span></span><br><span class="line">go mod init</span><br><span class="line"><span class="comment"># now go get</span></span><br><span class="line"></span><br><span class="line">go get github.com/micro/protoc-gen-micro/v2</span><br></pre></td></tr></table></figure></p>
+<h1 id="INSTALL-Protobuf"><a href="#INSTALL-Protobuf" class="headerlink" title="INSTALL Protobuf"></a>INSTALL Protobuf</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">https://github.com/protocolbuffers/protobuf/releases/download/v3.11.4/protoc-3.11.4-osx-x86_64.zip</span><br><span class="line"><span class="built_in">cd</span> protoc-3.6.1-osx-x86_64</span><br><span class="line">cp -r include/ /usr/<span class="built_in">local</span>/include/</span><br><span class="line">cp -r bin/ /usr/<span class="built_in">local</span>/bin/</span><br><span class="line">protoc</span><br><span class="line"></span><br><span class="line">go get -u github.com/golang/protobuf/protoc-gen-go</span><br><span class="line">protoc --proto_path=<span class="variable">$GOPATH</span>/src:. --micro_out=. --go_out=. greeter.proto</span><br></pre></td></tr></table></figure>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├──<span class="built_in"> client </span> # 客户端</span><br><span class="line">│   ├── client</span><br><span class="line">│   └── client.go</span><br><span class="line">├── go.mod</span><br><span class="line">├── go.sum</span><br><span class="line">├──<span class="built_in"> server </span> # 服务端</span><br><span class="line">│   ├── server</span><br><span class="line">│   └── server.go</span><br><span class="line">└──<span class="built_in"> service </span># 协议</span><br><span class="line">    ├── greeter.pb.go</span><br><span class="line">    ├── greeter.pb.micro.go</span><br><span class="line">    └── greeter.proto</span><br></pre></td></tr></table></figure>
+<h3 id="生成协议-Proto"><a href="#生成协议-Proto" class="headerlink" title="生成协议 Proto"></a>生成协议 Proto</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protoc --proto_path=<span class="variable">$GOPATH</span>/src:. --micro_out=. --go_out=. path/to/greeter.proto</span><br></pre></td></tr></table></figure>
+<h3 id="创建服务端"><a href="#创建服务端" class="headerlink" title="创建服务端"></a>创建服务端</h3><blockquote>
+<p>server -&gt; server.go<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">	micro <span class="string">"github.com/micro/go-micro/v2"</span></span><br><span class="line">	proto <span class="string">"mygomicro/service"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Greeter <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(g *Greeter)</span> <span class="title">Hello</span><span class="params">(ctx context.Context, req *proto.Request, rsp *proto.Response)</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	rsp.Greeting = <span class="string">"Hello "</span> + req.Name</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Create a new service. Optionally include some options here.</span></span><br><span class="line">	service := micro.NewService(</span><br><span class="line">		micro.Name(<span class="string">"greeter"</span>),</span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Init will parse the command line flags.</span></span><br><span class="line">	service.Init()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Register handler</span></span><br><span class="line">	proto.RegisterGreeterHandler(service.Server(), <span class="built_in">new</span>(Greeter))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Run the server</span></span><br><span class="line">	<span class="keyword">if</span> err := service.Run(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="创建客户端"><a href="#创建客户端" class="headerlink" title="创建客户端"></a>创建客户端</h3><blockquote>
+<p>client -&gt; client.go<br><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"context"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">	micro <span class="string">"github.com/micro/go-micro/v2"</span></span><br><span class="line">	proto <span class="string">"mygomicro/service"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Create a new service</span></span><br><span class="line">	service := micro.NewService(micro.Name(<span class="string">"greeter.client"</span>))</span><br><span class="line">	<span class="comment">// Initialise the client and parse command line flags</span></span><br><span class="line">	service.Init()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create new greeter client</span></span><br><span class="line">	greeter := proto.NewGreeterService(<span class="string">"greeter"</span>, service.Client())</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Call the greeter</span></span><br><span class="line">	rsp, err := greeter.Hello(context.TODO(), &amp;proto.Request&#123;Name: <span class="string">"John"</span>&#125;)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Print response</span></span><br><span class="line">	fmt.Println(rsp.Greeting)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="Run-Service"><a href="#Run-Service" class="headerlink" title="Run Service"></a>Run Service</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行服务端</span></span><br><span class="line">go run server.go</span><br><span class="line"><span class="comment"># 运行客户端</span></span><br><span class="line">go run client.go</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E4%B8%BAblog%E5%8A%A0%E9%80%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E4%B8%BAblog%E5%8A%A0%E9%80%9F/" class="post-title-link" itemprop="url">为blog加速</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-29 16:26:57 / 修改时间：19:50:25" itemprop="dateCreated datePublished" datetime="2020-05-29T16:26:57+08:00">2020-05-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="使用-git-page-做一个免费的blog"><a href="#使用-git-page-做一个免费的blog" class="headerlink" title="使用 git page 做一个免费的blog"></a>使用 git page 做一个免费的blog</h2><a href="/2020/05/hexo%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="gitpage blog搭建">gitpage blog搭建</a>
+<h2 id="注册一个自己的域名"><a href="#注册一个自己的域名" class="headerlink" title="注册一个自己的域名"></a>注册一个自己的域名</h2><p><a href="https://my.freenom.com" target="_blank" rel="noopener">freenom</a><br>去 freenom 注册一个自己的域名<br>网站有点卡，可以尝试多试几次。<br>management tools -&gt; nameservers -&gt; Use custom nameservers (enter below)-&gt;<br>把 dnspod 的 ns 地址填进去即可</p>
+<h2 id="使用-dnspod-进行域名解析"><a href="#使用-dnspod-进行域名解析" class="headerlink" title="使用 dnspod 进行域名解析"></a>使用 dnspod 进行域名解析</h2><p><a href="https://www.dnspod.cn/Products/DNS" target="_blank" rel="noopener">dns pod </a><br>控制台-&gt;添加域名-&gt;输入新注册的域名-&gt;点入域名-&gt; 把ns地址粘到 freenom 中。<br>-&gt; 点击刷新 -&gt; 一会就生效</p>
+<h2 id="在-GitHub-中配置域名"><a href="#在-GitHub-中配置域名" class="headerlink" title="在 GitHub 中配置域名"></a>在 GitHub 中配置域名</h2><p><a href="https://help.github.com/cn/github/working-with-github-pages/about-custom-domains-and-github-pages" target="_blank" rel="noopener">github page 添加自定义域名的方法</a><br>repo-&gt;setting-&gt;GitHub Pages -&gt;Custom domain-&gt; blog.yanqi.cf（我申请的域名）<br>保存会在repo 里生成一个 CNAME 文件<br>需要把这个文件写到 hexo 主题下，否则每次发布都会覆盖库的文件<br>echo “blog.yanqi.cf” &gt;themes/next/source/CNAME</p>
+<h2 id="添加-CNAME类型-DNS-解析"><a href="#添加-CNAME类型-DNS-解析" class="headerlink" title="添加 CNAME类型 DNS 解析"></a>添加 CNAME类型 DNS 解析</h2><p>blog CNAME blyanqi.github.io</p>
+<h2 id="修改-hexo-配置"><a href="#修改-hexo-配置" class="headerlink" title="修改 hexo 配置"></a>修改 hexo 配置</h2><p>url: <a href="http://blog.yanqi.cf/">http://blog.yanqi.cf/</a><br>root: /</p>
+<h2 id="为-blog-添加统计分析"><a href="#为-blog-添加统计分析" class="headerlink" title="为 blog 添加统计分析"></a>为 blog 添加统计分析</h2><p>使用百度统计</p>
+<p>添加网站-&gt; 获取代码<br>blog.yanqi.cf<br><a href="https://blog.yanqi.cf/index.html">https://blog.yanqi.cf/index.html</a></p>
+<p>获取key,把这一行？后的key 添加到主题配置文件<br>hm.src = “<a href="https://hm.baidu.com/hm.js?" target="_blank" rel="noopener">https://hm.baidu.com/hm.js?</a>“;</p>
+<p>修改主题配置文件  themes/next/_config.yml<br>baidu_analytics: ‘829697829f3xxxxxxx’</p>
+<p>修改百度分析文件<br>themes/next/layout/_third-party/analytics/baidu-analytics.njk<br>直接把代码复制到这个文件，否则直接加key。百度统计检查不出来。</p>
+<p>通过浏览器devtools查看<br>有一个hm.js，三个hm.gif文件</p>
+<h2 id="Baidu-Analytics"><a href="#Baidu-Analytics" class="headerlink" title="Baidu Analytics"></a>Baidu Analytics</h2><p>获取代码<br>查看报告 -&gt; 查看实时报告</p>
+<h2 id="更新，发布"><a href="#更新，发布" class="headerlink" title="更新，发布"></a>更新，发布</h2><p>hexo clean<br>hexo d</p>
+<h2 id="生成站点地图"><a href="#生成站点地图" class="headerlink" title="生成站点地图"></a>生成站点地图</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">npm</span> <span class="string">install hexo-generator-sitemap</span></span><br><span class="line"><span class="attr">npm</span> <span class="string">install hexo-generator-baidu-sitemap --save</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">_config.yml</span></span><br><span class="line">  <span class="attr">sitemap</span>:<span class="string"></span></span><br><span class="line">    <span class="attr">path</span>: <span class="string">sitemap.xml</span></span><br></pre></td></tr></table></figure>
+<h2 id="在线生成站点地图"><a href="#在线生成站点地图" class="headerlink" title="在线生成站点地图"></a>在线生成站点地图</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http<span class="variable">s:</span>//<span class="keyword">help</span>.bj.<span class="keyword">cn</span>/</span><br><span class="line"></span><br><span class="line">把生成的文件下载到 themes/<span class="keyword">next</span>/<span class="keyword">source</span>/</span><br></pre></td></tr></table></figure>
+<h2 id="主动推送"><a href="#主动推送" class="headerlink" title="主动推送"></a>主动推送</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">npm</span> <span class="string">install hexo-baidu-url-submit --save</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">_config.yml</span></span><br><span class="line"><span class="attr">baidu_url_submit</span>:<span class="string"></span></span><br><span class="line">  <span class="attr">count</span>: <span class="string">100</span></span><br><span class="line">  <span class="attr">host</span>: <span class="string">blog.yanqi.cf</span></span><br><span class="line">  <span class="attr">token</span>: <span class="string">8OGYxxxxxx</span></span><br><span class="line">  <span class="attr">path</span>: <span class="string">baidu_urls.txt #文档的地址， 新链接会保存在此文本文档里</span></span><br><span class="line"></span><br><span class="line"><span class="attr">deploy</span>:<span class="string"></span></span><br><span class="line"> <span class="meta">-</span> <span class="string">type:baidu_url_submitter</span></span><br></pre></td></tr></table></figure>
+<h2 id="在线提交"><a href="#在线提交" class="headerlink" title="在线提交"></a>在线提交</h2><p><a href="http://www.sousuoyinqingtijiao.com/" target="_blank" rel="noopener">搜索引擎在线提交</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Dockerfile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -828,148 +1023,6 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Zabbix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/Zabbix/" class="post-title-link" itemprop="url">Zabbix</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-28 13:17:43" itemprop="dateCreated datePublished" datetime="2020-05-28T13:17:43+08:00">2020-05-28</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%A4%A7%E6%95%B0%E6%8D%AE-1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E5%A4%A7%E6%95%B0%E6%8D%AE-1/" class="post-title-link" itemprop="url">大数据</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-28 11:47:47" itemprop="dateCreated datePublished" datetime="2020-05-28T11:47:47+08:00">2020-05-28</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1039,14 +1092,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1095,7 +1148,7 @@ var _hmt = _hmt || [];
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:51</span>
+    <span title="站点阅读时长">3:52</span>
 </div>
 
         
