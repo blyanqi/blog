@@ -237,8 +237,9 @@
   <entry>
     <title>Gitlab</title>
     <url>/2020/05/Gitlab/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><a href="/2020/05/gitlab%E5%AE%89%E8%A3%85/" title="gitlab docker安装">gitlab docker安装</a>
-<a href="/2020/05/gitlab%E8%BF%81%E7%A7%BB/" title="gitlab迁移">gitlab迁移</a>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><a href="https://github.com/gitlabhq" target="_blank" rel="noopener">gitlib</a></li>
+</ul>
 <h2 id="概念-conceptual"><a href="#概念-conceptual" class="headerlink" title="概念 conceptual"></a>概念 conceptual</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git     <span class="comment"># 版本管理工具</span></span><br><span class="line">gitlib  <span class="comment"># 实现git功能的开发库</span></span><br><span class="line">githup  <span class="comment"># git 公有仓库</span></span><br><span class="line">gitlab  <span class="comment"># git 私有仓库</span></span><br></pre></td></tr></table></figure>
 <h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>nginx<br>gitlab-workhourse<br>gitlab-shell<br>logrotate<br>postgresql|mysql</p>
 <h2 id="发布项目流程"><a href="#发布项目流程" class="headerlink" title="发布项目流程"></a>发布项目流程</h2><p>创建项目<br>创建 Feature 分支<br>coding 提交到分支<br>提交 master 合并申请<br>合并并确认申请</p>
@@ -3345,12 +3346,11 @@
 <p>CI 持续集成（Continuous Integration）<br>CD 持续部署（Continuous Delivery）<br>CD 持续部署（Continuous Deployment）</p>
 <h2 id="常规-DEVOPS-流程"><a href="#常规-DEVOPS-流程" class="headerlink" title="常规 DEVOPS 流程"></a>常规 DEVOPS 流程</h2><p>源代码托管 gitlab<br>CI持续集成工具 jenkins<br>自动发布工具 ansible</p>
 <h2 id="容器化-DEVOPS-流程"><a href="#容器化-DEVOPS-流程" class="headerlink" title="容器化 DEVOPS 流程"></a>容器化 DEVOPS 流程</h2><p>源代码托管 gitlab<br>CI持续集成工具jenkins<br>镜像仓库 harbor<br>自动发布工具 docker-composer | Kubernetes Deployment</p>
-<ul>
-<li><a href="https://github.com/gitlabhq" target="_blank" rel="noopener">gitlib</a></li>
-<li><a href="https://goharbor.io/" target="_blank" rel="noopener">harbor</a></li>
-<li><a href="https://www.jenkins.io/zh/doc/" target="_blank" rel="noopener">Jenkins</a></li>
-<li><a href="https://docs.rancher.cn/" target="_blank" rel="noopener">rancher</a></li>
-</ul>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><a href="/2020/05/gitlab%E5%AE%89%E8%A3%85/" title="gitlab docker安装">gitlab docker安装</a>
+<a href="/2020/05/gitlab%E8%BF%81%E7%A7%BB/" title="gitlab迁移">gitlab迁移</a>
+
+<a href="/2020/05/Harbor%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Harbor安装配">Harbor安装配</a>
+<a href="/2020/05/Docker/" title="Docker">Docker</a>
 ]]></content>
       <categories>
         <category>devops</category>
