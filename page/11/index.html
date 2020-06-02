@@ -12776,10 +12776,16 @@ var _hmt = _hmt || [];
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-13 18:58:53 / 修改时间：19:00:18" itemprop="dateCreated datePublished" datetime="2020-05-13T18:58:53+08:00">2020-05-13</time>
+              <time title="创建时间：2020-05-13 18:58:53" itemprop="dateCreated datePublished" datetime="2020-05-13T18:58:53+08:00">2020-05-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-02 18:06:48" itemprop="dateModified" datetime="2020-06-02T18:06:48+08:00">2020-06-02</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -12796,7 +12802,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.5k</span>
+              <span>4.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -12820,6 +12826,7 @@ var _hmt = _hmt || [];
 <p><a href="http://www.ansible.com.cn/" target="_blank" rel="noopener"> Ansible 中文  </a></p>
 <p><a href="https://github.com/ansible/ansible.git" target="_blank" rel="noopener"> Ansible 源码</a></p>
 </blockquote>
+<h2 id="playbook-目录结构"><a href="#playbook-目录结构" class="headerlink" title="playbook 目录结构"></a>playbook 目录结构</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── <span class="selector-tag">deploy</span><span class="selector-class">.yml</span></span><br><span class="line">├── <span class="selector-tag">product</span> #发布环境</span><br><span class="line">│   └── <span class="selector-tag">tasks</span></span><br><span class="line">│       └── <span class="selector-tag">main</span><span class="selector-class">.yml</span></span><br><span class="line">└── <span class="selector-tag">testbox</span> #测试环境</span><br><span class="line">    └── <span class="selector-tag">tasks</span></span><br><span class="line">        └── <span class="selector-tag">main</span><span class="selector-class">.yml</span></span><br></pre></td></tr></table></figure>
 <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install ansible</span><br><span class="line"></span><br><span class="line"><span class="comment"># git 源码</span></span><br><span class="line">git clone https:<span class="string">//github.com/ansible/ansible.git</span></span><br><span class="line"><span class="keyword">cd</span> <span class="string">./ansible</span></span><br><span class="line">make rpm</span><br><span class="line">sudo rpm -Uvh <span class="string">./rpm-build/ansible-</span>*<span class="string">.noarch.rpm</span></span><br></pre></td></tr></table></figure>
 <h2 id="主配置文件-INI-格式"><a href="#主配置文件-INI-格式" class="headerlink" title="主配置文件 INI 格式"></a>主配置文件 INI 格式</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 、; 为注释</span></span><br><span class="line">key = <span class="built_in">value</span> 格式</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下面指定的这几种方式顺序访问，配置遵循先到先得，后面的全部忽略。</span></span><br><span class="line">ANSIBLE_CONFIG (environment <span class="built_in">variable</span> <span class="keyword">if</span> <span class="built_in">set</span>)</span><br><span class="line">ansible.cfg (<span class="keyword">in</span> <span class="keyword">the</span> current <span class="built_in">directory</span>)</span><br><span class="line">~/.ansible.cfg (<span class="keyword">in</span> <span class="keyword">the</span> home <span class="built_in">directory</span>)</span><br><span class="line">/etc/ansible/ansible.cfg</span><br></pre></td></tr></table></figure>
 <p><a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-configuration-settings" target="_blank" rel="noopener"> ansible 配置变量查询</a></p>
