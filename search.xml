@@ -16032,7 +16032,18 @@
 </ul>
 </li>
 </ul>
-<h2 id="常见-ad-command-使用方法"><a href="#常见-ad-command-使用方法" class="headerlink" title="常见 ad-command 使用方法"></a>常见 ad-command 使用方法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/ansible/hosts  <span class="comment"># 默认的 inventory (-i 指定 inventory)</span></span><br><span class="line">ansible all -m ping <span class="comment"># 尝试连通</span></span><br><span class="line">ansible all -a <span class="string">"/bin/echo hello"</span> <span class="comment"># 执行 command </span></span><br><span class="line">ansible all -m ping -u bruce <span class="comment"># 使用 bruce 用户 </span></span><br><span class="line">ansible all -m ping -u bruce --become <span class="comment"># sudo</span></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="comment">## 主机列表 Inventory</span></span><br><span class="line">* Inventory</span><br><span class="line">    * 主机与组</span><br><span class="line">    * 主机变量</span><br><span class="line">    * 组的变量</span><br><span class="line">    * 子组</span><br><span class="line">* INI 格式</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">192.168.0.2</span><br><span class="line">www.example.com</span><br><span class="line">[group1]</span><br><span class="line">192.168.0.5</span><br><span class="line">192.168.0.6</span><br></pre></td></tr></table></figure>
+<h2 id="常见-ad-command-使用方法"><a href="#常见-ad-command-使用方法" class="headerlink" title="常见 ad-command 使用方法"></a>常见 ad-command 使用方法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/etc/ansible/hosts  <span class="comment"># 默认的 inventory (-i 指定 inventory)</span></span><br><span class="line">ansible all -m ping <span class="comment"># 尝试连通</span></span><br><span class="line">ansible all -a <span class="string">"/bin/echo hello"</span> <span class="comment"># 执行 command </span></span><br><span class="line">ansible all -m ping -u bruce <span class="comment"># 使用 bruce 用户 </span></span><br><span class="line">ansible all -m ping -u bruce --become <span class="comment"># sudo</span></span><br></pre></td></tr></table></figure>
+<h2 id="主机列表-Inventory"><a href="#主机列表-Inventory" class="headerlink" title="主机列表 Inventory"></a>主机列表 Inventory</h2><ul>
+<li>Inventory<ul>
+<li>主机与组</li>
+<li>主机变量</li>
+<li>组的变量</li>
+<li>子组</li>
+</ul>
+</li>
+<li>INI 格式</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">192.168.0.2</span><br><span class="line">www.example.com</span><br><span class="line">[group1]</span><br><span class="line">192.168.0.5</span><br><span class="line">192.168.0.6</span><br></pre></td></tr></table></figure>
 <ul>
 <li>YAML 格式<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">all:</span></span><br><span class="line">    <span class="attr">hosts:</span></span><br><span class="line">        <span class="attr">192.168.0.2:</span></span><br><span class="line">    <span class="attr">children:</span></span><br><span class="line">        <span class="attr">group1:</span></span><br><span class="line">            <span class="attr">hosts:</span></span><br><span class="line">              <span class="attr">192.168.0.5:</span></span><br><span class="line">              <span class="attr">192.168.0.6:</span></span><br></pre></td></tr></table></figure>
 </li>
