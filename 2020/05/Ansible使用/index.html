@@ -28,7 +28,7 @@
 <meta property="og:description" content="Ansible   Ansible 中文    Ansible 源码  Install12345678# 安装yum install ansible# git 源码git clone https:&#x2F;&#x2F;github.com&#x2F;ansible&#x2F;ansible.gitcd .&#x2F;ansiblemake rpmsudo rpm -Uvh .&#x2F;rpm-build&#x2F;ansible-*.noarch.rpm 主">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-13T10:58:53.000Z">
-<meta property="article:modified_time" content="2020-06-02T10:37:54.541Z">
+<meta property="article:modified_time" content="2020-06-02T10:41:57.825Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="inventory">
 <meta property="article:tag" content="ad-hoc">
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-02 18:37:54" itemprop="dateModified" datetime="2020-06-02T18:37:54+08:00">2020-06-02</time>
+                <time title="修改时间：2020-06-02 18:41:57" itemprop="dateModified" datetime="2020-06-02T18:41:57+08:00">2020-06-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -326,7 +326,7 @@ var _hmt = _hmt || [];
 </ul>
 <h4 id="主机变量"><a href="#主机变量" class="headerlink" title="主机变量"></a>主机变量</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[group1]</span><br><span class="line">host1 <span class="attribute">http_port</span>=80 <span class="attribute">maxRequestPerChild</span>=808</span><br><span class="line">host1 <span class="attribute">http_port</span>=303 <span class="attribute">maxRequestPerChild</span>=909</span><br></pre></td></tr></table></figure>
 <h4 id="连接变量"><a href="#连接变量" class="headerlink" title="连接变量"></a>连接变量</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[group2]</span></span><br><span class="line">other1.example.com ansible_connection=ssh ansible_user=myuser</span><br><span class="line"></span><br><span class="line"><span class="comment"># 别名</span></span><br><span class="line">jumper ansible_port=5555 ansible_host=192.168.0.50</span><br></pre></td></tr></table></figure>
-<h4 id="共享变量-vars"><a href="#共享变量-vars" class="headerlink" title="共享变量 vars"></a>共享变量 vars</h4><p>[webserver]<br>host1<br>host2<br>[webserver:vars] # 此处是共享的变量<br>ntp_server=ntp.blyanqi.com</p>
+<h4 id="共享变量-vars"><a href="#共享变量-vars" class="headerlink" title="共享变量 vars"></a>共享变量 vars</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[webserver]</span></span><br><span class="line">host1</span><br><span class="line">host2</span><br><span class="line"><span class="section">[webserver:vars]</span> <span class="comment"># 此处是共享的变量 </span></span><br><span class="line"><span class="attr">ntp_server</span>=ntp.blyanqi.com</span><br></pre></td></tr></table></figure>
 <h3 id="分多组"><a href="#分多组" class="headerlink" title="分多组"></a>分多组</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[web1]</span></span><br><span class="line">host1</span><br><span class="line">host2</span><br><span class="line"><span class="section">[web2]</span></span><br><span class="line">host3</span><br><span class="line">host4</span><br><span class="line"></span><br><span class="line"><span class="section">[web:children]</span> <span class="comment"># 包含多个组</span></span><br><span class="line">web1</span><br><span class="line">web2</span><br><span class="line"></span><br><span class="line"><span class="section">[web:vars]</span> <span class="comment"># 组共享变量</span></span><br><span class="line"><span class="attr">halon_system_timeout</span>=<span class="number">30</span></span><br></pre></td></tr></table></figure>
 <h4 id="合并多个变量"><a href="#合并多个变量" class="headerlink" title="合并多个变量"></a>合并多个变量</h4><blockquote>
 <p>all group -&gt; parent group -&gt;child group -&gt;host<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 默认合并按照字母表顺序，</span></span><br><span class="line"><span class="comment"># 或者 最近节点优先原则覆盖之前的</span></span><br><span class="line"><span class="string">for</span> <span class="string">example：</span> <span class="comment"># b_group 覆盖 a_group</span></span><br><span class="line"><span class="attr">a_group:</span></span><br><span class="line">    <span class="attr">testvar:</span> <span class="string">a</span></span><br><span class="line">    <span class="attr">ansible_group_priority:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">b_group:</span></span><br><span class="line">    <span class="attr">testvar:</span> <span class="string">b</span></span><br></pre></td></tr></table></figure></p>
@@ -491,7 +491,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">113</span>
+          <span class="site-state-item-count">114</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
