@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="删除所有源1234567rm  &#x2F;etc&#x2F;yum.repos.d&#x2F;* -rf# 更新缓存yum clean all &amp;&amp; yum makecache# 查看源yum repolist all centos 镜像源123# Aliyun 源curl -o &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;">
+  <meta name="description" content="Ali 镜像源 删除所有源1234567rm  &#x2F;etc&#x2F;yum.repos.d&#x2F;* -rf# 更新缓存yum clean all &amp;&amp; yum makecache# 查看源yum repolist all centos 镜像源1234567# Aliyun 源curl -o &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliy">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置国内镜像源">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="删除所有源1234567rm  &#x2F;etc&#x2F;yum.repos.d&#x2F;* -rf# 更新缓存yum clean all &amp;&amp; yum makecache# 查看源yum repolist all centos 镜像源123# Aliyun 源curl -o &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;">
+<meta property="og:description" content="Ali 镜像源 删除所有源1234567rm  &#x2F;etc&#x2F;yum.repos.d&#x2F;* -rf# 更新缓存yum clean all &amp;&amp; yum makecache# 查看源yum repolist all centos 镜像源1234567# Aliyun 源curl -o &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliy">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-20T09:50:25.000Z">
-<meta property="article:modified_time" content="2020-05-20T09:55:37.475Z">
+<meta property="article:modified_time" content="2020-06-03T02:30:15.572Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -224,10 +224,16 @@ var _hmt = _hmt || [];
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-20 17:50:25 / 修改时间：17:55:37" itemprop="dateCreated datePublished" datetime="2020-05-20T17:50:25+08:00">2020-05-20</time>
+              <time title="创建时间：2020-05-20 17:50:25" itemprop="dateCreated datePublished" datetime="2020-05-20T17:50:25+08:00">2020-05-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-03 10:30:15" itemprop="dateModified" datetime="2020-06-03T10:30:15+08:00">2020-06-03</time>
+              </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -235,7 +241,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>582</span>
+              <span>955</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -254,10 +260,12 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="删除所有源"><a href="#删除所有源" class="headerlink" title="删除所有源"></a>删除所有源</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rm</span>  <span class="string">/etc/yum.repos.d/* -rf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新缓存</span></span><br><span class="line"><span class="attr">yum</span> <span class="string">clean all &amp;&amp; yum makecache</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看源</span></span><br><span class="line"><span class="attr">yum</span> <span class="string">repolist all</span></span><br></pre></td></tr></table></figure>
-<h2 id="centos-镜像源"><a href="#centos-镜像源" class="headerlink" title="centos 镜像源"></a>centos 镜像源</h2><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Aliyun 源</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-<span class="module-access"><span class="module"><span class="identifier">Base</span>.</span></span>repo http:<span class="comment">//mirrors.aliyun.com/repo/Centos-7.repo</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-<span class="module-access"><span class="module"><span class="identifier">Base</span>.</span></span>repo http:<span class="comment">//mirrors.aliyun.com/repo/Centos-8.repo</span></span><br></pre></td></tr></table></figure>
+        <p><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">Ali 镜像源</a></p>
+<h2 id="删除所有源"><a href="#删除所有源" class="headerlink" title="删除所有源"></a>删除所有源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新缓存</span></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看源</span></span><br><span class="line">yum repolist all</span><br></pre></td></tr></table></figure>
+<h2 id="centos-镜像源"><a href="#centos-镜像源" class="headerlink" title="centos 镜像源"></a>centos 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Aliyun 源</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这两个源有时候访问不通</span></span><br><span class="line">sed -i <span class="string">"/cloud.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line">sed -i <span class="string">"/.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure>
+<h2 id="ubuntu-镜像源"><a href="#ubuntu-镜像源" class="headerlink" title="ubuntu 镜像源"></a>ubuntu 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/apt/sources.list</span><br><span class="line"><span class="comment"># http://archive.ubuntu.com/</span></span><br><span class="line"><span class="comment"># mirrors.aliyun.com</span></span><br><span class="line">sed -i <span class="string">'s/archive.ubuntu.com/mirrors.aliyun.com/'</span> /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
 <h2 id="docker-镜像源"><a href="#docker-镜像源" class="headerlink" title="docker 镜像源"></a>docker 镜像源</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//mirrors.aliyun.<span class="keyword">com</span>/docker-<span class="keyword">ce</span>/linux/centos/docker-<span class="keyword">ce</span>.repo -O /etc/yum.repos.d/docker-<span class="keyword">ce</span>.repo</span><br></pre></td></tr></table></figure>
-<h2 id="docker-registry-源"><a href="#docker-registry-源" class="headerlink" title="docker registry 源"></a>docker registry 源</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"># 加载 reload</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl reload docker</span><br></pre></td></tr></table></figure>
+<h2 id="docker-registry-源"><a href="#docker-registry-源" class="headerlink" title="docker registry 源"></a>docker registry 源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载 reload</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl reload docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># github 加速</span></span><br><span class="line">http://tool.chinaz.com/dns?<span class="built_in">type</span>=1&amp;host=github.com&amp;ip=</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -337,7 +345,7 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除所有源"><span class="nav-number">1.</span> <span class="nav-text">删除所有源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#centos-镜像源"><span class="nav-number">2.</span> <span class="nav-text">centos 镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-镜像源"><span class="nav-number">3.</span> <span class="nav-text">docker 镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-registry-源"><span class="nav-number">4.</span> <span class="nav-text">docker registry 源</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#删除所有源"><span class="nav-number">1.</span> <span class="nav-text">删除所有源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#centos-镜像源"><span class="nav-number">2.</span> <span class="nav-text">centos 镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu-镜像源"><span class="nav-number">3.</span> <span class="nav-text">ubuntu 镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-镜像源"><span class="nav-number">4.</span> <span class="nav-text">docker 镜像源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-registry-源"><span class="nav-number">5.</span> <span class="nav-text">docker registry 源</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -351,7 +359,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">114</span>
+          <span class="site-state-item-count">119</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -401,13 +409,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">261k</span>
+    <span title="站点总字数">269k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">3:57</span>
+    <span title="站点阅读时长">4:05</span>
 </div>
 
         
