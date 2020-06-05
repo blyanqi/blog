@@ -40,23 +40,20 @@
 <li><a href="https://www.infoq.cn/topic/operation" target="_blank" rel="noopener">InfoQ</a></li>
 <li><a href="http://www.178linux.com/" target="_blank" rel="noopener">Linux 运维部落</a></li>
 <li><a href="https://linuxtools-rst.readthedocs.io/" target="_blank" rel="noopener">Linux 工具快速教程</a></li>
-<li><a href="https://tech.youzan.com/" target="_blank" rel="noopener">有赞技术团队</a></li>
+<li><a href="https://jimmysong.io/kubernetes-handbook/" target="_blank" rel="noopener">云原生部落</a></li>
 </ul>
-<hr>
 <h2 id="网站资源"><a href="#网站资源" class="headerlink" title="网站资源"></a>网站资源</h2><ul>
 <li><a href="https://access.redhat.com/documentation/en-us/" target="_blank" rel="noopener"> Red Hat Container Development  </a></li>
 <li><a href="https://edu.aliyun.com/developer" target="_blank" rel="noopener">ali online courses</a></li>
 <li><a href="https://e.huawei.com/cn/material/MaterialList" target="_blank" rel="noopener">HUAWEI</a></li>
 <li><a href="https://mirror.tuna.tsinghua.edu.cn/help/alpine/" target="_blank" rel="noopener">清华大学开源软件镜像站</a></li>
 </ul>
-<hr>
 <h2 id="Awesome"><a href="#Awesome" class="headerlink" title="Awesome"></a>Awesome</h2><ul>
 <li><a href="https://www.kcsou.com/s_kubesphere/" target="_blank" rel="noopener">课程搜</a></li>
 <li><a href="https://github.com/prakhar1989/awesome-courses#algorithms" target="_blank" rel="noopener">CS Courses</a></li>
 <li><a href="https://github.com/xingshaocheng/architect-awesome" target="_blank" rel="noopener">architect</a></li>
 <li><a href="https://github.com/awesome-selfhosted/awesome-selfhosted" target="_blank" rel="noopener">selfhosted</a></li>
 </ul>
-<hr>
 <h2 id="各种语言项目"><a href="#各种语言项目" class="headerlink" title="各种语言项目"></a>各种语言项目</h2><ul>
 <li><a href="https://github.com/fffaraz/awesome-cpp" target="_blank" rel="noopener">cpp</a></li>
 <li><a href="https://github.com/akullpp/awesome-java" target="_blank" rel="noopener">java</a></li>
@@ -69,19 +66,16 @@
 <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">vue</a></li>
 <li><a href="http://c.biancheng.net/c/" target="_blank" rel="noopener">C语言入门</a></li>
 </ul>
-<hr>
 <h2 id="机器学习"><a href="#机器学习" class="headerlink" title="机器学习"></a>机器学习</h2><ul>
 <li><a href="https://github.com/josephmisiti/awesome-machine-learning" target="_blank" rel="noopener">machine-learning</a></li>
 <li><a href="https://github.com/MaximAbramchuck/awesome-interview-questions" target="_blank" rel="noopener">interview-questions</a></li>
 </ul>
-<hr>
 <h2 id="系统管理"><a href="#系统管理" class="headerlink" title="系统管理"></a>系统管理</h2><ul>
 <li><a href="https://github.com/Hack-with-Github/Awesome-Hacking" target="_blank" rel="noopener">Hacking</a></li>
 <li><a href="https://github.com/kahun/awesome-sysadmin" target="_blank" rel="noopener">sysadmin</a></li>
 <li><a href="https://github.com/veggiemonk/awesome-docker" target="_blank" rel="noopener">docker</a></li>
 <li><a href="https://man.linuxde.net/" target="_blank" rel="noopener">Linux 命令大全</a></li>
 </ul>
-<hr>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
 <li><a href="https://github.com/jaywcjlove/awesome-mac" target="_blank" rel="noopener">mac</a></li>
 <li><a href="https://github.com/herrbischoff/awesome-macos-command-line" target="_blank" rel="noopener">macos-command-line</a></li>
