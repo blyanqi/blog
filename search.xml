@@ -206,7 +206,10 @@
   <entry>
     <title>rancher安装k8s</title>
     <url>/2020/06/rancher%E5%AE%89%E8%A3%85k8s/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="rancher-概念及原理"><a href="#rancher-概念及原理" class="headerlink" title="rancher 概念及原理"></a>rancher 概念及原理</h2><ul>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><ul>
+<li><a href="https://rancher.com/docs/rancher/v1.6/zh/" target="_blank" rel="noopener">Rancher docs</a></li>
+</ul>
+<h2 id="rancher-概念及原理"><a href="#rancher-概念及原理" class="headerlink" title="rancher 概念及原理"></a>rancher 概念及原理</h2><ul>
 <li>集群<ul>
 <li>创建集群<ul>
 <li>管理云上集群</li>
