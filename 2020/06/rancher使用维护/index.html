@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="rander 2.x 新文档  rancher 概念及原理rancher 使用 集群 是指k8s or k3s 容器编排环境 项目 是指k8s 里的命名空间   项目 通过 rancher 安装一个 k8s 集群。 建立一个 pod，并完成对 pod 迁移，扩容，更新。 建立存储卷，将容器目录映射到存储卷。 连接到私有的容器镜像库，启动自定义镜像。  修改默认的 registry在 系统管理 -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rancher使用维护">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="rander 2.x 新文档  rancher 概念及原理rancher 使用 集群 是指k8s or k3s 容器编排环境 项目 是指k8s 里的命名空间   项目 通过 rancher 安装一个 k8s 集群。 建立一个 pod，并完成对 pod 迁移，扩容，更新。 建立存储卷，将容器目录映射到存储卷。 连接到私有的容器镜像库，启动自定义镜像。  修改默认的 registry在 系统管理 -">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-05T15:59:25.000Z">
+<meta property="article:modified_time" content="2020-06-06T05:27:29.364Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>rancher使用维护 | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          rancher使用维护
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-05 23:59:25" itemprop="dateCreated datePublished" datetime="2020-06-05T23:59:25+08:00">2020-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-06 13:27:29" itemprop="dateModified" datetime="2020-06-06T13:27:29+08:00">2020-06-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a href="https://docs.rancher.cn/rancher2x/quick-start.html" target="_blank" rel="noopener"> rander 2.x 新文档 </a></p>
+<h2 id="rancher-概念及原理"><a href="#rancher-概念及原理" class="headerlink" title="rancher 概念及原理"></a>rancher 概念及原理</h2><h2 id="rancher-使用"><a href="#rancher-使用" class="headerlink" title="rancher 使用"></a>rancher 使用</h2><ul>
+<li>集群 是指k8s or k3s 容器编排环境</li>
+<li>项目 是指k8s 里的命名空间</li>
+<li></li>
+</ul>
+<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><ul>
+<li>通过 rancher 安装一个 k8s 集群。</li>
+<li>建立一个 pod，并完成对 pod 迁移，扩容，更新。</li>
+<li>建立存储卷，将容器目录映射到存储卷。</li>
+<li>连接到私有的容器镜像库，启动自定义镜像。</li>
+</ul>
+<p>修改默认的 registry<br>在 系统管理 -&gt; 系统设置 -&gt; 高级设置, 点击 我确认已经知道修改高级设置可能导致问题.<br>找到registry.default 设置然后点击编辑按钮。</p>
+<p>限制镜像库的使用</p>
+<h2 id="使用自建镜像库-issue"><a href="#使用自建镜像库-issue" class="headerlink" title="使用自建镜像库 issue"></a>使用自建镜像库 issue</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x509: certificate signed by unknown authority</span></span><br><span class="line">使用了自签名证明，提示证书未受信任。</span><br><span class="line">解决方法，申请个受信任证书</span><br></pre></td></tr></table></figure>
+<p> .   <strong><em>_          </em>            </strong> <em> </em><br> /\ / <strong><em>‘</em> </strong> <em> </em>(<em>)</em> <strong>  </strong> <em> \ \ \ \<br>( ( )__</em> | ‘<em> | ‘</em>| | ‘<em> \/ </em>` | \ \ \ \<br> \/  <strong><em>)| |</em>)| | | | | || (<em>| |  ) ) ) )<br>  ‘  |_</em></strong>| .<strong>|<em>| |</em>|<em>| |</em>\</strong>, | / / / /<br> =========|<em>|==============|__</em>/=/<em>/</em>/_/<br> :: Spring Boot ::        (v2.2.7.RELEASE)</p>
+<p>2020-06-06 03:01:30.427 [main] INFO  - LOCAL<em>SNAPSHOT_PATH:/root/nacos/config<br>2020-06-06 03:01:30.485 [main] INFO  - limitTime:5.0<br>2020-06-06 03:01:30.622 [main] INFO  - isMultiInstance:false<br>2020-06-06 03:01:30.631 [main] WARN  - Ignore the empty nacos configuration and get it based on dataId[ID_META_AUTH_SERVICE] &amp; group[DEFAULT_GROUP]<br>2020-06-06 03:01:30.688 [main] INFO  - No active profile set, falling back to default profiles: default<br>2020-06-06 03:01:31.585 [main] WARN  - Endpoint ID ‘nacos-config’ contains invalid characters, please migrate to a valid format.<br>2020-06-06 03:01:32.813 [main] INFO  - Initializing ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:01:32.814 [main] INFO  - Starting service [Tomcat]<br>2020-06-06 03:01:32.814 [main] INFO  - Starting Servlet engine: [Apache Tomcat/9.0.34]<br>2020-06-06 03:01:32.889 [main] INFO  - Initializing Spring embedded WebApplicationContext<br>2020-06-06 03:01:33.052 [main] INFO  - Init DruidDataSource<br>2020-06-06 03:01:33.551 [main] INFO  - {dataSource-1} inited
+ </em> <em>   |</em>  <em> </em>|<em>. __</em> <em> |    </em><br>| | |\/|<em>)(</em>| | |<em>\  |</em>)||<em>|</em>\<br>     /               |<br>                        3.3.2<br>2020-06-06 03:01:34.112 [main] WARN  - Can not find table primary key in Class: “com.uhe.auth.dao.pojo.Log”.<br>2020-06-06 03:01:34.874 [main] INFO  - Starting ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:01:35.032 [main] INFO  - Started GoMetaAuthServiceApplication in 6.272 seconds (JVM running for 6.994)<br>2020-06-06 03:01:35.048 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_META_AUTH_SERVICE+DEFAULT_GROUP<br>2020-06-06 03:01:35.051 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_META_AUTH_SERVICE, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.051 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_META_AUTH_SERVICE.yaml+DEFAULT_GROUP<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_META_AUTH_SERVICE.yaml, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_GLOBAL.yaml+DEFAULT_GROUP<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_GLOBAL.yaml, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.056 [com.alibaba.nacos.client.Worker.longPolling.fixed-119.84.8.43_10094] INFO  - get changedGroupKeys:[]<br>2020-06-06 03:01:35.060 [com.alibaba.nacos.client.Worker.longPolling.fixed-119.84.8.43_10094] INFO  - get changedGroupKeys:[]</p>
+<p>  .   <strong><em>_          </em>            </strong> <em> </em><br> /\ / <strong><em>‘</em> </strong> <em> </em>(<em>)</em> <strong>  </strong> <em> \ \ \ \<br>( ( )__</em> | ‘<em> | ‘</em>| | ‘<em> \/ </em>` | \ \ \ \<br> \/  <strong><em>)| |</em>)| | | | | || (<em>| |  ) ) ) )<br>  ‘  |_</em></strong>| .<strong>|<em>| |</em>|<em>| |</em>\</strong>, | / / / /<br> =========|<em>|==============|__</em>/=/<em>/</em>/_/<br> :: Spring Boot ::        (v2.2.7.RELEASE)<br>2020-06-06 03:07:47.793 [main] INFO  - LOCAL_SNAPSHOT_PATH:/root/nacos/config<br>2020-06-06 03:07:48.008 [main] INFO  - limitTime:5.0<br>2020-06-06 03:07:48.109 [main] INFO  - isMultiInstance:false<br>2020-06-06 03:07:48.177 [main] WARN  - Ignore the empty nacos configuration and get it based on dataId[ID_META_AUTH_SERVICE] &amp; group[DEFAULT_GROUP]<br>2020-06-06 03:07:48.396 [main] INFO  - No active profile set, falling back to default profiles: default<br>2020-06-06 03:07:51.985 [main] WARN  - Endpoint ID ‘nacos-config’ contains invalid characters, please migrate to a valid format.<br>2020-06-06 03:07:55.607 [main] INFO  - Initializing ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:07:55.609 [main] INFO  - Starting service [Tomcat]<br>2020-06-06 03:07:55.609 [main] INFO  - Starting Servlet engine: [Apache Tomcat/9.0.34]<br>2020-06-06 03:07:55.905 [main] INFO  - Initializing Spring embedded WebApplicationContext<br>2020-06-06 03:07:56.599 [main] INFO  - Init DruidDataSource<br>2020-06-06 03:07:58.416 [main] INFO  - {dataSource-1} inited</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/helm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" rel="prev" title="helm安装使用">
+      <i class="fa fa-chevron-left"></i> helm安装使用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/SSL%E8%AF%81%E4%B9%A6/" rel="next" title="SSL证书">
+      SSL证书 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rancher-概念及原理"><span class="nav-number">1.</span> <span class="nav-text">rancher 概念及原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rancher-使用"><span class="nav-number">2.</span> <span class="nav-text">rancher 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目"><span class="nav-number">3.</span> <span class="nav-text">项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用自建镜像库-issue"><span class="nav-number">4.</span> <span class="nav-text">使用自建镜像库 issue</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">288k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:22</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/KVM%E5%AE%89%E8%A3%85/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%AE%89%E5%85%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -213,114 +213,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/KVM%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">KVM安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-22 16:13:01 / 修改时间：16:13:47" itemprop="dateCreated datePublished" datetime="2020-05-22T16:13:01+08:00">2020-05-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%99%9A%E6%8B%9F%E5%8C%96/" itemprop="url" rel="index"><span itemprop="name">虚拟化</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="KVM-安装配置"><a href="#KVM-安装配置" class="headerlink" title="KVM 安装配置"></a>KVM 安装配置</h2><h3 id="环境介绍"><a href="#环境介绍" class="headerlink" title="环境介绍"></a>环境介绍</h3><ul>
-<li>操作系统：centos7.x</li>
-<li>内核版本：3.10.0-327.el7.x86_64</li>
-<li>IP地址：192.168.1.1</li>
-</ul>
-<h3 id="检查CPU"><a href="#检查CPU" class="headerlink" title="检查CPU"></a>检查CPU</h3><ul>
-<li>和Xen不同，KVM需要有CPU的支持（IntelVT)或(AMDSVM)</li>
-<li>在安装KVM之前检查一下CPU是否提供了虚拟技术的支持<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">egrep<span class="string">'vmx|svm'</span> / proc / cpuinfo</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="安装KVM"><a href="#安装KVM" class="headerlink" title="安装KVM"></a>安装KVM</h3><h4 id="安装虚拟化的组件"><a href="#安装虚拟化的组件" class="headerlink" title="安装虚拟化的组件"></a>安装虚拟化的组件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install kvm pytho-virtinst libvirt bridge-utils virt-manager \</span><br><span class="line">qemu-kvm-tools virt-viewer virt-v2v libguestfs-tools-c \</span><br><span class="line">libguestfs-tools virt-install.noarch \</span><br></pre></td></tr></table></figure>
-<h4 id="远程管理配置"><a href="#远程管理配置" class="headerlink" title="远程管理配置"></a>远程管理配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">vim / etc / sysconfig / libvirtd</span><br><span class="line">LIBVIRTD_CONFIG=/etc/libvirt/libvirtd.conf</span><br><span class="line">LIBVIRTD_ARGS=<span class="string">"--listen"</span></span><br><span class="line"></span><br><span class="line">sed  -i <span class="string">'/LIBVIRTD_CONFIG/s#=.*#=/etc/libvirt/libvirtd.conf#g'</span> /etc/sysconfig/libvirtd</span><br><span class="line">sed  -i <span class="string">'/LIBVIRTD_ARGS/s#=.*#=="--listen"#g'</span> /etc/sysconfig/libvirtd</span><br><span class="line"></span><br><span class="line"><span class="comment"># libvirtd tcp连接的设置</span></span><br><span class="line">vim /etc/libvirt/libvirtd.conf</span><br><span class="line"><span class="comment"># 这里主要是tcp连接的设置末尾添加如下：</span></span><br><span class="line">listen_tls = 0</span><br><span class="line">listen_tcp = 1</span><br><span class="line">tcp_port = <span class="string">"16509"</span>  <span class="comment"># tcp端口</span></span><br><span class="line">listen_addr = <span class="string">"192.168.0.103"</span>  <span class="comment"># 监听IP</span></span><br><span class="line">unix_sock_ro_perms = <span class="string">"0777"</span></span><br><span class="line">unix_sock_rw_perms = <span class="string">"0770"</span></span><br><span class="line">auth_tcp = <span class="string">"none"</span></span><br><span class="line">max_clients = 1024  <span class="comment"># 最大连接书</span></span><br><span class="line">min_workers = 100</span><br><span class="line">max_workers = 200</span><br><span class="line">max_requests = 20</span><br><span class="line">max_client_requests = 50</span><br></pre></td></tr></table></figure>
-<h4 id="virsh控制台"><a href="#virsh控制台" class="headerlink" title="virsh控制台"></a>virsh控制台</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virsh -c qemu+tcp://192.168.1.1/system</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1006错误</span></span><br><span class="line">yum -y install novnc</span><br></pre></td></tr></table></figure>
-<h4 id="对vnc的设置"><a href="#对vnc的设置" class="headerlink" title="对vnc的设置"></a>对vnc的设置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里主要是对vnc的设置，一会儿通过vnc - viewer连接来进行安装，末尾添加</span></span><br><span class="line">vim /etc/libvirt/qemu.conf</span><br><span class="line">vnc_listen = <span class="string">"0.0.0.0"</span></span><br><span class="line">vnc_password = <span class="string">"m23456"</span>  <span class="comment"># vnc连接密码</span></span><br><span class="line">remote_display_port_min = 5900  <span class="comment"># vnc最小端口</span></span><br><span class="line">remote_display_port_max = 65500  <span class="comment"># vnc最大端口</span></span><br></pre></td></tr></table></figure>
-<h4 id="确认一下是否kvm安装成功"><a href="#确认一下是否kvm安装成功" class="headerlink" title="确认一下是否kvm安装成功"></a>确认一下是否kvm安装成功</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/libvirtd restart</span><br><span class="line">or</span><br><span class="line">systemctl restart libvirtd.service</span><br></pre></td></tr></table></figure>
-<h4 id="查看是否启动"><a href="#查看是否启动" class="headerlink" title="查看是否启动"></a>查看是否启动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps - ef | grep libvirtd</span><br><span class="line">systemctl status libvirtd.service</span><br></pre></td></tr></table></figure>
-<h4 id="查看kvm模块是否正常加载"><a href="#查看kvm模块是否正常加载" class="headerlink" title="查看kvm模块是否正常加载"></a>查看kvm模块是否正常加载</h4><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod <span class="string">|grep kvm</span></span><br></pre></td></tr></table></figure>
-<h5 id="配置网桥连接"><a href="#配置网桥连接" class="headerlink" title="配置网桥连接"></a>配置网桥连接</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置网桥br0</span></span><br><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-br0</span><br><span class="line">DEVICE = br0</span><br><span class="line">TYPE = Bridge</span><br><span class="line">ONBOOT = <span class="literal">yes</span></span><br><span class="line">NM_CONTROLLED = <span class="literal">yes</span></span><br><span class="line">BOOTPROTO = static</span><br><span class="line">IPADDR = 192.168.1.1</span><br><span class="line">NETMASK = 255.255.255.0</span><br><span class="line">GATEWAY = 192.168.1.254</span><br><span class="line">DNS1 = 202.106.0.20</span><br><span class="line"></span><br><span class="line">vim /etc/sysconfig/network-scripts/ifcfg-em1</span><br><span class="line">DEVICE = em1</span><br><span class="line">TYPE = Ethernet</span><br><span class="line">ONBOOT = <span class="literal">yes</span></span><br><span class="line">BRIDGE = br0</span><br><span class="line">NM_CONTROLLED = <span class="literal">yes</span></span><br></pre></td></tr></table></figure>
-<h5 id="重启网络"><a href="#重启网络" class="headerlink" title="重启网络"></a>重启网络</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d<span class="built_in">/network </span>restart</span><br></pre></td></tr></table></figure>
-<h5 id="查看网络连接"><a href="#查看网络连接" class="headerlink" title="查看网络连接"></a>查看网络连接</h5><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">brctl show</span><br><span class="line"><span class="comment"># 如果配置成功，会有以下输出：</span></span><br><span class="line">bridge name    <span class="built_in"> bridge </span>id               STP enabled     interfaces</span><br><span class="line">br0             8000.1866daecc2c4       <span class="literal">no</span>              em1</span><br><span class="line">                                                        vnet0</span><br><span class="line">                                                        vnet1</span><br><span class="line">                                                        vnet10</span><br><span class="line">                                                        vnet2</span><br><span class="line">                                                        vnet3</span><br><span class="line">                                                        vnet4</span><br><span class="line">                                                        vnet5</span><br><span class="line">virbr0          8000.5254003912f1       <span class="literal">yes</span>             virbr0-nic</span><br></pre></td></tr></table></figure>
-<h5 id="检查ip转发是否开启"><a href="#检查ip转发是否开启" class="headerlink" title="检查ip转发是否开启"></a>检查ip转发是否开启</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat / etc / sysctl.conf | grep</span><br><span class="line">ip_forward</span><br><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line">如果没有开启：</span><br><span class="line">vim / etc / sysctl.conf</span><br><span class="line">修改net.ipv4.ip_forward = 1</span><br><span class="line">/ sbin / sysctl - p</span><br></pre></td></tr></table></figure>
-<h3 id="安装虚拟机"><a href="#安装虚拟机" class="headerlink" title="安装虚拟机"></a>安装虚拟机</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">mkdir /data/images - p</span><br><span class="line">mkdir /data/software/ -p</span><br><span class="line"></span><br><span class="line">virt-install --name=<span class="built_in">test</span> --ram 4096 --vcpus = 2 \</span><br><span class="line">--disk path = / data / images / test.img, size = 10, format = raw, bus = virtio \</span><br><span class="line">--cdrom / home / software / CentOS - 7 - x86_64 - DVD - 1810.iso - -network bridge = br0, model = virtio \</span><br><span class="line">--vnc --accelerate --force --autostart</span><br><span class="line"></span><br><span class="line">yum - y install acpid</span><br><span class="line"></span><br><span class="line">virsh dumpxml mechine1</span><br><span class="line">virsh create mechine1.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里解释一下主要的几个参数含义：</span></span><br><span class="line">--name      给虚拟机起个名字</span><br><span class="line">--ram       分配给虚拟机的内存，单位MB</span><br><span class="line">--vcpus     分配给虚拟机的cpu个数</span><br><span class="line">--cdrom     指定安装文件的全路径</span><br><span class="line">--disk      指定虚拟机img文件路径，如果虚拟机使用lvm分区，这里就指向到lvm的分区就行</span><br><span class="line">size        虚拟机文件大小，单位GB</span><br><span class="line">bus         虚拟机磁盘使用的总线类型，为了使虚拟机达到好的性能，这里使用virtio</span><br><span class="line">cache       虚拟机磁盘的cache类型</span><br><span class="line">--network</span><br><span class="line">bridge      指定桥接网卡</span><br><span class="line">model       网卡模式，这里也是使用性能更好的virtio</span><br><span class="line">--graphics  图形参数</span><br></pre></td></tr></table></figure>
-<h3 id="vnc-连接虚拟机"><a href="#vnc-连接虚拟机" class="headerlink" title="vnc 连接虚拟机"></a>vnc 连接虚拟机</h3><p>通过在windows下使用vnc - viewer来连接172.16.57.24: 5902，并输入设置的密码，即可进行安装。</p>
-<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆虚拟机</span></span><br><span class="line">一般制作一个常用的虚拟机模板，下次安装可以直接来克隆这个模板。</span><br><span class="line">virt-clone --connect</span><br><span class="line"><span class="symbol">qemu:</span>/<span class="regexp">//system</span> --original=tomcat_01 --name=tomcat_02 --file=<span class="regexp">//var</span><span class="regexp">/lib/libvirt</span><span class="regexp">/images/tomcat</span>_02.img</span><br><span class="line">--original  克隆的虚拟机对象</span><br><span class="line">--name      克隆的新虚拟机名称</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加磁盘</span></span><br><span class="line"><span class="comment"># 一般虚拟机的磁盘结构为系统盘加数据盘，当系统发生故障时，可以重新建一个系统盘，而数据盘不会丢失。 添加磁盘操作:</span></span><br><span class="line">cd /var/<span class="class"><span class="keyword">lib</span>/<span class="title">libvirt</span>/<span class="title">images</span>/</span></span><br><span class="line"><span class="comment"># 创建一块100G的磁盘</span></span><br><span class="line">qemu-img create -f raw test_add.img <span class="number">100</span>G</span><br><span class="line"><span class="comment"># 添加到虚拟机</span></span><br><span class="line">virsh attach -disk tomcat_01 /var/<span class="class"><span class="keyword">lib</span>/<span class="title">libvirt</span>/<span class="title">images</span>/<span class="title">test_add</span>.<span class="title">img</span> <span class="title">vdb</span> --<span class="title">cache</span> <span class="title">none</span></span></span><br><span class="line"><span class="comment"># 动态添加磁盘</span></span><br><span class="line"><span class="comment"># 备份xml文件</span></span><br><span class="line">virsh dumpxml tomcat_01&gt;tomcat_01.xml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将最新的虚拟机配置重定向到其配置文件中</span></span><br><span class="line">virsh define tomcat_01.xml</span><br><span class="line"><span class="comment"># 这样，新增的磁盘就不会丢了。 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># virsh命令的一些操作</span></span><br><span class="line">Autostart   自动开始一个域</span><br><span class="line">Create      从一个 XML 文件创建一个域</span><br><span class="line">Define      从一个 XML 文件定义（但不开始）一个域</span><br><span class="line">edit        编辑某个域的 XML 配置</span><br><span class="line">shutdown    关闭一个域 </span><br><span class="line">start       开始一个（以前定义的）非活跃的域</span><br><span class="line">reboot      重新启动一个域</span><br><span class="line">suspend     挂起一个域</span><br><span class="line">resume      重新恢复一个域</span><br><span class="line">vncdisplay  vnc 显示</span><br></pre></td></tr></table></figure>
-<h3 id="查看镜像信息"><a href="#查看镜像信息" class="headerlink" title="查看镜像信息"></a>查看镜像信息</h3><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">qemu</span>-img <span class="meta">info</span> /<span class="meta">opt</span>/CentOS6.<span class="number">5</span>-x86_64.raw</span><br></pre></td></tr></table></figure>
-<h3 id="导入系统镜像"><a href="#导入系统镜像" class="headerlink" title="导入系统镜像"></a>导入系统镜像</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果是光盘就需要拷贝 我这边是使用的centos6.5</span></span><br><span class="line">dd <span class="keyword">if</span>=<span class="string">/dev/cdrom</span> of=<span class="string">/opt/CentOS-6.5-x86_64.ios</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建虚拟机</span></span><br><span class="line">virt-install <span class="params">--name</span> CentOS6.5 \</span><br><span class="line"><span class="params">--virt-type</span> kvm \</span><br><span class="line"><span class="params">--ram</span> 512 \</span><br><span class="line"><span class="params">--cdrom=/opt/CentOS-6</span>.5-x86_64.ios \</span><br><span class="line"><span class="params">--disk</span> path=<span class="string">/opt/CentOS6.5-x86_64.raw</span> \</span><br><span class="line"><span class="params">--network</span> network=default \</span><br><span class="line"><span class="params">--graphics</span> vnc,listen=0.0.0.0 \</span><br><span class="line"><span class="params">--noautoconsole</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看虚拟机列表</span></span><br><span class="line">virsh list <span class="params">--all</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动虚拟机</span></span><br><span class="line">virsh start CentOS6.5</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看所有虚拟机列表</span></span><br><span class="line">virsh list <span class="params">--all</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 虚拟机网络基本设置</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装电源服务</span></span><br><span class="line">yum -y install acpid</span><br><span class="line"><span class="string">/etc/init.d/acpid</span> start</span><br><span class="line">chkconfig acpid on</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建网桥</span></span><br><span class="line"><span class="comment"># 把br0添加到eth0</span></span><br><span class="line">brctl addbr br0</span><br><span class="line">brctl addif br0 eth0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动一台虚拟机使用刚才创建的网桥</span></span><br><span class="line">virt-install <span class="params">--name</span> CentOS7.2 <span class="params">--virt-type</span> kvm <span class="params">--ram</span> 1024 <span class="params">--cdrom=/opt/CentOS7</span>.2-x86_64.ios <span class="params">--disk</span> path=<span class="string">/opt/CentOS7.2.raw</span> <span class="params">--network</span> bridge=br0 <span class="params">--graphics</span> vnc,listen=0.0.0.0 <span class="params">--noautoconsole</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Docker%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/Docker%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Docker安装</a>
+            <a href="/2020/05/%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">安全</a>
         </h2>
 
         <div class="post-meta">
@@ -330,14 +223,14 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-22 11:59:55" itemprop="dateCreated datePublished" datetime="2020-05-22T11:59:55+08:00">2020-05-22</time>
+              <time title="创建时间：2020-05-22 22:22:06" itemprop="dateCreated datePublished" datetime="2020-05-22T22:22:06+08:00">2020-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-04 09:31:35" itemprop="dateModified" datetime="2020-06-04T09:31:35+08:00">2020-06-04</time>
+                <time title="修改时间：2020-05-23 00:15:26" itemprop="dateModified" datetime="2020-05-23T00:15:26+08:00">2020-05-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -345,7 +238,7 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
                 </span>
             </span>
 
@@ -355,7 +248,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>30</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -374,11 +267,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <a href="/2020/05/Docker/" title="Docker概念及原理">Docker概念及原理</a>
-<h2 id="安装-Docker-CE"><a href="#安装-Docker-CE" class="headerlink" title="安装 Docker CE"></a>安装 Docker CE</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载</span></span><br><span class="line">sudo yum -y remove docker \</span><br><span class="line">docker-client \</span><br><span class="line">docker-client-latest \</span><br><span class="line">docker-common \</span><br><span class="line">docker-latest \</span><br><span class="line">docker-latest-logrotate \</span><br><span class="line">docker-logrotate \</span><br><span class="line">docker-engine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新系统</span></span><br><span class="line">yum -y <span class="keyword">update</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装所需包</span></span><br><span class="line">yum -y <span class="keyword">install</span> yum-utils device-mapper-persistent-<span class="keyword">data</span> lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 新增 Docker 仓库。</span></span><br><span class="line">yum-config-manager \</span><br><span class="line">  <span class="comment">--add-repo \</span></span><br><span class="line">  https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 Docker CE.</span></span><br><span class="line">yum -y <span class="keyword">install</span> docker-ce</span><br><span class="line"></span><br><span class="line"><span class="comment">### 创建 /etc/docker 目录。</span></span><br><span class="line">mkdir /etc/docker</span><br><span class="line"></span><br><span class="line"><span class="comment">### 设置 daemon。</span></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"exec-opts"</span>: [<span class="string">"native.cgroupdriver=systemd"</span>],</span><br><span class="line">  <span class="string">"log-driver"</span>: <span class="string">"json-file"</span>,</span><br><span class="line">  <span class="string">"log-opts"</span>: &#123;</span><br><span class="line">    <span class="string">"max-size"</span>: <span class="string">"100m"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"storage-driver"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">  <span class="string">"storage-opts"</span>: [</span><br><span class="line">    <span class="string">"overlay2.override_kernel_check=true"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># docker 启动服务</span></span><br><span class="line">systemctl <span class="keyword">start</span> docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># mkdir -p /etc/systemd/system/docker.service.d</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker compose install</span></span><br><span class="line">sudo curl -L <span class="string">"https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)"</span> -o /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">sudo chmod +x /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">sudo <span class="keyword">ln</span> -s /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/docker-compose /usr/<span class="keyword">bin</span>/docker-compose</span><br><span class="line">docker-compose <span class="comment">--version</span></span><br></pre></td></tr></table></figure>
-<h3 id="重启-Docker"><a href="#重启-Docker" class="headerlink" title="重启 Docker"></a>重启 Docker</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
-<h3 id="使用脚本安装"><a href="#使用脚本安装" class="headerlink" title="使用脚本安装"></a>使用脚本安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://get.docker.com -o get-docker.sh</span><br><span class="line">sudo sh get-docker.sh</span><br></pre></td></tr></table></figure>
-<h3 id="Docker-镜像加速"><a href="#Docker-镜像加速" class="headerlink" title="Docker 镜像加速"></a>Docker 镜像加速</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="params">&lt;&lt;'EOF' &gt;</span><span class="meta-keyword">/etc/</span>docker/daemon.json</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">systemctl reload docker</span><br><span class="line"></span><br><span class="line"><span class="meta"># 如果重启报错，查看这个文件是不是已经注册了 registry</span></span><br><span class="line">cat <span class="meta-keyword">/etc/</span>systemd<span class="meta-keyword">/system/</span>docker.service.d/docker-options.conf</span><br><span class="line"></span><br><span class="line">rm -rf <span class="meta-keyword">/etc/</span>docker/daemon.json</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+          <h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><h3 id="web-安全"><a href="#web-安全" class="headerlink" title="web 安全"></a>web 安全</h3><h3 id="DDos-防范"><a href="#DDos-防范" class="headerlink" title="DDos 防范"></a>DDos 防范</h3><h3 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h3><h3 id="服务器安全"><a href="#服务器安全" class="headerlink" title="服务器安全"></a>服务器安全</h3><h3 id="数据安全"><a href="#数据安全" class="headerlink" title="数据安全"></a>数据安全</h3><h3 id="授权和认证"><a href="#授权和认证" class="headerlink" title="授权和认证"></a>授权和认证</h3>
       
     </div>
 
@@ -397,7 +286,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/kubernetes%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%A4%A7%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -411,7 +300,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/kubernetes%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">kubernetes使用</a>
+            <a href="/2020/05/%E5%A4%A7%E6%95%B0%E6%8D%AE/" class="post-title-link" itemprop="url">大数据</a>
         </h2>
 
         <div class="post-meta">
@@ -421,14 +310,227 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-22 11:51:14" itemprop="dateCreated datePublished" datetime="2020-05-22T11:51:14+08:00">2020-05-22</time>
+              <time title="创建时间：2020-05-22 22:21:53" itemprop="dateCreated datePublished" datetime="2020-05-22T22:21:53+08:00">2020-05-22</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">性能优化</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 22:21:44" itemprop="dateCreated datePublished" datetime="2020-05-22T22:21:44+08:00">2020-05-22</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" class="post-title-link" itemprop="url">搜索引擎</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 22:21:33" itemprop="dateCreated datePublished" datetime="2020-05-22T22:21:33+08:00">2020-05-22</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">网络原理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 22:21:11" itemprop="dateCreated datePublished" datetime="2020-05-22T22:21:11+08:00">2020-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-04 14:22:13" itemprop="dateModified" datetime="2020-06-04T14:22:13+08:00">2020-06-04</time>
+                <time title="修改时间：2020-05-23 00:13:17" itemprop="dateModified" datetime="2020-05-23T00:13:17+08:00">2020-05-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -436,7 +538,7 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
                 </span>
             </span>
 
@@ -446,7 +548,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>379</span>
+              <span>28</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -465,9 +567,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><a href="/2020/05/kubernetes%E5%AE%89%E8%A3%85/" title="kubernetes安装">kubernetes安装</a>
-<h1 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h1><p>kubectl get pods -A -o wide<br>kubectl describe pods -n test<br>kubectl logs $POD_NAME<br>kubectl exec $POD_NAME env<br>kubectl exec -ti $POD_NAME bash<br>kubectl expose deployment/kubernetes-bootcamp —type=”NodePort” —port 8080<br>kubectl describe service/kubernetes-bootcamp<br>kubectl get pods -l run=kubernetes-bootcamp<br>kubectl label pod $POD_NAME app=v1<br>kubectl delete service -l run=kubernetes-bootcamp</p>
-<h2 id="创建-pod"><a href="#创建-pod" class="headerlink" title="创建 pod"></a>创建 pod</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建命名空间（项目）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建</span></span><br></pre></td></tr></table></figure>
+          <h2 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h2><h3 id="网络模型"><a href="#网络模型" class="headerlink" title="网络模型"></a>网络模型</h3><h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><h3 id="IP-地址转换"><a href="#IP-地址转换" class="headerlink" title="IP 地址转换"></a>IP 地址转换</h3><h3 id="路由交换"><a href="#路由交换" class="headerlink" title="路由交换"></a>路由交换</h3><h4 id="路由协议"><a href="#路由协议" class="headerlink" title="路由协议"></a>路由协议</h4><h4 id="交换协议"><a href="#交换协议" class="headerlink" title="交换协议"></a>交换协议</h4>
       
     </div>
 
@@ -486,7 +586,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Serverless%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -500,7 +600,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/Serverless%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Serverless使用</a>
+            <a href="/2020/05/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">数据库原理</a>
         </h2>
 
         <div class="post-meta">
@@ -509,9 +609,8 @@ var _hmt = _hmt || [];
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-05-22 10:50:40 / 修改时间：11:08:29" itemprop="dateCreated datePublished" datetime="2020-05-22T10:50:40+08:00">2020-05-22</time>
+              <time title="创建时间：2020-05-22 22:21:00" itemprop="dateCreated datePublished" datetime="2020-05-22T22:21:00+08:00">2020-05-22</time>
             </span>
 
           <br>
@@ -520,7 +619,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>67</span>
+              <span>0</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -539,18 +638,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="conceptual"><a href="#conceptual" class="headerlink" title="conceptual"></a>conceptual</h2><ul>
-<li>云函数</li>
-<li>云数据库</li>
-<li>云存储</li>
-</ul>
-<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><ul>
-<li>nodejs</li>
-<li>vuejs</li>
-</ul>
-<h2 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h2><p><a href>unicloud</a></p>
-<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><p>创建APP uni-app<br>创建服务空间 </p>
-
+          
       
     </div>
 
@@ -569,7 +657,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/golang%E5%9F%BA%E9%87%91%E6%8A%93%E5%8F%96/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E4%B8%AD%E9%97%B4%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -583,7 +671,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/golang%E5%9F%BA%E9%87%91%E6%8A%93%E5%8F%96/" class="post-title-link" itemprop="url">golang基金抓取</a>
+            <a href="/2020/05/%E4%B8%AD%E9%97%B4%E4%BB%B6/" class="post-title-link" itemprop="url">中间件</a>
         </h2>
 
         <div class="post-meta">
@@ -593,14 +681,14 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-21 17:32:13" itemprop="dateCreated datePublished" datetime="2020-05-21T17:32:13+08:00">2020-05-21</time>
+              <time title="创建时间：2020-05-22 22:20:42" itemprop="dateCreated datePublished" datetime="2020-05-22T22:20:42+08:00">2020-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-22 08:30:01" itemprop="dateModified" datetime="2020-05-22T08:30:01+08:00">2020-05-22</time>
+                <time title="修改时间：2020-05-23 00:10:46" itemprop="dateModified" datetime="2020-05-23T00:10:46+08:00">2020-05-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -608,7 +696,7 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
                 </span>
             </span>
 
@@ -618,14 +706,14 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>7.8k</span>
+              <span>30</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -637,12 +725,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>此程序是用来跑基金排名的程序，能输出基金的持仓情况。<br>用于您的投资参考。。。<br>第一次运行速度有点慢，需要请求数据，耐心等待。。。<br>需要chrome 浏览器支持<br>./main [option] chromepath<br> -gain int<br>       输入年化收益百分比：1-100之间 (default 10)</p>
-</blockquote>
-<h2 id="main-程序"><a href="#main-程序" class="headerlink" title="main 程序"></a>main 程序</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"encoding/base64"</span></span><br><span class="line">	<span class="string">"flag"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/PuerkitoBio/goquery"</span></span><br><span class="line">	<span class="string">"github.com/robertkrimen/otto"</span></span><br><span class="line">	<span class="string">"io/ioutil"</span></span><br><span class="line">	<span class="string">"os"</span></span><br><span class="line">	<span class="string">"os/exec"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">	<span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个URL类</span></span><br><span class="line"><span class="keyword">type</span> Url <span class="keyword">struct</span> &#123;</span><br><span class="line">	id    <span class="keyword">uint</span></span><br><span class="line">	url   <span class="keyword">string</span></span><br><span class="line">	name  <span class="keyword">string</span></span><br><span class="line">	stats <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义保存排名类</span></span><br><span class="line"><span class="keyword">type</span> Ranking <span class="keyword">struct</span> &#123;</span><br><span class="line">	id         <span class="keyword">int</span></span><br><span class="line">	code       <span class="keyword">string</span></span><br><span class="line">	name       <span class="keyword">string</span></span><br><span class="line">	date       <span class="keyword">string</span></span><br><span class="line">	dwjz       <span class="keyword">float64</span></span><br><span class="line">	ljjz       <span class="keyword">float64</span></span><br><span class="line">	day        <span class="keyword">float64</span></span><br><span class="line">	week       <span class="keyword">float64</span></span><br><span class="line">	month      <span class="keyword">float64</span></span><br><span class="line">	threemouth <span class="keyword">float64</span></span><br><span class="line">	sixmouth   <span class="keyword">float64</span></span><br><span class="line">	year       <span class="keyword">float64</span></span><br><span class="line">	twoyear    <span class="keyword">float64</span></span><br><span class="line">	threeyear  <span class="keyword">float64</span></span><br><span class="line">	lastyear   <span class="keyword">float64</span></span><br><span class="line">	create     <span class="keyword">float64</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置chrome 执行文件路径</span></span><br><span class="line"><span class="keyword">var</span> driverpath <span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 主程序</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 命令行选项</span></span><br><span class="line">	flag.Usage = <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		fmt.Fprintf(os.Stderr, <span class="string">" 此程序是用来跑基金排名的程序，能输出基金的持仓情况。\n用于您的投资参考。。。"</span>+</span><br><span class="line">			<span class="string">"\n第一次运行速度有点慢，需要请求数据，耐心等待。。。\n"</span>+</span><br><span class="line">			<span class="string">"需要chrome 浏览器支持\n"</span>+</span><br><span class="line">			<span class="string">" %s [option] chromepath \n"</span>, os.Args[<span class="number">0</span>])</span><br><span class="line">		flag.PrintDefaults()</span><br><span class="line">		os.Exit(<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">var</span> level = flag.Int(<span class="string">"gain"</span>, <span class="number">10</span>, <span class="string">"输入年化收益百分比：1-100之间"</span>)</span><br><span class="line">	flag.Parse()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 采集目录</span></span><br><span class="line">	fundList := <span class="built_in">make</span>([]Url, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">	fundList[<span class="number">0</span>] = Url&#123;</span><br><span class="line">		id:    <span class="number">1</span>,</span><br><span class="line">		url:   <span class="string">"http://fund.eastmoney.com/data/fundranking.html#tall;c0;r;s3nzf;pn7000;ddesc;qsd20190517;qed20200517;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb"</span>,</span><br><span class="line">		name:  <span class="string">"所有排名"</span>,</span><br><span class="line">		stats: <span class="literal">true</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fundList[<span class="number">1</span>] = Url&#123;</span><br><span class="line">		id:    <span class="number">2</span>,</span><br><span class="line">		url:   <span class="string">"http://fund.eastmoney.com/data/fundranking.html#thh;c0;r;szzf;pn3000;ddesc;qsd20190515;qed20200515;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb"</span>,</span><br><span class="line">		name:  <span class="string">"混合排名"</span>,</span><br><span class="line">		stats: <span class="literal">true</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	fundList[<span class="number">2</span>] = Url&#123;</span><br><span class="line">		id:    <span class="number">3</span>,</span><br><span class="line">		url:   <span class="string">"http://fund.eastmoney.com/data/fundranking.html#tqdii;c0;r;s3nzf;pn200;ddesc;qsd20190517;qed20200517;qdii;zq;gg;gzbd;gzfs;bbzt;sfbb\n"</span>,</span><br><span class="line">		name:  <span class="string">"QDII排名"</span>,</span><br><span class="line">		stats: <span class="literal">true</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输入处理</span></span><br><span class="line">	<span class="keyword">if</span> <span class="built_in">len</span>(os.Args) == <span class="number">4</span> &amp;&amp; strings.Compare(os.Args[<span class="number">1</span>], <span class="string">"-gain"</span>) == <span class="number">0</span> &amp;&amp; *level &lt;= <span class="number">100</span> &amp;&amp; *level &gt;= <span class="number">1</span> &#123;</span><br><span class="line">		_, err := os.Stat(os.Args[<span class="number">3</span>])</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"chrome 路径不对。"</span>)</span><br><span class="line">			os.Exit(<span class="number">1</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		driverpath = os.Args[<span class="number">3</span>]</span><br><span class="line">		<span class="comment">// 第一步 抓取基金排名</span></span><br><span class="line">		dom := rankingFund(fundList[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">		fmt.Printf(<span class="string">"正在为您找出年化收益达到%d%%的优质基金。\n\n基金列表:\n%s\n"</span>, *level, strings.Repeat(<span class="string">"-"</span>, <span class="number">50</span>))</span><br><span class="line">		<span class="comment">// 第二步 过滤出优秀的基金</span></span><br><span class="line">		codelist := topFund(dom, <span class="string">"#dbtable &gt; tbody"</span>, *level)</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 第三步 获取基金的持仓</span></span><br><span class="line">		<span class="keyword">for</span> _, v := <span class="keyword">range</span> codelist &#123;</span><br><span class="line">			url := <span class="string">"http://fund.eastmoney.com/pingzhongdata/"</span> + v + <span class="string">".js"</span></span><br><span class="line">			fmt.Printf(<span class="string">"%s "</span>, v)</span><br><span class="line">			fmt.Println(spiderFundStats(url, v))</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		flag.Usage()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// encoding</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">EncodeData</span><span class="params">(d <span class="keyword">string</span>)</span> <span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	s = base64.StdEncoding.EncodeToString([]<span class="keyword">byte</span>(d))</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// decoding</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">DecodeData</span><span class="params">(d <span class="keyword">string</span>)</span> <span class="params">(s <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	dtext, _ := base64.StdEncoding.DecodeString(d)</span><br><span class="line">	s = <span class="keyword">string</span>(dtext)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 进行采集结果缓存</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">cacheResult</span><span class="params">(url Url)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	year := time.Now().Format(<span class="string">"2006"</span>)</span><br><span class="line">	month := time.Now().Format(<span class="string">"01"</span>)</span><br><span class="line">	day := time.Now().Format(<span class="string">"02"</span>)</span><br><span class="line">	filename := fmt.Sprintf(<span class="string">"fund-%s-%s-%s"</span>, year, month, day)</span><br><span class="line">	_, err := os.Stat(filename)</span><br><span class="line">	<span class="comment">// 结果不存在重新抓取</span></span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		text := spider(url.url)</span><br><span class="line">		<span class="keyword">if</span> <span class="built_in">len</span>(text) &gt; <span class="number">0</span> &#123;</span><br><span class="line">			ioutil.WriteFile(filename, []<span class="keyword">byte</span>(EncodeData(text)), os.ModePerm)</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> text</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 直接读取缓存</span></span><br><span class="line">	cachedata, _ := ioutil.ReadFile(filename)</span><br><span class="line">	<span class="keyword">return</span> DecodeData(<span class="keyword">string</span>(cachedata))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 采集</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">spider</span><span class="params">(url <span class="keyword">string</span>)</span> <span class="params">(text <span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">//fmt.Println("采集开始", url)</span></span><br><span class="line">	<span class="comment">// 爬虫驱动</span></span><br><span class="line">	<span class="comment">//tbyte, err := exec.Command(`/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`,</span></span><br><span class="line">	tbyte, err := exec.Command(driverpath,</span><br><span class="line">		<span class="string">"--headless"</span>, <span class="string">"--disable-gpu"</span>, <span class="string">"--dump-dom"</span>, url).Output()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		fmt.Println(err)</span><br><span class="line">	&#125;</span><br><span class="line">	text = <span class="keyword">string</span>(tbyte)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回基金的排名</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">rankingFund</span><span class="params">(url Url)</span> <span class="params">(dom *goquery.Document)</span></span> &#123;</span><br><span class="line">	text := cacheResult(url)</span><br><span class="line">	dom, _ = goquery.NewDocumentFromReader(strings.NewReader(text))</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 过滤出优秀的基金</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">topFund</span><span class="params">(dom *goquery.Document, tag <span class="keyword">string</span>, num <span class="keyword">int</span>)</span> <span class="params">(dlist []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	<span class="comment">// 排名数据</span></span><br><span class="line">	arrayRanking := <span class="built_in">make</span>([]Ranking, <span class="number">10</span>)</span><br><span class="line">	<span class="comment">//dom.Find("#dbtable &gt; tbody").Children()</span></span><br><span class="line">	dom.Find(tag).Children().Each(<span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>, selection *goquery.Selection)</span></span> &#123;</span><br><span class="line">		tmp := Ranking&#123;&#125;</span><br><span class="line">		selection.Children().Each(<span class="function"><span class="keyword">func</span><span class="params">(i <span class="keyword">int</span>, selection *goquery.Selection)</span></span> &#123;</span><br><span class="line">			<span class="comment">//fmt.Printf("%s,%s\t", i, selection.Text())</span></span><br><span class="line"></span><br><span class="line">			<span class="keyword">switch</span> i &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">				v, _ := strconv.Atoi(selection.Text())</span><br><span class="line">				tmp.id = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">				tmp.code = selection.Text()</span><br><span class="line">			<span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">				tmp.name = selection.Text()</span><br><span class="line">			<span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">				tmp.date = selection.Text()</span><br><span class="line">			<span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.dwjz = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.ljjz = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.day = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.week = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">9</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.month = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">10</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.threemouth = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">11</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.sixmouth = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">12</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.year = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">13</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.twoyear = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">14</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.threeyear = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">15</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.lastyear = v</span><br><span class="line">			<span class="keyword">case</span> <span class="number">16</span>:</span><br><span class="line">				v, _ := strconv.ParseFloat(strings.Replace(selection.Text(), <span class="string">"%"</span>, <span class="string">""</span>, <span class="number">1</span>), <span class="number">32</span>)</span><br><span class="line">				tmp.create = v</span><br><span class="line">				<span class="comment">//case 17:</span></span><br><span class="line">				<span class="comment">//	v9, _ := strconv.ParseFloat(strings.Replace(selection.Text(), "%", "", 1), 32)</span></span><br><span class="line">				<span class="comment">//	tmp.month = v9</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;)</span><br><span class="line">		arrayRanking = <span class="built_in">append</span>(arrayRanking, tmp)</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> _, v1 := <span class="keyword">range</span> arrayRanking &#123;</span><br><span class="line">		<span class="comment">//</span></span><br><span class="line">		<span class="keyword">if</span> v1.create == <span class="number">0</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> v1.threeyear == <span class="number">0</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> v1.twoyear == <span class="number">0</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> v1.year == <span class="number">0</span> &#123;</span><br><span class="line">						<span class="keyword">if</span> v1.sixmouth &gt; v1.threemouth+<span class="number">2</span> &amp;&amp; v1.threemouth &gt; <span class="keyword">float64</span>(num)/<span class="number">5</span> &#123;</span><br><span class="line">							dlist = <span class="built_in">append</span>(dlist, v1.code)</span><br><span class="line">						&#125;</span><br><span class="line">						<span class="keyword">continue</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">					<span class="keyword">if</span> v1.year &gt; v1.sixmouth+<span class="number">5</span> &amp;&amp; v1.threemouth &gt; <span class="keyword">float64</span>(num)/<span class="number">5</span> &#123;</span><br><span class="line">						dlist = <span class="built_in">append</span>(dlist, v1.code)</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">continue</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				<span class="keyword">if</span> v1.twoyear &gt; v1.year+<span class="number">10</span> &amp;&amp; v1.year &gt;= <span class="keyword">float64</span>(num) &#123;</span><br><span class="line">					dlist = <span class="built_in">append</span>(dlist, v1.code)</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">continue</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> v1.threeyear &gt; v1.twoyear+<span class="number">10</span> &amp;&amp; v1.twoyear &gt; v1.year+<span class="number">10</span> &amp;&amp; v1.year &gt;= <span class="keyword">float64</span>(num) &#123;</span><br><span class="line">				dlist = <span class="built_in">append</span>(dlist, v1.code)</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">continue</span></span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> v1.create &gt; v1.threeyear+<span class="number">10</span> &amp;&amp; v1.threeyear &gt; v1.twoyear+<span class="number">10</span> &amp;&amp; v1.twoyear &gt; v1.year+<span class="number">10</span> &amp;&amp; v1.year &gt;= <span class="keyword">float64</span>(num) &#123;</span><br><span class="line">			dlist = <span class="built_in">append</span>(dlist, v1.code)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 缓存基金信息</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">cacheFundStats</span><span class="params">(url <span class="keyword">string</span>, vcode <span class="keyword">string</span>)</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	year := time.Now().Format(<span class="string">"2006"</span>)</span><br><span class="line">	month := time.Now().Format(<span class="string">"01"</span>)</span><br><span class="line">	<span class="comment">//day := time.Now().Format("02")</span></span><br><span class="line">	os.MkdirAll(<span class="string">"fundstats"</span>, os.ModePerm)</span><br><span class="line">	filename := fmt.Sprintf(<span class="string">"fundstats/%s-%s-%s"</span>, vcode, year, month)</span><br><span class="line">	_, err := os.Stat(filename)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		text := spider(url)</span><br><span class="line">		ioutil.WriteFile(filename, []<span class="keyword">byte</span>(EncodeData(text)), os.ModePerm)</span><br><span class="line">		<span class="keyword">return</span> text</span><br><span class="line">	&#125;</span><br><span class="line">	cachedata, _ := ioutil.ReadFile(filename)</span><br><span class="line">	<span class="keyword">return</span> DecodeData(<span class="keyword">string</span>(cachedata))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 找去基金的持仓情况</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">spiderFundStats</span><span class="params">(url <span class="keyword">string</span>, vcode <span class="keyword">string</span>)</span> <span class="params">(name <span class="keyword">string</span>, arrStr1 []<span class="keyword">string</span>)</span></span> &#123;</span><br><span class="line">	textdata := cacheFundStats(url, vcode)</span><br><span class="line">	<span class="comment">// 采集数据</span></span><br><span class="line">	dom, _ := goquery.NewDocumentFromReader(strings.NewReader(textdata))</span><br><span class="line">	text := dom.Find(<span class="string">"body"</span>).Text()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 返回的是一个js文件，使用 otto js 解析器获取里面的值</span></span><br><span class="line">	vm := otto.New()</span><br><span class="line">	vm.Run(text)</span><br><span class="line">	v, _ := vm.Get(<span class="string">"stockCodes"</span>)</span><br><span class="line">	n, _ := vm.Get(<span class="string">"fS_name"</span>)</span><br><span class="line">	name = n.String()</span><br><span class="line">	arrStr := strings.Split(v.String(), <span class="string">","</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> arrStr &#123;</span><br><span class="line">		<span class="keyword">if</span> <span class="built_in">len</span>(v) == <span class="number">7</span> &#123;</span><br><span class="line">			<span class="comment">// 返回值里面多加一个数字，需要去掉</span></span><br><span class="line">			arrStr1 = <span class="built_in">append</span>(arrStr1, v[:<span class="number">6</span>])</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="交叉编译"><a href="#交叉编译" class="headerlink" title="交叉编译"></a>交叉编译</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># windows</span></span><br><span class="line"><span class="attribute">CGO_ENABLED</span>=0 <span class="attribute">GOOS</span>=windows <span class="attribute">GOARCH</span>=amd64 go build main.go</span><br><span class="line"><span class="comment"># linux</span></span><br><span class="line"><span class="attribute">CGO_ENABLED</span>=0 <span class="attribute">GOOS</span>=windows <span class="attribute">GOARCH</span>=amd64 go build main.go</span><br><span class="line"><span class="comment"># mac</span></span><br><span class="line"><span class="attribute">CGO_ENABLED</span>=0 <span class="attribute">GOOS</span>=darwin <span class="attribute">GOARCH</span>=amd64 go build main.go</span><br></pre></td></tr></table></figure>
-
+          <h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><h3 id="web-server"><a href="#web-server" class="headerlink" title="web server"></a>web server</h3><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><h3 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h3><h3 id="定时调度"><a href="#定时调度" class="headerlink" title="定时调度"></a>定时调度</h3><h3 id="RPC"><a href="#RPC" class="headerlink" title="RPC"></a>RPC</h3><h3 id="API-网关"><a href="#API-网关" class="headerlink" title="API 网关"></a>API 网关</h3>
       
     </div>
 
@@ -661,7 +744,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Nacos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -675,7 +758,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/Nacos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Nacos安装配置</a>
+            <a href="/2020/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">设计模式</a>
         </h2>
 
         <div class="post-meta">
@@ -685,14 +768,14 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-21 16:58:45" itemprop="dateCreated datePublished" datetime="2020-05-21T16:58:45+08:00">2020-05-21</time>
+              <time title="创建时间：2020-05-22 22:19:30" itemprop="dateCreated datePublished" datetime="2020-05-22T22:19:30+08:00">2020-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-22 17:45:24" itemprop="dateModified" datetime="2020-05-22T17:45:24+08:00">2020-05-22</time>
+                <time title="修改时间：2020-05-23 00:07:23" itemprop="dateModified" datetime="2020-05-23T00:07:23+08:00">2020-05-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -700,7 +783,7 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
                 </span>
             </span>
 
@@ -710,7 +793,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>35</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -729,25 +812,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://nacos.io/en-us/docs/quick-start.html" target="_blank" rel="noopener">Nacos docs</a></p>
-<h2 id="conceptual"><a href="#conceptual" class="headerlink" title="conceptual"></a>conceptual</h2><ul>
-<li>配置中心<ul>
-<li>发布配置</li>
-<li>获取最新配置</li>
-<li>更新通知<blockquote>
-<p>spring cloud,apollo,nacos</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>服务发现</li>
-<li>服务治理</li>
-<li>动态配置管理</li>
-<li>动态DNS服务</li>
-<li>服务和元数据管理</li>
-</ul>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://nacos.io/zh-cn/docs/quick-start-docker.html" target="_blank" rel="noopener">Nacos docker</a></p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 安装</span></span><br><span class="line">git clone https:<span class="comment">//github.com/nacos-group/nacos-docker.git</span></span><br><span class="line">cd nacos-docker/example</span><br><span class="line"></span><br><span class="line"><span class="meta"># docker-compose 配置 docker-compose.yml</span></span><br><span class="line">cat <span class="params">&lt;&lt;'EOF' &gt;</span>docker-compose.yml</span><br><span class="line"><span class="symbol">version:</span> <span class="string">"2"</span></span><br><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  nacos:</span></span><br><span class="line"><span class="symbol">    image:</span> nacos/nacos-server:latest</span><br><span class="line"><span class="symbol">    container_name:</span> nacos-standalone-mysql</span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line">      - PREFER_HOST_MODE=hostname</span><br><span class="line">      - MODE=standalone</span><br><span class="line">      - SPRING_DATASOURCE_PLATFORM=mysql</span><br><span class="line">      - MYSQL_SERVICE_HOST=mysql</span><br><span class="line">      - MYSQL_SERVICE_DB_NAME=nacos_dev</span><br><span class="line">      - MYSQL_SERVICE_PORT=<span class="number">3306</span></span><br><span class="line">      - MYSQL_SERVICE_USER=nacos</span><br><span class="line">      - MYSQL_SERVICE_PASSWORD=nacos<span class="meta">#123</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="meta-keyword">/data/</span>nacos-volume<span class="meta-keyword">/standalone-logs/</span>:<span class="meta-keyword">/home/</span>nacos/logs</span><br><span class="line">      - ./init.d/custom.properties:<span class="meta-keyword">/home/</span>nacos/init.d/custom.properties</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"8848:8848"</span></span><br><span class="line">      - <span class="string">"9555:9555"</span></span><br><span class="line"><span class="symbol">    depends_on:</span></span><br><span class="line">      - mysql</span><br><span class="line"><span class="symbol">    restart:</span> on-failure</span><br><span class="line"><span class="symbol">  mysql:</span></span><br><span class="line"><span class="symbol">    container_name:</span> mysql</span><br><span class="line"><span class="symbol">    image:</span> nacos/nacos-mysql:<span class="number">5.7</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line">      - MYSQL_ROOT_PASSWORD=root</span><br><span class="line">      - MYSQL_DATABASE=nacos_dev</span><br><span class="line">      - MYSQL_USER=nacos</span><br><span class="line">      - MYSQL_PASSWORD=nacos<span class="meta">#123</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="meta-keyword">/data/</span>nacos-volume/mysql:<span class="meta-keyword">/var/</span>lib/mysql</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"3306:3306"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta"># 启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="meta"># 启动日志</span></span><br><span class="line">tail <span class="number">-200</span>f <span class="meta-keyword">/data/</span>nacos-volume<span class="meta-keyword">/standalone-logs/</span>start.out</span><br><span class="line"></span><br><span class="line"><span class="meta"># 查看</span></span><br><span class="line">curl http:<span class="comment">//192.168.0.70:8848/nacos</span></span><br><span class="line"><span class="meta"># user nacos，pwd nacos</span></span><br></pre></td></tr></table></figure>
+          <h1 id><a href="#" class="headerlink" title="#"></a>#</h1><h3 id="设计模式的六大原则"><a href="#设计模式的六大原则" class="headerlink" title="设计模式的六大原则"></a>设计模式的六大原则</h3><h3 id="常见的设计模式"><a href="#常见的设计模式" class="headerlink" title="常见的设计模式"></a>常见的设计模式</h3><h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><h3 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h3><h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><h3 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h3><h3 id="SOA"><a href="#SOA" class="headerlink" title="SOA"></a>SOA</h3><h3 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h3>
       
     </div>
 
@@ -766,7 +831,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -780,88 +845,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">LVM逻辑卷管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-21 12:28:28 / 修改时间：13:23:59" itemprop="dateCreated datePublished" datetime="2020-05-21T12:28:28+08:00">2020-05-21</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>530</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="conceptual"><a href="#conceptual" class="headerlink" title="conceptual"></a>conceptual</h2><ul>
-<li>LVM是逻辑盘卷管理（Logical Volume Manager）</li>
-<li>物理卷(PV) （磁盘分区）</li>
-<li>卷组(VG) （多个磁盘分区组成卷组）</li>
-<li>逻辑卷(LV) （在卷组上划分分区）</li>
-</ul>
-<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 物理卷 PV</span></span><br><span class="line">pvdisplay -v</span><br><span class="line"><span class="meta"># v verbose</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 卷组 VG</span></span><br><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="meta"># 显示更多(VG,PV,LV)</span></span><br><span class="line">vgdisplay -v</span><br></pre></td></tr></table></figure>
-<h2 id="新创建-LVM"><a href="#新创建-LVM" class="headerlink" title="新创建(LVM)"></a>新创建(LVM)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建磁盘分区</span></span><br><span class="line">fdisk /dev/vdc</span><br><span class="line">&gt; n p w</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建物理分区</span></span><br><span class="line">pvcreate /dev/vdc1</span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入文件系统，使扩容生效。</span></span><br><span class="line">xfs_growfs /dev/centos/root</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看是否生效</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
-<h2 id="扩展-LVM"><a href="#扩展-LVM" class="headerlink" title="扩展(LVM)"></a>扩展(LVM)</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看新加磁盘</span></span><br><span class="line"><span class="attr">fdisk</span> <span class="string">-l</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建磁盘分区</span></span><br><span class="line"><span class="attr">fdisk</span> <span class="string">/dev/vdc</span></span><br><span class="line"><span class="meta">&gt;</span> <span class="string">n p w</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建物理分区</span></span><br><span class="line"><span class="attr">pvcreate</span> <span class="string">/dev/vdc1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加入卷组</span></span><br><span class="line"><span class="attr">vgextend</span> <span class="string">centos /dev/vdc1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定量加入逻辑卷</span></span><br><span class="line"><span class="attr">lvextend</span> <span class="string">-L +10G /dev/centos/root</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入文件系统，使扩容生效。</span></span><br><span class="line"><span class="attr">xfs_growfs</span> <span class="string">/dev/centos/root</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看是否生效</span></span><br><span class="line"><span class="attr">df</span> <span class="string">-h</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-title-link" itemprop="url">配置国内镜像源</a>
+            <a href="/2020/05/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">操作系统原理</a>
         </h2>
 
         <div class="post-meta">
@@ -871,15 +855,24 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-20 17:50:25" itemprop="dateCreated datePublished" datetime="2020-05-20T17:50:25+08:00">2020-05-20</time>
+              <time title="创建时间：2020-05-22 22:19:17" itemprop="dateCreated datePublished" datetime="2020-05-22T22:19:17+08:00">2020-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-03 10:30:15" itemprop="dateModified" datetime="2020-06-03T10:30:15+08:00">2020-06-03</time>
+                <time title="修改时间：2020-05-26 22:26:17" itemprop="dateModified" datetime="2020-05-26T22:26:17+08:00">2020-05-26</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -887,7 +880,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>955</span>
+              <span>51</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -906,12 +899,8 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">Ali 镜像源</a></p>
-<h2 id="删除所有源"><a href="#删除所有源" class="headerlink" title="删除所有源"></a>删除所有源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新缓存</span></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看源</span></span><br><span class="line">yum repolist all</span><br></pre></td></tr></table></figure>
-<h2 id="centos-镜像源"><a href="#centos-镜像源" class="headerlink" title="centos 镜像源"></a>centos 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Aliyun 源</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这两个源有时候访问不通</span></span><br><span class="line">sed -i <span class="string">"/cloud.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line">sed -i <span class="string">"/.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure>
-<h2 id="ubuntu-镜像源"><a href="#ubuntu-镜像源" class="headerlink" title="ubuntu 镜像源"></a>ubuntu 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/apt/sources.list</span><br><span class="line"><span class="comment"># http://archive.ubuntu.com/</span></span><br><span class="line"><span class="comment"># mirrors.aliyun.com</span></span><br><span class="line">sed -i <span class="string">'s/archive.ubuntu.com/mirrors.aliyun.com/'</span> /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-<h2 id="docker-镜像源"><a href="#docker-镜像源" class="headerlink" title="docker 镜像源"></a>docker 镜像源</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//mirrors.aliyun.<span class="keyword">com</span>/docker-<span class="keyword">ce</span>/linux/centos/docker-<span class="keyword">ce</span>.repo -O /etc/yum.repos.d/docker-<span class="keyword">ce</span>.repo</span><br></pre></td></tr></table></figure>
-<h2 id="docker-registry-源"><a href="#docker-registry-源" class="headerlink" title="docker registry 源"></a>docker registry 源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载 reload</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl reload docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># github 加速</span></span><br><span class="line">http://tool.chinaz.com/dns?<span class="built_in">type</span>=1&amp;host=github.com&amp;ip=</span><br></pre></td></tr></table></figure>
+          <a href="/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" title="计算机组成原理">计算机组成原理</a>
+<h2 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h2><h3 id="BootLoader"><a href="#BootLoader" class="headerlink" title="BootLoader"></a>BootLoader</h3><h3 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h3><h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><h3 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h3><h3 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h3><h3 id="系统驱动管理"><a href="#系统驱动管理" class="headerlink" title="系统驱动管理"></a>系统驱动管理</h3><h3 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h3><h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3>
       
     </div>
 
@@ -930,7 +919,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -944,7 +933,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
+            <a href="/2020/05/%E5%B9%B6%E5%8F%91%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">并发处理</a>
         </h2>
 
         <div class="post-meta">
@@ -954,15 +943,24 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-05-20 12:23:18" itemprop="dateCreated datePublished" datetime="2020-05-20T12:23:18+08:00">2020-05-20</time>
+              <time title="创建时间：2020-05-22 22:18:53" itemprop="dateCreated datePublished" datetime="2020-05-22T22:18:53+08:00">2020-05-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-22 23:57:49" itemprop="dateModified" datetime="2020-05-22T23:57:49+08:00">2020-05-22</time>
+                <time title="修改时间：2020-05-23 00:02:41" itemprop="dateModified" datetime="2020-05-23T00:02:41+08:00">2020-05-23</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -970,14 +968,14 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>65</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -989,262 +987,31 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="数据结构概念"><a href="#数据结构概念" class="headerlink" title="数据结构概念"></a>数据结构概念</h2><ul>
-<li>什么是数据？<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">数据(<span class="class"><span class="keyword">data</span>) 是事实或观察的结果，是对客观事物的逻辑归纳，是用于表示客观事物的未经加工的原始素材。</span></span><br><span class="line">数据 是科学实验、检验、统计等所获得的和用于科学研究、技术设计、查证、决策等的数值。</span><br></pre></td></tr></table></figure></li>
-<li><p>问题求解方法</p>
-<ul>
-<li>感觉、经验</li>
-<li>占卜、求神</li>
-<li>逻辑、数学推理、实验</li>
-<li>工程、计算</li>
-<li>模型、模拟、仿真</li>
-<li>哲学</li>
-</ul>
-</li>
-<li><p>不可解问题</p>
-<ul>
-<li>无解</li>
-<li>不可分问题</li>
-<li>熵无限大问题</li>
-<li>悖论<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列举两个经典的悖论</span></span><br><span class="line">(理发师)我只给村里不给自己理发的人理发</span><br><span class="line">A 集合（村里的人）</span><br><span class="line"><span class="keyword">B </span>集合（村里不给自己理发的人）</span><br><span class="line">c 理发师（我）</span><br><span class="line"><span class="comment"># 悖论产生的原因（集合内元素产生递归的行为）</span></span><br><span class="line">当 c 属于 A</span><br><span class="line">且 c 属于 <span class="keyword">B</span></span><br><span class="line"><span class="keyword">B </span>又是 A 的真子集</span><br><span class="line">结论：理发师不能属于<span class="keyword">B</span></span><br><span class="line"><span class="keyword"># </span>理发师产生了递归的行为，因此集合内元素不能产生递归行为。</span><br><span class="line"></span><br><span class="line">一尺之棰，日取其半，万世不竭</span><br><span class="line"><span class="comment"># 悖论产生的原因（降维，信息丢失导致）</span></span><br><span class="line">一尺之锤 理应是多维对象。被抽象数学中的线后变成了一维</span><br><span class="line">日取其半 </span><br><span class="line">万世不竭 因为维度降低，信息有丢失。</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p>什么是问题？</p>
-<blockquote>
-<p>问题求解的过程是从未知到已知过程，熵在不断减小。熵趋近于0，则问题有解。<br>下降的过程叫梯度<br>数学问题-&gt;明确到明确过程</p>
-</blockquote>
-</li>
-<li><p>熵</p>
-<blockquote>
-<p>指混乱程度</p>
-</blockquote>
-</li>
-<li><p>分类问题用判断</p>
-</li>
-<li>求因、证明问题 用公理、数学证明</li>
-<li>构建问题用流程和算法</li>
-</ul>
-<blockquote>
-<p>计算的边界： 有穷，能行问题。</p>
+          <h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><blockquote>
+<p>并行和并发的区别</p>
 </blockquote>
 <ul>
-<li>什么是抽象？<blockquote>
-<p>从众多的具体事物中，抽取共同的、本质的属性，舍弃个别的、非本质的属性，从而形成概念。<br>算法 + 数据结构 = 程序</p>
-</blockquote>
-</li>
-</ul>
-<h3 id="算法复杂度-从低到高"><a href="#算法复杂度-从低到高" class="headerlink" title="算法复杂度(从低到高)"></a>算法复杂度(从低到高)</h3><blockquote>
-<p>问题求解的规模，大 O 是指主导部分。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">O</span><span class="params">(<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(log(n)</span></span>)</span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(n)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(nlog(n)</span></span>)</span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(n^<span class="number">2</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(n^<span class="number">3</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(<span class="number">2</span>^n)</span></span></span><br><span class="line">n! 举例(用随机数随机组合成一个已知顺序数)</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>程序实现的好坏<ul>
-<li>是否可读</li>
-<li>是否有冗余语句</li>
-<li>健壮性</li>
-<li>可维护性</li>
+<li>多线程<ul>
+<li>线程安全</li>
 </ul>
 </li>
-<li>python 算法计量<ul>
-<li>timeit 模块<br><a href="https://wiki.python.org/moin/TimeComplexity" target="_blank" rel="noopener">python 容器操作的算法复杂度</a></li>
+<li>一致性、事务<ul>
+<li>事务 ACID 特性</li>
+<li>事务的隔离级别</li>
+<li>MVCC</li>
 </ul>
 </li>
-</ul>
-</blockquote>
-<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="划分1"><a href="#划分1" class="headerlink" title="划分1"></a>划分1</h3><ul>
-<li>数据的逻辑结构<ul>
-<li>集合</li>
-<li>线性结构</li>
-<li>树形结构<blockquote>
-<p>DNS (互联网中最大的树结构）</p>
-</blockquote>
-</li>
-<li>图形结构<blockquote>
-<p>万维网（互联网中最大的图结构）</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>数据存储结构<ul>
-<li>顺序存储</li>
-<li>链式存储</li>
-<li>索引存储</li>
-<li>哈希存储</li>
-</ul>
-</li>
-<li>常用算法<ul>
-<li>检索</li>
-<li>插入</li>
-<li>删除</li>
-<li>更新</li>
-<li>排序</li>
+<li>锁<ul>
+<li>悲观锁</li>
+<li>乐观锁</li>
+<li>公平锁 和 非公平锁</li>
+<li>互斥锁</li>
+<li>共享锁</li>
+<li>死锁</li>
 </ul>
 </li>
 </ul>
-<h3 id="划分2"><a href="#划分2" class="headerlink" title="划分2"></a>划分2</h3><ul>
-<li>数据的逻辑结构<ul>
-<li>集合</li>
-<li>线性结构<ul>
-<li>数组</li>
-<li>栈</li>
-<li>队列</li>
-<li>链表</li>
-</ul>
-</li>
-<li>树形结构<ul>
-<li>二叉树</li>
-<li>完全二叉树</li>
-<li>平衡二叉树</li>
-<li>二叉查找树</li>
-<li>红黑树</li>
-<li>B 树<ul>
-<li>B-</li>
-<li>B+</li>
-<li>B*</li>
-</ul>
-</li>
-<li>LSM树</li>
-</ul>
-</li>
-<li>图形结构</li>
-</ul>
-</li>
-<li>数据存储结构<ul>
-<li>顺序存储</li>
-<li>链式存储</li>
-<li>索引存储</li>
-<li>哈希存储</li>
-</ul>
-</li>
-<li>常用算法<ul>
-<li>检索</li>
-<li>插入</li>
-<li>删除</li>
-<li>更新</li>
-<li>排序<ul>
-<li>选择排序</li>
-<li>冒泡排序</li>
-<li>快速排序</li>
-<li>归并排序</li>
-<li>希尔排序</li>
-<li>堆排序</li>
-<li>计数排序</li>
-<li>桶排序</li>
-<li>基数排序</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>二分查找</li>
-<li>贪心算法</li>
-<li>回溯算法</li>
-<li>剪枝算法</li>
-<li>动态规划</li>
-<li>朴素贝叶斯</li>
-<li>推荐算法</li>
-<li>最小生成树算法</li>
-<li>最短路径算法</li>
-</ul>
-<h3 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">括号匹配，次序反转</span><br><span class="line">十进制转二进制，通过取余反转得到</span><br><span class="line">表达式转换，</span><br><span class="line">中缀 <span class="selector-tag">a</span> + b</span><br><span class="line">前缀 +ab</span><br><span class="line">后缀 ab+</span><br><span class="line">中缀转后缀表达式，利用栈</span><br><span class="line">后缀计算值，利用栈</span><br><span class="line">后缀表达式传值</span><br></pre></td></tr></table></figure>
-<h3 id="队列的应用"><a href="#队列的应用" class="headerlink" title="队列的应用"></a>队列的应用</h3><blockquote>
-<p>使用场景：处理资源速度慢于资源输入速度</p>
-</blockquote>
-<h3 id="递归-recursion"><a href="#递归-recursion" class="headerlink" title="递归 recursion"></a>递归 recursion</h3><blockquote>
-<p>横向解决大规模问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">递归三定律</span><br><span class="line">    有结束条件</span><br><span class="line">    问题规模逐步减小</span><br><span class="line">    调用自身</span><br><span class="line">递归应用</span><br><span class="line">    任意进制转换</span><br><span class="line">    分形图</span><br></pre></td></tr></table></figure></p>
-<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">冒泡排序：两两交换</span><br><span class="line">选择排序：全表扫描，最大&#x2F;小 交换</span><br><span class="line">插入排序：新项和扫描过的子列表比对</span><br><span class="line">希尔排序：子列表进行插入排序</span><br><span class="line">归并排序：分治算法排序</span><br><span class="line">快速排序：找中值，按中值分裂</span><br></pre></td></tr></table></figure>
-<h2 id="树结构"><a href="#树结构" class="headerlink" title="树结构"></a>树结构</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">链表-&gt;二叉树-&gt;二叉查找树-&gt;特殊的二叉查找树（自平衡的二叉查找树）</span><br><span class="line"></span><br><span class="line">二分：有序数据，(min+max)/<span class="number">2</span>,二叉树查找树（左小，右大），时间复杂度是树的深度</span><br><span class="line">最优二叉树-赫夫曼树</span><br><span class="line">平衡二叉树-AVL树</span><br><span class="line"></span><br><span class="line">红黑树</span><br><span class="line">每个节点不是红色就是黑色</span><br><span class="line">不能出现连在一起的红色节点</span><br><span class="line">根节点是黑色（根节点入度为零）</span><br><span class="line">红色节点的两个叶子节点都是黑色，叶子节点都是黑色</span><br><span class="line">左旋：条件-&gt;</span><br><span class="line">右旋：条件-&gt;</span><br><span class="line">变颜色</span><br><span class="line"></span><br><span class="line">构建红黑树</span><br><span class="line">所有插入的点默认为红色</span><br><span class="line">按照二叉查找树插入</span><br><span class="line">插入节点后，不满足红黑树规则</span><br><span class="line">变颜色（父，叔节点都为红）：把父节点，叔节点变成黑色，把祖父节点变红色</span><br><span class="line">旋转（父，叔节点为红，黑）：右边都是红色，进行左旋</span><br><span class="line">旋转（父，叔节点为红，黑）：左边都是红色，进行右旋，要进行变颜色，父节点变黑色，祖父节点变红色</span><br></pre></td></tr></table></figure>
-<h3 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前序遍历：根，左，右</span><br><span class="line">中序遍历：左，根，右</span><br><span class="line">后序遍历：左，右，根</span><br></pre></td></tr></table></figure>
-<h3 id="树的应用"><a href="#树的应用" class="headerlink" title="树的应用"></a>树的应用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文件系统</span><br><span class="line">html文档 dom 处理</span><br><span class="line">DNS域名体系</span><br><span class="line">语法树（解析树）</span><br></pre></td></tr></table></figure>
-</blockquote>
-<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><blockquote>
-<p>树是特殊的图<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">图 <span class="keyword">Graph</span></span><br><span class="line">    顶点 Vertex</span><br><span class="line">    边 Edge</span><br><span class="line">    权重 Weight</span><br><span class="line">图的表示</span><br><span class="line">    邻接矩阵</span><br><span class="line">    邻接表：链表</span><br><span class="line"></span><br><span class="line">六度分隔理论</span><br></pre></td></tr></table></figure></p>
-</blockquote>
-<h3 id="优化问题"><a href="#优化问题" class="headerlink" title="优化问题"></a>优化问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">移位操作应用</span><br><span class="line">    可以做倍数：左移位</span><br><span class="line">    可以做取余：与操作</span><br><span class="line">    可以做布尔运算：判断奇偶</span><br></pre></td></tr></table></figure>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">二进制编码</span><br><span class="line">补码作用：利用溢出，我们可以将减法变成加法</span><br><span class="line"><span class="number">-1</span> + <span class="number">1</span> = <span class="number">0</span></span><br><span class="line"><span class="number">1001</span> #原码 <span class="number">-1</span>       <span class="number">111</span> <span class="number">1</span> #补码 <span class="number">-1</span> 的补码（反码+<span class="number">1</span>），<span class="number">-1</span> 的反码 <span class="number">1110</span> </span><br><span class="line">+     <span class="number">0001</span> #原码  <span class="number">1</span>       <span class="number">0001</span> #原码</span><br><span class="line">---</span><br><span class="line">       <span class="number">1010</span> # <span class="number">-2</span>            <span class="number">10000</span> # 等于<span class="number">0</span> <span class="number">1</span>溢出</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>个字节能表示的最大整数是<span class="number">2</span>^<span class="number">8</span><span class="number">-1</span> =<span class="number">255</span></span><br><span class="line"><span class="number">1</span>个字节能表示的最大负数是-(<span class="number">2</span>^<span class="number">8</span>)/<span class="number">2</span> = <span class="number">-128</span></span><br><span class="line"><span class="number">1</span>个字节能表示的最大正数是 <span class="number">2</span>^<span class="number">8</span>/<span class="number">2</span><span class="number">-1</span> = <span class="number">127</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编码符号表示</span></span><br><span class="line"><span class="attr">ascii</span> <span class="string">8bit</span></span><br><span class="line"><span class="attr">unicode16</span> <span class="string">16bit # 可以表示全世界所有的文字</span></span><br><span class="line"><span class="attr">unicode32</span> <span class="string">32bit</span></span><br><span class="line"><span class="attr">utf8</span> <span class="string">8-32bit</span></span><br><span class="line"><span class="attr">base64</span>  <span class="string"># 全都转换成 8bit  可显示的字符，便于传输，有病毒利用 base64 传输，禁用 base64 可以防止病毒传输</span></span><br><span class="line"></span><br><span class="line"><span class="attr">hashcode</span> <span class="string">把字符串转成数字</span></span><br></pre></td></tr></table></figure>
-<h3 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">数据结构</span><br><span class="line">大话数据结构</span><br><span class="line">算法入门经典</span><br><span class="line">算法导论</span><br></pre></td></tr></table></figure>
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Consul%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/Consul%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Consul安装配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-20 12:10:13 / 修改时间：12:19:31" itemprop="dateCreated datePublished" datetime="2020-05-20T12:10:13+08:00">2020-05-20</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>64</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href>consul</a></li>
-</ul>
-<h2 id="Consul-conceptual"><a href="#Consul-conceptual" class="headerlink" title="Consul conceptual"></a>Consul conceptual</h2><ul>
-<li>微服务</li>
-<li>服务网格</li>
-<li>服务发现</li>
-<li>服务间调用</li>
-<li>限流</li>
-<li>熔断</li>
-<li>监控</li>
-</ul>
-<h2 id="Consul-集群安装"><a href="#Consul-集群安装" class="headerlink" title="Consul 集群安装"></a>Consul 集群安装</h2><h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><h2 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h2><h2 id="熔断"><a href="#熔断" class="headerlink" title="熔断"></a>熔断</h2><h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2>
       
     </div>
 
@@ -1262,7 +1029,7 @@ var _hmt = _hmt || [];
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1328,7 +1095,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">122</span>
+          <span class="site-state-item-count">132</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1378,13 +1145,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">278k</span>
+    <span title="站点总字数">288k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:12</span>
+    <span title="站点阅读时长">4:22</span>
 </div>
 
         
