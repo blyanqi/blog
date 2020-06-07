@@ -574,6 +574,175 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">华为交换机基本配置命令详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 11:37:14 / 修改时间：11:38:35" itemprop="dateCreated datePublished" datetime="2020-06-07T11:37:14+08:00">2020-06-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="华为交换机基本配置命令详解"><a href="#华为交换机基本配置命令详解" class="headerlink" title="华为交换机基本配置命令详解"></a>华为交换机基本配置命令详解</h2><p>1、配置文件相关命令<br>system-view                    进入特权模式<br>display current-configuration      显示当前生效的配置<br>display saved-configuration        显示flash中配置文件，即下次上电启动时所用的配置文件<br>reset saved-configuration           檫除旧的配置文件<br>reboot                                          交换机重启<br>display version                             显示系统版本信息</p>
+<p>2、基本配置<br>super password                          修改特权用户密码<br>sysname                                     交换机命名<br>interface GigabitEthernet 1/0/1            进入接口视图<br>interface vlan 1                           进入接口视图<br>ip address 192.168.100.253 255.255.255.0            配置VLAN的IP地址<br>ip route-static 0.0.0.0 0.0.0.0 10.1.1.1     静态路由＝网关</p>
+<p>3、telnet配置<br>user-interface vty 0 4                                                                                     进入虚拟终端<br>[S3026-ui-vty0-4]authentication-mode password                                     设置口令模式<br>[S3026-ui-vty0-4]set authentication password simple fesf1qaz               设置口令<br>[S3026-ui-vty0-4]user-role network-admin                                                 用户级</p>
+<p>4、端口配置<br>[Quidway-Ethernet1/0/1]duplex {half|full|auto}                    配置端口工作状态<br>[Quidway-Ethernet1/0/1]speed {10|100|auto}                      配置端口工作速率<br>[Quidway-Ethernet1/0/1]flow-control                                  配置端口流控<br>[Quidway-Ethernet1/0/1]mdi {across|auto|normal}              配置端口平接扭接<br>[Quidway-Ethernet1/0/1]port link-type {trunk|access|hybrid}     设置端口工作模式<br>[Quidway-Ethernet1/0/1]undo shutdown                                     激活端口<br>[Quidway-Ethernet1/0/2]quit                                                        退出系统视图</p>
+<p>5、链路聚合配置</p>
+<p>[DeviceA] link-aggregation group 1 mode manual       创建手工聚合组1<br>[Qw_A] interface ethernet 1/0/1                     将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1<br>[Qw_A-Ethernet1/0/1] interface ethernet 1/0/2    将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/2] port link-aggregation group 1<br>[Qw_A] link-aggregation group 1 service-type tunnel     # 在手工聚合组的基础上创建tunnel业务环回组。<br>[Qw_A] interface ethernet 1/0/1               将以太网端口Ethernet1/0/1加入业务环回组。<br>[Qw_A-Ethernet1/0/1] undo stp<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1</p>
+<p>6、端口镜像<br>monitor-port        　指定镜像端口<br>port mirror     　　 指定被镜像端口<br>port mirror int_list observing-port int_type int_num  指定镜像和被镜像</p>
+<p>以太网端口有三种链路类型：Access、Hybrid和Trunk。<br>   Access类型的端口只能属于1个VLAN，一般用于连接计算机的端口；<br>   Trunk类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，一般用于交换机之间连接的端口；<br>    Hybrid类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，可以用于交换机之间连接，也可以用于连接用户的计算机。<br>    Hybrid端口和Trunk端口在接收数据时，处理方法是一样的，唯一不同之处在于发送数据时：Hybrid端口可以允许多个VLAN的报文发送时不打标签，而Trunk端口只允许缺省VLAN的报文发送时不打标签。</p>
+<p>7、VLAN配置<br>vlan 4                                 　　　　　　   创建VLAN<br>[Quidway-vlan4]port ethernet 1/0/1 to ethernet 1/0/4 　　　  在VLAN中增加端口</p>
+<p>① 配置基于access的VLAN<br>[Quidway-Ethernet1/0/2]port access vlan 4          　　　　　 当前端口加入到VLAN<br>注意：缺省情况下，端口的链路类型为Access类型，所有Access端口均属于且只属于VLAN1</p>
+<p>② 配置基于trunk的VLAN<br>[Quidway-Ethernet 1/0/24]port link-type trunk                        设置当前端口为trunk<br>[Quidway-Ethernet 1/0/24]port trunk permit vlan {ID|All}     　设trunk允许的VLAN<br>注意：所有端口缺省情况下都是允许VLAN1的报文通过的<br>[Quidway-Ethernet1/0/2]port trunk pvid vlan 34   　　　　　  设置trunk端口的PVID</p>
+<p>③ 配置基于Hybrid端口的VLAN<br>[Quidway-Ethernet1/0/2]port link-type hybrid              配置端口的链路类型为Hybrid类型<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan-id-list { tagged | untagged }  允许指定的VLAN通过当前Hybrid端口<br>注意：缺省情况下，所有Hybrid端口只允许VLAN1通过<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan vlan-id      设置Hybrid端口的缺省VLAN<br>注意：缺省情况下，Hybrid端口的缺省VLAN为VLAN1</p>
+<p>④ VLAN描述<br>description string                      　　　　 指定VLAN描述字符<br>undo description                         　　  　删除VLAN描述字符<br>display vlan [vlan_id]                               查看VLAN设置</p>
+<p>⑤ 私有VLAN配置<br>[Qw_A-vlanx]isolate-user-vlan enable          　　　 　　设置主vlan<br>[Qw_A]Isolate-user-vlan  secondary  　　　 　　           设置主vlan包括的子vlan<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan      　　 设置vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid pvid             　　  删除vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan_id_list untagged 　设置无标识的vlan</p>
+<p>如果包的vlan id与PVId一致，则去掉vlan信息. 默认PVID=1。<br>所以设置PVID为所属vlan id, 设置可以互通的vlan为untagged.</p>
+<p>8、STP配置<br>stp {enable|disable}                               设置生成树,默认关闭<br>stp mode rstp                                        设置生成树模式为rstp<br>stp priority 8192                         　　　 设置交换机的优先级<br>stp root {primary|secondary}             　设置为根或根的备份<br>[Quidway-Ethernet0/1]stp cost 200      设置交换机端口的花费</p>
+<p>display mac-address                            显示地址表信息<br>display mac-address aging-time         显示地址表动态表项的老化时间<br>display port-mac                                  显示用户配置的以太网端口MAC地址的起始值</p>
+<p>2、端口隔离配置</p>
+<p>① 通过端口隔离特性，用户可以将需要进行控制的端口加入到一个隔离组中，实现隔离组中的端口之间二层、三层数据的隔离，既增强了网络的安全性，也为用户提供了灵活的组网方案。</p>
+<p>[Sysname] interface ethernet1/0/2   将以太网端口Ethernet1/0/2加入隔离组。<br>[Sysname-Ethernet1/0/2] port isolate<br>[Sysname] display isolate port      显示隔离组中的端口信息</p>
+<p>② 配置隔离组后，只有隔离组内各个端口之间的报文不能互通，隔离组内端口与隔离组外端口以及隔离组外端口之间的通信不会受到影响。<br>③ 端口隔离特性与以太网端口所属的VLAN无关。<br>④ 当汇聚组中的某个端口加入或离开隔离组后，本设备中同一汇聚组内的其它端口，均会自动加入或离开该隔离组。<br>⑤ 对于既处于某个聚合组又处于某个隔离组的一组端口，其中的一个端口离开聚合组时不会影响其他端口，即其他端口仍将处于原聚合组和原隔离组中。<br>⑥ 如果某个聚合组中的端口同时属于某个隔离组，当在系统视图下直接删除该聚合组后，该聚合组中的端口仍将处于该隔离组中。<br>⑦ 当隔离组中的某个端口加入聚合组时，该聚合组中的所有端口，会自动加入隔离组中。</p>
+<p>13、端口安全配置<br>[Switch] port-security enable     启动端口安全功能<br>[Switch] interface Ethernet 1/0/1  进入以太网Ethernet1/0/1端口视图<br>[Switch-Ethernet1/0/1] port-security max-mac-count 80<br>设置端口允许接入的最大MAC地址数为80<br>[Switch-Ethernet1/0/1] port-security port-mode autolearn  配置端口的安全模式为autolearn<br>[Switch-Ethernet1/0/1] mac-address security 0001-0002-0003 vlan 1<br>将Host 的MAC地址0001-0002-0003作为Security MAC添加到VLAN 1中<br>[Switch-Ethernet1/0/1] port-security intrusion-mode disableport-temporarily<br>设置Intrusion Protection特性被触发后，暂时关闭该端口<br>[Switch]port-security timer disableport 30       关闭时间为30秒。</p>
+<p>14、端口绑定配置<br>通过端口绑定特性，网络管理员可以将用户的MAC地址和IP地址绑定到指定的端口上。进行绑定操作后，交换机只对从该端口收到的指定MAC地址和IP地址的用户发出的报文进行转发，提高了系统的安全性，增强了对网络安全的监控。</p>
+<p>[Qw_A-Ethernet1/0/1] am user-bind mac-addr 0001-0002-0003 ip-addr 10.12.1.1<br>将Host 1的MAC地址和IP地址绑定到Ethernet1/0/1端口。<br>有的交换机上绑定的配置不一样<br>[Qw_A] interface ethernet 1/0/2<br>[Qw_A-Ethernet1/0/2] user-bind ip-address 192.168.0.3 mac-address 0001-0203-0405<br>端口过滤配置<br>[Qw_A] interface ethernet1/0/1      配置端口Ethernet1/0/1的端口过滤功能。<br>[Qw_A-Ethernet1/0/1] ip check source ip-address mac-address<br>[Qw_A] dhcp-snooping             开启DHCP Snooping功能。<br>[Qw_A] interface ethernet1/0/2<br>设置与DHCP服务器相连的端口Ethernet1/0/2为信任端口。<br>[Qw_A-Ethernet1/0/2] dhcp-snooping trust<br>在端口Ethernet1/0/1上启用IP过滤功能，防止客户端使用伪造的不同源IP地址对服务器进行攻击</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">ceph存储配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 10:51:38 / 修改时间：10:52:02" itemprop="dateCreated datePublished" datetime="2020-06-07T10:51:38+08:00">2020-06-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://docs.ceph.org.cn/start/" target="_blank" rel="noopener">ceph 安装配置</a></p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E9%A2%98%E5%BA%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -953,201 +1122,6 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/" class="post-title-link" itemprop="url">rancher使用维护</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-05 23:59:25" itemprop="dateCreated datePublished" datetime="2020-06-05T23:59:25+08:00">2020-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-06 13:27:29" itemprop="dateModified" datetime="2020-06-06T13:27:29+08:00">2020-06-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://docs.rancher.cn/rancher2x/quick-start.html" target="_blank" rel="noopener"> rander 2.x 新文档 </a></p>
-<h2 id="rancher-概念及原理"><a href="#rancher-概念及原理" class="headerlink" title="rancher 概念及原理"></a>rancher 概念及原理</h2><h2 id="rancher-使用"><a href="#rancher-使用" class="headerlink" title="rancher 使用"></a>rancher 使用</h2><ul>
-<li>集群 是指k8s or k3s 容器编排环境</li>
-<li>项目 是指k8s 里的命名空间</li>
-<li></li>
-</ul>
-<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><ul>
-<li>通过 rancher 安装一个 k8s 集群。</li>
-<li>建立一个 pod，并完成对 pod 迁移，扩容，更新。</li>
-<li>建立存储卷，将容器目录映射到存储卷。</li>
-<li>连接到私有的容器镜像库，启动自定义镜像。</li>
-</ul>
-<p>修改默认的 registry<br>在 系统管理 -&gt; 系统设置 -&gt; 高级设置, 点击 我确认已经知道修改高级设置可能导致问题.<br>找到registry.default 设置然后点击编辑按钮。</p>
-<p>限制镜像库的使用</p>
-<h2 id="使用自建镜像库-issue"><a href="#使用自建镜像库-issue" class="headerlink" title="使用自建镜像库 issue"></a>使用自建镜像库 issue</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x509: certificate signed by unknown authority</span></span><br><span class="line">使用了自签名证明，提示证书未受信任。</span><br><span class="line">解决方法，申请个受信任证书</span><br></pre></td></tr></table></figure>
-<p> .   <strong><em>_          </em>            </strong> <em> </em><br> /\ / <strong><em>‘</em> </strong> <em> </em>(<em>)</em> <strong>  </strong> <em> \ \ \ \<br>( ( )__</em> | ‘<em> | ‘</em>| | ‘<em> \/ </em>` | \ \ \ \<br> \/  <strong><em>)| |</em>)| | | | | || (<em>| |  ) ) ) )<br>  ‘  |_</em></strong>| .<strong>|<em>| |</em>|<em>| |</em>\</strong>, | / / / /<br> =========|<em>|==============|__</em>/=/<em>/</em>/_/<br> :: Spring Boot ::        (v2.2.7.RELEASE)</p>
-<p>2020-06-06 03:01:30.427 [main] INFO  - LOCAL<em>SNAPSHOT_PATH:/root/nacos/config<br>2020-06-06 03:01:30.485 [main] INFO  - limitTime:5.0<br>2020-06-06 03:01:30.622 [main] INFO  - isMultiInstance:false<br>2020-06-06 03:01:30.631 [main] WARN  - Ignore the empty nacos configuration and get it based on dataId[ID_META_AUTH_SERVICE] &amp; group[DEFAULT_GROUP]<br>2020-06-06 03:01:30.688 [main] INFO  - No active profile set, falling back to default profiles: default<br>2020-06-06 03:01:31.585 [main] WARN  - Endpoint ID ‘nacos-config’ contains invalid characters, please migrate to a valid format.<br>2020-06-06 03:01:32.813 [main] INFO  - Initializing ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:01:32.814 [main] INFO  - Starting service [Tomcat]<br>2020-06-06 03:01:32.814 [main] INFO  - Starting Servlet engine: [Apache Tomcat/9.0.34]<br>2020-06-06 03:01:32.889 [main] INFO  - Initializing Spring embedded WebApplicationContext<br>2020-06-06 03:01:33.052 [main] INFO  - Init DruidDataSource<br>2020-06-06 03:01:33.551 [main] INFO  - {dataSource-1} inited
- </em> <em>   |</em>  <em> </em>|<em>. __</em> <em> |    </em><br>| | |\/|<em>)(</em>| | |<em>\  |</em>)||<em>|</em>\<br>     /               |<br>                        3.3.2<br>2020-06-06 03:01:34.112 [main] WARN  - Can not find table primary key in Class: “com.uhe.auth.dao.pojo.Log”.<br>2020-06-06 03:01:34.874 [main] INFO  - Starting ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:01:35.032 [main] INFO  - Started GoMetaAuthServiceApplication in 6.272 seconds (JVM running for 6.994)<br>2020-06-06 03:01:35.048 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_META_AUTH_SERVICE+DEFAULT_GROUP<br>2020-06-06 03:01:35.051 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_META_AUTH_SERVICE, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.051 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_META_AUTH_SERVICE.yaml+DEFAULT_GROUP<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_META_AUTH_SERVICE.yaml, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_GLOBAL.yaml+DEFAULT_GROUP<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_GLOBAL.yaml, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.056 [com.alibaba.nacos.client.Worker.longPolling.fixed-119.84.8.43_10094] INFO  - get changedGroupKeys:[]<br>2020-06-06 03:01:35.060 [com.alibaba.nacos.client.Worker.longPolling.fixed-119.84.8.43_10094] INFO  - get changedGroupKeys:[]</p>
-<p>  .   <strong><em>_          </em>            </strong> <em> </em><br> /\ / <strong><em>‘</em> </strong> <em> </em>(<em>)</em> <strong>  </strong> <em> \ \ \ \<br>( ( )__</em> | ‘<em> | ‘</em>| | ‘<em> \/ </em>` | \ \ \ \<br> \/  <strong><em>)| |</em>)| | | | | || (<em>| |  ) ) ) )<br>  ‘  |_</em></strong>| .<strong>|<em>| |</em>|<em>| |</em>\</strong>, | / / / /<br> =========|<em>|==============|__</em>/=/<em>/</em>/_/<br> :: Spring Boot ::        (v2.2.7.RELEASE)<br>2020-06-06 03:07:47.793 [main] INFO  - LOCAL_SNAPSHOT_PATH:/root/nacos/config<br>2020-06-06 03:07:48.008 [main] INFO  - limitTime:5.0<br>2020-06-06 03:07:48.109 [main] INFO  - isMultiInstance:false<br>2020-06-06 03:07:48.177 [main] WARN  - Ignore the empty nacos configuration and get it based on dataId[ID_META_AUTH_SERVICE] &amp; group[DEFAULT_GROUP]<br>2020-06-06 03:07:48.396 [main] INFO  - No active profile set, falling back to default profiles: default<br>2020-06-06 03:07:51.985 [main] WARN  - Endpoint ID ‘nacos-config’ contains invalid characters, please migrate to a valid format.<br>2020-06-06 03:07:55.607 [main] INFO  - Initializing ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:07:55.609 [main] INFO  - Starting service [Tomcat]<br>2020-06-06 03:07:55.609 [main] INFO  - Starting Servlet engine: [Apache Tomcat/9.0.34]<br>2020-06-06 03:07:55.905 [main] INFO  - Initializing Spring embedded WebApplicationContext<br>2020-06-06 03:07:56.599 [main] INFO  - Init DruidDataSource<br>2020-06-06 03:07:58.416 [main] INFO  - {dataSource-1} inited</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/helm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/helm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">helm安装使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-05 23:07:44 / 修改时间：23:58:33" itemprop="dateCreated datePublished" datetime="2020-06-05T23:07:44+08:00">2020-06-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>495</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="https://github.com/helm/helm/releases" target="_blank" rel="noopener">helm client</a></li>
-</ul>
-<h2 id="kubernetes-helm"><a href="#kubernetes-helm" class="headerlink" title="kubernetes-helm"></a>kubernetes-helm</h2><p>Helm客户端(helm)和Helm服务端(Tiller)。<br>helm init<br>gcr.io/kubernetes-helm/tiller</p>
-<p>—tiller-image<br>export HELM_HOST=localhost:44134</p>
-<p>Tiller可以升级使用helm init —upgrade<br>默认情况下，tiller将安装release信息存储在其运行的命名空间中的ConfigMaps中</p>
-<h2 id="定义一个-Chart"><a href="#定义一个-Chart" class="headerlink" title="定义一个 Chart"></a>定义一个 Chart</h2><p>helm repo add stable <a href="https://kubernetes-charts.storage.googleapis.com/" target="_blank" rel="noopener">https://kubernetes-charts.storage.googleapis.com/</a></p>
-<p>helm repo add rancher-stable \<br><a href="https://releases.rancher.com/server-charts/stable" target="_blank" rel="noopener">https://releases.rancher.com/server-charts/stable</a><br>helm search repo stable<br>helm repo update<br>helm install stable/mysql —generate-name<br>helm ls<br>helm uninstall smiling-penguin<br>helm uninstall smiling-penguin</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1217,7 +1191,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1267,13 +1241,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">288k</span>
+    <span title="站点总字数">290k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:22</span>
+    <span title="站点阅读时长">4:24</span>
 </div>
 
         

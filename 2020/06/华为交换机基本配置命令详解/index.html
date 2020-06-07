@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="华为交换机基本配置命令详解1、配置文件相关命令system-view                    进入特权模式display current-configuration      显示当前生效的配置display saved-configuration        显示flash中配置文件，即下次上电启动时所用的配置文件reset saved-configuration">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华为交换机基本配置命令详解">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="华为交换机基本配置命令详解1、配置文件相关命令system-view                    进入特权模式display current-configuration      显示当前生效的配置display saved-configuration        显示flash中配置文件，即下次上电启动时所用的配置文件reset saved-configuration">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-07T03:37:14.000Z">
+<meta property="article:modified_time" content="2020-06-07T03:38:35.218Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>华为交换机基本配置命令详解 | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          华为交换机基本配置命令详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 11:37:14 / 修改时间：11:38:35" itemprop="dateCreated datePublished" datetime="2020-06-07T11:37:14+08:00">2020-06-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="华为交换机基本配置命令详解"><a href="#华为交换机基本配置命令详解" class="headerlink" title="华为交换机基本配置命令详解"></a>华为交换机基本配置命令详解</h2><p>1、配置文件相关命令<br>system-view                    进入特权模式<br>display current-configuration      显示当前生效的配置<br>display saved-configuration        显示flash中配置文件，即下次上电启动时所用的配置文件<br>reset saved-configuration           檫除旧的配置文件<br>reboot                                          交换机重启<br>display version                             显示系统版本信息</p>
+<p>2、基本配置<br>super password                          修改特权用户密码<br>sysname                                     交换机命名<br>interface GigabitEthernet 1/0/1            进入接口视图<br>interface vlan 1                           进入接口视图<br>ip address 192.168.100.253 255.255.255.0            配置VLAN的IP地址<br>ip route-static 0.0.0.0 0.0.0.0 10.1.1.1     静态路由＝网关</p>
+<p>3、telnet配置<br>user-interface vty 0 4                                                                                     进入虚拟终端<br>[S3026-ui-vty0-4]authentication-mode password                                     设置口令模式<br>[S3026-ui-vty0-4]set authentication password simple fesf1qaz               设置口令<br>[S3026-ui-vty0-4]user-role network-admin                                                 用户级</p>
+<p>4、端口配置<br>[Quidway-Ethernet1/0/1]duplex {half|full|auto}                    配置端口工作状态<br>[Quidway-Ethernet1/0/1]speed {10|100|auto}                      配置端口工作速率<br>[Quidway-Ethernet1/0/1]flow-control                                  配置端口流控<br>[Quidway-Ethernet1/0/1]mdi {across|auto|normal}              配置端口平接扭接<br>[Quidway-Ethernet1/0/1]port link-type {trunk|access|hybrid}     设置端口工作模式<br>[Quidway-Ethernet1/0/1]undo shutdown                                     激活端口<br>[Quidway-Ethernet1/0/2]quit                                                        退出系统视图</p>
+<p>5、链路聚合配置</p>
+<p>[DeviceA] link-aggregation group 1 mode manual       创建手工聚合组1<br>[Qw_A] interface ethernet 1/0/1                     将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1<br>[Qw_A-Ethernet1/0/1] interface ethernet 1/0/2    将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/2] port link-aggregation group 1<br>[Qw_A] link-aggregation group 1 service-type tunnel     # 在手工聚合组的基础上创建tunnel业务环回组。<br>[Qw_A] interface ethernet 1/0/1               将以太网端口Ethernet1/0/1加入业务环回组。<br>[Qw_A-Ethernet1/0/1] undo stp<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1</p>
+<p>6、端口镜像<br>monitor-port        　指定镜像端口<br>port mirror     　　 指定被镜像端口<br>port mirror int_list observing-port int_type int_num  指定镜像和被镜像</p>
+<p>以太网端口有三种链路类型：Access、Hybrid和Trunk。<br>   Access类型的端口只能属于1个VLAN，一般用于连接计算机的端口；<br>   Trunk类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，一般用于交换机之间连接的端口；<br>    Hybrid类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，可以用于交换机之间连接，也可以用于连接用户的计算机。<br>    Hybrid端口和Trunk端口在接收数据时，处理方法是一样的，唯一不同之处在于发送数据时：Hybrid端口可以允许多个VLAN的报文发送时不打标签，而Trunk端口只允许缺省VLAN的报文发送时不打标签。</p>
+<p>7、VLAN配置<br>vlan 4                                 　　　　　　   创建VLAN<br>[Quidway-vlan4]port ethernet 1/0/1 to ethernet 1/0/4 　　　  在VLAN中增加端口</p>
+<p>① 配置基于access的VLAN<br>[Quidway-Ethernet1/0/2]port access vlan 4          　　　　　 当前端口加入到VLAN<br>注意：缺省情况下，端口的链路类型为Access类型，所有Access端口均属于且只属于VLAN1</p>
+<p>② 配置基于trunk的VLAN<br>[Quidway-Ethernet 1/0/24]port link-type trunk                        设置当前端口为trunk<br>[Quidway-Ethernet 1/0/24]port trunk permit vlan {ID|All}     　设trunk允许的VLAN<br>注意：所有端口缺省情况下都是允许VLAN1的报文通过的<br>[Quidway-Ethernet1/0/2]port trunk pvid vlan 34   　　　　　  设置trunk端口的PVID</p>
+<p>③ 配置基于Hybrid端口的VLAN<br>[Quidway-Ethernet1/0/2]port link-type hybrid              配置端口的链路类型为Hybrid类型<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan-id-list { tagged | untagged }  允许指定的VLAN通过当前Hybrid端口<br>注意：缺省情况下，所有Hybrid端口只允许VLAN1通过<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan vlan-id      设置Hybrid端口的缺省VLAN<br>注意：缺省情况下，Hybrid端口的缺省VLAN为VLAN1</p>
+<p>④ VLAN描述<br>description string                      　　　　 指定VLAN描述字符<br>undo description                         　　  　删除VLAN描述字符<br>display vlan [vlan_id]                               查看VLAN设置</p>
+<p>⑤ 私有VLAN配置<br>[Qw_A-vlanx]isolate-user-vlan enable          　　　 　　设置主vlan<br>[Qw_A]Isolate-user-vlan  secondary  　　　 　　           设置主vlan包括的子vlan<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan      　　 设置vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid pvid             　　  删除vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan_id_list untagged 　设置无标识的vlan</p>
+<p>如果包的vlan id与PVId一致，则去掉vlan信息. 默认PVID=1。<br>所以设置PVID为所属vlan id, 设置可以互通的vlan为untagged.</p>
+<p>8、STP配置<br>stp {enable|disable}                               设置生成树,默认关闭<br>stp mode rstp                                        设置生成树模式为rstp<br>stp priority 8192                         　　　 设置交换机的优先级<br>stp root {primary|secondary}             　设置为根或根的备份<br>[Quidway-Ethernet0/1]stp cost 200      设置交换机端口的花费</p>
+<p>display mac-address                            显示地址表信息<br>display mac-address aging-time         显示地址表动态表项的老化时间<br>display port-mac                                  显示用户配置的以太网端口MAC地址的起始值</p>
+<p>2、端口隔离配置</p>
+<p>① 通过端口隔离特性，用户可以将需要进行控制的端口加入到一个隔离组中，实现隔离组中的端口之间二层、三层数据的隔离，既增强了网络的安全性，也为用户提供了灵活的组网方案。</p>
+<p>[Sysname] interface ethernet1/0/2   将以太网端口Ethernet1/0/2加入隔离组。<br>[Sysname-Ethernet1/0/2] port isolate<br>[Sysname] display isolate port      显示隔离组中的端口信息</p>
+<p>② 配置隔离组后，只有隔离组内各个端口之间的报文不能互通，隔离组内端口与隔离组外端口以及隔离组外端口之间的通信不会受到影响。<br>③ 端口隔离特性与以太网端口所属的VLAN无关。<br>④ 当汇聚组中的某个端口加入或离开隔离组后，本设备中同一汇聚组内的其它端口，均会自动加入或离开该隔离组。<br>⑤ 对于既处于某个聚合组又处于某个隔离组的一组端口，其中的一个端口离开聚合组时不会影响其他端口，即其他端口仍将处于原聚合组和原隔离组中。<br>⑥ 如果某个聚合组中的端口同时属于某个隔离组，当在系统视图下直接删除该聚合组后，该聚合组中的端口仍将处于该隔离组中。<br>⑦ 当隔离组中的某个端口加入聚合组时，该聚合组中的所有端口，会自动加入隔离组中。</p>
+<p>13、端口安全配置<br>[Switch] port-security enable     启动端口安全功能<br>[Switch] interface Ethernet 1/0/1  进入以太网Ethernet1/0/1端口视图<br>[Switch-Ethernet1/0/1] port-security max-mac-count 80<br>设置端口允许接入的最大MAC地址数为80<br>[Switch-Ethernet1/0/1] port-security port-mode autolearn  配置端口的安全模式为autolearn<br>[Switch-Ethernet1/0/1] mac-address security 0001-0002-0003 vlan 1<br>将Host 的MAC地址0001-0002-0003作为Security MAC添加到VLAN 1中<br>[Switch-Ethernet1/0/1] port-security intrusion-mode disableport-temporarily<br>设置Intrusion Protection特性被触发后，暂时关闭该端口<br>[Switch]port-security timer disableport 30       关闭时间为30秒。</p>
+<p>14、端口绑定配置<br>通过端口绑定特性，网络管理员可以将用户的MAC地址和IP地址绑定到指定的端口上。进行绑定操作后，交换机只对从该端口收到的指定MAC地址和IP地址的用户发出的报文进行转发，提高了系统的安全性，增强了对网络安全的监控。</p>
+<p>[Qw_A-Ethernet1/0/1] am user-bind mac-addr 0001-0002-0003 ip-addr 10.12.1.1<br>将Host 1的MAC地址和IP地址绑定到Ethernet1/0/1端口。<br>有的交换机上绑定的配置不一样<br>[Qw_A] interface ethernet 1/0/2<br>[Qw_A-Ethernet1/0/2] user-bind ip-address 192.168.0.3 mac-address 0001-0203-0405<br>端口过滤配置<br>[Qw_A] interface ethernet1/0/1      配置端口Ethernet1/0/1的端口过滤功能。<br>[Qw_A-Ethernet1/0/1] ip check source ip-address mac-address<br>[Qw_A] dhcp-snooping             开启DHCP Snooping功能。<br>[Qw_A] interface ethernet1/0/2<br>设置与DHCP服务器相连的端口Ethernet1/0/2为信任端口。<br>[Qw_A-Ethernet1/0/2] dhcp-snooping trust<br>在端口Ethernet1/0/1上启用IP过滤功能，防止客户端使用伪造的不同源IP地址对服务器进行攻击</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/" rel="prev" title="ceph存储配置">
+      <i class="fa fa-chevron-left"></i> ceph存储配置
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#华为交换机基本配置命令详解"><span class="nav-number">1.</span> <span class="nav-text">华为交换机基本配置命令详解</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">290k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">4:24</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

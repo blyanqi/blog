@@ -28,7 +28,7 @@
 <meta property="og:description" content="rander 2.x 新文档  rancher 概念及原理rancher 使用 集群 是指k8s or k3s 容器编排环境 项目 是指k8s 里的命名空间   项目 通过 rancher 安装一个 k8s 集群。 建立一个 pod，并完成对 pod 迁移，扩容，更新。 建立存储卷，将容器目录映射到存储卷。 连接到私有的容器镜像库，启动自定义镜像。  修改默认的 registry在 系统管理 -">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-05T15:59:25.000Z">
-<meta property="article:modified_time" content="2020-06-06T05:27:29.364Z">
+<meta property="article:modified_time" content="2020-06-07T03:26:39.158Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-06 13:27:29" itemprop="dateModified" datetime="2020-06-06T13:27:29+08:00">2020-06-06</time>
+                <time title="修改时间：2020-06-07 11:26:39" itemprop="dateModified" datetime="2020-06-07T11:26:39+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,14 +250,14 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>483</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -283,11 +283,9 @@ var _hmt = _hmt || [];
 </ul>
 <p>修改默认的 registry<br>在 系统管理 -&gt; 系统设置 -&gt; 高级设置, 点击 我确认已经知道修改高级设置可能导致问题.<br>找到registry.default 设置然后点击编辑按钮。</p>
 <p>限制镜像库的使用</p>
-<h2 id="使用自建镜像库-issue"><a href="#使用自建镜像库-issue" class="headerlink" title="使用自建镜像库 issue"></a>使用自建镜像库 issue</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x509: certificate signed by unknown authority</span></span><br><span class="line">使用了自签名证明，提示证书未受信任。</span><br><span class="line">解决方法，申请个受信任证书</span><br></pre></td></tr></table></figure>
-<p> .   <strong><em>_          </em>            </strong> <em> </em><br> /\ / <strong><em>‘</em> </strong> <em> </em>(<em>)</em> <strong>  </strong> <em> \ \ \ \<br>( ( )__</em> | ‘<em> | ‘</em>| | ‘<em> \/ </em>` | \ \ \ \<br> \/  <strong><em>)| |</em>)| | | | | || (<em>| |  ) ) ) )<br>  ‘  |_</em></strong>| .<strong>|<em>| |</em>|<em>| |</em>\</strong>, | / / / /<br> =========|<em>|==============|__</em>/=/<em>/</em>/_/<br> :: Spring Boot ::        (v2.2.7.RELEASE)</p>
-<p>2020-06-06 03:01:30.427 [main] INFO  - LOCAL<em>SNAPSHOT_PATH:/root/nacos/config<br>2020-06-06 03:01:30.485 [main] INFO  - limitTime:5.0<br>2020-06-06 03:01:30.622 [main] INFO  - isMultiInstance:false<br>2020-06-06 03:01:30.631 [main] WARN  - Ignore the empty nacos configuration and get it based on dataId[ID_META_AUTH_SERVICE] &amp; group[DEFAULT_GROUP]<br>2020-06-06 03:01:30.688 [main] INFO  - No active profile set, falling back to default profiles: default<br>2020-06-06 03:01:31.585 [main] WARN  - Endpoint ID ‘nacos-config’ contains invalid characters, please migrate to a valid format.<br>2020-06-06 03:01:32.813 [main] INFO  - Initializing ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:01:32.814 [main] INFO  - Starting service [Tomcat]<br>2020-06-06 03:01:32.814 [main] INFO  - Starting Servlet engine: [Apache Tomcat/9.0.34]<br>2020-06-06 03:01:32.889 [main] INFO  - Initializing Spring embedded WebApplicationContext<br>2020-06-06 03:01:33.052 [main] INFO  - Init DruidDataSource<br>2020-06-06 03:01:33.551 [main] INFO  - {dataSource-1} inited
- </em> <em>   |</em>  <em> </em>|<em>. __</em> <em> |    </em><br>| | |\/|<em>)(</em>| | |<em>\  |</em>)||<em>|</em>\<br>     /               |<br>                        3.3.2<br>2020-06-06 03:01:34.112 [main] WARN  - Can not find table primary key in Class: “com.uhe.auth.dao.pojo.Log”.<br>2020-06-06 03:01:34.874 [main] INFO  - Starting ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:01:35.032 [main] INFO  - Started GoMetaAuthServiceApplication in 6.272 seconds (JVM running for 6.994)<br>2020-06-06 03:01:35.048 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_META_AUTH_SERVICE+DEFAULT_GROUP<br>2020-06-06 03:01:35.051 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_META_AUTH_SERVICE, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.051 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_META_AUTH_SERVICE.yaml+DEFAULT_GROUP<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_META_AUTH_SERVICE.yaml, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [subscribe] ID_GLOBAL.yaml+DEFAULT_GROUP<br>2020-06-06 03:01:35.052 [main] INFO  - [fixed-119.84.8.43_10094] [add-listener] ok, tenant=, dataId=ID_GLOBAL.yaml, group=DEFAULT_GROUP, cnt=1<br>2020-06-06 03:01:35.056 [com.alibaba.nacos.client.Worker.longPolling.fixed-119.84.8.43_10094] INFO  - get changedGroupKeys:[]<br>2020-06-06 03:01:35.060 [com.alibaba.nacos.client.Worker.longPolling.fixed-119.84.8.43_10094] INFO  - get changedGroupKeys:[]</p>
-<p>  .   <strong><em>_          </em>            </strong> <em> </em><br> /\ / <strong><em>‘</em> </strong> <em> </em>(<em>)</em> <strong>  </strong> <em> \ \ \ \<br>( ( )__</em> | ‘<em> | ‘</em>| | ‘<em> \/ </em>` | \ \ \ \<br> \/  <strong><em>)| |</em>)| | | | | || (<em>| |  ) ) ) )<br>  ‘  |_</em></strong>| .<strong>|<em>| |</em>|<em>| |</em>\</strong>, | / / / /<br> =========|<em>|==============|__</em>/=/<em>/</em>/_/<br> :: Spring Boot ::        (v2.2.7.RELEASE)<br>2020-06-06 03:07:47.793 [main] INFO  - LOCAL_SNAPSHOT_PATH:/root/nacos/config<br>2020-06-06 03:07:48.008 [main] INFO  - limitTime:5.0<br>2020-06-06 03:07:48.109 [main] INFO  - isMultiInstance:false<br>2020-06-06 03:07:48.177 [main] WARN  - Ignore the empty nacos configuration and get it based on dataId[ID_META_AUTH_SERVICE] &amp; group[DEFAULT_GROUP]<br>2020-06-06 03:07:48.396 [main] INFO  - No active profile set, falling back to default profiles: default<br>2020-06-06 03:07:51.985 [main] WARN  - Endpoint ID ‘nacos-config’ contains invalid characters, please migrate to a valid format.<br>2020-06-06 03:07:55.607 [main] INFO  - Initializing ProtocolHandler [“http-nio-9090”]<br>2020-06-06 03:07:55.609 [main] INFO  - Starting service [Tomcat]<br>2020-06-06 03:07:55.609 [main] INFO  - Starting Servlet engine: [Apache Tomcat/9.0.34]<br>2020-06-06 03:07:55.905 [main] INFO  - Initializing Spring embedded WebApplicationContext<br>2020-06-06 03:07:56.599 [main] INFO  - Init DruidDataSource<br>2020-06-06 03:07:58.416 [main] INFO  - {dataSource-1} inited</p>
+<h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><h3 id="使用自建镜像库-issue"><a href="#使用自建镜像库-issue" class="headerlink" title="使用自建镜像库 issue"></a>使用自建镜像库 issue</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x509: certificate signed by unknown authority</span></span><br><span class="line">使用了自签名证明，提示证书未受信任。</span><br><span class="line">解决方法:</span><br><span class="line">  申请个受信任证书</span><br><span class="line">  把镜像库改成公开</span><br></pre></td></tr></table></figure>
+<h3 id="gitlab-挂载了nfs，启动不起来"><a href="#gitlab-挂载了nfs，启动不起来" class="headerlink" title="gitlab 挂载了nfs，启动不起来"></a>gitlab 挂载了nfs，启动不起来</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Errno::EPERM when <span class="built_in">running</span> Gitlab <span class="keyword">on</span> OpenShift <span class="keyword">and</span> NFS persistent Volume</span><br><span class="line">原因是 gitlab 需要改文件权限导致。建议后端存储不要用nfs</span><br></pre></td></tr></table></figure>
+<p><a href="https://gitlab.com/gitlab-org/omnibus-gitlab/-/issues/4929" target="_blank" rel="noopener">gitlab community</a></p>
 
     </div>
 
@@ -368,7 +366,7 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rancher-概念及原理"><span class="nav-number">1.</span> <span class="nav-text">rancher 概念及原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rancher-使用"><span class="nav-number">2.</span> <span class="nav-text">rancher 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目"><span class="nav-number">3.</span> <span class="nav-text">项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用自建镜像库-issue"><span class="nav-number">4.</span> <span class="nav-text">使用自建镜像库 issue</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rancher-概念及原理"><span class="nav-number">1.</span> <span class="nav-text">rancher 概念及原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rancher-使用"><span class="nav-number">2.</span> <span class="nav-text">rancher 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目"><span class="nav-number">3.</span> <span class="nav-text">项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Troubleshooting"><span class="nav-number">4.</span> <span class="nav-text">Troubleshooting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用自建镜像库-issue"><span class="nav-number">4.1.</span> <span class="nav-text">使用自建镜像库 issue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitlab-挂载了nfs，启动不起来"><span class="nav-number">4.2.</span> <span class="nav-text">gitlab 挂载了nfs，启动不起来</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,7 +380,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">132</span>
+          <span class="site-state-item-count">134</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -432,13 +430,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">288k</span>
+    <span title="站点总字数">290k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:22</span>
+    <span title="站点阅读时长">4:24</span>
 </div>
 
         
