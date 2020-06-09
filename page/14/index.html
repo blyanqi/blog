@@ -199,6 +199,97 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/ArchitectureDesign/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/ArchitectureDesign/" class="post-title-link" itemprop="url">ArchitectureDesign</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-13 18:45:30" itemprop="dateCreated datePublished" datetime="2020-05-13T18:45:30+08:00">2020-05-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-22 22:00:56" itemprop="dateModified" datetime="2020-05-22T22:00:56+08:00">2020-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">架构设计</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>867</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="web-业务架构演变"><a href="#web-业务架构演变" class="headerlink" title="web 业务架构演变"></a>web 业务架构演变</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">webserver</span> <span class="string">-&gt;</span> <span class="string">db</span></span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB</span> <span class="string">-&gt;</span> <span class="string">webserver</span> <span class="string">-&gt;</span> <span class="string">redis</span> <span class="string">-&gt;</span> <span class="string">db</span></span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB</span> <span class="string">-&gt;</span> <span class="string">webserver</span> <span class="string">-&gt;</span> <span class="string">app(type1)</span> <span class="string">-&gt;</span> <span class="string">redis</span> <span class="string">-&gt;</span> <span class="string">db</span></span><br><span class="line">                          <span class="string">-&gt;</span> <span class="string">app(type2)</span> </span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">webserver(pool)</span> <span class="string">-&gt;</span> <span class="string">app(pool)</span> <span class="string">-&gt;</span> <span class="string">redis(pool)</span> <span class="string">-&gt;</span> <span class="string">db(read,write)</span></span><br><span class="line"></span><br><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">webserver(pool)</span> <span class="string">-&gt;</span> <span class="string">app(pool)</span> <span class="string">-&gt;</span> <span class="string">redis(pool)</span> <span class="string">-&gt;</span> <span class="string">db(read,write)</span></span><br><span class="line">                                                                  <span class="string">-&gt;</span> <span class="string">mongodb</span> <span class="string">(read,write)</span></span><br></pre></td></tr></table></figure>
+<h2 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">API</span> <span class="string">网关</span> <span class="string">-&gt;</span> <span class="string">服务注册/发现</span></span><br><span class="line">                              <span class="string">-&gt;</span> <span class="string">配置中心</span></span><br><span class="line">                              <span class="string">-&gt;</span> <span class="string">业务服务</span></span><br></pre></td></tr></table></figure>
+<h2 id="容器化-web-业务架构"><a href="#容器化-web-业务架构" class="headerlink" title="容器化 web 业务架构"></a>容器化 web 业务架构</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">brower</span> <span class="string">-&gt;</span> <span class="string">LB(pool)</span> <span class="string">-&gt;</span> <span class="string">Ingress</span> <span class="string">pod</span> <span class="string">-&gt;</span> <span class="string">service</span> <span class="string">-&gt;</span> <span class="string">app</span> <span class="string">pod(label)</span> <span class="string">-&gt;</span> <span class="string">db</span> <span class="string">pod</span></span><br><span class="line">                                             <span class="string">-&gt;</span> <span class="string">sidecar</span> <span class="string">pod(proxy)</span></span><br><span class="line"><span class="string">--------------------------------</span> <span class="string">storage</span> <span class="string">-------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="attr">App pod:</span></span><br><span class="line">    <span class="string">nginx</span> <span class="string">container</span></span><br><span class="line">    <span class="string">tomcat</span> <span class="string">container</span></span><br><span class="line">        <span class="string">springboot</span></span><br><span class="line">    <span class="string">sidecar</span> <span class="string">container</span></span><br><span class="line">    <span class="string">redis</span> <span class="string">container</span></span><br><span class="line">    <span class="string">db</span> <span class="string">container</span></span><br></pre></td></tr></table></figure>
+<h2 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">githup</span> <span class="string">-&gt;</span> <span class="string">hook</span> <span class="string">-&gt;</span> <span class="string">jenkins</span> <span class="string">-&gt;</span> <span class="string">开发环境</span></span><br><span class="line"><span class="string">gitlab</span>                    <span class="string">-&gt;</span> <span class="string">测试环境</span></span><br><span class="line"><span class="string">svn</span>                       <span class="string">-&gt;</span> <span class="string">生产环境</span> <span class="string">-&gt;</span> <span class="string">ansible</span></span><br><span class="line">                                     <span class="string">-&gt;</span> <span class="string">saltstack</span></span><br></pre></td></tr></table></figure>
+<h2 id="EX-F-L-K日志分析"><a href="#EX-F-L-K日志分析" class="headerlink" title="EX(F,L)K日志分析"></a>EX(F,L)K日志分析</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">metric</span> <span class="string">-&gt;</span> <span class="string">kafka</span> <span class="string">-&gt;</span> <span class="string">Elasticsearch</span> <span class="string">-&gt;</span> <span class="string">kibana</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/flutter%E8%B7%A8%E7%BB%88%E7%AB%AF%E5%BC%80%E5%8F%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -714,7 +805,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-07 12:52:37" itemprop="dateModified" datetime="2020-06-07T12:52:37+08:00">2020-06-07</time>
+                <time title="修改时间：2020-06-07 13:22:21" itemprop="dateModified" datetime="2020-06-07T13:22:21+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -751,13 +842,13 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Kubernetes-Architecture"><a href="#Kubernetes-Architecture" class="headerlink" title="Kubernetes Architecture"></a>Kubernetes Architecture</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">api-server</span></span><br><span class="line"><span class="string">scheduler</span></span><br><span class="line"><span class="string">kebelet</span>       <span class="string">kubelet</span>   <span class="string">kube-proxy</span></span><br><span class="line"><span class="string">---Master---</span> <span class="string">--------Work</span> <span class="string">node-------</span></span><br><span class="line"><span class="string">---etcd---</span></span><br><span class="line"><span class="string">***********</span> <span class="string">DOCKER</span> <span class="string">Engine</span> <span class="string">***********</span></span><br><span class="line"><span class="string">Host</span> <span class="string">OS</span></span><br><span class="line"><span class="string">Infrastructure</span></span><br></pre></td></tr></table></figure>
-<ul>
+          <ul>
 <li><a href="https://kubernetes.io/zh/docs/home/" target="_blank" rel="noopener"> Kubernetes 官网 </a></li>
-<li></li>
-<li>
+<li><a href="/2020/05/kubernetes%E5%AE%89%E8%A3%85/" title="kubernetes安装">kubernetes安装</a></li>
+<li><a href="/2020/05/kubernetes%E4%BD%BF%E7%94%A8/" title="Kubernetes管理">Kubernetes管理</a>
 </li>
 </ul>
+<h2 id="Kubernetes-Architecture"><a href="#Kubernetes-Architecture" class="headerlink" title="Kubernetes Architecture"></a>Kubernetes Architecture</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">api-server</span></span><br><span class="line"><span class="string">scheduler</span></span><br><span class="line"><span class="string">kebelet</span>       <span class="string">kubelet</span>   <span class="string">kube-proxy</span></span><br><span class="line"><span class="string">---Master---</span> <span class="string">--------Work</span> <span class="string">node-------</span></span><br><span class="line"><span class="string">---etcd---</span></span><br><span class="line"><span class="string">***********</span> <span class="string">DOCKER</span> <span class="string">Engine</span> <span class="string">***********</span></span><br><span class="line"><span class="string">Host</span> <span class="string">OS</span></span><br><span class="line"><span class="string">Infrastructure</span></span><br></pre></td></tr></table></figure>
 <h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>提供5台 linux 系统(Centos 7) 主机</p>
 <p>主机IP如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">master1:192.168.0.55</span></span><br><span class="line"><span class="string">master2:192.168.0.56</span></span><br><span class="line"><span class="string">master3:192.168.0.57</span></span><br><span class="line"></span><br><span class="line"><span class="string">work1:192.168.0.59</span></span><br><span class="line"><span class="string">work2:192.168.0.60</span></span><br></pre></td></tr></table></figure>
@@ -880,14 +971,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -930,13 +1021,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">290k</span>
+    <span title="站点总字数">312k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:24</span>
+    <span title="站点阅读时长">4:44</span>
 </div>
 
         

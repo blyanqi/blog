@@ -199,6 +199,93 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-title-link" itemprop="url">配置国内镜像源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-20 17:50:25" itemprop="dateCreated datePublished" datetime="2020-05-20T17:50:25+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-09 19:04:13" itemprop="dateModified" datetime="2020-06-09T19:04:13+08:00">2020-06-09</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">清华大学镜像源</a></li>
+<li><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">Ali 镜像源</a></li>
+</ul>
+<h2 id="删除所有源"><a href="#删除所有源" class="headerlink" title="删除所有源"></a>删除所有源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新缓存</span></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看源</span></span><br><span class="line">yum repolist all</span><br></pre></td></tr></table></figure>
+<h2 id="centos-镜像源"><a href="#centos-镜像源" class="headerlink" title="centos 镜像源"></a>centos 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Aliyun 源</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这两个源有时候访问不通</span></span><br><span class="line">sed -i <span class="string">"/cloud.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line">sed -i <span class="string">"/.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure>
+<h2 id="ubuntu-镜像源"><a href="#ubuntu-镜像源" class="headerlink" title="ubuntu 镜像源"></a>ubuntu 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/apt/sources.list</span><br><span class="line"><span class="comment"># http://archive.ubuntu.com/</span></span><br><span class="line"><span class="comment"># mirrors.aliyun.com</span></span><br><span class="line">sed -i <span class="string">'s/archive.ubuntu.com/mirrors.aliyun.com/'</span> /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<h2 id="docker-镜像源"><a href="#docker-镜像源" class="headerlink" title="docker 镜像源"></a>docker 镜像源</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//mirrors.aliyun.<span class="keyword">com</span>/docker-<span class="keyword">ce</span>/linux/centos/docker-<span class="keyword">ce</span>.repo -O /etc/yum.repos.d/docker-<span class="keyword">ce</span>.repo</span><br></pre></td></tr></table></figure>
+<h2 id="docker-registry-源"><a href="#docker-registry-源" class="headerlink" title="docker registry 源"></a>docker registry 源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载 reload</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl reload docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># github 加速</span></span><br><span class="line">http://tool.chinaz.com/dns?<span class="built_in">type</span>=1&amp;host=github.com&amp;ip=</span><br></pre></td></tr></table></figure>
+<h2 id="debian-源"><a href="#debian-源" class="headerlink" title="debian 源"></a>debian 源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># debian 8源</span></span><br><span class="line">cat&lt;&lt;EOF &gt;/etc/apt/sources.list</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span></span><br><span class="line"><span class="string">deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib</span></span><br><span class="line"><span class="string">deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span></span><br><span class="line"><span class="string">deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib'</span> &gt;/etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"><span class="comment">#  debian 9源</span></span><br><span class="line">cat&lt;&lt;<span class="string">'EOF'</span> &gt;./sources.list</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ stretch main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ stretch main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/debian-security stretch/updates main</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian-security stretch/updates main</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -667,7 +754,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-05 19:17:24" itemprop="dateModified" datetime="2020-06-05T19:17:24+08:00">2020-06-05</time>
+                <time title="修改时间：2020-06-07 15:01:51" itemprop="dateModified" datetime="2020-06-07T15:01:51+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -704,7 +791,13 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="docker-方式迁移"><a href="#docker-方式迁移" class="headerlink" title="docker 方式迁移"></a>docker 方式迁移</h1><a href="/2020/05/gitlab%E5%AE%89%E8%A3%85/" title="gitlab安装">gitlab安装</a>
+          <ul>
+<li><a href="https://github.com/gitlabhq" target="_blank" rel="noopener">gitlib</a></li>
+<li><a href="/2020/05/Gitlab/" title="Gitlab管理">Gitlab管理</a></li>
+<li><a href="/2020/05/gitlab%E8%BF%81%E7%A7%BB/" title="gitlab迁移">gitlab迁移</a>
+</li>
+</ul>
+<h1 id="docker-方式迁移"><a href="#docker-方式迁移" class="headerlink" title="docker 方式迁移"></a>docker 方式迁移</h1><a href="/2020/05/gitlab%E5%AE%89%E8%A3%85/" title="gitlab安装">gitlab安装</a>
 <h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入容器</span></span><br><span class="line"><span class="comment"># docker container exec -it d0ff23550e14 bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入 compose 目录</span></span><br><span class="line"><span class="keyword">cd</span> <span class="string">/root/gitlab-container</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份</span></span><br><span class="line">docker-compose run <span class="params">--rm</span> gitlab app<span class="function">:rake</span> gitlab<span class="function">:backup</span><span class="function">:create</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看备份</span></span><br><span class="line"><span class="keyword">ls</span> <span class="string">/data/volumn-docker/gitlab/backups/</span></span><br></pre></td></tr></table></figure>
 <h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 授权备份文件</span></span><br><span class="line">chmod 777 /data/volumn-docker/gitlab/backups/1590004949_gitlab_backup.tar</span><br><span class="line"></span><br><span class="line">docker-compose <span class="builtin-name">run</span> --rm gitlab app:rake gitlab:backup:restore <span class="attribute">BACKUP</span>=1590023823_2020_05_21_12.10.6</span><br><span class="line"><span class="comment"># 两次 entry yes</span></span><br></pre></td></tr></table></figure>
 <h3 id="gitlab-版本不一致处理"><a href="#gitlab-版本不一致处理" class="headerlink" title="gitlab 版本不一致处理"></a>gitlab 版本不一致处理</h3><blockquote>
@@ -1345,79 +1438,6 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/nginx/" class="post-title-link" itemprop="url">nginx</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-19 11:09:39 / 修改时间：11:12:55" itemprop="dateCreated datePublished" datetime="2020-05-19T11:09:39+08:00">2020-05-19</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>259</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.kancloud.cn/digest/understandingnginx/202599" target="_blank" rel="noopener">理解 nginx 源码</a></p>
-<h2 id="nginx-代码结构"><a href="#nginx-代码结构" class="headerlink" title="nginx 代码结构"></a>nginx 代码结构</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── core  <span class="meta"># Nginx的核心源代码，包括常用数据结构的以及Nginx 内核实现的核心代码；</span></span><br><span class="line">├── <span class="keyword">event</span> <span class="meta"># Nginx事件驱动模型，以及定时器的实现相关代码；</span></span><br><span class="line">├── http  <span class="meta"># Nginx 实现http 服务器相关的代码；</span></span><br><span class="line">├── mail  <span class="meta"># Nginx 实现邮件代理服务器相关的代码；</span></span><br><span class="line">├── misc  <span class="meta"># 辅助代码，测试C++头 的兼容性，以及对Google_PerfTools 的支持；</span></span><br><span class="line">├── os    <span class="meta"># 不同体系统结构所提供的系统函数的封装，提供对外统一的系统调用接口；</span></span><br><span class="line">└── stream <span class="meta">#</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1487,14 +1507,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1537,13 +1557,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">290k</span>
+    <span title="站点总字数">312k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:24</span>
+    <span title="站点阅读时长">4:44</span>
 </div>
 
         

@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Kubernetes Architecture12345678api-serverschedulerkebelet       kubelet   kube-proxy---Master--- --------Work node----------etcd---*********** DOCKER Engine ***********Host OSInfrastructure   Kubernet">
+  <meta name="description" content="Kubernetes 官网  kubernetes安装 Kubernetes管理   Kubernetes Architecture12345678api-serverschedulerkebelet       kubelet   kube-proxy---Master--- --------Work node----------etcd---*********** DOCKER Engin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubernetes安装">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/05/kubernetes%E5%AE%89%E8%A3%85/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="Kubernetes Architecture12345678api-serverschedulerkebelet       kubelet   kube-proxy---Master--- --------Work node----------etcd---*********** DOCKER Engine ***********Host OSInfrastructure   Kubernet">
+<meta property="og:description" content="Kubernetes 官网  kubernetes安装 Kubernetes管理   Kubernetes Architecture12345678api-serverschedulerkebelet       kubelet   kube-proxy---Master--- --------Work node----------etcd---*********** DOCKER Engin">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-13T10:08:48.000Z">
-<meta property="article:modified_time" content="2020-06-07T04:52:37.245Z">
+<meta property="article:modified_time" content="2020-06-07T05:22:21.931Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="container">
 <meta property="article:tag" content="集群">
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-07 12:52:37" itemprop="dateModified" datetime="2020-06-07T12:52:37+08:00">2020-06-07</time>
+                <time title="修改时间：2020-06-07 13:22:21" itemprop="dateModified" datetime="2020-06-07T13:22:21+08:00">2020-06-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,13 +270,13 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Kubernetes-Architecture"><a href="#Kubernetes-Architecture" class="headerlink" title="Kubernetes Architecture"></a>Kubernetes Architecture</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">api-server</span></span><br><span class="line"><span class="string">scheduler</span></span><br><span class="line"><span class="string">kebelet</span>       <span class="string">kubelet</span>   <span class="string">kube-proxy</span></span><br><span class="line"><span class="string">---Master---</span> <span class="string">--------Work</span> <span class="string">node-------</span></span><br><span class="line"><span class="string">---etcd---</span></span><br><span class="line"><span class="string">***********</span> <span class="string">DOCKER</span> <span class="string">Engine</span> <span class="string">***********</span></span><br><span class="line"><span class="string">Host</span> <span class="string">OS</span></span><br><span class="line"><span class="string">Infrastructure</span></span><br></pre></td></tr></table></figure>
-<ul>
+        <ul>
 <li><a href="https://kubernetes.io/zh/docs/home/" target="_blank" rel="noopener"> Kubernetes 官网 </a></li>
-<li></li>
-<li>
+<li><a href="/2020/05/kubernetes%E5%AE%89%E8%A3%85/" title="kubernetes安装">kubernetes安装</a></li>
+<li><a href="/2020/05/kubernetes%E4%BD%BF%E7%94%A8/" title="Kubernetes管理">Kubernetes管理</a>
 </li>
 </ul>
+<h2 id="Kubernetes-Architecture"><a href="#Kubernetes-Architecture" class="headerlink" title="Kubernetes Architecture"></a>Kubernetes Architecture</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">api-server</span></span><br><span class="line"><span class="string">scheduler</span></span><br><span class="line"><span class="string">kebelet</span>       <span class="string">kubelet</span>   <span class="string">kube-proxy</span></span><br><span class="line"><span class="string">---Master---</span> <span class="string">--------Work</span> <span class="string">node-------</span></span><br><span class="line"><span class="string">---etcd---</span></span><br><span class="line"><span class="string">***********</span> <span class="string">DOCKER</span> <span class="string">Engine</span> <span class="string">***********</span></span><br><span class="line"><span class="string">Host</span> <span class="string">OS</span></span><br><span class="line"><span class="string">Infrastructure</span></span><br></pre></td></tr></table></figure>
 <h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>提供5台 linux 系统(Centos 7) 主机</p>
 <p>主机IP如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">master1:192.168.0.55</span></span><br><span class="line"><span class="string">master2:192.168.0.56</span></span><br><span class="line"><span class="string">master3:192.168.0.57</span></span><br><span class="line"></span><br><span class="line"><span class="string">work1:192.168.0.59</span></span><br><span class="line"><span class="string">work2:192.168.0.60</span></span><br></pre></td></tr></table></figure>
@@ -413,14 +413,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">134</span>
+          <span class="site-state-item-count">135</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">30</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -463,13 +463,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">290k</span>
+    <span title="站点总字数">312k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:24</span>
+    <span title="站点阅读时长">4:44</span>
 </div>
 
         
