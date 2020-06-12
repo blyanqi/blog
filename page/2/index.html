@@ -199,6 +199,495 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Ali%E5%85%AC%E6%9C%89%E4%BA%91%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/Ali%E5%85%AC%E6%9C%89%E4%BA%91%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">Ali公有云管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-08 12:47:59" itemprop="dateCreated datePublished" datetime="2020-06-08T12:47:59+08:00">2020-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-10 10:12:07" itemprop="dateModified" datetime="2020-06-10T10:12:07+08:00">2020-06-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%AC%E6%9C%89%E4%BA%91/" itemprop="url" rel="index"><span itemprop="name">公有云</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>243</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id><a href="#" class="headerlink" title=" "></a> </h2><ul>
+<li><p>计算引擎</p>
+<ul>
+<li>虚拟化</li>
+<li>容器</li>
+<li>nodejs</li>
+</ul>
+</li>
+<li><p>数据库</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算资源成本(月)</span></span><br><span class="line">CPU: 85元/C/月</span><br><span class="line">MEMORY: 10元/G/月</span><br><span class="line">DISK: 0.35元/G/月</span><br><span class="line">NETFLOW: 0.6/G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例成本</span></span><br><span class="line">40C,192G=5280元/月</span><br><span class="line">1C,1G,20G=52元/月</span><br><span class="line"></span><br><span class="line"><span class="comment"># k8s 集群成本</span></span><br><span class="line">CPU: 24core</span><br><span class="line">MEM: 96G</span><br><span class="line">DISK: 500G  31/小时 31*24*30  29760元/月</span><br><span class="line"></span><br><span class="line"><span class="comment"># 价格另算</span></span><br><span class="line">SLB</span><br><span class="line">NAT</span><br><span class="line">弹性IP</span><br><span class="line"><span class="comment"># admin#123.Com</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># IDC 托管成本</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">华为交换机基本配置命令详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 11:37:14 / 修改时间：11:38:35" itemprop="dateCreated datePublished" datetime="2020-06-07T11:37:14+08:00">2020-06-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="华为交换机基本配置命令详解"><a href="#华为交换机基本配置命令详解" class="headerlink" title="华为交换机基本配置命令详解"></a>华为交换机基本配置命令详解</h2><p>1、配置文件相关命令<br>system-view                    进入特权模式<br>display current-configuration      显示当前生效的配置<br>display saved-configuration        显示flash中配置文件，即下次上电启动时所用的配置文件<br>reset saved-configuration           檫除旧的配置文件<br>reboot                                          交换机重启<br>display version                             显示系统版本信息</p>
+<p>2、基本配置<br>super password                          修改特权用户密码<br>sysname                                     交换机命名<br>interface GigabitEthernet 1/0/1            进入接口视图<br>interface vlan 1                           进入接口视图<br>ip address 192.168.100.253 255.255.255.0            配置VLAN的IP地址<br>ip route-static 0.0.0.0 0.0.0.0 10.1.1.1     静态路由＝网关</p>
+<p>3、telnet配置<br>user-interface vty 0 4                                                                                     进入虚拟终端<br>[S3026-ui-vty0-4]authentication-mode password                                     设置口令模式<br>[S3026-ui-vty0-4]set authentication password simple fesf1qaz               设置口令<br>[S3026-ui-vty0-4]user-role network-admin                                                 用户级</p>
+<p>4、端口配置<br>[Quidway-Ethernet1/0/1]duplex {half|full|auto}                    配置端口工作状态<br>[Quidway-Ethernet1/0/1]speed {10|100|auto}                      配置端口工作速率<br>[Quidway-Ethernet1/0/1]flow-control                                  配置端口流控<br>[Quidway-Ethernet1/0/1]mdi {across|auto|normal}              配置端口平接扭接<br>[Quidway-Ethernet1/0/1]port link-type {trunk|access|hybrid}     设置端口工作模式<br>[Quidway-Ethernet1/0/1]undo shutdown                                     激活端口<br>[Quidway-Ethernet1/0/2]quit                                                        退出系统视图</p>
+<p>5、链路聚合配置</p>
+<p>[DeviceA] link-aggregation group 1 mode manual       创建手工聚合组1<br>[Qw_A] interface ethernet 1/0/1                     将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1<br>[Qw_A-Ethernet1/0/1] interface ethernet 1/0/2    将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/2] port link-aggregation group 1<br>[Qw_A] link-aggregation group 1 service-type tunnel     # 在手工聚合组的基础上创建tunnel业务环回组。<br>[Qw_A] interface ethernet 1/0/1               将以太网端口Ethernet1/0/1加入业务环回组。<br>[Qw_A-Ethernet1/0/1] undo stp<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1</p>
+<p>6、端口镜像<br>monitor-port        　指定镜像端口<br>port mirror     　　 指定被镜像端口<br>port mirror int_list observing-port int_type int_num  指定镜像和被镜像</p>
+<p>以太网端口有三种链路类型：Access、Hybrid和Trunk。<br>   Access类型的端口只能属于1个VLAN，一般用于连接计算机的端口；<br>   Trunk类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，一般用于交换机之间连接的端口；<br>    Hybrid类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，可以用于交换机之间连接，也可以用于连接用户的计算机。<br>    Hybrid端口和Trunk端口在接收数据时，处理方法是一样的，唯一不同之处在于发送数据时：Hybrid端口可以允许多个VLAN的报文发送时不打标签，而Trunk端口只允许缺省VLAN的报文发送时不打标签。</p>
+<p>7、VLAN配置<br>vlan 4                                 　　　　　　   创建VLAN<br>[Quidway-vlan4]port ethernet 1/0/1 to ethernet 1/0/4 　　　  在VLAN中增加端口</p>
+<p>① 配置基于access的VLAN<br>[Quidway-Ethernet1/0/2]port access vlan 4          　　　　　 当前端口加入到VLAN<br>注意：缺省情况下，端口的链路类型为Access类型，所有Access端口均属于且只属于VLAN1</p>
+<p>② 配置基于trunk的VLAN<br>[Quidway-Ethernet 1/0/24]port link-type trunk                        设置当前端口为trunk<br>[Quidway-Ethernet 1/0/24]port trunk permit vlan {ID|All}     　设trunk允许的VLAN<br>注意：所有端口缺省情况下都是允许VLAN1的报文通过的<br>[Quidway-Ethernet1/0/2]port trunk pvid vlan 34   　　　　　  设置trunk端口的PVID</p>
+<p>③ 配置基于Hybrid端口的VLAN<br>[Quidway-Ethernet1/0/2]port link-type hybrid              配置端口的链路类型为Hybrid类型<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan-id-list { tagged | untagged }  允许指定的VLAN通过当前Hybrid端口<br>注意：缺省情况下，所有Hybrid端口只允许VLAN1通过<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan vlan-id      设置Hybrid端口的缺省VLAN<br>注意：缺省情况下，Hybrid端口的缺省VLAN为VLAN1</p>
+<p>④ VLAN描述<br>description string                      　　　　 指定VLAN描述字符<br>undo description                         　　  　删除VLAN描述字符<br>display vlan [vlan_id]                               查看VLAN设置</p>
+<p>⑤ 私有VLAN配置<br>[Qw_A-vlanx]isolate-user-vlan enable          　　　 　　设置主vlan<br>[Qw_A]Isolate-user-vlan  secondary  　　　 　　           设置主vlan包括的子vlan<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan      　　 设置vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid pvid             　　  删除vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan_id_list untagged 　设置无标识的vlan</p>
+<p>如果包的vlan id与PVId一致，则去掉vlan信息. 默认PVID=1。<br>所以设置PVID为所属vlan id, 设置可以互通的vlan为untagged.</p>
+<p>8、STP配置<br>stp {enable|disable}                               设置生成树,默认关闭<br>stp mode rstp                                        设置生成树模式为rstp<br>stp priority 8192                         　　　 设置交换机的优先级<br>stp root {primary|secondary}             　设置为根或根的备份<br>[Quidway-Ethernet0/1]stp cost 200      设置交换机端口的花费</p>
+<p>display mac-address                            显示地址表信息<br>display mac-address aging-time         显示地址表动态表项的老化时间<br>display port-mac                                  显示用户配置的以太网端口MAC地址的起始值</p>
+<p>2、端口隔离配置</p>
+<p>① 通过端口隔离特性，用户可以将需要进行控制的端口加入到一个隔离组中，实现隔离组中的端口之间二层、三层数据的隔离，既增强了网络的安全性，也为用户提供了灵活的组网方案。</p>
+<p>[Sysname] interface ethernet1/0/2   将以太网端口Ethernet1/0/2加入隔离组。<br>[Sysname-Ethernet1/0/2] port isolate<br>[Sysname] display isolate port      显示隔离组中的端口信息</p>
+<p>② 配置隔离组后，只有隔离组内各个端口之间的报文不能互通，隔离组内端口与隔离组外端口以及隔离组外端口之间的通信不会受到影响。<br>③ 端口隔离特性与以太网端口所属的VLAN无关。<br>④ 当汇聚组中的某个端口加入或离开隔离组后，本设备中同一汇聚组内的其它端口，均会自动加入或离开该隔离组。<br>⑤ 对于既处于某个聚合组又处于某个隔离组的一组端口，其中的一个端口离开聚合组时不会影响其他端口，即其他端口仍将处于原聚合组和原隔离组中。<br>⑥ 如果某个聚合组中的端口同时属于某个隔离组，当在系统视图下直接删除该聚合组后，该聚合组中的端口仍将处于该隔离组中。<br>⑦ 当隔离组中的某个端口加入聚合组时，该聚合组中的所有端口，会自动加入隔离组中。</p>
+<p>13、端口安全配置<br>[Switch] port-security enable     启动端口安全功能<br>[Switch] interface Ethernet 1/0/1  进入以太网Ethernet1/0/1端口视图<br>[Switch-Ethernet1/0/1] port-security max-mac-count 80<br>设置端口允许接入的最大MAC地址数为80<br>[Switch-Ethernet1/0/1] port-security port-mode autolearn  配置端口的安全模式为autolearn<br>[Switch-Ethernet1/0/1] mac-address security 0001-0002-0003 vlan 1<br>将Host 的MAC地址0001-0002-0003作为Security MAC添加到VLAN 1中<br>[Switch-Ethernet1/0/1] port-security intrusion-mode disableport-temporarily<br>设置Intrusion Protection特性被触发后，暂时关闭该端口<br>[Switch]port-security timer disableport 30       关闭时间为30秒。</p>
+<p>14、端口绑定配置<br>通过端口绑定特性，网络管理员可以将用户的MAC地址和IP地址绑定到指定的端口上。进行绑定操作后，交换机只对从该端口收到的指定MAC地址和IP地址的用户发出的报文进行转发，提高了系统的安全性，增强了对网络安全的监控。</p>
+<p>[Qw_A-Ethernet1/0/1] am user-bind mac-addr 0001-0002-0003 ip-addr 10.12.1.1<br>将Host 1的MAC地址和IP地址绑定到Ethernet1/0/1端口。<br>有的交换机上绑定的配置不一样<br>[Qw_A] interface ethernet 1/0/2<br>[Qw_A-Ethernet1/0/2] user-bind ip-address 192.168.0.3 mac-address 0001-0203-0405<br>端口过滤配置<br>[Qw_A] interface ethernet1/0/1      配置端口Ethernet1/0/1的端口过滤功能。<br>[Qw_A-Ethernet1/0/1] ip check source ip-address mac-address<br>[Qw_A] dhcp-snooping             开启DHCP Snooping功能。<br>[Qw_A] interface ethernet1/0/2<br>设置与DHCP服务器相连的端口Ethernet1/0/2为信任端口。<br>[Qw_A-Ethernet1/0/2] dhcp-snooping trust<br>在端口Ethernet1/0/1上启用IP过滤功能，防止客户端使用伪造的不同源IP地址对服务器进行攻击</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">ceph存储配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 10:51:38 / 修改时间：10:52:02" itemprop="dateCreated datePublished" datetime="2020-06-07T10:51:38+08:00">2020-06-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://docs.ceph.org.cn/start/" target="_blank" rel="noopener">ceph 安装配置</a></p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E9%A2%98%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E9%A2%98%E5%BA%93/" class="post-title-link" itemprop="url">逻辑思维题库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 13:37:29 / 修改时间：13:40:51" itemprop="dateCreated datePublished" datetime="2020-06-06T13:37:29+08:00">2020-06-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/jetbrain%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/jetbrain%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/" class="post-title-link" itemprop="url">jetbrain软件卸载</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 13:28:53 / 修改时间：13:30:42" itemprop="dateCreated datePublished" datetime="2020-06-06T13:28:53+08:00">2020-06-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>799</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="写了个脚本卸载"><a href="#写了个脚本卸载" class="headerlink" title="写了个脚本卸载"></a>写了个脚本卸载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;uninstalljetbrain.sh</span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 产品列表</span></span><br><span class="line">group=<span class="string">"AppCode</span></span><br><span class="line"><span class="string">CLion</span></span><br><span class="line"><span class="string">DataGrip</span></span><br><span class="line"><span class="string">Datalore</span></span><br><span class="line"><span class="string">dotTrace</span></span><br><span class="line"><span class="string">Exposed</span></span><br><span class="line"><span class="string">GoLand</span></span><br><span class="line"><span class="string">Hub</span></span><br><span class="line"><span class="string">IntelliJ</span></span><br><span class="line"><span class="string">JetBrains</span></span><br><span class="line"><span class="string">Kotlin</span></span><br><span class="line"><span class="string">KotlinConf</span></span><br><span class="line"><span class="string">Ktor</span></span><br><span class="line"><span class="string">MPS</span></span><br><span class="line"><span class="string">PhpStorm</span></span><br><span class="line"><span class="string">PyCharm</span></span><br><span class="line"><span class="string">Resharper</span></span><br><span class="line"><span class="string">Resharper C++</span></span><br><span class="line"><span class="string">Rider</span></span><br><span class="line"><span class="string">RubyMine</span></span><br><span class="line"><span class="string">Space</span></span><br><span class="line"><span class="string">TeamCity</span></span><br><span class="line"><span class="string">Toolbox App</span></span><br><span class="line"><span class="string">Upsource</span></span><br><span class="line"><span class="string">Webstorm</span></span><br><span class="line"><span class="string">YouTrack"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目安装目录</span></span><br><span class="line">dir=<span class="string">"/Users/alert/Library/Preferences/</span></span><br><span class="line"><span class="string">/Users/alert/Library/Caches/</span></span><br><span class="line"><span class="string">/Users/alert/Library/Logs/"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> <span class="variable">$dir</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$d</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="variable">$group</span></span><br><span class="line"> <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> $(<span class="built_in">pwd</span>) <span class="variable">$s</span></span><br><span class="line">  tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span></span><br><span class="line">  tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span>|xargs rm -rf -</span><br><span class="line"> <span class="keyword">done</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="variable">$group</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> /Users/alert/Library/Application\ Support/</span><br><span class="line">tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span></span><br><span class="line">tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span>|xargs rm -rf -</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%85%8D%E8%B4%B9ssl%E7%94%B3%E8%AF%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E5%85%8D%E8%B4%B9ssl%E7%94%B3%E8%AF%B7/" class="post-title-link" itemprop="url">免费ssl申请</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 13:27:45 / 修改时间：13:37:13" itemprop="dateCreated datePublished" datetime="2020-06-06T13:27:45+08:00">2020-06-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>700</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://freessl.cn/" target="_blank" rel="noopener">https://freessl.cn/</a>  免费证书申请</p>
+<h2 id="填入申请域名"><a href="#填入申请域名" class="headerlink" title="填入申请域名"></a>填入申请域名</h2><h2 id="生成CSR文件"><a href="#生成CSR文件" class="headerlink" title="生成CSR文件"></a>生成CSR文件</h2><p><a href="https://www.racent.com/generate-csr" target="_blank" rel="noopener">https://www.racent.com/generate-csr</a> CSR 在线生成</p>
+<h2 id="设置DNS-解析txt纪录"><a href="#设置DNS-解析txt纪录" class="headerlink" title="设置DNS 解析txt纪录"></a>设置DNS 解析txt纪录</h2><p>key：TXT 记录<br>值：记录值</p>
+<p>验证域名：wx.xxxx.com<br>TXT 记录：_dnsauth.wx<br>记录值：202004120717021oq4s1ogkvbr3jw70a48u8w9ib3bfhqfvzpfq6gdzcxrrdcml7</p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>nslookup -q=txt _dnsauth.gitlab.uhetrip.com</p>
+<h2 id="下载证书"><a href="#下载证书" class="headerlink" title="下载证书"></a>下载证书</h2><h2 id="配置到nginx中"><a href="#配置到nginx中" class="headerlink" title="配置到nginx中"></a>配置到nginx中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen              443 ssl;</span><br><span class="line">        server_name        wx.xxxx.com;</span><br><span class="line">        keepalive_timeout   70;</span><br><span class="line">        &#x2F;&#x2F; pem 是生成的证书，key是csr生成的key</span><br><span class="line">        ssl_certificate      wx.xxx.com&#x2F;full_chain.pem; </span><br><span class="line">        ssl_certificate_key  wx.xxxx.com&#x2F;wx.xxxxp.com.key;</span><br><span class="line">        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line">        &#x2F;&#x2F; 后端服务</span><br><span class="line">        location ~* &#123;</span><br><span class="line">            proxy_pass http:&#x2F;&#x2F;119.1.1.1:10090;</span><br><span class="line">            access_log  &#x2F;data&#x2F;log&#x2F;nginxlog&#x2F;weiinssl.log  main;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/idea%E5%8F%8D%E7%BC%96%E8%AF%91jar%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -564,560 +1053,10 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%AE%B9%E5%99%A8%E6%A0%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/%E5%AE%B9%E5%99%A8%E6%A0%88/" class="post-title-link" itemprop="url">容器栈</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-05 21:28:34 / 修改时间：23:58:39" itemprop="dateCreated datePublished" datetime="2020-06-05T21:28:34+08:00">2020-06-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>221</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><ul>
-<li>DKE        容器引擎</li>
-<li>containerd 容器引擎</li>
-<li>docker 容器管理工具</li>
-<li>kubernetes  容器编排工具</li>
-<li>helm        包管理工具</li>
-<li>rancher k8s 管理工具</li>
-<li>harbor  私有镜像库</li>
-<li>gitlab  代码托管</li>
-<li>jenkins CI,CD 工具</li>
-</ul>
-<h2 id="DevOps"><a href="#DevOps" class="headerlink" title="DevOps"></a>DevOps</h2><p>研发 -&gt; 代码提交到(Gitlab) -&gt; 触发hook -&gt; (jenkins)通过pipeline开始构建代码打包镜像 -&gt; 发布到（k8s中)<br>-&gt; 开发环境<br>-&gt; 测试环境<br>-&gt; 生产环境</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/k3s%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/k3s%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">k3s安装配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-05 18:23:16 / 修改时间：21:28:02" itemprop="dateCreated datePublished" datetime="2020-06-05T18:23:16+08:00">2020-06-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>59</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="https://rancher.com/docs/k3s/latest/en/" target="_blank" rel="noopener">K3S docs</a></li>
-</ul>
-<h1 id="k3s-概念及原理"><a href="#k3s-概念及原理" class="headerlink" title="k3s 概念及原理"></a>k3s 概念及原理</h1><ul>
-<li>helm controller</li>
-<li>service LB</li>
-<li>Traefik LB</li>
-<li>持久化和存储</li>
-<li>RootFS</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/img/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/img/" class="post-title-link" itemprop="url">img</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-05 17:07:18 / 修改时间：19:20:56" itemprop="dateCreated datePublished" datetime="2020-06-05T17:07:18+08:00">2020-06-05</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>10</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="内部使用，无内容展示"><a href="#内部使用，无内容展示" class="headerlink" title="内部使用，无内容展示"></a>内部使用，无内容展示</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E4%B8%80%E7%AB%99%E5%BC%8F%E8%BF%90%E7%BB%B4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/%E4%B8%80%E7%AB%99%E5%BC%8F%E8%BF%90%E7%BB%B4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">一站式运维环境搭建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-05 14:43:55 / 修改时间：15:08:02" itemprop="dateCreated datePublished" datetime="2020-06-05T14:43:55+08:00">2020-06-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>240</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="主机自动化安装"><a href="#主机自动化安装" class="headerlink" title="主机自动化安装"></a>主机自动化安装</h2><ul>
-<li><a href="/2020/05/Cobbler/" title="Cobbler">Cobbler</a>
-</li>
-</ul>
-<h2 id="服务自动化部署"><a href="#服务自动化部署" class="headerlink" title="服务自动化部署"></a>服务自动化部署</h2><ul>
-<li><a href="/2020/05/Ansible%E4%BD%BF%E7%94%A8/" title="使用Ansible大规模部署">使用Ansible大规模部署</a>
-</li>
-</ul>
-<h2 id="openstack-私有云安装（适用规模大的环境）"><a href="#openstack-私有云安装（适用规模大的环境）" class="headerlink" title="openstack 私有云安装（适用规模大的环境）"></a>openstack 私有云安装（适用规模大的环境）</h2><ul>
-<li><a href="/2020/05/OpenStack%E5%AE%89%E8%A3%85/" title="OpenStack安装">OpenStack安装</a>
-</li>
-</ul>
-<h2 id="非私有云安装-适用于规模小的环境"><a href="#非私有云安装-适用于规模小的环境" class="headerlink" title="非私有云安装 (适用于规模小的环境)"></a>非私有云安装 (适用于规模小的环境)</h2><ul>
-<li><a href="/2020/05/webvirtmgr%E5%AE%89%E8%A3%85/" title="虚拟化web管理">虚拟化web管理</a></li>
-<li><a href="/2020/05/KVM%E5%AE%89%E8%A3%85/" title="KMV虚拟化">KMV虚拟化</a>
-</li>
-</ul>
-<h2 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h2><ul>
-<li><a href="/2020/05/Docker%E5%AE%89%E8%A3%85/" title="Docker安装部署">Docker安装部署</a>
-</li>
-</ul>
-<h2 id="k8s-集群部署"><a href="#k8s-集群部署" class="headerlink" title="k8s 集群部署"></a>k8s 集群部署</h2><ul>
-<li><a href="/2020/05/kubernetes%E5%AE%89%E8%A3%85/" title="kubernetes安装">kubernetes安装</a></li>
-<li>or</li>
-<li><a href="/2020/06/rancher%E5%AE%89%E8%A3%85k8s/" title="rancher安装k8s">rancher安装k8s</a>
-</li>
-</ul>
-<h2 id="docker-私有镜像仓库搭建"><a href="#docker-私有镜像仓库搭建" class="headerlink" title="docker 私有镜像仓库搭建"></a>docker 私有镜像仓库搭建</h2><ul>
-<li><a href="/2020/05/Harbor%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Harbor安装配置">Harbor安装配置</a>
-</li>
-</ul>
-<h2 id="dockerfile-容器镜像制作"><a href="#dockerfile-容器镜像制作" class="headerlink" title="dockerfile 容器镜像制作"></a>dockerfile 容器镜像制作</h2><ul>
-<li><a href="/2020/05/Dockerfile/" title="容器镜像制作">容器镜像制作</a>
-</li>
-</ul>
-<h2 id="ELK-环境搭建"><a href="#ELK-环境搭建" class="headerlink" title="ELK 环境搭建"></a>ELK 环境搭建</h2><ul>
-<li><a href="/2020/05/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="ELK安装配置">ELK安装配置</a>
-</li>
-</ul>
-<h2 id="运维监控"><a href="#运维监控" class="headerlink" title="运维监控"></a>运维监控</h2><ul>
-<li><a href="/2020/05/Openfalcon/" title="Openfalcon安装">Openfalcon安装</a></li>
-<li><a href="/2020/05/Prometheus/" title="prometheus安装">prometheus安装</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/rancher%E5%AE%89%E8%A3%85k8s/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/rancher%E5%AE%89%E8%A3%85k8s/" class="post-title-link" itemprop="url">rancher安装k8s</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-05 11:49:40" itemprop="dateCreated datePublished" datetime="2020-06-05T11:49:40+08:00">2020-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-07 13:25:39" itemprop="dateModified" datetime="2020-06-07T13:25:39+08:00">2020-06-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/" title="rancher管理">rancher管理</a>
-</li>
-</ul>
-<h2 id="简易-docker-安装脚本（包含基本主机配置）"><a href="#简易-docker-安装脚本（包含基本主机配置）" class="headerlink" title="简易 docker 安装脚本（包含基本主机配置）"></a>简易 docker 安装脚本（包含基本主机配置）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'GEOF'</span>&gt;install.sh</span><br><span class="line"><span class="function"><span class="title">log</span></span>()&#123;</span><br><span class="line"><span class="comment"># 注释</span></span><br><span class="line"><span class="comment"># log 1 ，使用方法（会将 注释打印出来）</span></span><br><span class="line"><span class="built_in">echo</span> -e <span class="string">"\e[0;32m ------<span class="variable">$1</span>、`sed -n "</span>/\&lt;<span class="built_in">log</span> <span class="variable">$1</span>\&gt;/&#123;x;p&#125;;h<span class="string">" <span class="variable">$0</span>`\t------- \e[m"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置主机名</span></span><br><span class="line"><span class="built_in">log</span> 1</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"127.0.0.1   localhost</span></span><br><span class="line"><span class="string">::1         localhost</span></span><br><span class="line"><span class="string">192.168.0.72 k8sn-1</span></span><br><span class="line"><span class="string">192.168.0.73 k8sn-2"</span>&gt;/etc/hosts</span><br><span class="line"><span class="comment"># 关闭防火墙</span></span><br><span class="line"><span class="built_in">log</span> 2</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"><span class="comment"># 关闭selinux</span></span><br><span class="line"><span class="built_in">log</span> 3</span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">"s/^SELINUX=enforcing/SELINUX=disabled/g"</span> /etc/selinux/config</span><br><span class="line"><span class="comment"># 关闭 swap</span></span><br><span class="line"><span class="built_in">log</span> 4</span><br><span class="line">swapoff -a;sed -i <span class="string">'s/.*swap.*/#&amp;/'</span> /etc/fstab</span><br><span class="line"><span class="comment"># 配置dns</span></span><br><span class="line"><span class="built_in">log</span> 5</span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;/etc/resolv.conf</span><br><span class="line">nameserver 202.106.0.20</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># 配置镜像源</span></span><br><span class="line"><span class="built_in">log</span> 6</span><br><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"><span class="comment">#yum -y install epel-release</span></span><br><span class="line">yum -y install wget</span><br><span class="line">wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br><span class="line">yum -y update</span><br><span class="line"><span class="comment"># 配置 ntp</span></span><br><span class="line"><span class="built_in">log</span> 7</span><br><span class="line">yum install chrony -y</span><br><span class="line">sed -i <span class="string">"/^server/d"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp1.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp2.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf </span><br><span class="line">sed -i <span class="string">"/#allow/s/#//"</span> /etc/chrony.conf</span><br><span class="line">systemctl <span class="built_in">enable</span> chronyd.service;systemctl start chronyd.service</span><br><span class="line"><span class="comment"># 安装 docker</span></span><br><span class="line"><span class="built_in">log</span> 8</span><br><span class="line">yum -y install yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">yum -y install docker-ce-18.06.2.ce</span><br><span class="line"><span class="comment"># 配置 docker</span></span><br><span class="line"><span class="built_in">log</span> 9</span><br><span class="line">mkdir /etc/docker</span><br><span class="line"></span><br><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"exec-opts"</span>: [<span class="string">"native.cgroupdriver=systemd"</span>],</span><br><span class="line">  <span class="string">"log-driver"</span>: <span class="string">"json-file"</span>,</span><br><span class="line">  <span class="string">"log-opts"</span>: &#123;</span><br><span class="line">    <span class="string">"max-size"</span>: <span class="string">"100m"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"storage-driver"</span>: <span class="string">"overlay2"</span>,</span><br><span class="line">  <span class="string">"storage-opts"</span>: [</span><br><span class="line">    <span class="string">"overlay2.override_kernel_check=true"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 docker</span></span><br><span class="line"><span class="built_in">log</span> 10</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示 docker 版本</span></span><br><span class="line"><span class="built_in">log</span> 11</span><br><span class="line">docker --version</span><br><span class="line">GEOF</span><br></pre></td></tr></table></figure>
-<h2 id="在-rancher-中配置"><a href="#在-rancher-中配置" class="headerlink" title="在 rancher 中配置"></a>在 rancher 中配置</h2><h3 id="k8sn-1-安装-master"><a href="#k8sn-1-安装-master" class="headerlink" title="k8sn-1 安装 master"></a>k8sn-1 安装 master</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d <span class="params">--privileged</span> <span class="params">--restart=unless-stopped</span> <span class="params">--net=host</span> -v <span class="string">/etc/kubernetes</span>:<span class="string">/etc/kubernetes</span> -v <span class="string">/var/run</span>:<span class="string">/var/run</span> rancher/rancher-agent<span class="function">:v2.4.4</span> <span class="params">--server</span> https:<span class="string">//192.168.0.71</span> <span class="params">--token</span> v7lxh82dqhbkfngvk7dzqnb8jvnrm58lh7vzjqcdjftvpk8bwflp5m <span class="params">--ca-checksum</span> 482dbd8274d4038743cbbc176ebd9bb328afa221ecbc1c11a9961d402df05f11 <span class="params">--etcd</span> <span class="params">--controlplane</span></span><br></pre></td></tr></table></figure>
-<h3 id="k8sn-1-安装-worker"><a href="#k8sn-1-安装-worker" class="headerlink" title="k8sn-1 安装 worker"></a>k8sn-1 安装 worker</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -d <span class="params">--privileged</span> <span class="params">--restart=unless-stopped</span> <span class="params">--net=host</span> -v <span class="string">/etc/kubernetes</span>:<span class="string">/etc/kubernetes</span> -v <span class="string">/var/run</span>:<span class="string">/var/run</span> rancher/rancher-agent<span class="function">:v2.4.4</span> <span class="params">--server</span> https:<span class="string">//192.168.0.71</span> <span class="params">--token</span> v7lxh82dqhbkfngvk7dzqnb8jvnrm58lh7vzjqcdjftvpk8bwflp5m <span class="params">--ca-checksum</span> 482dbd8274d4038743cbbc176ebd9bb328afa221ecbc1c11a9961d402df05f11 <span class="params">--worker</span></span><br></pre></td></tr></table></figure>
-<h2 id="创建集群存储-使用nfs"><a href="#创建集群存储-使用nfs" class="headerlink" title="创建集群存储(使用nfs)"></a>创建集群存储(使用nfs)</h2><h3 id="创建存储类"><a href="#创建存储类" class="headerlink" title="创建存储类"></a>创建存储类</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">storage.k8s.io/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">StorageClass</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">nfs-storage</span></span><br><span class="line"><span class="attr">provisioner:</span> <span class="string">nfs-client-provisioner</span></span><br></pre></td></tr></table></figure>
-<h3 id="创建PV（nfs）"><a href="#创建PV（nfs）" class="headerlink" title="创建PV（nfs）"></a>创建PV（nfs）</h3><ul>
-<li><a href="/2020/05/NFS%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="NFS安装配置">NFS安装配置</a>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/kubernetes%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/kubernetes%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/" class="post-title-link" itemprop="url">kubernetes备份恢复</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-05 09:43:17" itemprop="dateCreated datePublished" datetime="2020-06-05T09:43:17+08:00">2020-06-05</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1183,14 +1122,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">135</span>
+          <span class="site-state-item-count">141</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1233,13 +1172,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">312k</span>
+    <span title="站点总字数">341k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">4:44</span>
+    <span title="站点阅读时长">5:10</span>
 </div>
 
         
