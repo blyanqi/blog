@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="fluentd docs fluentdbit docs 插件列表  安装配置安装前准备设置NTP123456yum install chrony -ysed -i &quot;&#x2F;^server&#x2F;d&quot; &#x2F;etc&#x2F;chrony.confsed -i &quot;2a server ntp1.cloud.aliyuncs.com iburst&quot; &#x2F;etc&#x2F;chrony.confsed -i &quot;2a server ntp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fluentd">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/Fluentd/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="fluentd docs fluentdbit docs 插件列表  安装配置安装前准备设置NTP123456yum install chrony -ysed -i &quot;&#x2F;^server&#x2F;d&quot; &#x2F;etc&#x2F;chrony.confsed -i &quot;2a server ntp1.cloud.aliyuncs.com iburst&quot; &#x2F;etc&#x2F;chrony.confsed -i &quot;2a server ntp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-13T00:19:07.000Z">
+<meta property="article:modified_time" content="2020-06-14T07:29:53.135Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/Fluentd/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Fluentd | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Fluentd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Fluentd
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-13 08:19:07" itemprop="dateCreated datePublished" datetime="2020-06-13T08:19:07+08:00">2020-06-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-14 15:29:53" itemprop="dateModified" datetime="2020-06-14T15:29:53+08:00">2020-06-14</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="https://docs.fluentd.org/" target="_blank" rel="noopener">fluentd docs</a></li>
+<li><a href="https://docs.fluentbit.io/manual/" target="_blank" rel="noopener">fluentdbit docs</a></li>
+<li><a href="https://www.fluentd.org/plugins" target="_blank" rel="noopener">插件列表</a></li>
+</ul>
+<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><h3 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h3><h4 id="设置NTP"><a href="#设置NTP" class="headerlink" title="设置NTP"></a>设置NTP</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install chrony -y</span><br><span class="line">sed -i <span class="string">"/^server/d"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp1.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp2.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"/#allow/s/#//"</span> /etc/chrony.conf</span><br><span class="line">systemctl <span class="built_in">enable</span> chronyd.service;systemctl start chronyd.service</span><br></pre></td></tr></table></figure>
+<h4 id="增加文件描述符"><a href="#增加文件描述符" class="headerlink" title="增加文件描述符"></a>增加文件描述符</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF &gt;/etc/security/limits.conf</span><br><span class="line">root soft nofile 65536</span><br><span class="line">root hard nofile 65536</span><br><span class="line">* soft nofile 65536</span><br><span class="line">* hard nofile 65536</span><br><span class="line">EOF</span><br><span class="line"><span class="built_in">ulimit</span> -HSn 65535</span><br></pre></td></tr></table></figure>
+<h4 id="优化网络参数"><a href="#优化网络参数" class="headerlink" title="优化网络参数"></a>优化网络参数</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">net.core.somaxconn</span> = <span class="number">1024</span></span><br><span class="line"><span class="attr">net.core.netdev_max_backlog</span> = <span class="number">5000</span></span><br><span class="line"><span class="attr">net.core.rmem_max</span> = <span class="number">16777216</span></span><br><span class="line"><span class="attr">net.core.wmem_max</span> = <span class="number">16777216</span></span><br><span class="line"><span class="attr">net.ipv4.tcp_wmem</span> = <span class="number">4096</span> <span class="number">12582912</span> <span class="number">16777216</span></span><br><span class="line"><span class="attr">net.ipv4.tcp_rmem</span> = <span class="number">4096</span> <span class="number">12582912</span> <span class="number">16777216</span></span><br><span class="line"><span class="attr">net.ipv4.tcp_max_syn_backlog</span> = <span class="number">8096</span></span><br><span class="line"><span class="attr">net.ipv4.tcp_slow_start_after_idle</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">net.ipv4.tcp_tw_reuse</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">net.ipv4.ip_local_port_range</span> = <span class="number">10240</span> <span class="number">65535</span></span><br></pre></td></tr></table></figure>
+<h2 id="在CentOS安装"><a href="#在CentOS安装" class="headerlink" title="在CentOS安装"></a>在CentOS安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://toolbelt.treasuredata.com/sh/install-redhat-td-agent3.sh | sh</span><br></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置文件</span></span><br><span class="line">/etc/td-agent/td-agent.conf</span><br><span class="line"><span class="comment"># 配置语法</span></span><br><span class="line"><span class="comment"># Data Source</span></span><br><span class="line">&lt;<span class="built_in">source</span>&gt;</span><br><span class="line">  @<span class="built_in">type</span> syslog</span><br><span class="line">  port 5140</span><br><span class="line">  tag system</span><br><span class="line">&lt;/<span class="built_in">source</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Output Endpoint</span></span><br><span class="line">&lt;match debug.log&gt;</span><br><span class="line">  @<span class="built_in">type</span> kafka2</span><br><span class="line">  port 5140</span><br><span class="line">  brokers kafka-server:9092</span><br><span class="line">  tag system</span><br><span class="line">  <span class="comment"># other parameters...</span></span><br><span class="line">&lt;/match&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">sudo systemctl restart td-agent</span><br><span class="line"><span class="comment"># 日志</span></span><br><span class="line">/var/<span class="built_in">log</span>/td-agent/td-agent.log</span><br></pre></td></tr></table></figure>
+<h2 id="fluentd-插件管理"><a href="#fluentd-插件管理" class="headerlink" title="fluentd 插件管理"></a>fluentd 插件管理</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装</span></span><br><span class="line">/usr/sbin/td-agent-gem install fluent-plugin-s3</span><br></pre></td></tr></table></figure>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span>  <span class="comment"># 输入</span></span><br><span class="line">match   <span class="comment"># 输出</span></span><br><span class="line">filter  <span class="comment"># 处理</span></span><br><span class="line">system  <span class="comment"># fluentd 系统配置</span></span><br><span class="line">label   <span class="comment"># 对数据分类路由</span></span><br><span class="line">@include <span class="comment"># 导入其他文件，include 文件尾部可以设置共享参数</span></span><br></pre></td></tr></table></figure>
+<h2 id="统配符的使用"><a href="#统配符的使用" class="headerlink" title="统配符的使用"></a>统配符的使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 &lt;match&gt; and &lt;filter&gt; 标签使用</span></span><br><span class="line"><span class="comment"># 匹配一个</span></span><br><span class="line">*</span><br><span class="line"><span class="comment"># 0 或多个</span></span><br><span class="line">**</span><br><span class="line"><span class="comment"># x，y 或者 z</span></span><br><span class="line">&#123;x,y,z&#125;</span><br><span class="line"><span class="comment"># Ruby 扩展</span></span><br><span class="line"><span class="comment">#&#123;...&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="输入及输出插件"><a href="#输入及输出插件" class="headerlink" title="输入及输出插件"></a>输入及输出插件</h2><p>输入</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>in_tail</td>
+<td>监视指定日志文件</td>
+</tr>
+<tr>
+<td>in_forward</td>
+<td>从其他fluentd或各种编程语言日志输出模块接收事件信息。</td>
+</tr>
+<tr>
+<td>in_http</td>
+<td>通过HTTP的POST请求接收事件信息。</td>
+</tr>
+<tr>
+<td>in_syslog</td>
+<td>syslog的日志</td>
+</tr>
+<tr>
+<td>in_exec</td>
+<td></td>
+</tr>
+<tr>
+<td>in_scribe</td>
+<td>Facebook开发的日志收集服务「Scribe」协议接收事件信息。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>输出</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>explain</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>out_file</td>
+<td>输出至指定文件</td>
+</tr>
+<tr>
+<td>out_stdout</td>
+<td>输出至标准输出</td>
+</tr>
+<tr>
+<td>out_null</td>
+<td>不进行输出</td>
+</tr>
+<tr>
+<td>out_copy</td>
+<td>输出日志至一个以上的目标地址</td>
+</tr>
+<tr>
+<td>out_roundrobin</td>
+<td>以轮询调度方式向一个以上的目标地址进行输出</td>
+</tr>
+<tr>
+<td>out_exec_filter</td>
+<td></td>
+</tr>
+<tr>
+<td>out_forward</td>
+<td>通过网络向其他fluentd进行输出</td>
+</tr>
+<tr>
+<td>out_mongo</td>
+<td>输出至MongoDB</td>
+</tr>
+<tr>
+<td>out_mongo_replset</td>
+<td>输出至MongoDB副本</td>
+</tr>
+<tr>
+<td>out_exec</td>
+<td></td>
+</tr>
+<tr>
+<td>out_s3</td>
+<td>保存至Amazon S3存储</td>
+</tr>
+<tr>
+<td>out_webhdfsQ</td>
+<td>保存至HDFS</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="docker-使用"><a href="#docker-使用" class="headerlink" title="docker 使用"></a>docker 使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker pull</span></span><br><span class="line">docker pull fluent/fluentd:v1.6-debian-1</span><br><span class="line">docker pull fluent/fluentd</span><br><span class="line"><span class="comment"># docker run</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker stop</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># docker sh</span></span><br><span class="line">docker <span class="built_in">exec</span> -it 3ea2a969bae0 sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># fluentd -h</span></span><br><span class="line">ruby -v</span><br><span class="line">ruby 2.5.2p104</span><br><span class="line">fluentd -h</span><br><span class="line">cat /fluentd/etc/fluent.conf</span><br><span class="line"></span><br><span class="line">fluent-cat</span><br><span class="line">fluent-gem</span><br><span class="line">fluent-debug</span><br><span class="line">fluent-binlog-reader</span><br><span class="line">fluent-ca-generate</span><br><span class="line">fluent-plugin-generate</span><br><span class="line">fluent-plugin-config-format</span><br></pre></td></tr></table></figure>
+<h2 id="docker-compose使用"><a href="#docker-compose使用" class="headerlink" title="docker-compose使用"></a>docker-compose使用</h2><ul>
+<li><a href="https://docs.fluentd.org/container-deployment/docker-compose" target="_blank" rel="noopener">fluentd compose 配置</a><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">web:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">httpd</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"80:80"</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">fluentd</span></span><br><span class="line">    <span class="attr">logging:</span></span><br><span class="line">      <span class="attr">driver:</span> <span class="string">"fluentd"</span> <span class="comment"># 使用fluentd</span></span><br><span class="line">      <span class="attr">options:</span></span><br><span class="line">        <span class="attr">fluentd-address:</span> <span class="string">localhost:24224</span></span><br><span class="line">        <span class="attr">tag:</span> <span class="string">httpd.access</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">fluentd:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./fluentd</span> <span class="comment"># build 镜像</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./fluentd/conf:/fluentd/etc</span></span><br><span class="line">    <span class="attr">links:</span> <span class="comment"># 连接到 elasticsearch</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"elasticsearch"</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"24224:24224"</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"24224:24224/udp"</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">docker.elastic.co/elasticsearch/elasticsearch:7.2.0</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"discovery.type=single-node"</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9200"</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"9200:9200"</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">kibana:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">kibana:7.2.0</span></span><br><span class="line">    <span class="attr">links:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"elasticsearch"</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">"5601:5601"</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="fluentd-for-k8s"><a href="#fluentd-for-k8s" class="headerlink" title="fluentd for k8s"></a>fluentd for k8s</h2><h3 id="定义configmap"><a href="#定义configmap" class="headerlink" title="定义configmap"></a>定义configmap</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">ConfigMap</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">fluentd-config</span></span><br><span class="line"><span class="attr">data:</span></span><br><span class="line">  <span class="attr">fluentd.conf:</span> <span class="string">|</span></span><br><span class="line">    <span class="string">&lt;source&gt;</span></span><br><span class="line">      <span class="string">type</span> <span class="string">tail</span></span><br><span class="line">      <span class="string">format</span> <span class="string">none</span></span><br><span class="line">      <span class="string">path</span> <span class="string">/var/log/1.log</span></span><br><span class="line">      <span class="string">pos_file</span> <span class="string">/var/log/1.log.pos</span></span><br><span class="line">      <span class="string">tag</span> <span class="string">count.format1</span></span><br><span class="line">    <span class="string">&lt;/source&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&lt;source&gt;</span></span><br><span class="line">      <span class="string">type</span> <span class="string">tail</span></span><br><span class="line">      <span class="string">format</span> <span class="string">none</span></span><br><span class="line">      <span class="string">path</span> <span class="string">/var/log/2.log</span></span><br><span class="line">      <span class="string">pos_file</span> <span class="string">/var/log/2.log.pos</span></span><br><span class="line">      <span class="string">tag</span> <span class="string">count.format2</span></span><br><span class="line">    <span class="string">&lt;/source&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="string">&lt;match</span> <span class="string">**&gt;</span></span><br><span class="line">      <span class="string">type</span> <span class="string">google_cloud</span></span><br><span class="line">    <span class="string">&lt;/match&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="在-sidecar-中使用"><a href="#在-sidecar-中使用" class="headerlink" title="在 sidecar 中使用"></a>在 sidecar 中使用</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="attr">volumeMounts:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">varlog</span></span><br><span class="line">    <span class="attr">mountPath:</span> <span class="string">/var/log</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config-volume</span> <span class="comment"># 使用 configmap</span></span><br><span class="line">    <span class="attr">mountPath:</span> <span class="string">/etc/fluentd-config</span> <span class="comment"># 挂载到指定的路径</span></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">varlog</span></span><br><span class="line">  <span class="attr">emptyDir:</span> <span class="string">&#123;&#125;</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">config-volume</span></span><br><span class="line">  <span class="attr">configMap:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">fluentd-config</span> <span class="comment"># 指定 configmap</span></span><br></pre></td></tr></table></figure>
+<h2 id><a href="#" class="headerlink" title="#"></a>#</h2><p>$ git clone <a href="https://github.com/fluent/fluentd-kubernetes-daemonset" target="_blank" rel="noopener">https://github.com/fluent/fluentd-kubernetes-daemonset</a><br>fluentd-daemonset-elasticsearch.yaml<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">DaemonSet</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">fluentd</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">kube-system</span></span><br><span class="line">  <span class="attr">labels:</span></span><br><span class="line">    <span class="attr">k8s-app:</span> <span class="string">fluentd-logging</span></span><br><span class="line">    <span class="attr">version:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">selector:</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">k8s-app:</span> <span class="string">fluentd-logging</span></span><br><span class="line">      <span class="attr">version:</span> <span class="string">v1</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">k8s-app:</span> <span class="string">fluentd-logging</span></span><br><span class="line">        <span class="attr">version:</span> <span class="string">v1</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">tolerations:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">key:</span> <span class="string">node-role.kubernetes.io/master</span></span><br><span class="line">        <span class="attr">effect:</span> <span class="string">NoSchedule</span></span><br><span class="line">      <span class="attr">containers:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">fluentd</span></span><br><span class="line">        <span class="attr">image:</span> <span class="string">fluent/fluentd-kubernetes-daemonset:v1-debian-elasticsearch</span></span><br><span class="line">        <span class="attr">env:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span>  <span class="string">FLUENT_ELASTICSEARCH_HOST</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"elasticsearch-logging"</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span>  <span class="string">FLUENT_ELASTICSEARCH_PORT</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"9200"</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">FLUENT_ELASTICSEARCH_SCHEME</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"http"</span></span><br><span class="line">          <span class="comment"># Option to configure elasticsearch plugin with self signed certs</span></span><br><span class="line">          <span class="comment"># ================================================================</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">FLUENT_ELASTICSEARCH_SSL_VERIFY</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"true"</span></span><br><span class="line">          <span class="comment"># Option to configure elasticsearch plugin with tls</span></span><br><span class="line">          <span class="comment"># ================================================================</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">FLUENT_ELASTICSEARCH_SSL_VERSION</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"TLSv1_2"</span></span><br><span class="line">          <span class="comment"># X-Pack Authentication</span></span><br><span class="line">          <span class="comment"># =====================</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">FLUENT_ELASTICSEARCH_USER</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"elastic"</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">FLUENT_ELASTICSEARCH_PASSWORD</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"changeme"</span></span><br><span class="line">          <span class="comment"># Logz.io Authentication</span></span><br><span class="line">          <span class="comment"># ======================</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">LOGZIO_TOKEN</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"ThisIsASuperLongToken"</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">LOGZIO_LOGTYPE</span></span><br><span class="line">            <span class="attr">value:</span> <span class="string">"kubernetes"</span></span><br><span class="line">        <span class="attr">resources:</span></span><br><span class="line">          <span class="attr">limits:</span></span><br><span class="line">            <span class="attr">memory:</span> <span class="string">200Mi</span></span><br><span class="line">          <span class="attr">requests:</span></span><br><span class="line">            <span class="attr">cpu:</span> <span class="string">100m</span></span><br><span class="line">            <span class="attr">memory:</span> <span class="string">200Mi</span></span><br><span class="line">        <span class="attr">volumeMounts:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">varlog</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/var/log</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">varlibdockercontainers</span></span><br><span class="line">          <span class="attr">mountPath:</span> <span class="string">/var/lib/docker/containers</span></span><br><span class="line">          <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">terminationGracePeriodSeconds:</span> <span class="number">30</span></span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">varlog</span></span><br><span class="line">        <span class="attr">hostPath:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">/var/log</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">varlibdockercontainers</span></span><br><span class="line">        <span class="attr">hostPath:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">/var/lib/docker/containers</span></span><br></pre></td></tr></table></figure></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/%E4%BC%81%E4%B8%9A%E5%A4%87%E4%BB%BD%E7%81%BE%E5%A4%87%E6%96%B9%E6%A1%88/" rel="prev" title="企业备份灾备方案">
+      <i class="fa fa-chevron-left"></i> 企业备份灾备方案
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/%E5%88%9B%E4%B8%9A/" rel="next" title="创业">
+      创业 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装配置"><span class="nav-number">1.</span> <span class="nav-text">安装配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装前准备"><span class="nav-number">1.1.</span> <span class="nav-text">安装前准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#设置NTP"><span class="nav-number">1.1.1.</span> <span class="nav-text">设置NTP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加文件描述符"><span class="nav-number">1.1.2.</span> <span class="nav-text">增加文件描述符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#优化网络参数"><span class="nav-number">1.1.3.</span> <span class="nav-text">优化网络参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在CentOS安装"><span class="nav-number">2.</span> <span class="nav-text">在CentOS安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fluentd-插件管理"><span class="nav-number">4.</span> <span class="nav-text">fluentd 插件管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指令"><span class="nav-number">5.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统配符的使用"><span class="nav-number">6.</span> <span class="nav-text">统配符的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入及输出插件"><span class="nav-number">7.</span> <span class="nav-text">输入及输出插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-使用"><span class="nav-number">8.</span> <span class="nav-text">docker 使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-compose使用"><span class="nav-number">9.</span> <span class="nav-text">docker-compose使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fluentd-for-k8s"><span class="nav-number">10.</span> <span class="nav-text">fluentd for k8s</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义configmap"><span class="nav-number">10.1.</span> <span class="nav-text">定义configmap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在-sidecar-中使用"><span class="nav-number">10.1.1.</span> <span class="nav-text">在 sidecar 中使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">11.</span> <span class="nav-text">#</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">360k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">5:27</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

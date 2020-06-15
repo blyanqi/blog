@@ -199,6 +199,1010 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/kubernetes%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/kubernetes%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">kubernetes使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-22 11:51:14" itemprop="dateCreated datePublished" datetime="2020-05-22T11:51:14+08:00">2020-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-14 21:29:09" itemprop="dateModified" datetime="2020-06-14T21:29:09+08:00">2020-06-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://kubernetes.io/zh/docs/home/" target="_blank" rel="noopener"> Kubernetes 官网 </a></li>
+<li><a href="/2020/05/kubernetes%E5%AE%89%E8%A3%85/" title="kubernetes安装">kubernetes安装</a></li>
+<li><a href="/2020/05/kubernetes%E4%BD%BF%E7%94%A8/" title="Kubernetes管理">Kubernetes管理</a>
+</li>
+</ul>
+<h2 id="k8s-集群规模"><a href="#k8s-集群规模" class="headerlink" title="k8s 集群规模"></a>k8s 集群规模</h2><p>Kubernetes1.3版本支持多达1000个节点的集群规模。<br>Kubernetes 支持多个容器运行环境: Docker、 containerd、cri-o、 rktlet </p>
+<h2 id="CLI"><a href="#CLI" class="headerlink" title="CLI"></a>CLI</h2><h3 id="查看命令"><a href="#查看命令" class="headerlink" title="查看命令"></a>查看命令</h3><p>kubectl get pods -A -o wide<br>kubectl describe pods -n test<br>kubectl logs $POD_NAME<br>kubectl exec $POD_NAME env<br>kubectl exec -ti $POD_NAME bash<br>kubectl expose deployment/kubernetes-bootcamp —type=”NodePort” —port 8080<br>kubectl describe service/kubernetes-bootcamp<br>kubectl get pods -l run=kubernetes-bootcamp<br>kubectl label pod $POD_NAME app=v1<br>kubectl delete service -l run=kubernetes-bootcamp</p>
+<h3 id="资源管理"><a href="#资源管理" class="headerlink" title="资源管理"></a>资源管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Pod (应用运行时)</span></span><br><span class="line">PID命名空间：Pod中的不同应用程序可以看到其他应用程序的进程ID；</span><br><span class="line">网络命名空间：Pod中的多个容器能够访问同一个IP和端口范围；</span><br><span class="line">IPC命名空间：Pod中的多个容器能够使用SystemV IPC或POSIX消息队列进行通信；</span><br><span class="line">UTS命名空间：Pod中的多个容器共享一个主机名；</span><br><span class="line">Volumes（共享存储卷）：Pod中的各个容器可以访问在Pod级别定义的Volumes；</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建pod</span></span><br><span class="line">kubectl apply -f - &lt;&lt;EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: private-image-test-1</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: uses-private-image</span><br><span class="line">      image: <span class="variable">$PRIVATE_IMAGE_NAME</span></span><br><span class="line">      imagePullPolicy: Always</span><br><span class="line">      <span class="built_in">command</span>: [ <span class="string">"echo"</span>, <span class="string">"SUCCESS"</span> ]</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># 镜像管理</span></span><br><span class="line">kubectl create secret docker-registry myregistry --docker-server=192.168.0.69 --docker-username=yanqi --docker-password=yanqi --docker-email=blyanqi@163.com -n <span class="built_in">test</span></span><br><span class="line"></span><br><span class="line">kubectl apply -f - &lt;&lt;EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: foo</span><br><span class="line">  namespace: <span class="built_in">test</span></span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">    - name: foo</span><br><span class="line">      image: 192.168.0.69/youlv/go-meta-auth-service:latest</span><br><span class="line">  imagePullSecrets: <span class="comment"># 设置要pull的镜像库</span></span><br><span class="line">    - name: myregistry</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器运行时类(Runtime Class)</span></span><br><span class="line">kubectl apply -f - &lt;&lt;EOF</span><br><span class="line">apiVersion: node.k8s.io/v1beta1</span><br><span class="line">kind: RuntimeClass</span><br><span class="line">metadata:</span><br><span class="line">  name: myclass  <span class="comment"># 名称</span></span><br><span class="line">  <span class="comment"># RuntimeClass 不是namespace 资源</span></span><br><span class="line">handler: myconfiguration</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 容器钩子</span></span><br><span class="line">PostStart</span><br><span class="line">PreStop</span><br><span class="line"></span><br><span class="line"><span class="comment"># Pod 和控制器</span></span><br><span class="line">Deployment</span><br><span class="line">StatefulSet</span><br><span class="line">DaemonSet</span><br><span class="line"></span><br><span class="line"><span class="comment"># 无状态Deployment</span></span><br><span class="line">- 没有顺序的要求。</span><br><span class="line">- 不用考虑再哪个Node运行。</span><br><span class="line">- 随意扩容缩容。</span><br><span class="line">多个实例可以共享相同的持久化数据。例如：nginx实例，tomcat实例等</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 有状态StatefulSet</span></span><br><span class="line">- 集群节点之间的关系。</span><br><span class="line">- 数据不完全一致。</span><br><span class="line">- 实例之间不对等的关系。</span><br><span class="line">- 依靠外部存储的应用。</span><br><span class="line">- 通过dns维持身份</span><br><span class="line">有状态服务 可以说是 需要数据存储功能的服务、或者指多线程类型的服务，队列等。（mysql数据库、kafka、zookeeper等）</span><br><span class="line">每个实例都需要有自己独立的持久化存储。</span><br><span class="line"></span><br><span class="line"><span class="comment"># DaemonSe</span></span><br><span class="line">例如 glusterd、ceph</span><br><span class="line">例如 fluentd、logstash</span><br><span class="line"></span><br><span class="line">kubectl apply -f - &lt;&lt;EOF</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: DaemonSet</span><br><span class="line">metadata:</span><br><span class="line">  name: fluentd-elasticsearch</span><br><span class="line">  namespace: kube-system</span><br><span class="line">  labels:</span><br><span class="line">    k8s-app: fluentd-logging</span><br><span class="line">spec:</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      name: fluentd-elasticsearch</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        name: fluentd-elasticsearch</span><br><span class="line">    spec:</span><br><span class="line">      tolerations:</span><br><span class="line">      <span class="comment"># this toleration is to have the daemonset runnable on master nodes</span></span><br><span class="line">      <span class="comment"># remove it if your masters can't run pods</span></span><br><span class="line">      - key: node-role.kubernetes.io/master</span><br><span class="line">        effect: NoSchedule</span><br><span class="line">      containers:</span><br><span class="line">      - name: fluentd-elasticsearch</span><br><span class="line">        image: quay.io/fluentd_elasticsearch/fluentd:v2.5.2</span><br><span class="line">        resources:</span><br><span class="line">          limits:</span><br><span class="line">            memory: 200Mi</span><br><span class="line">          requests:</span><br><span class="line">            cpu: 100m</span><br><span class="line">            memory: 200Mi</span><br><span class="line">        volumeMounts:</span><br><span class="line">        - name: varlog</span><br><span class="line">          mountPath: /var/<span class="built_in">log</span></span><br><span class="line">        - name: varlibdockercontainers</span><br><span class="line">          mountPath: /var/lib/docker/containers</span><br><span class="line">          readOnly: <span class="literal">true</span></span><br><span class="line">      terminationGracePeriodSeconds: 30</span><br><span class="line">      volumes:</span><br><span class="line">      - name: varlog</span><br><span class="line">        hostPath:</span><br><span class="line">          path: /var/<span class="built_in">log</span></span><br><span class="line">      - name: varlibdockercontainers</span><br><span class="line">        hostPath:</span><br><span class="line">          path: /var/lib/docker/containers</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用运行时类</span></span><br><span class="line">kubectl apply -f - &lt;&lt;EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: mypod</span><br><span class="line">spec:</span><br><span class="line">  runtimeClassName: myclass</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Service （网络运行时）</span></span><br><span class="line">kubectl apply -f - &lt;&lt;EOF</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: my-nginx-svc</span><br><span class="line">  labels: <span class="comment"># 标签</span></span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">  <span class="built_in">type</span>: LoadBalancer</span><br><span class="line">  ports:</span><br><span class="line">  - port: 80</span><br><span class="line">  selector: <span class="comment"># 选择带有 app: nginx标签的pod</span></span><br><span class="line">    app: nginx</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment （对应用，网络整合）</span></span><br><span class="line">kubectl apply -f - &lt;&lt;EOF</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: my-nginx</span><br><span class="line">  labels:</span><br><span class="line">    app: nginx</span><br><span class="line">spec:</span><br><span class="line">  replicas: 3</span><br><span class="line">  selector: <span class="comment"># 选择要抓取的Pod</span></span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nginx</span><br><span class="line">  template: <span class="comment"># pod 模板</span></span><br><span class="line">    metadata:</span><br><span class="line">      labels: <span class="comment"># 标签</span></span><br><span class="line">        app: nginx</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: nginx</span><br><span class="line">        image: nginx:1.14.2</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 80</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建方式</span></span><br><span class="line"><span class="comment"># yaml 方式</span></span><br><span class="line">kubectl apply -f</span><br><span class="line">kubectl apply -f a.yaml -f b.yaml <span class="comment"># 分清先后次序</span></span><br><span class="line">kubectl apply -f dir <span class="comment"># 指定目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># kubectl 将读取任何后缀为 .yaml，.yml 或者 .json 的文件。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 批量操作</span></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">kubectl delete -f</span><br><span class="line">kubectl delete deployments/my-nginx <span class="comment"># 资源类型/资源名</span></span><br><span class="line">kubectl delete deployment,services -l app=nginx <span class="comment"># 基于标签</span></span><br><span class="line"><span class="comment"># 链式操作</span></span><br><span class="line">kubectl get $(kubectl create -f docs/concepts/cluster-administration/nginx/ -o name | grep service)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 目录结构</span></span><br><span class="line">project/k8s/development</span><br><span class="line">├── configmap</span><br><span class="line">│   └── my-configmap.yaml</span><br><span class="line">├── deployment</span><br><span class="line">│   └── my-deployment.yaml</span><br><span class="line">└── pvc</span><br><span class="line">    └── my-pvc.yaml</span><br><span class="line"></span><br><span class="line">kubectl apply -f DIR -R <span class="comment"># 对目录递归操作 --recursive</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用标签对应用分类</span></span><br><span class="line">labels:</span><br><span class="line">  app: guestbook <span class="comment"># 应用类型</span></span><br><span class="line">  tier: frontend <span class="comment"># 应用层级</span></span><br><span class="line">  role: master   <span class="comment"># 应用角色</span></span><br><span class="line">  deploy: A      <span class="comment"># 部署类型 A,B 发布</span></span><br><span class="line"><span class="comment"># 标签的使用可以对资源进行任意维度切分</span></span><br><span class="line"><span class="comment"># 对标签更新</span></span><br><span class="line">kubectl label pods -l app=nginx tier=fe</span><br><span class="line"><span class="comment"># 对注解更新</span></span><br><span class="line">kubectl annotate pods my-nginx-v4-9gw19 description=<span class="string">'my frontend running nginx'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 对pod 进行 缩扩</span></span><br><span class="line">kubectl scale deployment/my-nginx --replicas=1</span><br><span class="line"><span class="comment"># 自动缩扩</span></span><br><span class="line">kubectl autoscale deployment/my-nginx --min=1 --max=5</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑资源文件</span></span><br><span class="line">kubectl edit deployment/my-nginx</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出资源文件</span></span><br><span class="line">kubectl get deployment my-nginx -o yaml &gt; /tmp/nginx.yaml</span><br><span class="line"></span><br><span class="line"><span class="comment"># 强制更新</span></span><br><span class="line">kubectl replace -f https://k8s.io/examples/application/nginx/nginx-deployment.yaml --force</span><br></pre></td></tr></table></figure>
+<h3 id="集群网络"><a href="#集群网络" class="headerlink" title="集群网络"></a>集群网络</h3><ul>
+<li><a href="https://kubernetes.io/zh/docs/concepts/cluster-administration/addons/" target="_blank" rel="noopener">网络插件</a><br>集群网络系统<ul>
+<li>容器间通信</li>
+<li>Pod 间通信</li>
+<li>Pod 和 Service 间通信</li>
+<li>外部和 Service 间通信<blockquote>
+<p>有很多种方式可以实现这种网络模型,常用的有 flannel（二层），Calico（三层），Canal 结合 Flannel 和 Calico</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="日志管理"><a href="#日志管理" class="headerlink" title="日志管理"></a>日志管理</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看日志</span></span><br><span class="line">kubectl logs</span><br><span class="line"><span class="comment"># 查看崩溃前的日志</span></span><br><span class="line">kubectl logs --previous</span><br><span class="line"><span class="comment"># 应用日志</span></span><br><span class="line"><span class="comment"># 使用sidecar 日志代理，把日志转发出去</span></span><br></pre></td></tr></table></figure>
+<h3 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h3><p>Kubelet 将每分钟对容器执行一次垃圾回收，每五分钟对镜像执行一次垃圾回收。</p>
+<h4 id="镜像垃圾"><a href="#镜像垃圾" class="headerlink" title="镜像垃圾"></a>镜像垃圾</h4><p>image-gc-high-threshold，触发镜像垃圾回收的磁盘使用率百分比。默认值为 85%。<br>image-gc-low-threshold，镜像垃圾回收试图释放资源后达到的磁盘使用率百分比。默认值为 80%。</p>
+<h4 id="容器垃圾"><a href="#容器垃圾" class="headerlink" title="容器垃圾"></a>容器垃圾</h4><p>minimum-container-ttl-duration，完成的容器在被垃圾回收之前的最小年龄，默认是 0 分钟，这意味着每个完成的容器都会被执行垃圾回收。<br>maximum-dead-containers-per-container，每个容器要保留的旧实例的最大数量。默认值为 1。<br>maximum-dead-containers，要全局保留的旧容器实例的最大数量。默认值是 -1，这意味着没有全局限制。</p>
+<h3 id="创建-pod-共享卷"><a href="#创建-pod-共享卷" class="headerlink" title="创建 pod 共享卷"></a>创建 pod 共享卷</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">two-containers</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">restartPolicy:</span> <span class="string">Never</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">volumes:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">shared-data</span> <span class="comment"># 定义卷</span></span><br><span class="line">    <span class="attr">emptyDir:</span> <span class="string">&#123;&#125;</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">nginx-container</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">volumeMounts:</span> <span class="comment"># 挂载卷</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">shared-data</span></span><br><span class="line">      <span class="attr">mountPath:</span> <span class="string">/usr/share/nginx/html</span></span><br><span class="line"></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">debian-container</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">debian</span></span><br><span class="line">    <span class="attr">volumeMounts:</span> <span class="comment"># 挂载卷</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">shared-data</span></span><br><span class="line">      <span class="attr">mountPath:</span> <span class="string">/pod-data</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">["/bin/sh"]</span></span><br><span class="line">    <span class="attr">args:</span> <span class="string">["-c",</span> <span class="string">"echo Hello from the debian container &gt; /pod-data/index.html"</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-nfs"><a href="#使用-nfs" class="headerlink" title="使用 nfs"></a>使用 nfs</h3><h3 id><a href="#" class="headerlink" title="#"></a>#</h3><h3 id="-1"><a href="#-1" class="headerlink" title="#"></a>#</h3><h4 id="容器挂载-nfs"><a href="#容器挂载-nfs" class="headerlink" title="容器挂载 nfs"></a>容器挂载 nfs</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">apps/v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">deployment.kubernetes.io/revision:</span> <span class="string">"5"</span></span><br><span class="line">    <span class="attr">field.cattle.io/creatorId:</span> <span class="string">user-prfbt</span></span><br><span class="line">    <span class="attr">field.cattle.io/publicEndpoints:</span> <span class="string">'[&#123;"addresses":["192.168.0.73"],"port":80,"protocol":"HTTP","serviceName":"test:ingress-ccac484d66e6ce270678942b93af0576","ingressName":"test:mynginx","hostname":"mynginx.test.192.168.0.73.xip.io","path":"/test","allNodes":true&#125;]'</span></span><br><span class="line">  <span class="attr">creationTimestamp:</span> <span class="string">"2020-06-07T00:41:35Z"</span></span><br><span class="line">  <span class="attr">generation:</span> <span class="number">36</span></span><br><span class="line">  <span class="attr">labels:</span> <span class="comment"># 标签</span></span><br><span class="line">    <span class="attr">cattle.io/creator:</span> <span class="string">norman</span></span><br><span class="line">    <span class="attr">workload.user.cattle.io/workloadselector:</span> <span class="string">deployment-test-mynginx</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mynginx</span> <span class="comment"># 名称</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">test</span> <span class="comment"># 命名空间</span></span><br><span class="line">  <span class="attr">selfLink:</span> <span class="string">/apis/apps/v1/namespaces/test/deployments/mynginx</span></span><br><span class="line">  <span class="attr">uid:</span> <span class="string">d03e2a14-6280-4d33-af0a-b6c9eacf837f</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">progressDeadlineSeconds:</span> <span class="number">600</span></span><br><span class="line">  <span class="attr">replicas:</span> <span class="number">1</span> <span class="comment">#副本数</span></span><br><span class="line">  <span class="attr">revisionHistoryLimit:</span> <span class="number">10</span></span><br><span class="line">  <span class="attr">selector:</span> <span class="comment"># 选择器</span></span><br><span class="line">    <span class="attr">matchLabels:</span></span><br><span class="line">      <span class="attr">workload.user.cattle.io/workloadselector:</span> <span class="string">deployment-test-mynginx</span></span><br><span class="line">  <span class="attr">strategy:</span> <span class="comment"># 更新策略</span></span><br><span class="line">    <span class="attr">rollingUpdate:</span></span><br><span class="line">      <span class="attr">maxSurge:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">maxUnavailable:</span> <span class="number">0</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">RollingUpdate</span></span><br><span class="line">  <span class="attr">template:</span></span><br><span class="line">    <span class="attr">metadata:</span></span><br><span class="line">      <span class="attr">annotations:</span></span><br><span class="line">        <span class="attr">cattle.io/timestamp:</span> <span class="string">"2020-06-11T10:59:46Z"</span></span><br><span class="line">      <span class="attr">creationTimestamp:</span> <span class="literal">null</span></span><br><span class="line">      <span class="attr">labels:</span></span><br><span class="line">        <span class="attr">workload.user.cattle.io/workloadselector:</span> <span class="string">deployment-test-mynginx</span></span><br><span class="line">    <span class="attr">spec:</span></span><br><span class="line">      <span class="attr">containers:</span> <span class="comment"># 容器</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">image:</span> <span class="number">192.168</span><span class="number">.0</span><span class="number">.69</span><span class="string">/youlv/mynginx:0.1</span> <span class="comment"># 镜像源</span></span><br><span class="line">        <span class="attr">imagePullPolicy:</span> <span class="string">Always</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">mynginx</span> <span class="comment"># 容器名称</span></span><br><span class="line">        <span class="attr">resources:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">        <span class="attr">securityContext:</span> <span class="comment"># 安全设置</span></span><br><span class="line">          <span class="attr">allowPrivilegeEscalation:</span> <span class="literal">false</span></span><br><span class="line">          <span class="attr">capabilities:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">          <span class="attr">privileged:</span> <span class="literal">false</span></span><br><span class="line">          <span class="attr">readOnlyRootFilesystem:</span> <span class="literal">false</span></span><br><span class="line">          <span class="attr">runAsNonRoot:</span> <span class="literal">false</span></span><br><span class="line">        <span class="attr">stdin:</span> <span class="literal">true</span></span><br><span class="line">        <span class="attr">terminationMessagePath:</span> <span class="string">/dev/termination-log</span></span><br><span class="line">        <span class="attr">terminationMessagePolicy:</span> <span class="string">File</span></span><br><span class="line">        <span class="attr">tty:</span> <span class="literal">true</span> <span class="comment"># 终端</span></span><br><span class="line">        <span class="attr">volumeMounts:</span> <span class="comment"># 卷挂载</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/usr/share/nginx/html/</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">vol1</span></span><br><span class="line">          <span class="attr">subPath:</span> <span class="string">nginx/www</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">mountPath:</span> <span class="string">/etc/localtime</span> <span class="comment"># 本地时间设置</span></span><br><span class="line">          <span class="attr">name:</span> <span class="string">vol3</span></span><br><span class="line">          <span class="attr">readOnly:</span> <span class="literal">true</span></span><br><span class="line">      <span class="attr">dnsPolicy:</span> <span class="string">ClusterFirst</span> <span class="comment"># dns策略</span></span><br><span class="line">      <span class="attr">restartPolicy:</span> <span class="string">Always</span> <span class="comment"># 重启策略</span></span><br><span class="line">      <span class="attr">schedulerName:</span> <span class="string">default-scheduler</span></span><br><span class="line">      <span class="attr">securityContext:</span> <span class="string">&#123;&#125;</span></span><br><span class="line">      <span class="attr">terminationGracePeriodSeconds:</span> <span class="number">30</span></span><br><span class="line">      <span class="attr">volumes:</span> <span class="comment"># 定义卷</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">vol1</span></span><br><span class="line">        <span class="attr">persistentVolumeClaim:</span> <span class="comment"># 使用pvc</span></span><br><span class="line">          <span class="attr">claimName:</span> <span class="string">nfs</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">hostPath:</span></span><br><span class="line">          <span class="attr">path:</span> <span class="string">/etc/localtime</span></span><br><span class="line">          <span class="attr">type:</span> <span class="string">""</span></span><br><span class="line">        <span class="attr">name:</span> <span class="string">vol3</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Serverless%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/Serverless%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Serverless使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-22 10:50:40 / 修改时间：11:08:29" itemprop="dateCreated datePublished" datetime="2020-05-22T10:50:40+08:00">2020-05-22</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>67</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="conceptual"><a href="#conceptual" class="headerlink" title="conceptual"></a>conceptual</h2><ul>
+<li>云函数</li>
+<li>云数据库</li>
+<li>云存储</li>
+</ul>
+<h2 id="开发工具"><a href="#开发工具" class="headerlink" title="开发工具"></a>开发工具</h2><ul>
+<li>nodejs</li>
+<li>vuejs</li>
+</ul>
+<h2 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h2><p><a href>unicloud</a></p>
+<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><p>创建APP uni-app<br>创建服务空间 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/golang%E5%9F%BA%E9%87%91%E6%8A%93%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/golang%E5%9F%BA%E9%87%91%E6%8A%93%E5%8F%96/" class="post-title-link" itemprop="url">golang基金抓取</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-21 17:32:13" itemprop="dateCreated datePublished" datetime="2020-05-21T17:32:13+08:00">2020-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-12 23:21:02" itemprop="dateModified" datetime="2020-06-12T23:21:02+08:00">2020-06-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Other/" itemprop="url" rel="index"><span itemprop="name">Other</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/05/golang%E5%9F%BA%E9%87%91%E6%8A%93%E5%8F%96/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Nacos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/Nacos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Nacos安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-21 16:58:45" itemprop="dateCreated datePublished" datetime="2020-05-21T16:58:45+08:00">2020-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-22 17:45:24" itemprop="dateModified" datetime="2020-05-22T17:45:24+08:00">2020-05-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index"><span itemprop="name">分布式计算</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://nacos.io/en-us/docs/quick-start.html" target="_blank" rel="noopener">Nacos docs</a></p>
+<h2 id="conceptual"><a href="#conceptual" class="headerlink" title="conceptual"></a>conceptual</h2><ul>
+<li>配置中心<ul>
+<li>发布配置</li>
+<li>获取最新配置</li>
+<li>更新通知<blockquote>
+<p>spring cloud,apollo,nacos</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>服务发现</li>
+<li>服务治理</li>
+<li>动态配置管理</li>
+<li>动态DNS服务</li>
+<li>服务和元数据管理</li>
+</ul>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><a href="https://nacos.io/zh-cn/docs/quick-start-docker.html" target="_blank" rel="noopener">Nacos docker</a></p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 安装</span></span><br><span class="line">git clone https:<span class="comment">//github.com/nacos-group/nacos-docker.git</span></span><br><span class="line">cd nacos-docker/example</span><br><span class="line"></span><br><span class="line"><span class="meta"># docker-compose 配置 docker-compose.yml</span></span><br><span class="line">cat <span class="params">&lt;&lt;'EOF' &gt;</span>docker-compose.yml</span><br><span class="line"><span class="symbol">version:</span> <span class="string">"2"</span></span><br><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  nacos:</span></span><br><span class="line"><span class="symbol">    image:</span> nacos/nacos-server:latest</span><br><span class="line"><span class="symbol">    container_name:</span> nacos-standalone-mysql</span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line">      - PREFER_HOST_MODE=hostname</span><br><span class="line">      - MODE=standalone</span><br><span class="line">      - SPRING_DATASOURCE_PLATFORM=mysql</span><br><span class="line">      - MYSQL_SERVICE_HOST=mysql</span><br><span class="line">      - MYSQL_SERVICE_DB_NAME=nacos_dev</span><br><span class="line">      - MYSQL_SERVICE_PORT=<span class="number">3306</span></span><br><span class="line">      - MYSQL_SERVICE_USER=nacos</span><br><span class="line">      - MYSQL_SERVICE_PASSWORD=nacos<span class="meta">#123</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="meta-keyword">/data/</span>nacos-volume<span class="meta-keyword">/standalone-logs/</span>:<span class="meta-keyword">/home/</span>nacos/logs</span><br><span class="line">      - ./init.d/custom.properties:<span class="meta-keyword">/home/</span>nacos/init.d/custom.properties</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"8848:8848"</span></span><br><span class="line">      - <span class="string">"9555:9555"</span></span><br><span class="line"><span class="symbol">    depends_on:</span></span><br><span class="line">      - mysql</span><br><span class="line"><span class="symbol">    restart:</span> on-failure</span><br><span class="line"><span class="symbol">  mysql:</span></span><br><span class="line"><span class="symbol">    container_name:</span> mysql</span><br><span class="line"><span class="symbol">    image:</span> nacos/nacos-mysql:<span class="number">5.7</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line">      - MYSQL_ROOT_PASSWORD=root</span><br><span class="line">      - MYSQL_DATABASE=nacos_dev</span><br><span class="line">      - MYSQL_USER=nacos</span><br><span class="line">      - MYSQL_PASSWORD=nacos<span class="meta">#123</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - <span class="meta-keyword">/data/</span>nacos-volume/mysql:<span class="meta-keyword">/var/</span>lib/mysql</span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">"3306:3306"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="meta"># 启动</span></span><br><span class="line">docker-compose up -d</span><br><span class="line"></span><br><span class="line"><span class="meta"># 启动日志</span></span><br><span class="line">tail <span class="number">-200</span>f <span class="meta-keyword">/data/</span>nacos-volume<span class="meta-keyword">/standalone-logs/</span>start.out</span><br><span class="line"></span><br><span class="line"><span class="meta"># 查看</span></span><br><span class="line">curl http:<span class="comment">//192.168.0.70:8848/nacos</span></span><br><span class="line"><span class="meta"># user nacos，pwd nacos</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/LVM%E9%80%BB%E8%BE%91%E5%8D%B7%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">LVM逻辑卷管理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-21 12:28:28 / 修改时间：13:23:59" itemprop="dateCreated datePublished" datetime="2020-05-21T12:28:28+08:00">2020-05-21</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>530</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="conceptual"><a href="#conceptual" class="headerlink" title="conceptual"></a>conceptual</h2><ul>
+<li>LVM是逻辑盘卷管理（Logical Volume Manager）</li>
+<li>物理卷(PV) （磁盘分区）</li>
+<li>卷组(VG) （多个磁盘分区组成卷组）</li>
+<li>逻辑卷(LV) （在卷组上划分分区）</li>
+</ul>
+<h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># 物理卷 PV</span></span><br><span class="line">pvdisplay -v</span><br><span class="line"><span class="meta"># v verbose</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># 卷组 VG</span></span><br><span class="line">vgdisplay</span><br><span class="line"></span><br><span class="line"><span class="meta"># 显示更多(VG,PV,LV)</span></span><br><span class="line">vgdisplay -v</span><br></pre></td></tr></table></figure>
+<h2 id="新创建-LVM"><a href="#新创建-LVM" class="headerlink" title="新创建(LVM)"></a>新创建(LVM)</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建磁盘分区</span></span><br><span class="line">fdisk /dev/vdc</span><br><span class="line">&gt; n p w</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建物理分区</span></span><br><span class="line">pvcreate /dev/vdc1</span><br><span class="line"></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入文件系统，使扩容生效。</span></span><br><span class="line">xfs_growfs /dev/centos/root</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看是否生效</span></span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<h2 id="扩展-LVM"><a href="#扩展-LVM" class="headerlink" title="扩展(LVM)"></a>扩展(LVM)</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看新加磁盘</span></span><br><span class="line"><span class="attr">fdisk</span> <span class="string">-l</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建磁盘分区</span></span><br><span class="line"><span class="attr">fdisk</span> <span class="string">/dev/vdc</span></span><br><span class="line"><span class="meta">&gt;</span> <span class="string">n p w</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建物理分区</span></span><br><span class="line"><span class="attr">pvcreate</span> <span class="string">/dev/vdc1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 加入卷组</span></span><br><span class="line"><span class="attr">vgextend</span> <span class="string">centos /dev/vdc1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定量加入逻辑卷</span></span><br><span class="line"><span class="attr">lvextend</span> <span class="string">-L +10G /dev/centos/root</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入文件系统，使扩容生效。</span></span><br><span class="line"><span class="attr">xfs_growfs</span> <span class="string">/dev/centos/root</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看是否生效</span></span><br><span class="line"><span class="attr">df</span> <span class="string">-h</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-title-link" itemprop="url">配置国内镜像源</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-20 17:50:25" itemprop="dateCreated datePublished" datetime="2020-05-20T17:50:25+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-12 23:03:44" itemprop="dateModified" datetime="2020-06-12T23:03:44+08:00">2020-06-12</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">清华大学镜像源</a></li>
+<li><a href="https://developer.aliyun.com/mirror/" target="_blank" rel="noopener">Ali 镜像源</a></li>
+<li><a href="http://get.daocloud.io/" target="_blank" rel="noopener">Daocloud 镜像源</a></li>
+</ul>
+<h2 id="删除所有源"><a href="#删除所有源" class="headerlink" title="删除所有源"></a>删除所有源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新缓存</span></span><br><span class="line">yum clean all &amp;&amp; yum makecache</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看源</span></span><br><span class="line">yum repolist all</span><br></pre></td></tr></table></figure>
+<h2 id="centos-镜像源"><a href="#centos-镜像源" class="headerlink" title="centos 镜像源"></a>centos 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Aliyun 源</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这两个源有时候访问不通</span></span><br><span class="line">sed -i <span class="string">"/cloud.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line">sed -i <span class="string">"/.aliyuncs.com/s/^/#/"</span> /etc/yum.repos.d/CentOS-Base.repo</span><br></pre></td></tr></table></figure>
+<h2 id="ubuntu-镜像源"><a href="#ubuntu-镜像源" class="headerlink" title="ubuntu 镜像源"></a>ubuntu 镜像源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/etc/apt/sources.list</span><br><span class="line"><span class="comment"># http://archive.ubuntu.com/</span></span><br><span class="line"><span class="comment"># mirrors.aliyun.com</span></span><br><span class="line">sed -i <span class="string">'s/archive.ubuntu.com/mirrors.aliyun.com/'</span> /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<h2 id="docker-镜像源"><a href="#docker-镜像源" class="headerlink" title="docker 镜像源"></a>docker 镜像源</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http<span class="variable">s:</span>//mirrors.aliyun.<span class="keyword">com</span>/docker-<span class="keyword">ce</span>/linux/centos/docker-<span class="keyword">ce</span>.repo -O /etc/yum.repos.d/docker-<span class="keyword">ce</span>.repo</span><br></pre></td></tr></table></figure>
+<h2 id="docker-registry-源"><a href="#docker-registry-源" class="headerlink" title="docker registry 源"></a>docker registry 源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-<span class="string">'EOF'</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"registry-mirrors"</span>: [<span class="string">"https://pe80e41t.mirror.aliyuncs.com"</span>]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载 reload</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl reload docker</span><br><span class="line"></span><br><span class="line"><span class="comment"># github 加速</span></span><br><span class="line">http://tool.chinaz.com/dns?<span class="built_in">type</span>=1&amp;host=github.com&amp;ip=</span><br></pre></td></tr></table></figure>
+<h2 id="debian-源"><a href="#debian-源" class="headerlink" title="debian 源"></a>debian 源</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># debian 8源</span></span><br><span class="line">cat&lt;&lt;EOF &gt;/etc/apt/sources.list</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'deb http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span></span><br><span class="line"><span class="string">deb http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib</span></span><br><span class="line"><span class="string">deb-src http://mirrors.aliyun.com/debian/ jessie main non-free contrib</span></span><br><span class="line"><span class="string">deb-src http://mirrors.aliyun.com/debian/ jessie-proposed-updates main non-free contrib'</span> &gt;/etc/apt/sources.list</span><br><span class="line"></span><br><span class="line"><span class="comment">#  debian 9源</span></span><br><span class="line">cat&lt;&lt;<span class="string">'EOF'</span> &gt;./sources.list</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ stretch main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ stretch main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/debian-security stretch/updates main</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian-security stretch/updates main</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ stretch-updates main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib</span><br><span class="line">deb-src http://mirrors.aliyun.com/debian/ stretch-backports main non-free contrib</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<p>开源镜像: <a href="http://npm.taobao.org/mirrors" target="_blank" rel="noopener">http://npm.taobao.org/mirrors</a><br>Node.js 镜像: <a href="http://npm.taobao.org/mirrors/node" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/node</a><br>alinode 镜像: <a href="http://npm.taobao.org/mirrors/alinode" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/alinode</a><br>phantomjs 镜像: <a href="http://npm.taobao.org/mirrors/phantomjs" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/phantomjs</a><br>ChromeDriver 镜像: <a href="http://npm.taobao.org/mirrors/chromedriver" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/chromedriver</a><br>OperaDriver 镜像: <a href="http://npm.taobao.org/mirrors/operadriver" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/operadriver</a><br>Selenium 镜像: <a href="http://npm.taobao.org/mirrors/selenium" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/selenium</a><br>Node.js 文档镜像: <a href="http://npm.taobao.org/mirrors/node/latest/docs/api/index.html" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/node/latest/docs/api/index.html</a><br>NPM 镜像: <a href="https://npm.taobao.org/mirrors/npm/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/npm/</a><br>electron 镜像: <a href="https://npm.taobao.org/mirrors/electron/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/electron/</a><br>node-inspector 镜像: <a href="https://npm.taobao.org/mirrors/node-inspector/" target="_blank" rel="noopener">https://npm.taobao.org/mirrors/node-inspector/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">数据结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-20 12:23:18" itemprop="dateCreated datePublished" datetime="2020-05-20T12:23:18+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-22 23:57:49" itemprop="dateModified" datetime="2020-05-22T23:57:49+08:00">2020-05-22</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="数据结构概念"><a href="#数据结构概念" class="headerlink" title="数据结构概念"></a>数据结构概念</h2><ul>
+<li>什么是数据？<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">数据(<span class="class"><span class="keyword">data</span>) 是事实或观察的结果，是对客观事物的逻辑归纳，是用于表示客观事物的未经加工的原始素材。</span></span><br><span class="line">数据 是科学实验、检验、统计等所获得的和用于科学研究、技术设计、查证、决策等的数值。</span><br></pre></td></tr></table></figure></li>
+<li><p>问题求解方法</p>
+<ul>
+<li>感觉、经验</li>
+<li>占卜、求神</li>
+<li>逻辑、数学推理、实验</li>
+<li>工程、计算</li>
+<li>模型、模拟、仿真</li>
+<li>哲学</li>
+</ul>
+</li>
+<li><p>不可解问题</p>
+<ul>
+<li>无解</li>
+<li>不可分问题</li>
+<li>熵无限大问题</li>
+<li>悖论<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列举两个经典的悖论</span></span><br><span class="line">(理发师)我只给村里不给自己理发的人理发</span><br><span class="line">A 集合（村里的人）</span><br><span class="line"><span class="keyword">B </span>集合（村里不给自己理发的人）</span><br><span class="line">c 理发师（我）</span><br><span class="line"><span class="comment"># 悖论产生的原因（集合内元素产生递归的行为）</span></span><br><span class="line">当 c 属于 A</span><br><span class="line">且 c 属于 <span class="keyword">B</span></span><br><span class="line"><span class="keyword">B </span>又是 A 的真子集</span><br><span class="line">结论：理发师不能属于<span class="keyword">B</span></span><br><span class="line"><span class="keyword"># </span>理发师产生了递归的行为，因此集合内元素不能产生递归行为。</span><br><span class="line"></span><br><span class="line">一尺之棰，日取其半，万世不竭</span><br><span class="line"><span class="comment"># 悖论产生的原因（降维，信息丢失导致）</span></span><br><span class="line">一尺之锤 理应是多维对象。被抽象数学中的线后变成了一维</span><br><span class="line">日取其半 </span><br><span class="line">万世不竭 因为维度降低，信息有丢失。</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>什么是问题？</p>
+<blockquote>
+<p>问题求解的过程是从未知到已知过程，熵在不断减小。熵趋近于0，则问题有解。<br>下降的过程叫梯度<br>数学问题-&gt;明确到明确过程</p>
+</blockquote>
+</li>
+<li><p>熵</p>
+<blockquote>
+<p>指混乱程度</p>
+</blockquote>
+</li>
+<li><p>分类问题用判断</p>
+</li>
+<li>求因、证明问题 用公理、数学证明</li>
+<li>构建问题用流程和算法</li>
+</ul>
+<blockquote>
+<p>计算的边界： 有穷，能行问题。</p>
+</blockquote>
+<ul>
+<li>什么是抽象？<blockquote>
+<p>从众多的具体事物中，抽取共同的、本质的属性，舍弃个别的、非本质的属性，从而形成概念。<br>算法 + 数据结构 = 程序</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="算法复杂度-从低到高"><a href="#算法复杂度-从低到高" class="headerlink" title="算法复杂度(从低到高)"></a>算法复杂度(从低到高)</h3><blockquote>
+<p>问题求解的规模，大 O 是指主导部分。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">O</span><span class="params">(<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(log(n)</span></span>)</span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(n)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(nlog(n)</span></span>)</span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(n^<span class="number">2</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(n^<span class="number">3</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">O</span><span class="params">(<span class="number">2</span>^n)</span></span></span><br><span class="line">n! 举例(用随机数随机组合成一个已知顺序数)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>程序实现的好坏<ul>
+<li>是否可读</li>
+<li>是否有冗余语句</li>
+<li>健壮性</li>
+<li>可维护性</li>
+</ul>
+</li>
+<li>python 算法计量<ul>
+<li>timeit 模块<br><a href="https://wiki.python.org/moin/TimeComplexity" target="_blank" rel="noopener">python 容器操作的算法复杂度</a></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h2 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h2><h3 id="划分1"><a href="#划分1" class="headerlink" title="划分1"></a>划分1</h3><ul>
+<li>数据的逻辑结构<ul>
+<li>集合</li>
+<li>线性结构</li>
+<li>树形结构<blockquote>
+<p>DNS (互联网中最大的树结构）</p>
+</blockquote>
+</li>
+<li>图形结构<blockquote>
+<p>万维网（互联网中最大的图结构）</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>数据存储结构<ul>
+<li>顺序存储</li>
+<li>链式存储</li>
+<li>索引存储</li>
+<li>哈希存储</li>
+</ul>
+</li>
+<li>常用算法<ul>
+<li>检索</li>
+<li>插入</li>
+<li>删除</li>
+<li>更新</li>
+<li>排序</li>
+</ul>
+</li>
+</ul>
+<h3 id="划分2"><a href="#划分2" class="headerlink" title="划分2"></a>划分2</h3><ul>
+<li>数据的逻辑结构<ul>
+<li>集合</li>
+<li>线性结构<ul>
+<li>数组</li>
+<li>栈</li>
+<li>队列</li>
+<li>链表</li>
+</ul>
+</li>
+<li>树形结构<ul>
+<li>二叉树</li>
+<li>完全二叉树</li>
+<li>平衡二叉树</li>
+<li>二叉查找树</li>
+<li>红黑树</li>
+<li>B 树<ul>
+<li>B-</li>
+<li>B+</li>
+<li>B*</li>
+</ul>
+</li>
+<li>LSM树</li>
+</ul>
+</li>
+<li>图形结构</li>
+</ul>
+</li>
+<li>数据存储结构<ul>
+<li>顺序存储</li>
+<li>链式存储</li>
+<li>索引存储</li>
+<li>哈希存储</li>
+</ul>
+</li>
+<li>常用算法<ul>
+<li>检索</li>
+<li>插入</li>
+<li>删除</li>
+<li>更新</li>
+<li>排序<ul>
+<li>选择排序</li>
+<li>冒泡排序</li>
+<li>快速排序</li>
+<li>归并排序</li>
+<li>希尔排序</li>
+<li>堆排序</li>
+<li>计数排序</li>
+<li>桶排序</li>
+<li>基数排序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二分查找</li>
+<li>贪心算法</li>
+<li>回溯算法</li>
+<li>剪枝算法</li>
+<li>动态规划</li>
+<li>朴素贝叶斯</li>
+<li>推荐算法</li>
+<li>最小生成树算法</li>
+<li>最短路径算法</li>
+</ul>
+<h3 id="栈的应用"><a href="#栈的应用" class="headerlink" title="栈的应用"></a>栈的应用</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">括号匹配，次序反转</span><br><span class="line">十进制转二进制，通过取余反转得到</span><br><span class="line">表达式转换，</span><br><span class="line">中缀 <span class="selector-tag">a</span> + b</span><br><span class="line">前缀 +ab</span><br><span class="line">后缀 ab+</span><br><span class="line">中缀转后缀表达式，利用栈</span><br><span class="line">后缀计算值，利用栈</span><br><span class="line">后缀表达式传值</span><br></pre></td></tr></table></figure>
+<h3 id="队列的应用"><a href="#队列的应用" class="headerlink" title="队列的应用"></a>队列的应用</h3><blockquote>
+<p>使用场景：处理资源速度慢于资源输入速度</p>
+</blockquote>
+<h3 id="递归-recursion"><a href="#递归-recursion" class="headerlink" title="递归 recursion"></a>递归 recursion</h3><blockquote>
+<p>横向解决大规模问题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">递归三定律</span><br><span class="line">    有结束条件</span><br><span class="line">    问题规模逐步减小</span><br><span class="line">    调用自身</span><br><span class="line">递归应用</span><br><span class="line">    任意进制转换</span><br><span class="line">    分形图</span><br></pre></td></tr></table></figure></p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">冒泡排序：两两交换</span><br><span class="line">选择排序：全表扫描，最大&#x2F;小 交换</span><br><span class="line">插入排序：新项和扫描过的子列表比对</span><br><span class="line">希尔排序：子列表进行插入排序</span><br><span class="line">归并排序：分治算法排序</span><br><span class="line">快速排序：找中值，按中值分裂</span><br></pre></td></tr></table></figure>
+<h2 id="树结构"><a href="#树结构" class="headerlink" title="树结构"></a>树结构</h2><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">链表-&gt;二叉树-&gt;二叉查找树-&gt;特殊的二叉查找树（自平衡的二叉查找树）</span><br><span class="line"></span><br><span class="line">二分：有序数据，(min+max)/<span class="number">2</span>,二叉树查找树（左小，右大），时间复杂度是树的深度</span><br><span class="line">最优二叉树-赫夫曼树</span><br><span class="line">平衡二叉树-AVL树</span><br><span class="line"></span><br><span class="line">红黑树</span><br><span class="line">每个节点不是红色就是黑色</span><br><span class="line">不能出现连在一起的红色节点</span><br><span class="line">根节点是黑色（根节点入度为零）</span><br><span class="line">红色节点的两个叶子节点都是黑色，叶子节点都是黑色</span><br><span class="line">左旋：条件-&gt;</span><br><span class="line">右旋：条件-&gt;</span><br><span class="line">变颜色</span><br><span class="line"></span><br><span class="line">构建红黑树</span><br><span class="line">所有插入的点默认为红色</span><br><span class="line">按照二叉查找树插入</span><br><span class="line">插入节点后，不满足红黑树规则</span><br><span class="line">变颜色（父，叔节点都为红）：把父节点，叔节点变成黑色，把祖父节点变红色</span><br><span class="line">旋转（父，叔节点为红，黑）：右边都是红色，进行左旋</span><br><span class="line">旋转（父，叔节点为红，黑）：左边都是红色，进行右旋，要进行变颜色，父节点变黑色，祖父节点变红色</span><br></pre></td></tr></table></figure>
+<h3 id="树的遍历"><a href="#树的遍历" class="headerlink" title="树的遍历"></a>树的遍历</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">前序遍历：根，左，右</span><br><span class="line">中序遍历：左，根，右</span><br><span class="line">后序遍历：左，右，根</span><br></pre></td></tr></table></figure>
+<h3 id="树的应用"><a href="#树的应用" class="headerlink" title="树的应用"></a>树的应用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">文件系统</span><br><span class="line">html文档 dom 处理</span><br><span class="line">DNS域名体系</span><br><span class="line">语法树（解析树）</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="图"><a href="#图" class="headerlink" title="图"></a>图</h3><blockquote>
+<p>树是特殊的图<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">图 <span class="keyword">Graph</span></span><br><span class="line">    顶点 Vertex</span><br><span class="line">    边 Edge</span><br><span class="line">    权重 Weight</span><br><span class="line">图的表示</span><br><span class="line">    邻接矩阵</span><br><span class="line">    邻接表：链表</span><br><span class="line"></span><br><span class="line">六度分隔理论</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h3 id="优化问题"><a href="#优化问题" class="headerlink" title="优化问题"></a>优化问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">移位操作应用</span><br><span class="line">    可以做倍数：左移位</span><br><span class="line">    可以做取余：与操作</span><br><span class="line">    可以做布尔运算：判断奇偶</span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">二进制编码</span><br><span class="line">补码作用：利用溢出，我们可以将减法变成加法</span><br><span class="line"><span class="number">-1</span> + <span class="number">1</span> = <span class="number">0</span></span><br><span class="line"><span class="number">1001</span> #原码 <span class="number">-1</span>       <span class="number">111</span> <span class="number">1</span> #补码 <span class="number">-1</span> 的补码（反码+<span class="number">1</span>），<span class="number">-1</span> 的反码 <span class="number">1110</span> </span><br><span class="line">+     <span class="number">0001</span> #原码  <span class="number">1</span>       <span class="number">0001</span> #原码</span><br><span class="line">---</span><br><span class="line">       <span class="number">1010</span> # <span class="number">-2</span>            <span class="number">10000</span> # 等于<span class="number">0</span> <span class="number">1</span>溢出</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>个字节能表示的最大整数是<span class="number">2</span>^<span class="number">8</span><span class="number">-1</span> =<span class="number">255</span></span><br><span class="line"><span class="number">1</span>个字节能表示的最大负数是-(<span class="number">2</span>^<span class="number">8</span>)/<span class="number">2</span> = <span class="number">-128</span></span><br><span class="line"><span class="number">1</span>个字节能表示的最大正数是 <span class="number">2</span>^<span class="number">8</span>/<span class="number">2</span><span class="number">-1</span> = <span class="number">127</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编码符号表示</span></span><br><span class="line"><span class="attr">ascii</span> <span class="string">8bit</span></span><br><span class="line"><span class="attr">unicode16</span> <span class="string">16bit # 可以表示全世界所有的文字</span></span><br><span class="line"><span class="attr">unicode32</span> <span class="string">32bit</span></span><br><span class="line"><span class="attr">utf8</span> <span class="string">8-32bit</span></span><br><span class="line"><span class="attr">base64</span>  <span class="string"># 全都转换成 8bit  可显示的字符，便于传输，有病毒利用 base64 传输，禁用 base64 可以防止病毒传输</span></span><br><span class="line"></span><br><span class="line"><span class="attr">hashcode</span> <span class="string">把字符串转成数字</span></span><br></pre></td></tr></table></figure>
+<h3 id="书籍推荐"><a href="#书籍推荐" class="headerlink" title="书籍推荐"></a>书籍推荐</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">数据结构</span><br><span class="line">大话数据结构</span><br><span class="line">算法入门经典</span><br><span class="line">算法导论</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Consul%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/Consul%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Consul安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-20 12:10:13 / 修改时间：12:19:31" itemprop="dateCreated datePublished" datetime="2020-05-20T12:10:13+08:00">2020-05-20</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>64</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href>consul</a></li>
+</ul>
+<h2 id="Consul-conceptual"><a href="#Consul-conceptual" class="headerlink" title="Consul conceptual"></a>Consul conceptual</h2><ul>
+<li>微服务</li>
+<li>服务网格</li>
+<li>服务发现</li>
+<li>服务间调用</li>
+<li>限流</li>
+<li>熔断</li>
+<li>监控</li>
+</ul>
+<h2 id="Consul-集群安装"><a href="#Consul-集群安装" class="headerlink" title="Consul 集群安装"></a>Consul 集群安装</h2><h2 id="服务注册"><a href="#服务注册" class="headerlink" title="服务注册"></a>服务注册</h2><h2 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h2><h2 id="熔断"><a href="#熔断" class="headerlink" title="熔断"></a>熔断</h2><h2 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/kong%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/kong%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">kong安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-20 12:10:01" itemprop="dateCreated datePublished" datetime="2020-05-20T12:10:01+08:00">2020-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-29 23:21:23" itemprop="dateModified" datetime="2020-05-29T23:21:23+08:00">2020-05-29</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://docs.konghq.com/" target="_blank" rel="noopener">Kong docs </a></li>
+</ul>
+<h2 id="kong-consul"><a href="#kong-consul" class="headerlink" title="kong consul"></a>kong consul</h2><ul>
+<li>nginx</li>
+<li>lua</li>
+<li><p>API网关</p>
+<ul>
+<li>请求接入</li>
+<li>业务聚合</li>
+<li>中介策略</li>
+<li>统一管理</li>
+</ul>
+</li>
+<li><p>OpenResty</p>
+</li>
+</ul>
+<h2 id="kong-安装"><a href="#kong-安装" class="headerlink" title="kong 安装"></a>kong 安装</h2><ul>
+<li><a href="https://docs.konghq.com/install/docker/" target="_blank" rel="noopener">Docker Installation</a><ul>
+<li>DB mode 数据库模式</li>
+<li>DB-less mode 无数据库模式</li>
+</ul>
+</li>
+<li><a href="https://docs.konghq.com/2.0.x/kong-for-kubernetes/install/" target="_blank" rel="noopener">kubernetes Installation</a></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Create a Docker network</span></span><br><span class="line">docker network create kong-net</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start your database</span></span><br><span class="line">docker run -d --name kong-database \</span><br><span class="line">               --network=kong-net \</span><br><span class="line">               -p 9042:9042 \</span><br><span class="line">               cassandra:3</span><br><span class="line"></span><br><span class="line"><span class="comment"># PostgreSQL container</span></span><br><span class="line">docker run -d --name kong-database \</span><br><span class="line">               --network=kong-net \</span><br><span class="line">               -p 5432:5432 \</span><br><span class="line">               -e <span class="string">"POSTGRES_USER=kong"</span> \</span><br><span class="line">               -e <span class="string">"POSTGRES_DB=kong"</span> \</span><br><span class="line">               -e <span class="string">"POSTGRES_PASSWORD=kong"</span> \</span><br><span class="line">               postgres:9.6</span><br><span class="line"></span><br><span class="line"><span class="comment"># Prepare your database</span></span><br><span class="line">docker run --rm \</span><br><span class="line">     --network=kong-net \</span><br><span class="line">     -e <span class="string">"KONG_DATABASE=postgres"</span> \</span><br><span class="line">     -e <span class="string">"KONG_PG_HOST=kong-database"</span> \</span><br><span class="line">     -e <span class="string">"KONG_PG_PASSWORD=kong"</span> \</span><br><span class="line">     -e <span class="string">"KONG_CASSANDRA_CONTACT_POINTS=kong-database"</span> \</span><br><span class="line">     kong:latest kong migrations bootstrap</span><br><span class="line"></span><br><span class="line"><span class="comment"># Start Kong</span></span><br><span class="line">docker run -d --name kong \</span><br><span class="line">     --network=kong-net \</span><br><span class="line">     -e <span class="string">"KONG_DATABASE=postgres"</span> \</span><br><span class="line">     -e <span class="string">"KONG_PG_HOST=kong-database"</span> \</span><br><span class="line">     -e <span class="string">"KONG_PG_PASSWORD=kong"</span> \</span><br><span class="line">     -e <span class="string">"KONG_CASSANDRA_CONTACT_POINTS=kong-database"</span> \</span><br><span class="line">     -e <span class="string">"KONG_PROXY_ACCESS_LOG=/dev/stdout"</span> \</span><br><span class="line">     -e <span class="string">"KONG_ADMIN_ACCESS_LOG=/dev/stdout"</span> \</span><br><span class="line">     -e <span class="string">"KONG_PROXY_ERROR_LOG=/dev/stderr"</span> \</span><br><span class="line">     -e <span class="string">"KONG_ADMIN_ERROR_LOG=/dev/stderr"</span> \</span><br><span class="line">     -e <span class="string">"KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl"</span> \</span><br><span class="line">     -p 8000:8000 \</span><br><span class="line">     -p 8443:8443 \</span><br><span class="line">     -p 127.0.0.1:8001:8001 \</span><br><span class="line">     -p 127.0.0.1:8444:8444 \</span><br><span class="line">     kong:latest</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use Kong</span></span><br><span class="line">curl -i http://localhost:8001/</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/gitlab%E8%BF%81%E7%A7%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,1772 +1305,6 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">容器技术原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-19 23:52:13 / 修改时间：23:53:04" itemprop="dateCreated datePublished" datetime="2020-05-19T23:52:13+08:00">2020-05-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>24</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="namespace-隔离"><a href="#namespace-隔离" class="headerlink" title="namespace 隔离"></a>namespace 隔离</h2><h2 id="分层文件系统-overlay"><a href="#分层文件系统-overlay" class="headerlink" title="分层文件系统 overlay"></a>分层文件系统 overlay</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/linux-kernel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/linux-kernel/" class="post-title-link" itemprop="url">linux-kernel</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-19 23:27:16 / 修改时间：23:43:53" itemprop="dateCreated datePublished" datetime="2020-05-19T23:27:16+08:00">2020-05-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>837</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.kernel.org/doc/html/latest/" target="_blank" rel="noopener">kernel</a><br><a href="https://www.ibm.com/developerworks/cn/linux/kernel/syscall/part1/appendix.html" target="_blank" rel="noopener">Linux系统调用列表</a><br><a href="https://cmake.org/cmake/help/latest/" target="_blank" rel="noopener">cmake</a></p>
-<h3 id="kernel-source-directory"><a href="#kernel-source-directory" class="headerlink" title="kernel source directory"></a>kernel source directory</h3><hr>
-<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">linux-<span class="number">5.6</span>.<span class="number">13</span>/</span><br><span class="line">├── COPYING</span><br><span class="line">├── CREDITS</span><br><span class="line">├── Documentation</span><br><span class="line">├── Kbuild</span><br><span class="line">├── Kconfig</span><br><span class="line">├── LICENSES</span><br><span class="line">├── MAINTAINERS</span><br><span class="line">├── Makefile</span><br><span class="line">├── README</span><br><span class="line">├── arch            <span class="comment"># 体系结构相关的代码，例如arm, x86等等。</span></span><br><span class="line">├── block           <span class="comment"># 提供块设备的层次。</span></span><br><span class="line">├── certs           <span class="comment"># </span></span><br><span class="line">├── crypto          <span class="comment"># 加密、解密相关的库函数</span></span><br><span class="line">├── drivers         <span class="comment"># 设备驱动</span></span><br><span class="line">├── fs              <span class="comment"># VFS子系统</span></span><br><span class="line">├── <span class="keyword">include</span>         <span class="comment"># 内核头文件，需要提供给外部模块（例如用户空间代码）使用</span></span><br><span class="line">├── init            <span class="comment"># Linux系统启动初始化相关的代码</span></span><br><span class="line">├── ipc             <span class="comment"># IPC（进程间通信）子系统</span></span><br><span class="line">├── kernel          <span class="comment"># Linux内核的核心代码，包含了3.2小节所描述的进程调度子系统，以及和进程调度相关的模块。</span></span><br><span class="line">├── <span class="class"><span class="keyword">lib</span>             <span class="comment"># 实现需要在内核中使用的库函数</span></span></span><br><span class="line">├── mm              <span class="comment"># 内存管理子系统</span></span><br><span class="line">├── net             <span class="comment"># 不包括网络设备驱动的网络子系统</span></span><br><span class="line">├── samples         <span class="comment"># 示例代码</span></span><br><span class="line">├── scripts         <span class="comment"># 用于内核编译的配置文件、脚本等。</span></span><br><span class="line">├── security        <span class="comment"># 提供安全特性（SELinux）</span></span><br><span class="line">├── sound           <span class="comment"># 音频相关的驱动及子系统，可以看作“音频子系统”。</span></span><br><span class="line">├── tools           <span class="comment"># 一些常用工具，如性能剖析、自测试等</span></span><br><span class="line">├── usr             <span class="comment"># 用于生成initramfs的代码</span></span><br><span class="line">└── virt            <span class="comment"># 提供虚拟机技术（KVM等）的支持</span></span><br></pre></td></tr></table></figure>
-<h3 id="kernel-实现功能"><a href="#kernel-实现功能" class="headerlink" title="kernel 实现功能"></a>kernel 实现功能</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>进程管理</span><br><span class="line"><span class="bullet">    * </span>调度策略</span><br><span class="line"><span class="bullet">    * </span>架构特定的调度</span><br><span class="line"><span class="bullet">    * </span>架构独立的调度</span><br><span class="line"><span class="bullet">    * </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>内存管理</span><br><span class="line"><span class="bullet">    * </span>架构相关管理</span><br><span class="line"><span class="bullet">    * </span>架构独立管理</span><br><span class="line"><span class="bullet">    * </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>虚拟文件系统</span><br><span class="line"><span class="bullet">* </span>网络堆栈</span><br><span class="line"><span class="bullet">    * </span>网络设备驱动</span><br><span class="line"><span class="bullet">    * </span>设备独立接口</span><br><span class="line"><span class="bullet">    * </span>网络协议</span><br><span class="line"><span class="bullet">    * </span>协议独立接口</span><br><span class="line"><span class="bullet">    * </span>系统调用接口</span><br><span class="line"><span class="bullet">* </span>设备驱动程序</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/Linux%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Linux操作系统原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-19 15:34:35" itemprop="dateCreated datePublished" datetime="2020-05-19T15:34:35+08:00">2020-05-19</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">计算机组成原理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-19 15:32:45" itemprop="dateCreated datePublished" datetime="2020-05-19T15:32:45+08:00">2020-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-20 08:22:15" itemprop="dateModified" datetime="2020-05-20T08:22:15+08:00">2020-05-20</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h2><ul>
-<li><p><a href="https://zh.wikipedia.org/wiki/%E5%A4%8D%E6%9D%82%E6%8C%87%E4%BB%A4%E9%9B%86" target="_blank" rel="noopener">CISC 复杂指令集</a></p>
-<ul>
-<li>X86架构 (<a href="http://www.zhaoxin.com/" target="_blank" rel="noopener">兆芯</a>)<ul>
-<li><a href="https://zh.wikipedia.org/wiki/X86" target="_blank" rel="noopener">X86</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><a href="https://zh.wikipedia.org/wiki/%E7%B2%BE%E7%AE%80%E6%8C%87%E4%BB%A4%E9%9B%86" target="_blank" rel="noopener">RISC 精简指令集</a></p>
-<ul>
-<li>ARM架构 (<a href="https://e.huawei.com/cn/solutions/hic" target="_blank" rel="noopener">华为</a>)<ul>
-<li><a href="https://zh.wikipedia.org/wiki/ARM%E6%9E%B6%E6%A7%8B" target="_blank" rel="noopener">ARM</a></li>
-</ul>
-</li>
-<li>MIPS架构(<a href="http://www.loongson.cn/index.html" target="_blank" rel="noopener">龙芯</a>)<ul>
-<li><a href="https://zh.wikipedia.org/wiki/MIPS%E6%9E%B6%E6%A7%8B" target="_blank" rel="noopener">MIPS</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="计算机组成"><a href="#计算机组成" class="headerlink" title="计算机组成"></a>计算机组成</h2><ul>
-<li>CPU</li>
-<li>MEMORY</li>
-<li>DISK</li>
-<li><p>IO</p>
-<ul>
-<li>GPU</li>
-<li>NET</li>
-</ul>
-</li>
-<li><p>主板</p>
-<ul>
-<li>北桥<ul>
-<li>CPU</li>
-<li>MEMORY</li>
-<li>GPU</li>
-<li>PCIE</li>
-</ul>
-</li>
-<li>南桥<ul>
-<li>DISK</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="hello-world-工作流程"><a href="#hello-world-工作流程" class="headerlink" title="hello world 工作流程"></a>hello world 工作流程</h2><p><a href="https://yangwang.hk/?p=281" target="_blank" rel="noopener">引用：用机器码写hello world</a></p>
-<p>加电 -&gt; BIOS -&gt; 读取第一扇区 -&gt; bootloader -&gt; 操作系统</p>
-<ul>
-<li>加电</li>
-<li>BIOS<ul>
-<li>电池</li>
-<li>只读 ROM</li>
-</ul>
-</li>
-<li><p>第一扇区</p>
-<ul>
-<li>MBR（ Master Boot Record，主引导记录 ）<ul>
-<li>466字节的引导程序</li>
-<li>64字节的分区表<blockquote>
-<p>为什么一块硬盘上最多只能有四个主分区的原因——第五个主分区放不下…</p>
-</blockquote>
-</li>
-<li>2字节的校验位</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>实模式</p>
-</li>
-<li><p>保护模式</p>
-<ul>
-<li>286架构<blockquote>
-<p>段寄存器保存的数据不再是内存物理地址，而是称作选择器（selector）</p>
-<ul>
-<li>选择器<ul>
-<li>高13位指向描述符表</li>
-<li>最低的两位数据定义了请求的权限，从0到3，0是最高权限，3是最低权限；</li>
-<li>剩下的一位表示是使用全局描述符表（GDT）还是局部描述符表（LDT）。</li>
-</ul>
-</li>
-<li>全局描述表（GDT Global Descriptor Table)</li>
-</ul>
-</blockquote>
-</li>
-<li>386架构 （CPU开创的分页内存管理）<ul>
-<li>页目（page directory）</li>
-<li>页表（page table）<blockquote>
-<p>CR3寄存器保存了进程的页目的物理地址。页目与页表中每4字节为一个单元，是一个32位的值，当页目项第0位为1时，表明页表已经在物理内存中；当页表项第0位为1时，表明访问的数据已经在内存中。</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>0x7c00</p>
-<blockquote>
-<p>8086设计出了20位的寻址总线(16位集群器寻20位地址)<br>16位最大是65536，也就是64kb。2^20=1MB。</p>
-</blockquote>
-</li>
-<li>段寄存器（16位）一级<ul>
-<li>段地址</li>
-</ul>
-</li>
-<li><p>指针寄存器（4位）二级</p>
-<ul>
-<li>偏移地址</li>
-</ul>
-</li>
-<li><p>显示器</p>
-<ul>
-<li>点距<blockquote>
-<p>像素之间的距离</p>
-</blockquote>
-</li>
-<li><p>分辨率</p>
-<blockquote>
-<p>显示分辨率（屏幕分辨率）是屏幕图像的精密度，是指显示器所能显示的像素有多少。</p>
-</blockquote>
-<ul>
-<li>ppi（像素每英寸）</li>
-<li>dpi（点每英寸）用于打印机    </li>
-</ul>
-</li>
-<li>频率<blockquote>
-<p>刷新率指每秒钟出现新图像的数量</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li>显卡<blockquote>
-<p>控制像素点显示，显卡有一块内存，叫显存。只需要把字符写入显存，显卡就会帮助我们将他显示在屏幕上。</p>
-</blockquote>
-</li>
-<li>内存映射(会把显存映射到内存)</li>
-<li>显示字符<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">086</span>下<span class="number">0X00000</span><span class="number">-0X9FFFF</span>是留给普通内存的，后面的<span class="number">0XF0000</span>-FFFFF则是存放BIOS的芯片。</span><br><span class="line">中间<span class="number">0XA0000</span>-EFFFFF的<span class="number">320</span>k字节，则由各种外围设备提供，比如显卡。</span><br><span class="line">显存的范围是<span class="number">0xB8000</span><span class="number">-0XBFFF</span></span><br><span class="line">显卡在启动后，会自动的被初始化为<span class="number">80</span>×<span class="number">25</span>的文本模式，一共两千个字符。</span><br><span class="line"><span class="number">0xB8000</span>就对应屏幕的左上角第一个字符，然后是往右依次类推</span><br><span class="line"></span><br><span class="line">一个字符并不是占用一个字节，而是两个。</span><br><span class="line">第一个字节是字符的ASCII，第二个字节指定了字符的显示属性，比如颜色，是否闪烁。</span><br><span class="line">颜色分为前景色和背景色（前四bit，后四bit）</span><br><span class="line">前四：K RGB K,控制是否闪烁</span><br><span class="line">后四：I RGB I,控制颜色深浅</span><br><span class="line"></span><br><span class="line">屏幕黑色时，显存里是空格。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%AF%AD%E8%A8%80%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">计算机语言编译过程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-19 15:14:18" itemprop="dateCreated datePublished" datetime="2020-05-19T15:14:18+08:00">2020-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-23 06:27:08" itemprop="dateModified" datetime="2020-05-23T06:27:08+08:00">2020-05-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="计算机组成原理"><a href="#计算机组成原理" class="headerlink" title="计算机组成原理"></a>计算机组成原理</h2><a href="/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" title="计算机组成原理">计算机组成原理</a>
-<h2 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h2><blockquote>
-<p>不同的指令集对应不同的汇编器</p>
-</blockquote>
-<ul>
-<li><a href="https://www.ibm.com/developerworks/cn/linux/l-assembly/index.html" target="_blank" rel="noopener">Linux 汇编语言开发指南</a></li>
-</ul>
-<h2 id="C-语言编译过程"><a href="#C-语言编译过程" class="headerlink" title="C 语言编译过程"></a>C 语言编译过程</h2><ul>
-<li>预处理<ul>
-<li>处理预编译指令，例如 #define，#if，#ifdefine 等。</li>
-<li>将 #include 包含文件插入到该预编译指令的位置</li>
-<li>删除所有的注析 // 、/**/</li>
-</ul>
-</li>
-<li>编译<ul>
-<li>把预处理过的代码编译成汇编代码</li>
-</ul>
-</li>
-<li>汇编<ul>
-<li>把汇编代码编译成目标代码</li>
-</ul>
-</li>
-<li>链接<ul>
-<li>把目标代码链接成可执行文件</li>
-</ul>
-</li>
-</ul>
-<h2 id="以-nginx-代码为例，使用-gcc-编译器了解一下编译过程。"><a href="#以-nginx-代码为例，使用-gcc-编译器了解一下编译过程。" class="headerlink" title="以 nginx 代码为例，使用 gcc 编译器了解一下编译过程。"></a>以 nginx 代码为例，使用 gcc 编译器了解一下编译过程。</h2><h3 id="下载-nginx-代码"><a href="#下载-nginx-代码" class="headerlink" title="下载 nginx 代码"></a>下载 nginx 代码</h3><p><a href="http://nginx.org/download/nginx-1.17.10.tar.gz" target="_blank" rel="noopener">nginx 源码</a></p>
-<h3 id="使用-gcc-编译器-gcc-version-4-8-5"><a href="#使用-gcc-编译器-gcc-version-4-8-5" class="headerlink" title="使用 gcc 编译器 (gcc version 4.8.5)"></a>使用 gcc 编译器 (gcc version 4.8.5)</h3><figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gcc -v # 显示编译过程</span><br><span class="line">gcc -### # 选项和命令不执行</span><br><span class="line">gcc -E # 预处理</span><br><span class="line">gcc -S # 编译成汇编代码</span><br><span class="line">gcc -c # 编译、汇编，不链接</span><br></pre></td></tr></table></figure>
-<h3 id="gcc-编译过程"><a href="#gcc-编译过程" class="headerlink" title="gcc 编译过程"></a>gcc 编译过程</h3><a href="/2020/05/nginx/" title="nginx源码分析">nginx源码分析</a>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.17.10.tar.gz</span><br><span class="line">tar -zxf nginx-1.17.10.tar.gz</span><br><span class="line"><span class="built_in">cd</span> /root/nginx-1.17.10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先执行 configure 配置一下整个环境。因为要生成一些文件</span></span><br><span class="line">./configure --prefix=/opt/nginx</span><br><span class="line"><span class="built_in">cd</span> /src/core</span><br><span class="line"><span class="comment"># 备份一下源码</span></span><br><span class="line">cp nginx.c nginx.c.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># -I 用于预处理时，指定头文件</span></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core \</span><br><span class="line">-I../../objs/ \</span><br><span class="line">-I../../src/os/unix/ \</span><br><span class="line">-E nginx.c</span><br><span class="line"></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core -I../../objs/ -I../../src/os/unix/ -E nginx.c &gt;nginx1.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 预处理前后的对比</span></span><br><span class="line">gcc -I/root/nginx-1.17.10/src/core -I../../objs/ -I../../src/os/unix/ -E nginx.c |less -N</span><br><span class="line">less -N nginx.c.bak</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译</span></span><br><span class="line">gcc -S nginx1.c</span><br><span class="line"></span><br><span class="line"><span class="comment"># 汇编</span></span><br><span class="line">gcc -c nginx1.s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接</span></span><br><span class="line">gcc nginx1.o -o nginx1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译后文件大小(行)</span></span><br><span class="line">1590 nginx.c.bak    <span class="comment"># 源码</span></span><br><span class="line">13535 nginx1.c      <span class="comment"># 预处理后代码，把所有需要的头文件都 include 进来</span></span><br><span class="line">3726 nginx1.s       <span class="comment"># 编译后汇编代码</span></span><br><span class="line">139 nginx1.o        <span class="comment"># 编译成目标文件</span></span><br></pre></td></tr></table></figure>
-<h2 id="linux-可执行文件介绍"><a href="#linux-可执行文件介绍" class="headerlink" title="linux 可执行文件介绍"></a>linux 可执行文件介绍</h2><blockquote>
-<p>ELF 是Executable and Linking Format的缩写，即可执行和可链接的格式，是Unix/Linux系统ABI (Application Binary Interface)规范的一部分。</p>
-</blockquote>
-<h3 id="usr-include-elf-h"><a href="#usr-include-elf-h" class="headerlink" title="/usr/include/elf.h"></a>/usr/include/elf.h</h3><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"># 定义了ELF文件的数据类型</span><br><span class="line"> <span class="number">30</span> <span class="comment">/* Type for a 16-bit quantity.  */</span></span><br><span class="line">  <span class="number">31</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf32_Half;</span><br><span class="line">  <span class="number">32</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf64_Half;</span><br><span class="line">  <span class="number">33</span> </span><br><span class="line">  <span class="number">34</span> <span class="comment">/* Types for signed and unsigned 32-bit quantities.  */</span></span><br><span class="line">  <span class="number">35</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Word;</span><br><span class="line">  <span class="number">36</span> <span class="keyword">typedef</span> <span class="built_in">int</span>32_t  Elf32_Sword;</span><br><span class="line">  <span class="number">37</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf64_Word;</span><br><span class="line">  <span class="number">38</span> <span class="keyword">typedef</span> <span class="built_in">int</span>32_t  Elf64_Sword;</span><br><span class="line">  <span class="number">39</span> </span><br><span class="line">  <span class="number">40</span> <span class="comment">/* Types for signed and unsigned 64-bit quantities.  */</span></span><br><span class="line">  <span class="number">41</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf32_Xword;</span><br><span class="line">  <span class="number">42</span> <span class="keyword">typedef</span> <span class="built_in">int</span>64_t  Elf32_Sxword;</span><br><span class="line">  <span class="number">43</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Xword;</span><br><span class="line">  <span class="number">44</span> <span class="keyword">typedef</span> <span class="built_in">int</span>64_t  Elf64_Sxword;</span><br><span class="line">  <span class="number">45</span> </span><br><span class="line">  <span class="number">46</span> <span class="comment">/* Type of addresses.  */</span></span><br><span class="line">  <span class="number">47</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Addr;</span><br><span class="line">  <span class="number">48</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Addr;</span><br><span class="line">  <span class="number">49</span> </span><br><span class="line">  <span class="number">50</span> <span class="comment">/* Type of file offsets.  */</span></span><br><span class="line">  <span class="number">51</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>32_t Elf32_Off;</span><br><span class="line">  <span class="number">52</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>64_t Elf64_Off;</span><br><span class="line">  <span class="number">53</span> </span><br><span class="line">  <span class="number">54</span> <span class="comment">/* Type for section indices, which are 16-bit quantities.  */</span></span><br><span class="line">  <span class="number">55</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf32_Section;</span><br><span class="line">  <span class="number">56</span> <span class="keyword">typedef</span> <span class="built_in">uint</span>16_t Elf64_Section;</span><br><span class="line">  <span class="number">57</span> </span><br><span class="line">  <span class="number">58</span> <span class="comment">/* Type for version symbol information.  */</span></span><br><span class="line">  <span class="number">59</span> <span class="keyword">typedef</span> Elf32_Half Elf32_Versym;</span><br><span class="line">  <span class="number">60</span> <span class="keyword">typedef</span> Elf64_Half Elf64_Versym;</span><br><span class="line"></span><br><span class="line"># 定义了可执行文件头部--结构体</span><br><span class="line">  <span class="number">67</span> <span class="keyword">typedef</span> struct</span><br><span class="line">  <span class="number">68</span> &#123;</span><br><span class="line">  <span class="number">69</span>   unsigned char e_ident[EI_NIDENT];     <span class="comment">/* Magic number and other info */</span></span><br><span class="line">  <span class="number">70</span>   Elf32_Half    e_type;                 <span class="comment">/* Object file type */</span></span><br><span class="line">  <span class="number">71</span>   Elf32_Half    e_machine;              <span class="comment">/* Architecture */</span></span><br><span class="line">  <span class="number">72</span>   Elf32_Word    e_version;              <span class="comment">/* Object file version */</span></span><br><span class="line">  <span class="number">73</span>   Elf32_Addr    e_entry;                <span class="comment">/* Entry point virtual address */</span></span><br><span class="line">  <span class="number">74</span>   Elf32_Off     e_phoff;                <span class="comment">/* Program header table file offset */</span></span><br><span class="line">  <span class="number">75</span>   Elf32_Off     e_shoff;                <span class="comment">/* Section header table file offset */</span></span><br><span class="line">  <span class="number">76</span>   Elf32_Word    e_flags;                <span class="comment">/* Processor-specific flags */</span></span><br><span class="line">  <span class="number">77</span>   Elf32_Half    e_ehsize;               <span class="comment">/* ELF header size in bytes */</span></span><br><span class="line">  <span class="number">78</span>   Elf32_Half    e_phentsize;            <span class="comment">/* Program header table entry size */</span></span><br><span class="line">  <span class="number">79</span>   Elf32_Half    e_phnum;                <span class="comment">/* Program header table entry count */</span></span><br><span class="line">  <span class="number">80</span>   Elf32_Half    e_shentsize;            <span class="comment">/* Section header table entry size */</span></span><br><span class="line">  <span class="number">81</span>   Elf32_Half    e_shnum;                <span class="comment">/* Section header table entry count */</span></span><br><span class="line">  <span class="number">82</span>   Elf32_Half    e_shstrndx;             <span class="comment">/* Section header string table index */</span></span><br><span class="line">  <span class="number">83</span> &#125; Elf32_Ehdr;</span><br><span class="line">  <span class="number">84</span> </span><br><span class="line">  <span class="number">85</span> <span class="keyword">typedef</span> struct</span><br><span class="line">  <span class="number">86</span> &#123;</span><br><span class="line">  <span class="number">87</span>   unsigned char e_ident[EI_NIDENT];     <span class="comment">/* Magic number and other info */</span></span><br><span class="line">  <span class="number">88</span>   Elf64_Half    e_type;                 <span class="comment">/* Object file type */</span></span><br><span class="line">  <span class="number">89</span>   Elf64_Half    e_machine;              <span class="comment">/* Architecture */</span></span><br><span class="line">  <span class="number">90</span>   Elf64_Word    e_version;              <span class="comment">/* Object file version */</span></span><br><span class="line">  <span class="number">91</span>   Elf64_Addr    e_entry;                <span class="comment">/* Entry point virtual address */</span></span><br><span class="line">  <span class="number">92</span>   Elf64_Off     e_phoff;                <span class="comment">/* Program header table file offset */</span></span><br><span class="line">  <span class="number">93</span>   Elf64_Off     e_shoff;                <span class="comment">/* Section header table file offset */</span></span><br><span class="line">  <span class="number">94</span>   Elf64_Word    e_flags;                <span class="comment">/* Processor-specific flags */</span></span><br><span class="line">  <span class="number">95</span>   Elf64_Half    e_ehsize;               <span class="comment">/* ELF header size in bytes */</span></span><br><span class="line">  <span class="number">96</span>   Elf64_Half    e_phentsize;            <span class="comment">/* Program header table entry size */</span></span><br><span class="line">  <span class="number">97</span>   Elf64_Half    e_phnum;                <span class="comment">/* Program header table entry count */</span></span><br><span class="line">  <span class="number">98</span>   Elf64_Half    e_shentsize;            <span class="comment">/* Section header table entry size */</span></span><br><span class="line">  <span class="number">99</span>   Elf64_Half    e_shnum;                <span class="comment">/* Section header table entry count */</span></span><br><span class="line"> <span class="number">100</span>   Elf64_Half    e_shstrndx;             <span class="comment">/* Section header string table index */</span></span><br><span class="line"> <span class="number">101</span> &#125; Elf64_Ehdr;</span><br><span class="line"></span><br><span class="line"># 解释了数值表示的意义</span><br><span class="line"> <span class="number">160</span> <span class="comment">/* Legal values for e_type (object file type).  */</span></span><br><span class="line"> <span class="number">161</span> </span><br><span class="line"> <span class="number">162</span> #define ET_NONE         <span class="number">0</span>               <span class="comment">/* No file type */</span></span><br><span class="line"> <span class="number">163</span> #define ET_REL          <span class="number">1</span>               <span class="comment">/* Relocatable file */</span></span><br><span class="line"> <span class="number">164</span> #define ET_EXEC         <span class="number">2</span>               <span class="comment">/* Executable file */</span></span><br><span class="line"> <span class="number">165</span> #define ET_DYN          <span class="number">3</span>               <span class="comment">/* Shared object file */</span></span><br><span class="line"> <span class="number">166</span> #define ET_CORE         <span class="number">4</span>               <span class="comment">/* Core file */</span></span><br><span class="line"> <span class="number">167</span> #define ET_NUM          <span class="number">5</span>               <span class="comment">/* Number of defined types */</span></span><br><span class="line"> <span class="number">168</span> #define ET_LOOS         <span class="number">0xfe00</span>          <span class="comment">/* OS-specific range start */</span></span><br><span class="line"> <span class="number">169</span> #define ET_HIOS         <span class="number">0xfeff</span>          <span class="comment">/* OS-specific range end */</span></span><br><span class="line"> <span class="number">170</span> #define ET_LOPROC       <span class="number">0xff00</span>          <span class="comment">/* Processor-specific range start */</span></span><br><span class="line"> <span class="number">171</span> #define ET_HIPROC       <span class="number">0xffff</span>          <span class="comment">/* Processor-specific range end */</span></span><br></pre></td></tr></table></figure>
-<h3 id="通过-readelf-命令了解-linux-可执行文件"><a href="#通过-readelf-命令了解-linux-可执行文件" class="headerlink" title="通过 readelf 命令了解 linux 可执行文件"></a>通过 readelf 命令了解 linux 可执行文件</h3><ul>
-<li>section<blockquote>
-<p>目标代码文件的内容是由section组成的,.text，.bss，.data这些指示，都指的是section。</p>
-<ul>
-<li>section header table</li>
-</ul>
-</blockquote>
-</li>
-<li>segment<blockquote>
-<p>可执行文件的内容是由segment组成的。</p>
-<ul>
-<li>program header table</li>
-</ul>
-</blockquote>
-</li>
-<li>Magic number<blockquote>
-<p>Magic number一般是指硬写到代码里的整数常量，数值是编程者自己指定的，其他人不知道数值有什么具体意义，表示不明觉厉，就称作magic number。</p>
-</blockquote>
-</li>
-<li>Magic number 作用<blockquote>
-<p>file命令是一个很神奇的命令。它能够根据文件中魔数来判断文件类型。这比根据后缀来判断文件类型要靠谱一点。比如，即使把一张位图文件后缀名改为.jpg，file命令依然大公无私地告诉你它是一张bmp图片。<br>ELF文件头会写入一个magic number，检查这个数和自己预想的是否一致可以判断文件是否损坏。<br>在缓冲区数组旁放一个magic number（称作canary金丝雀），通过检查是否一致可检测缓冲区溢出攻击。</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看segment 和 section 对应关系</span></span><br><span class="line"><span class="attr">readelf</span> <span class="string">-l /usr/bin/sleep</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 反编译</span></span><br><span class="line"><span class="attr">readelf</span> <span class="string">-S nginx1.o</span></span><br></pre></td></tr></table></figure>
-</blockquote>
-</li>
-</ul>
-<h2 id="反汇编工具-objdump"><a href="#反汇编工具-objdump" class="headerlink" title="反汇编工具 objdump"></a>反汇编工具 objdump</h2><blockquote>
-<p>objdump是用查看目标文件或者可执行的目标文件的构成</p>
-</blockquote>
-<ul>
-<li><p>符号表</p>
-<blockquote>
-<p>在计算机科学中，符号表是一种用于语言翻译器（例如编译器和解释器）中的数据结构。<br>在符号表中，程序源代码中的每个标识符都和它的声明或使用信息绑定在一起，比如其数据类型、作用域以及内存地址。<br>散列表是用来实现符号表的一种常用技术。<br>编译器可能会使用一个很大的符号表来包含所有的符号，或是针对不同的作用域使用层次结构的多个独立的符号表。</p>
-</blockquote>
-</li>
-<li><p>文件头</p>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">objdump</span> <span class="string">-f</span> <span class="string">nginx1.o</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">nginx1.o:</span>     <span class="string">file</span> <span class="string">format</span> <span class="string">elf64-x86-64</span></span><br><span class="line"><span class="attr">architecture:</span> <span class="string">i386:x86-64,</span> <span class="attr">flags 0x00000011:</span></span><br><span class="line"><span class="string">HAS_RELOC,</span> <span class="string">HAS_SYMS</span></span><br><span class="line"><span class="string">start</span> <span class="string">address</span> <span class="number">0x0000000000000000</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/nginx/" class="post-title-link" itemprop="url">nginx</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-19 11:09:39 / 修改时间：11:12:55" itemprop="dateCreated datePublished" datetime="2020-05-19T11:09:39+08:00">2020-05-19</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>259</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://www.kancloud.cn/digest/understandingnginx/202599" target="_blank" rel="noopener">理解 nginx 源码</a></p>
-<h2 id="nginx-代码结构"><a href="#nginx-代码结构" class="headerlink" title="nginx 代码结构"></a>nginx 代码结构</h2><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── core  <span class="meta"># Nginx的核心源代码，包括常用数据结构的以及Nginx 内核实现的核心代码；</span></span><br><span class="line">├── <span class="keyword">event</span> <span class="meta"># Nginx事件驱动模型，以及定时器的实现相关代码；</span></span><br><span class="line">├── http  <span class="meta"># Nginx 实现http 服务器相关的代码；</span></span><br><span class="line">├── mail  <span class="meta"># Nginx 实现邮件代理服务器相关的代码；</span></span><br><span class="line">├── misc  <span class="meta"># 辅助代码，测试C++头 的兼容性，以及对Google_PerfTools 的支持；</span></span><br><span class="line">├── os    <span class="meta"># 不同体系统结构所提供的系统函数的封装，提供对外统一的系统调用接口；</span></span><br><span class="line">└── stream <span class="meta">#</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%A4%9A%E8%AF%AD%E8%A8%80helloworld%E7%A4%BA%E4%BE%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/%E5%A4%9A%E8%AF%AD%E8%A8%80helloworld%E7%A4%BA%E4%BE%8B/" class="post-title-link" itemprop="url">多语言helloworld示例</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-19 09:57:04 / 修改时间：15:15:52" itemprop="dateCreated datePublished" datetime="2020-05-19T09:57:04+08:00">2020-05-19</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>491</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="多语言helloworld示例"><a href="#多语言helloworld示例" class="headerlink" title="多语言helloworld示例"></a>多语言helloworld示例</h1><p><a href="https://www.runoob.com/w3cnote/hello-world-programs-of-24-programing-language.html" target="_blank" rel="noopener">runoob 示例</a></p>
-<h3 id="python-示例"><a href="#python-示例" class="headerlink" title="python 示例"></a>python 示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Hello World"</span>)</span><br></pre></td></tr></table></figure>
-<h3 id="C-示例"><a href="#C-示例" class="headerlink" title="C 示例"></a>C 示例</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">include <span class="string">"stdio.h"</span> <span class="comment">// 头文件</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span>&#123;  <span class="comment">// 入口函数</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World\n"</span>) <span class="comment">// 输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="C-示例-1"><a href="#C-示例-1" class="headerlink" title="C++ 示例"></a>C++ 示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>; <span class="comment">// 命名空间</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="java"><a href="#java" class="headerlink" title="java"></a>java</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123; <span class="comment">// 类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123; <span class="comment">// 入口函数</span></span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>); <span class="comment">// 输出</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="golang-示例"><a href="#golang-示例" class="headerlink" title="golang 示例"></a>golang 示例</h3><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main <span class="comment">// 命名空间</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span> <span class="comment">// 输出包</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello World"</span>) <span class="comment">// 输出</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Java%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/Java%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/" class="post-title-link" itemprop="url">Java环境准备</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-19 09:37:43" itemprop="dateCreated datePublished" datetime="2020-05-19T09:37:43+08:00">2020-05-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-11 10:18:50" itemprop="dateModified" datetime="2020-06-11T10:18:50+08:00">2020-06-11</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>322</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>
-</li>
-</ul>
-<h2 id="JDK-安装"><a href="#JDK-安装" class="headerlink" title="JDK 安装"></a>JDK 安装</h2><ul>
-<li><a href="https://www.oracle.com/java/" target="_blank" rel="noopener">Java</a></li>
-<li><a href="https://docs.oracle.com/en/java/javase/14/" target="_blank" rel="noopener">JDK docs</a></li>
-</ul>
-<h3 id="下载-JDK-包"><a href="#下载-JDK-包" class="headerlink" title="下载 JDK 包"></a>下载 JDK 包</h3><ul>
-<li><a href="https://www.oracle.com/java/technologies/javase-jdk14-downloads.html" target="_blank" rel="noopener">Oracle JDK</a></li>
-<li><a href="https://www.oracle.com/java/technologies/javase-downloads.html" target="_blank" rel="noopener">JDK download</a></li>
-<li><a href="https://openjdk.java.net/" target="_blank" rel="noopener">OPENJDK</a></li>
-</ul>
-<h3 id="JAVA-开发工具"><a href="#JAVA-开发工具" class="headerlink" title="JAVA 开发工具"></a>JAVA 开发工具</h3><ul>
-<li><a href="https://www.eclipse.org/downloads/" target="_blank" rel="noopener">Eclipse</a></li>
-<li><a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">Idea</a></li>
-</ul>
-<h3 id="Java-框架"><a href="#Java-框架" class="headerlink" title="Java 框架"></a>Java 框架</h3><p><a href="https://spring.io/" target="_blank" rel="noopener">Spring family</a></p>
-<h3 id="配置三个变量"><a href="#配置三个变量" class="headerlink" title="配置三个变量"></a>配置三个变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME <span class="comment"># 安装java目录</span></span><br><span class="line">CLASSPATH <span class="comment"># java 类库</span></span><br><span class="line">PATH      <span class="comment"># java 可执行路径</span></span><br></pre></td></tr></table></figure>
-<h3 id="hello-world-示例"><a href="#hello-world-示例" class="headerlink" title="hello world 示例"></a>hello world 示例</h3><p>新建一个 Helloworld.class 文件<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// java 类声明</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 入口函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String []args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// java 输出语句</span></span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/markdown%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/markdown%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/" class="post-title-link" itemprop="url">markdown数学公式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-18 20:40:08" itemprop="dateCreated datePublished" datetime="2020-05-18T20:40:08+08:00">2020-05-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-19 09:10:11" itemprop="dateModified" datetime="2020-05-19T09:10:11+08:00">2020-05-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">数学</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="行内与独行"><a href="#行内与独行" class="headerlink" title="行内与独行"></a>行内与独行</h2><p>行内公式：将公式插入到本行内，一个美元符，$xyz$</p>
-<p>独行公式：将公式插入到新的一行内，并且居中，两个美元符，<script type="math/tex">xyz</script></p>
-<h2 id="上标、下标与组合"><a href="#上标、下标与组合" class="headerlink" title="上标、下标与组合"></a>上标、下标与组合</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>表示</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>上标符号</td>
-<td>^</td>
-<td>$x^4$</td>
-</tr>
-<tr>
-<td>下标符号</td>
-<td>_</td>
-<td>$x_1$</td>
-</tr>
-<tr>
-<td>组合符号</td>
-<td>{}</td>
-<td>${16}<em>{8}O{2+}</em>{2}$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="汉字、字体与格式"><a href="#汉字、字体与格式" class="headerlink" title="汉字、字体与格式"></a>汉字、字体与格式</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>表示</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>汉字形式</td>
-<td>\mbox{}</td>
-<td>$V_{\mbox{初始}}$</td>
-</tr>
-<tr>
-<td>字体控制</td>
-<td>\displaystyle</td>
-<td>$\displaystyle \frac{x+y}{y+z}$</td>
-</tr>
-<tr>
-<td>下划线符号</td>
-<td>\underline</td>
-<td>$\underline{x+y}$</td>
-</tr>
-<tr>
-<td>标签</td>
-<td>\tag{数字}</td>
-<td>$\tag{12}$</td>
-</tr>
-<tr>
-<td>上大括号</td>
-<td>\overbrace{算式}</td>
-<td>$\overbrace{a+b+c+d}^{2.0}$</td>
-</tr>
-<tr>
-<td>下大括号</td>
-<td>\underbrace{算式}</td>
-<td>$a+\underbrace{b+c}_{1.0}+d$</td>
-</tr>
-<tr>
-<td>上位符号</td>
-<td>\stacrel{上位符号}{基位符号}</td>
-<td>$\vec{x}\stackrel{\mathrm{def}}{=}{x_1,\dots,x_n}$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="占位符"><a href="#占位符" class="headerlink" title="占位符"></a>占位符</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>表示</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>两个quad空格</td>
-<td>\qquad</td>
-<td>$x \qquad y$</td>
-</tr>
-<tr>
-<td>quad空格</td>
-<td>\quad</td>
-<td>$x \quad y$</td>
-</tr>
-<tr>
-<td>大空格</td>
-<td>符号\</td>
-<td>$x \ y$</td>
-</tr>
-<tr>
-<td>中空格</td>
-<td>符号\:</td>
-<td>$x : y$</td>
-</tr>
-<tr>
-<td>小空格</td>
-<td>符号\,</td>
-<td>$x , y$</td>
-</tr>
-<tr>
-<td>没有空格</td>
-<td>符号``</td>
-<td>$xy$</td>
-</tr>
-<tr>
-<td>紧贴</td>
-<td>符号!</td>
-<td>$x ! y$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="定界符与组合"><a href="#定界符与组合" class="headerlink" title="定界符与组合"></a>定界符与组合</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>表示</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>括号</td>
-<td>（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)</td>
-<td>$（）\big(\big) \Big(\Big) \bigg(\bigg) \Bigg(\Bigg)$</td>
-</tr>
-<tr>
-<td>中括号</td>
-<td>[]</td>
-<td>$[x+y]$</td>
-</tr>
-<tr>
-<td>大括号</td>
-<td>{ }</td>
-<td>${x+y}$</td>
-</tr>
-<tr>
-<td>自适应括号</td>
-<td>\left</td>
-<td>$\left(x\right)$</td>
-</tr>
-<tr>
-<td>自适应括号</td>
-<td>\right</td>
-<td>$\left(x{yz}\right)$</td>
-</tr>
-<tr>
-<td>组合公式</td>
-<td>{上位公式 \choose 下位公式}</td>
-<td>${n+1 \choose k}={n \choose k}+{n \choose k-1}$</td>
-</tr>
-<tr>
-<td>组合公式</td>
-<td>{上位公式 \atop 下位公式}</td>
-<td>$\sum{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A{k0}A{k_1}\cdots$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<blockquote>
-<p>$\sum<em>{k_0,k_1,\ldots&gt;0 \atop k_0+k_1+\cdots=n}A</em>{k<em>0}A</em>{k_1}\cdots$</p>
-</blockquote>
-<h2 id="四则运算"><a href="#四则运算" class="headerlink" title="四则运算"></a>四则运算</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>符号</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>加法运算</td>
-<td>+</td>
-<td>$x+y=z$</td>
-</tr>
-<tr>
-<td>减法运算</td>
-<td>-</td>
-<td>$x-y=z$</td>
-</tr>
-<tr>
-<td>加减运算</td>
-<td>\pm</td>
-<td>$x \pm y=z$</td>
-</tr>
-<tr>
-<td>减甲运算</td>
-<td>\mp</td>
-<td>$x \mp y=z$</td>
-</tr>
-<tr>
-<td>乘法运算</td>
-<td>\times</td>
-<td>$x \times y=z$</td>
-</tr>
-<tr>
-<td>点乘运算</td>
-<td>\cdot</td>
-<td>$x \cdot y=z$</td>
-</tr>
-<tr>
-<td>星乘运算</td>
-<td>\ast</td>
-<td>$x \ast y=z$</td>
-</tr>
-<tr>
-<td>除法运算</td>
-<td>\div</td>
-<td>$x \div y=z$</td>
-</tr>
-<tr>
-<td>斜法运算</td>
-<td>/</td>
-<td>$x/y=z$</td>
-</tr>
-<tr>
-<td>分式表示</td>
-<td>\frac{分子}{分母}</td>
-<td>$\frac{x+y}{y+z}$</td>
-</tr>
-<tr>
-<td>分式表示</td>
-<td>{分子} \voer {分母}</td>
-<td>${x+y} \over {y+z}$</td>
-</tr>
-<tr>
-<td>绝对值表示</td>
-<td></td>
-<td>$x+y$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="高级运算"><a href="#高级运算" class="headerlink" title="高级运算"></a>高级运算</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>运算符</th>
-<th>符号</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>平均数运算</td>
-<td>\overline{算式}</td>
-<td>$\overline{xyz}$</td>
-</tr>
-<tr>
-<td>开二次方运算</td>
-<td>\sqrt</td>
-<td>$\sqrt x$</td>
-</tr>
-<tr>
-<td>开方运算</td>
-<td>\sqrt[开方数]{被开方数}</td>
-<td>$\sqrt[3]{x+y}$</td>
-</tr>
-<tr>
-<td>对数运算</td>
-<td>\log</td>
-<td>$\log(x)$</td>
-</tr>
-<tr>
-<td>极限运算</td>
-<td>\lim</td>
-<td>$\lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</td>
-</tr>
-<tr>
-<td>极限运算</td>
-<td>\displaystyle \lim</td>
-<td>$\displaystyle \lim^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</td>
-</tr>
-<tr>
-<td>求和运算</td>
-<td>\sum</td>
-<td>$\sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</td>
-</tr>
-<tr>
-<td>求和运算</td>
-<td>\displaystyle \sum</td>
-<td>$\displaystyle \sum^{x \to \infty}_{y \to 0}{\frac{x}{y}}$</td>
-</tr>
-<tr>
-<td>积分运算</td>
-<td>\int</td>
-<td>$\int^{\infty}_{0}{xdx}$</td>
-</tr>
-<tr>
-<td>积分运算</td>
-<td>\displaystyle \int</td>
-<td>$\displaystyle \int^{\infty}_{0}{xdx}$</td>
-</tr>
-<tr>
-<td>微分运算</td>
-<td>\partial</td>
-<td>$\frac{\partial x}{\partial y}$</td>
-</tr>
-<tr>
-<td>矩阵表示</td>
-<td>\begin{matrix} \end{matrix}</td>
-<td>$\left[ \begin{matrix} 1 &amp; 2 &amp; 3 \cdots \vdots 4 &amp; 5 &amp; 6 \end{matrix} \right]$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<blockquote>
-<p>\ddots \cdots</p>
-</blockquote>
-<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>逻辑运算</th>
-<th>符号</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>等于运算</td>
-<td>=</td>
-<td>$x+y=z$</td>
-</tr>
-<tr>
-<td>大于运算</td>
-<td>&gt;</td>
-<td>$x+y&gt;z$</td>
-</tr>
-<tr>
-<td>小于运算</td>
-<td>&lt;</td>
-<td>$x+y&lt;z$</td>
-</tr>
-<tr>
-<td>大于等于运算</td>
-<td>\geq</td>
-<td>$x+y \geq z$</td>
-</tr>
-<tr>
-<td>小于等于运算</td>
-<td>\leq</td>
-<td>$x+y \leq z$</td>
-</tr>
-<tr>
-<td>不等于运算</td>
-<td>\neq</td>
-<td>$x+y \neq z$</td>
-</tr>
-<tr>
-<td>不大于等于运算</td>
-<td>\ngeq</td>
-<td>$x+y \ngeq z$</td>
-</tr>
-<tr>
-<td>不大于等于运算</td>
-<td>\not\geq</td>
-<td>$x+y \not\geq z$</td>
-</tr>
-<tr>
-<td>不小于等于运算</td>
-<td>\nleq</td>
-<td>$x+y \nleq z$</td>
-</tr>
-<tr>
-<td>不小于等于运算</td>
-<td>\not\leq</td>
-<td>$x+y \not\leq z$</td>
-</tr>
-<tr>
-<td>约等于运算</td>
-<td>\approx</td>
-<td>$x+y \approx z$</td>
-</tr>
-<tr>
-<td>恒定等于运算</td>
-<td>\equiv</td>
-<td>$x+y \equiv z$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="集合运算"><a href="#集合运算" class="headerlink" title="集合运算"></a>集合运算</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>数学运算</th>
-<th>符号</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>属于运算</td>
-<td>\in</td>
-<td>$x \in y$</td>
-</tr>
-<tr>
-<td>不属于运算</td>
-<td>\notin</td>
-<td>$x \notin y$</td>
-</tr>
-<tr>
-<td>不属于运算</td>
-<td>\not\in</td>
-<td>$x \not\in y$</td>
-</tr>
-<tr>
-<td>子集运算</td>
-<td>\subset</td>
-<td>$x \subset y$</td>
-</tr>
-<tr>
-<td>子集运算</td>
-<td>\supset</td>
-<td>$x \supset y$</td>
-</tr>
-<tr>
-<td>真子集运算</td>
-<td>\subseteq</td>
-<td>$x \subseteq y$</td>
-</tr>
-<tr>
-<td>非真子集运算</td>
-<td>\subsetneq</td>
-<td>$x \subsetneq y$</td>
-</tr>
-<tr>
-<td>真子集运算</td>
-<td>\supseteq</td>
-<td>$x \supseteq y$</td>
-</tr>
-<tr>
-<td>非真子集运算</td>
-<td>\supsetneq</td>
-<td>$x \supsetneq y$</td>
-</tr>
-<tr>
-<td>非子集运算</td>
-<td>\not\subset</td>
-<td>$x \not\subset y$</td>
-</tr>
-<tr>
-<td>非子集运算</td>
-<td>\not\supset</td>
-<td>$x \not\supset y$</td>
-</tr>
-<tr>
-<td>并集运算</td>
-<td>\cup</td>
-<td>$x \cup y$</td>
-</tr>
-<tr>
-<td>交集运算</td>
-<td>\cap</td>
-<td>$x \cap y$</td>
-</tr>
-<tr>
-<td>差集运算</td>
-<td>\setminus</td>
-<td>$x \setminus y$</td>
-</tr>
-<tr>
-<td>同或运算</td>
-<td>\bigodot</td>
-<td>$x \bigodot y$</td>
-</tr>
-<tr>
-<td>同与运算</td>
-<td>\bigotimes</td>
-<td>$x \bigotimes y$</td>
-</tr>
-<tr>
-<td>实数集合</td>
-<td>\mathbb{R}</td>
-<td>\mathbb{R}</td>
-</tr>
-<tr>
-<td>自然数集合</td>
-<td>\mathbb{Z}</td>
-<td>\mathbb{Z}</td>
-</tr>
-<tr>
-<td>空集</td>
-<td>\emptyset</td>
-<td>$\emptyset$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="数学符号"><a href="#数学符号" class="headerlink" title="数学符号"></a>数学符号</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>学名</th>
-<th>符号</th>
-<th>例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>无穷</td>
-<td>\infty</td>
-<td>$\infty$</td>
-</tr>
-<tr>
-<td>虚数</td>
-<td>\imath</td>
-<td>$\imath$</td>
-</tr>
-<tr>
-<td>虚数</td>
-<td>\jmath</td>
-<td>$\jmath$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\hat{a}</td>
-<td>$\hat{a}$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\check{a}</td>
-<td>$\check{a}$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\breve{a}</td>
-<td>$\breve{a}$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\tilde{a}</td>
-<td>$\tilde{a}$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\bar{a}</td>
-<td>$\bar{a}$</td>
-</tr>
-<tr>
-<td>矢量符号</td>
-<td>符号\vec{a}</td>
-<td>$\vec{a}$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\acute{a}</td>
-<td>$\acute{a}$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\grave{a}</td>
-<td>$\grave{a}$</td>
-</tr>
-<tr>
-<td>数学符号</td>
-<td>符号\mathring{a}</td>
-<td>$\mathring{a}$</td>
-</tr>
-<tr>
-<td>一阶导数符号</td>
-<td>符号\dot{a}</td>
-<td>$\dot{a}$</td>
-</tr>
-<tr>
-<td>二阶导数符号</td>
-<td>符号\ddot{a}</td>
-<td>$\ddot{a}$</td>
-</tr>
-<tr>
-<td>上箭头</td>
-<td>\uparrow</td>
-<td>$\uparrow$</td>
-</tr>
-<tr>
-<td>上箭头</td>
-<td>\Uparrow</td>
-<td>$\Uparrow$</td>
-</tr>
-<tr>
-<td>下箭头</td>
-<td>\downarrow</td>
-<td>$\downarrow$</td>
-</tr>
-<tr>
-<td>下箭头</td>
-<td>\Downarrow</td>
-<td>$\Downarrow$</td>
-</tr>
-<tr>
-<td>左箭头</td>
-<td>\leftarrow</td>
-<td>$\leftarrow$</td>
-</tr>
-<tr>
-<td>左箭头</td>
-<td>\Leftarrow</td>
-<td>$\Leftarrow$</td>
-</tr>
-<tr>
-<td>右箭头</td>
-<td>\rightarrow</td>
-<td>$\rightarrow$</td>
-</tr>
-<tr>
-<td>右箭头</td>
-<td>\Rightarrow</td>
-<td>$\Rightarrow$</td>
-</tr>
-<tr>
-<td>底端对齐的省略号</td>
-<td>\ldots</td>
-<td>$1,2,\ldots,n$</td>
-</tr>
-<tr>
-<td>中线对齐的省略号</td>
-<td>\cdots</td>
-<td>$x_1^2 + x_2^2 + \cdots + x_n^2$</td>
-</tr>
-<tr>
-<td>竖直对齐的省略号</td>
-<td>\vdots</td>
-<td>$\vdots$</td>
-</tr>
-<tr>
-<td>斜对齐的省略号</td>
-<td>\ddots</td>
-<td>$\ddots$</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h2 id="希腊字母"><a href="#希腊字母" class="headerlink" title="希腊字母"></a>希腊字母</h2><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>字母</th>
-<th>实现</th>
-<th>字母</th>
-<th>实现</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A</td>
-<td>A</td>
-<td>α</td>
-<td>\alhpa</td>
-</tr>
-<tr>
-<td>B</td>
-<td>B</td>
-<td>β</td>
-<td>\beta</td>
-</tr>
-<tr>
-<td>Γ</td>
-<td>\Gamma</td>
-<td>γ</td>
-<td>\gamma</td>
-</tr>
-<tr>
-<td>Δ</td>
-<td>\Delta</td>
-<td>δ</td>
-<td>\delta</td>
-</tr>
-<tr>
-<td>E</td>
-<td>E</td>
-<td>ϵ</td>
-<td>\epsilon</td>
-</tr>
-<tr>
-<td>Z</td>
-<td>Z</td>
-<td>ζ</td>
-<td>\zeta</td>
-</tr>
-<tr>
-<td>H</td>
-<td>H</td>
-<td>η</td>
-<td>\eta</td>
-</tr>
-<tr>
-<td>Θ</td>
-<td>\Theta</td>
-<td>θ</td>
-<td>\theta</td>
-</tr>
-<tr>
-<td>I</td>
-<td>I</td>
-<td>ι</td>
-<td>\iota</td>
-</tr>
-<tr>
-<td>K</td>
-<td>K</td>
-<td>κ</td>
-<td>\kappa</td>
-</tr>
-<tr>
-<td>Λ</td>
-<td>\Lambda</td>
-<td>λ</td>
-<td>\lambda</td>
-</tr>
-<tr>
-<td>M</td>
-<td>M</td>
-<td>μ</td>
-<td>\mu</td>
-</tr>
-<tr>
-<td>N</td>
-<td>N</td>
-<td>ν</td>
-<td>\nu</td>
-</tr>
-<tr>
-<td>Ξ</td>
-<td>\Xi</td>
-<td>ξ</td>
-<td>\xi</td>
-</tr>
-<tr>
-<td>O</td>
-<td>O</td>
-<td>ο</td>
-<td>\omicron</td>
-</tr>
-<tr>
-<td>Π</td>
-<td>\Pi</td>
-<td>π</td>
-<td>\pi</td>
-</tr>
-<tr>
-<td>P</td>
-<td>P</td>
-<td>ρ</td>
-<td>\rho</td>
-</tr>
-<tr>
-<td>Σ</td>
-<td>\Sigma</td>
-<td>σ</td>
-<td>\sigma</td>
-</tr>
-<tr>
-<td>T</td>
-<td>T</td>
-<td>τ</td>
-<td>\tau</td>
-</tr>
-<tr>
-<td>Υ</td>
-<td>\Upsilon</td>
-<td>υ</td>
-<td>\upsilon</td>
-</tr>
-<tr>
-<td>Φ</td>
-<td>\Phi</td>
-<td>ϕ</td>
-<td>\phi</td>
-</tr>
-<tr>
-<td>X</td>
-<td>X</td>
-<td>χ</td>
-<td>\chi</td>
-</tr>
-<tr>
-<td>Ψ</td>
-<td>\Psi</td>
-<td>ψ</td>
-<td>\psi</td>
-</tr>
-<tr>
-<td>Ω</td>
-<td>\v</td>
-<td>ω</td>
-<td>\omega</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2136,7 +1374,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2186,13 +1424,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">341k</span>
+    <span title="站点总字数">360k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:10</span>
+    <span title="站点阅读时长">5:27</span>
 </div>
 
         
@@ -2249,59 +1487,6 @@ var _hmt = _hmt || [];
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 

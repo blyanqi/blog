@@ -28,7 +28,7 @@
 <meta property="og:description" content="Kubernetes 官网  kubernetes安装 Kubernetes管理   Kubernetes 概念1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-14T01:11:37.000Z">
-<meta property="article:modified_time" content="2020-06-07T05:21:41.814Z">
+<meta property="article:modified_time" content="2020-06-14T06:39:57.989Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-07 13:21:41" itemprop="dateModified" datetime="2020-06-07T13:21:41+08:00">2020-06-07</time>
+                <time title="修改时间：2020-06-14 14:39:57" itemprop="dateModified" datetime="2020-06-14T14:39:57+08:00">2020-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,7 +250,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -276,6 +276,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h2 id="Kubernetes-概念"><a href="#Kubernetes-概念" class="headerlink" title="Kubernetes 概念"></a>Kubernetes 概念</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 集群结构</span></span><br><span class="line">    主机 Node</span><br><span class="line">        Master node</span><br><span class="line">        Work node</span><br><span class="line">    Network</span><br><span class="line">    Storage</span><br><span class="line">    ETCD</span><br><span class="line"></span><br><span class="line"><span class="comment"># 集群组件</span></span><br><span class="line">controller manager</span><br><span class="line">scheduler</span><br><span class="line">etcd</span><br><span class="line">kubelet</span><br><span class="line"></span><br><span class="line"><span class="comment"># 集群网络插件</span></span><br><span class="line">Istio</span><br><span class="line">Calico</span><br><span class="line">Flannel</span><br><span class="line"></span><br><span class="line"><span class="comment"># 概念</span></span><br><span class="line">Namespace 项目</span><br><span class="line">pod 容器组 （可以包含多个容器）</span><br><span class="line">deployments (用来部署 pod，指定 pod 策略等)</span><br><span class="line">service 服务（提供 pod 间网络）</span><br><span class="line">Ingress nginx（对 pod 提供应用路由 如:http://pod.com/<span class="built_in">test</span>/）</span><br><span class="line">Image Registries 镜像仓库</span><br><span class="line">PersistentVolume PV 存储卷</span><br><span class="line">PersistentVolumeClaim（PVC)</span><br><span class="line">StorageClass 存储类型</span><br><span class="line"></span><br><span class="line"><span class="comment"># 集群管理</span></span><br><span class="line"><span class="comment"># master节点</span></span><br><span class="line">升级(不能降级)</span><br><span class="line">备份/恢复</span><br><span class="line">证书管理</span><br><span class="line">Etcd管理</span><br><span class="line"><span class="comment"># 集群资源限制</span></span><br><span class="line">    不可用节点数限制</span><br><span class="line">    集群API地址授权</span><br><span class="line">    项目资源配额</span><br><span class="line"></span><br><span class="line"><span class="comment"># work节点</span></span><br><span class="line">升级</span><br><span class="line">暂停</span><br><span class="line">驱散</span><br><span class="line"></span><br><span class="line"><span class="comment"># pod 类型</span></span><br><span class="line">Deployment: 部署无状态应用 </span><br><span class="line">DaemonSet: 每台主机部署 1 个Pod</span><br><span class="line">StatefulSet: 部署有状态应用 1 个Pod</span><br><span class="line">CronJob: 定时运行Pod</span><br><span class="line">Job: 一次性运行Pod</span><br><span class="line"></span><br><span class="line"><span class="comment"># pod 卷</span></span><br><span class="line">本地卷</span><br><span class="line">存储卷-&gt;存储类 PVC</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级策略</span></span><br><span class="line">滚动</span><br><span class="line">    先启动新Pod，再停止旧Pod。</span><br><span class="line">    先停止旧Pod，再启动新Pod。</span><br><span class="line">直接升级：删除所有Pod，然后重新开始。</span><br><span class="line">自定义</span><br><span class="line">    最大 pod 数量</span><br><span class="line">    可用 pod 数量</span><br><span class="line">pod 准备时间</span><br><span class="line"></span><br><span class="line"><span class="comment"># pod 网络模式</span></span><br><span class="line">NodePort(所有主机端口均可访问)</span><br><span class="line">HostPort(pod所在主机端口能访问)</span><br><span class="line">集群IP(与pod端口相同，集群内能访问)</span><br><span class="line">L4负载均衡(对接公有云负载均衡)</span><br><span class="line"></span><br><span class="line"><span class="comment"># PV 插件</span></span><br><span class="line">公有云 PV 插件</span><br><span class="line"><span class="built_in">local</span></span><br><span class="line">hostpath</span><br><span class="line">NFS</span><br><span class="line"></span><br><span class="line"><span class="comment"># PV 访问模式</span></span><br><span class="line">单机读写</span><br><span class="line">多机读写</span><br><span class="line">多机只读</span><br><span class="line"></span><br><span class="line"><span class="comment"># 存储类</span></span><br><span class="line">回收策略</span><br><span class="line">    随工作负载删除</span><br><span class="line">    保留</span><br><span class="line">卷绑定模式</span><br><span class="line">    创建PersistentVolumeClaim后，绑定并提供一个持久卷</span><br><span class="line">    使用PersistentVolumeClaim创建一个Pod后，绑定并提供一个持久卷</span><br><span class="line"></span><br><span class="line">首先创建 Storage Classes -&gt; 创建PersistentVolume -&gt; Add Volume Claim</span><br><span class="line">在 pod 中使用 PersistentVolumeClaim</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">云控制器管理器（cloud controller manager，CCM）</span><br><span class="line">期望状态与当前状态</span><br><span class="line"></span><br><span class="line">集群</span><br><span class="line">    认证</span><br><span class="line"></span><br><span class="line">管理资源</span><br><span class="line">    POD</span><br><span class="line">    Service</span><br><span class="line">    Deployment</span><br><span class="line">    标签来区分集合</span><br><span class="line">    使用标签来进行金丝雀部署</span><br><span class="line">    注解</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -369,7 +370,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -419,13 +420,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">341k</span>
+    <span title="站点总字数">360k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:10</span>
+    <span title="站点阅读时长">5:27</span>
 </div>
 
         

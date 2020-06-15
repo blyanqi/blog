@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="rander 2.x 新文档   rancher 概念catalog： https:&#x2F;&#x2F;github.com&#x2F;rancher&#x2F;charts&#x2F;tree&#x2F;master&#x2F;charts 示例 通过 rancher 安装一个 k8s 集群。 建立一个 pod，并完成对 pod 迁移，扩容，更新。 建立存储卷，将容器目录映射到存储卷。 连接到私有的容器镜像库，启动自定义镜像。 添加Pod水平自动伸缩 HB">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="rancher使用维护">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="rander 2.x 新文档   rancher 概念catalog： https:&#x2F;&#x2F;github.com&#x2F;rancher&#x2F;charts&#x2F;tree&#x2F;master&#x2F;charts 示例 通过 rancher 安装一个 k8s 集群。 建立一个 pod，并完成对 pod 迁移，扩容，更新。 建立存储卷，将容器目录映射到存储卷。 连接到私有的容器镜像库，启动自定义镜像。 添加Pod水平自动伸缩 HB">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-05T15:59:25.000Z">
-<meta property="article:modified_time" content="2020-06-08T07:13:11.799Z">
+<meta property="article:modified_time" content="2020-06-14T05:37:48.878Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-08 15:13:11" itemprop="dateModified" datetime="2020-06-08T15:13:11+08:00">2020-06-08</time>
+                <time title="修改时间：2020-06-14 13:37:48" itemprop="dateModified" datetime="2020-06-14T13:37:48+08:00">2020-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,7 +250,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>599</span>
+              <span>707</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -269,25 +269,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li><a href="https://docs.rancher.cn/rancher2x/quick-start.html" target="_blank" rel="noopener"> rander 2.x 新文档 </a></li>
-</ul>
-<h2 id="rancher-概念"><a href="#rancher-概念" class="headerlink" title="rancher 概念"></a>rancher 概念</h2><p>catalog：</p>
-<p><a href="https://github.com/rancher/charts/tree/master/charts" target="_blank" rel="noopener">https://github.com/rancher/charts/tree/master/charts</a></p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ul>
-<li>通过 rancher 安装一个 k8s 集群。</li>
-<li>建立一个 pod，并完成对 pod 迁移，扩容，更新。</li>
-<li>建立存储卷，将容器目录映射到存储卷。</li>
-<li>连接到私有的容器镜像库，启动自定义镜像。</li>
-<li>添加Pod水平自动伸缩 HBA</li>
-</ul>
-<p>修改默认的 registry<br>在 系统管理 -&gt; 系统设置 -&gt; 高级设置, 点击 我确认已经知道修改高级设置可能导致问题.<br>找到registry.default 设置然后点击编辑按钮。</p>
-<p>限制镜像库的使用</p>
-<h2 id="Troubleshooting"><a href="#Troubleshooting" class="headerlink" title="Troubleshooting"></a>Troubleshooting</h2><h3 id="使用自建镜像库-issue"><a href="#使用自建镜像库-issue" class="headerlink" title="使用自建镜像库 issue"></a>使用自建镜像库 issue</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># x509: certificate signed by unknown authority</span></span><br><span class="line">使用了自签名证明，提示证书未受信任。</span><br><span class="line">解决方法:</span><br><span class="line">  申请个受信任证书</span><br><span class="line">  把镜像库改成公开</span><br></pre></td></tr></table></figure>
-<h3 id="gitlab-挂载了nfs，启动不起来"><a href="#gitlab-挂载了nfs，启动不起来" class="headerlink" title="gitlab 挂载了nfs，启动不起来"></a>gitlab 挂载了nfs，启动不起来</h3><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Errno::EPERM when <span class="built_in">running</span> Gitlab <span class="keyword">on</span> OpenShift <span class="keyword">and</span> NFS persistent Volume</span><br><span class="line">原因是 gitlab 需要改文件权限导致。建议后端存储不要用nfs</span><br></pre></td></tr></table></figure>
-<h3 id="rancher2-x-pipeline-gitlab-不能自动触发"><a href="#rancher2-x-pipeline-gitlab-不能自动触发" class="headerlink" title="rancher2.x pipeline gitlab 不能自动触发"></a>rancher2.x pipeline gitlab 不能自动触发</h3><p>Admin Area -&gt; Settings -&gt; Network -&gt;Outbound requests</p>
-<p><a href="https://gitlab.com/gitlab-org/omnibus-gitlab/-/issues/4929" target="_blank" rel="noopener">gitlab community</a></p>
-
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="Oh, these decrypted content cannot be verified, but you can still have a look."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="Hey, password is required here." /><label>Hey, password is required here.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="e336819e1c12658206ceb3a5bd4bc9f4e06909665fdb2c9363ebe1162b523918">4dc7a94a957e0b6d366c4c57187f63c514b1838b6a28f070585cad84b1e80383823afa5695960eaf613334f5875bdfb08adf1b54968bae6f75323815871b97903d058ec2fb386405a9e110ec1beeb740f6856f37547d36edc7f37ad366d7409f1e297077bc40f01b219ff8cb5c589c06e7432033e859424280a9c215351504277ea5b72d0a3c88b439afcfcfdc4e7aebded72679b1186438d29cb186b1eb3d2a604610de7591ead960e6ac6a0fdc70500fc87c1b15937338ff1777d9773da13d098d106a1e281ff4a9d817cc7b7645b05137f9b23698fe23681d33f403b3d8e342afb799ff88ca5059d7ced204a3f1d8e8677102b1ac81950bea37acd0d0f00619c3e3ff954b2f0b89c8c1bd3421e4fe91227651d914ebacce5bc2b055465cf227637719b4fd0365d7552ed763185bd1a63995177adf96e49faaff74ccd38acbd184145b331b57a8dd58cd3b43d77922fad4d0fbe53b69982da3f1be8c09edd95460cfa2b485d48b88bd3f04bd6bc106ac22b1fe3c25c9ba9f1768099649d0649e39cc2c4343a5e6b447f1d89a657e4a4eb02b3cba212f79201e28d58b805952fb48114277813d5e3b447d6f1b691339af763e8d62a5c56fc89167d20293e8df738386b2396846e6de2ada0daa5aca1b66567142809d368f1815ce6c34e4c4edc92f8c107d372ddce0e558e85d74ad980a6db1d232def37d8fbf7af673a497e7ade0a114433593410ef5a59783dc8d0e39df091666fd5435a4a2556f80df64d7e17c6fa9fad9cdad23b984076a1e552d409f0bd82e696642581ad3dd77826c076b3eace3baff6a7cb903785a5e8177f18d01b48e32e951ef431c35177916c1d5fc495c5c7cc07cee25d83a3958a81f6fc773008e0ea49982f6fe69f43ef01be5ae9bd518a4200975bc25f40df7095273a99e8306f827804cd80d887d9ba4497b4c14f0485f547c359c68a8fb7959cf0805f07632c379902cc0435ff81b3900336304c45d547f13df46d5d7f457006bd740ae17ee51661598d51d4860f2f4866fd7e1d873b4f641c10be8ced10180f324b44f36de5e29a4a4da1e9b7e20b7f52872022b9df6702de9386bd2cb09f60da2c370b574e0aa7b628b86ea5037a44769f50c80ad750f18d837b556991c0a6ebb41bcbd17cee70d571253b54979632683b728e5939d03d1be7d2432e51d23f6a6f38bdfc5555ea9458b8bcd5ded168a81ec8af9a61e0d923dd5e37ca38c418a0ef382edb4037e8e8dd3a696f346aedcb520d4c675d614ed58624b49c6cc26a2bc5bc19b85eda6beec9ff13ba1329269349dcb24f18674ea22ba981d2f213c6ed1cca218ab3ccc1e51e79bdea687ec2b17752c7819a2c03870268a4ec9f4012b4935064efdd7865eaf5d36a5ff2b0d7ab10a6ee963e127ccbd9891632246eff4ff6e41a8fa09245c2e4c97cc5fa3959cef565fc9f9fa4beaff7908cb2a5be700b30a66e0c5d23e637a5374a5062d7d2f71d6a68ef05953b0d1a926833840f7d5c610fc89da3ca239165e85539543da4c68a0fa95bf50740e069c86a8e634f3953c6285fcdcbac92034537393187947b232e00777362c42d998c2698540706b38dfc73c7f86827fc06f4dcfb7f7b7fb217990e830a78cc73144393f6cabc5d6fd769091f5970d01288803964dd80749a5ffa2d6afcbabdefe9ad63cdbde9a3afb5d378c86b15d1e1ab89d68a3f9362f4d754f83c7b0e23cb1fecf4143f9e6501b1e8f16f614deb46bbb68283bc02f7608223f448874c4d1e500fe9bb27106dc970714d306f65b3930fa88a270081a8546a7e75a7629cc44d0951ffd36c2002a5955347daf3ab21b405426771aa0273d6d4f0bd5f4e6cece7fd8ea8a10570bddc2535f282169b19f81f9bafbf0d6e3c7a9fb895f523e27dade8c795fb4497056bf3d78f22efcd51a6a749fc59c5c2b51298b7c4cc9b9a9cdb61a1074b2017d5dfed420f4cb68c2d0b1ed4586de66306d831bd2dba6caa4c5c86a79686af245783d1e02cd26ca631e64856a1d21ee74f70392aa3a7af20ede59f4cd6c5048f936a54c970a09c7d58de0b2de43bc150e8f49a49197cd03940a938343d1ef2e801b05c70dd37198acebcb24ae769b1eeaa8342f6cfa11d1296be6e7f41c07e434bb53a3b50cd5a517331b6c654ad037a225d355812307dd64c5855c27ec1f4122971992ba5042ae7dbeb9e5a300f092bc5268d52cc75de7fbafcd571420c2ee2b848d006af1e0db335e5934e450cd6ab9ae03597fef417657efe6d9667884d21cd42979e6e318d99c94c1bf2fb0b3d4de4039596e584cc76132d07686e060c44a3199ddccf68e6f7cd81cff1d87c31f02747332722f320fa8ce3964994a265909739a4ded6b3b0abd5dd38a8bb29451a83590b0e270f10d99d17a9a8e3db1ee628298feda54c32abe53fb95a1aaa28045f60d0c4e114476fa97fb75044ca68f4776570a093de0132440d679ddd95f20c2b1d89639134cd097d8b294c7c1291f0d5efc36ca09b19a07bbe65bc664977b75e1ad4c3723a573fc75a3668d56bc98f5090465653bc6d0bd785ff1ef94f780642b0fcde46273218b3b0604a73373737c1b3fd6f366a181fdf8d2c3620d5882b7c150653b21e9e3958819df52107cb7432a346c42e0c9cc1a117040e009557807b2acfa2437007a7f3796b85e18de22cc128a5aefdb2bfc1d0e56de1f2cb67e7eafa8db9e3bd8eab2453733f2b26084646aff6397aa3c60e39c18b94e291ea06f76b5dd0ef09065f646f74437704f8d0e580fe5c05f978ba03180d348815fd3e280a7137dd3d81dc39cbe8d3f3018c538f7d4ec5321bd387b035339656f450273da72c126f8f022129bb79ac84a4f512aa7e834a81d22ab86bcc096730fadca47bcf5f2d606d0d1aa667654fc094b602a447c63f857cee0e938edd27d707ce18e813e71d55fcfd7b06552992d17c1a8bd8d6c352bea267929c8daee74c9ee07e5c68682dc00f032aa5796df21374b9c1335a933995c1b80d812b94206491df1a61162136a65ffb523bcec013357d5215ec849db53d4be4f571c112f345b1a7a0c04549c95282165ec31a1680d5d36d1b545b334695f6bc3f5f854d5faa186bc60709b76bdf399b0a4f4ab3a30bce5d0b664a5e34b3486756c6c400cbb1df74114660f73e8f0cd707bb2894f377208ee5a27507e17170b12c63cd611f2974b3969f062fdd5244049196aed2cb7b14c0227ebd9bb2c613a08f3fc50533cb66ec58682415ed7a30c1c11991f15b78f2567077e47622065495dde3f1ceec17cbbb73c3caf1edc94906a971f118c042871d1047961302a52ff9537b711b21a52b815cef7252908c70e1787aee6f154393785769056d15a5a9ae191529ccd057df7d558545dd9f4dca51e62029b7eee2e5aaff74616bd19d08bd45f6a6aa65ded37b668b850469981993f9fd0cc05d7ba1dd483fdf0c31d0c206fd8bd901ba168effac1b5330d3586016ef0117f0d8deae208073e4ee3c80435dbf6a7a55d385f9997ef3fe2e545f0be4fedee6de68945a20190f3229b9732e87255183fbb0c207c969f51c4b74408e63c36698d445d2305808546bd0907313155b6d89cb025f9940ebff0f8fb0450e82df8518adbf48deafde2342c916046951838ce0a03a0f411d6752190a8b0894e41bb32fb5e7fc3e1edf9d4baffdb0c9d5c5b798c4eaee1215eddc90522b6d4d14113300508a9a70ce6356a80c6dafd97b5e55fef4f4f5b70b1a4bef771ae0ccdf9f8bb4182d49035213b514dd49f2ce8cc2d8f184bc7587a62c7e7bd80c29411e821c66c458b92563c9ad80fc91bc3c73f68199ce6258e020c73139bdd55b27a27c9f02b2e89379890912da761b8b445f08128d784db83fcf08de62dd956eaa9bbb3df73776abb0d3fde68230870fa0229ee4062ba9bc57ca9d4689c52ddc294f669560059f7cc03eb968626134a0f048f96f4e583d86e9a5d6a8202b0e2f115ef31879938068849dd869d71b33842bfbc79d0908f2b876dd5edf28caf7277193128ccf541712302dfbc2f0bc6211c3fd4b9bee43f7b9c6c285f613add5df4f46e0d40ae6cf062e994fad31fe683614a7aca01442f05f7bfbd47304515ad44c021078e625ab7f3c6d7ed303e493e85ae9bbaf0d582e60f842e45b3df18931f9df9ed12295d7f244364c1a3ce65eed4876e3baaa2e924d56b018be9b2276db5496c58fbfd5a1e149c23615b48d8715eff42a2f3b0d683d81cc0926f256a393d37fdc6f1b24c87365246467029f7939174e88c470cbba6b382bfb9b54065d8be6b5838862342b57166107b837670e453df1493e7ce0fffc711755a8a85728d110ebda4b2c23c16fe3ce5fd12b54217207859fbb0ba6034d5ab94d3e116d2a88f8eeffb47eb1f2aa278da48a7b1f077ae94f2f63e7339c1e2e5d2e198939224579258afbde094b7ec8cb9978d8f79413890e65f78e1c03815275fc6eb466d02f5f65daf20fa42ac01744a598e56a0ab61cf4abfbbfc9d898dd757dc86502eb5566f5a6d730c327690e6612b6bd3042c72c12dbbdf01500f933e8144bfa35a0cebcc36b926304f688dda65fce138fa3190122a6eff2ad95409e2dfd243677a9c8ea66779377d46c1371712478632ed58359401394afdc215bdfd4416ee6bef3263f557b400bafea75bb62f04fa258e04a71a6071d61c298485f2f34c99cd1b53632756f6106da76faab1b68c27c582a97d949f0e0c83ed9d282462a70f6c1a186a36f2c7590ac09798025ac3bedab2e1604c591d5789d620dff44107d1b65ca067b4a6c02a2cd01d2a447d4164e762516e5cf10b30a054ba84861612d49324a726eec2c6c7f9c4f40ef7006e0b0740da15b3d98cacbbf2f8ed3609ef8ee196a200220fc26a7e01132a054ada9a33a4865f54d68745489d2ea417f9a69e9886a713516603ac92f3778955c6c14c4b84b23e7505a15826b9d3aef231a82f5e3264f0984045c51298e67af32e27476f8b013b6746c59f4cd6d5ce5d4ba8395893b1844371e7015517e3bcbd116026bea0c864f7cfe575a812d2ff45d5f7fd689c3df203b3a8435c8e5828a48139bea84c</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -367,7 +349,6 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#rancher-概念"><span class="nav-number">1.</span> <span class="nav-text">rancher 概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">2.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Troubleshooting"><span class="nav-number">3.</span> <span class="nav-text">Troubleshooting</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用自建镜像库-issue"><span class="nav-number">3.1.</span> <span class="nav-text">使用自建镜像库 issue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gitlab-挂载了nfs，启动不起来"><span class="nav-number">3.2.</span> <span class="nav-text">gitlab 挂载了nfs，启动不起来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rancher2-x-pipeline-gitlab-不能自动触发"><span class="nav-number">3.3.</span> <span class="nav-text">rancher2.x pipeline gitlab 不能自动触发</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -381,7 +362,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -431,13 +412,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">341k</span>
+    <span title="站点总字数">360k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:10</span>
+    <span title="站点阅读时长">5:27</span>
 </div>
 
         

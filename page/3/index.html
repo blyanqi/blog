@@ -199,6 +199,755 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">华为交换机基本配置命令详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 11:37:14 / 修改时间：11:38:35" itemprop="dateCreated datePublished" datetime="2020-06-07T11:37:14+08:00">2020-06-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="华为交换机基本配置命令详解"><a href="#华为交换机基本配置命令详解" class="headerlink" title="华为交换机基本配置命令详解"></a>华为交换机基本配置命令详解</h2><p>1、配置文件相关命令<br>system-view                    进入特权模式<br>display current-configuration      显示当前生效的配置<br>display saved-configuration        显示flash中配置文件，即下次上电启动时所用的配置文件<br>reset saved-configuration           檫除旧的配置文件<br>reboot                                          交换机重启<br>display version                             显示系统版本信息</p>
+<p>2、基本配置<br>super password                          修改特权用户密码<br>sysname                                     交换机命名<br>interface GigabitEthernet 1/0/1            进入接口视图<br>interface vlan 1                           进入接口视图<br>ip address 192.168.100.253 255.255.255.0            配置VLAN的IP地址<br>ip route-static 0.0.0.0 0.0.0.0 10.1.1.1     静态路由＝网关</p>
+<p>3、telnet配置<br>user-interface vty 0 4                                                                                     进入虚拟终端<br>[S3026-ui-vty0-4]authentication-mode password                                     设置口令模式<br>[S3026-ui-vty0-4]set authentication password simple fesf1qaz               设置口令<br>[S3026-ui-vty0-4]user-role network-admin                                                 用户级</p>
+<p>4、端口配置<br>[Quidway-Ethernet1/0/1]duplex {half|full|auto}                    配置端口工作状态<br>[Quidway-Ethernet1/0/1]speed {10|100|auto}                      配置端口工作速率<br>[Quidway-Ethernet1/0/1]flow-control                                  配置端口流控<br>[Quidway-Ethernet1/0/1]mdi {across|auto|normal}              配置端口平接扭接<br>[Quidway-Ethernet1/0/1]port link-type {trunk|access|hybrid}     设置端口工作模式<br>[Quidway-Ethernet1/0/1]undo shutdown                                     激活端口<br>[Quidway-Ethernet1/0/2]quit                                                        退出系统视图</p>
+<p>5、链路聚合配置</p>
+<p>[DeviceA] link-aggregation group 1 mode manual       创建手工聚合组1<br>[Qw_A] interface ethernet 1/0/1                     将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1<br>[Qw_A-Ethernet1/0/1] interface ethernet 1/0/2    将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/2] port link-aggregation group 1<br>[Qw_A] link-aggregation group 1 service-type tunnel     # 在手工聚合组的基础上创建tunnel业务环回组。<br>[Qw_A] interface ethernet 1/0/1               将以太网端口Ethernet1/0/1加入业务环回组。<br>[Qw_A-Ethernet1/0/1] undo stp<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1</p>
+<p>6、端口镜像<br>monitor-port        　指定镜像端口<br>port mirror     　　 指定被镜像端口<br>port mirror int_list observing-port int_type int_num  指定镜像和被镜像</p>
+<p>以太网端口有三种链路类型：Access、Hybrid和Trunk。<br>   Access类型的端口只能属于1个VLAN，一般用于连接计算机的端口；<br>   Trunk类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，一般用于交换机之间连接的端口；<br>    Hybrid类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，可以用于交换机之间连接，也可以用于连接用户的计算机。<br>    Hybrid端口和Trunk端口在接收数据时，处理方法是一样的，唯一不同之处在于发送数据时：Hybrid端口可以允许多个VLAN的报文发送时不打标签，而Trunk端口只允许缺省VLAN的报文发送时不打标签。</p>
+<p>7、VLAN配置<br>vlan 4                                 　　　　　　   创建VLAN<br>[Quidway-vlan4]port ethernet 1/0/1 to ethernet 1/0/4 　　　  在VLAN中增加端口</p>
+<p>① 配置基于access的VLAN<br>[Quidway-Ethernet1/0/2]port access vlan 4          　　　　　 当前端口加入到VLAN<br>注意：缺省情况下，端口的链路类型为Access类型，所有Access端口均属于且只属于VLAN1</p>
+<p>② 配置基于trunk的VLAN<br>[Quidway-Ethernet 1/0/24]port link-type trunk                        设置当前端口为trunk<br>[Quidway-Ethernet 1/0/24]port trunk permit vlan {ID|All}     　设trunk允许的VLAN<br>注意：所有端口缺省情况下都是允许VLAN1的报文通过的<br>[Quidway-Ethernet1/0/2]port trunk pvid vlan 34   　　　　　  设置trunk端口的PVID</p>
+<p>③ 配置基于Hybrid端口的VLAN<br>[Quidway-Ethernet1/0/2]port link-type hybrid              配置端口的链路类型为Hybrid类型<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan-id-list { tagged | untagged }  允许指定的VLAN通过当前Hybrid端口<br>注意：缺省情况下，所有Hybrid端口只允许VLAN1通过<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan vlan-id      设置Hybrid端口的缺省VLAN<br>注意：缺省情况下，Hybrid端口的缺省VLAN为VLAN1</p>
+<p>④ VLAN描述<br>description string                      　　　　 指定VLAN描述字符<br>undo description                         　　  　删除VLAN描述字符<br>display vlan [vlan_id]                               查看VLAN设置</p>
+<p>⑤ 私有VLAN配置<br>[Qw_A-vlanx]isolate-user-vlan enable          　　　 　　设置主vlan<br>[Qw_A]Isolate-user-vlan  secondary  　　　 　　           设置主vlan包括的子vlan<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan      　　 设置vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid pvid             　　  删除vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan_id_list untagged 　设置无标识的vlan</p>
+<p>如果包的vlan id与PVId一致，则去掉vlan信息. 默认PVID=1。<br>所以设置PVID为所属vlan id, 设置可以互通的vlan为untagged.</p>
+<p>8、STP配置<br>stp {enable|disable}                               设置生成树,默认关闭<br>stp mode rstp                                        设置生成树模式为rstp<br>stp priority 8192                         　　　 设置交换机的优先级<br>stp root {primary|secondary}             　设置为根或根的备份<br>[Quidway-Ethernet0/1]stp cost 200      设置交换机端口的花费</p>
+<p>display mac-address                            显示地址表信息<br>display mac-address aging-time         显示地址表动态表项的老化时间<br>display port-mac                                  显示用户配置的以太网端口MAC地址的起始值</p>
+<p>2、端口隔离配置</p>
+<p>① 通过端口隔离特性，用户可以将需要进行控制的端口加入到一个隔离组中，实现隔离组中的端口之间二层、三层数据的隔离，既增强了网络的安全性，也为用户提供了灵活的组网方案。</p>
+<p>[Sysname] interface ethernet1/0/2   将以太网端口Ethernet1/0/2加入隔离组。<br>[Sysname-Ethernet1/0/2] port isolate<br>[Sysname] display isolate port      显示隔离组中的端口信息</p>
+<p>② 配置隔离组后，只有隔离组内各个端口之间的报文不能互通，隔离组内端口与隔离组外端口以及隔离组外端口之间的通信不会受到影响。<br>③ 端口隔离特性与以太网端口所属的VLAN无关。<br>④ 当汇聚组中的某个端口加入或离开隔离组后，本设备中同一汇聚组内的其它端口，均会自动加入或离开该隔离组。<br>⑤ 对于既处于某个聚合组又处于某个隔离组的一组端口，其中的一个端口离开聚合组时不会影响其他端口，即其他端口仍将处于原聚合组和原隔离组中。<br>⑥ 如果某个聚合组中的端口同时属于某个隔离组，当在系统视图下直接删除该聚合组后，该聚合组中的端口仍将处于该隔离组中。<br>⑦ 当隔离组中的某个端口加入聚合组时，该聚合组中的所有端口，会自动加入隔离组中。</p>
+<p>13、端口安全配置<br>[Switch] port-security enable     启动端口安全功能<br>[Switch] interface Ethernet 1/0/1  进入以太网Ethernet1/0/1端口视图<br>[Switch-Ethernet1/0/1] port-security max-mac-count 80<br>设置端口允许接入的最大MAC地址数为80<br>[Switch-Ethernet1/0/1] port-security port-mode autolearn  配置端口的安全模式为autolearn<br>[Switch-Ethernet1/0/1] mac-address security 0001-0002-0003 vlan 1<br>将Host 的MAC地址0001-0002-0003作为Security MAC添加到VLAN 1中<br>[Switch-Ethernet1/0/1] port-security intrusion-mode disableport-temporarily<br>设置Intrusion Protection特性被触发后，暂时关闭该端口<br>[Switch]port-security timer disableport 30       关闭时间为30秒。</p>
+<p>14、端口绑定配置<br>通过端口绑定特性，网络管理员可以将用户的MAC地址和IP地址绑定到指定的端口上。进行绑定操作后，交换机只对从该端口收到的指定MAC地址和IP地址的用户发出的报文进行转发，提高了系统的安全性，增强了对网络安全的监控。</p>
+<p>[Qw_A-Ethernet1/0/1] am user-bind mac-addr 0001-0002-0003 ip-addr 10.12.1.1<br>将Host 1的MAC地址和IP地址绑定到Ethernet1/0/1端口。<br>有的交换机上绑定的配置不一样<br>[Qw_A] interface ethernet 1/0/2<br>[Qw_A-Ethernet1/0/2] user-bind ip-address 192.168.0.3 mac-address 0001-0203-0405<br>端口过滤配置<br>[Qw_A] interface ethernet1/0/1      配置端口Ethernet1/0/1的端口过滤功能。<br>[Qw_A-Ethernet1/0/1] ip check source ip-address mac-address<br>[Qw_A] dhcp-snooping             开启DHCP Snooping功能。<br>[Qw_A] interface ethernet1/0/2<br>设置与DHCP服务器相连的端口Ethernet1/0/2为信任端口。<br>[Qw_A-Ethernet1/0/2] dhcp-snooping trust<br>在端口Ethernet1/0/1上启用IP过滤功能，防止客户端使用伪造的不同源IP地址对服务器进行攻击</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">ceph存储配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-07 10:51:38 / 修改时间：10:52:02" itemprop="dateCreated datePublished" datetime="2020-06-07T10:51:38+08:00">2020-06-07</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="http://docs.ceph.org.cn/start/" target="_blank" rel="noopener">ceph 安装配置</a></p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E9%A2%98%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E9%A2%98%E5%BA%93/" class="post-title-link" itemprop="url">逻辑思维题库</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 13:37:29 / 修改时间：13:40:51" itemprop="dateCreated datePublished" datetime="2020-06-06T13:37:29+08:00">2020-06-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/jetbrain%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/jetbrain%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/" class="post-title-link" itemprop="url">jetbrain软件卸载</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 13:28:53 / 修改时间：13:30:42" itemprop="dateCreated datePublished" datetime="2020-06-06T13:28:53+08:00">2020-06-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>799</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="写了个脚本卸载"><a href="#写了个脚本卸载" class="headerlink" title="写了个脚本卸载"></a>写了个脚本卸载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;uninstalljetbrain.sh</span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 产品列表</span></span><br><span class="line">group=<span class="string">"AppCode</span></span><br><span class="line"><span class="string">CLion</span></span><br><span class="line"><span class="string">DataGrip</span></span><br><span class="line"><span class="string">Datalore</span></span><br><span class="line"><span class="string">dotTrace</span></span><br><span class="line"><span class="string">Exposed</span></span><br><span class="line"><span class="string">GoLand</span></span><br><span class="line"><span class="string">Hub</span></span><br><span class="line"><span class="string">IntelliJ</span></span><br><span class="line"><span class="string">JetBrains</span></span><br><span class="line"><span class="string">Kotlin</span></span><br><span class="line"><span class="string">KotlinConf</span></span><br><span class="line"><span class="string">Ktor</span></span><br><span class="line"><span class="string">MPS</span></span><br><span class="line"><span class="string">PhpStorm</span></span><br><span class="line"><span class="string">PyCharm</span></span><br><span class="line"><span class="string">Resharper</span></span><br><span class="line"><span class="string">Resharper C++</span></span><br><span class="line"><span class="string">Rider</span></span><br><span class="line"><span class="string">RubyMine</span></span><br><span class="line"><span class="string">Space</span></span><br><span class="line"><span class="string">TeamCity</span></span><br><span class="line"><span class="string">Toolbox App</span></span><br><span class="line"><span class="string">Upsource</span></span><br><span class="line"><span class="string">Webstorm</span></span><br><span class="line"><span class="string">YouTrack"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目安装目录</span></span><br><span class="line">dir=<span class="string">"/Users/alert/Library/Preferences/</span></span><br><span class="line"><span class="string">/Users/alert/Library/Caches/</span></span><br><span class="line"><span class="string">/Users/alert/Library/Logs/"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> <span class="variable">$dir</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$d</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="variable">$group</span></span><br><span class="line"> <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> $(<span class="built_in">pwd</span>) <span class="variable">$s</span></span><br><span class="line">  tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span></span><br><span class="line">  tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span>|xargs rm -rf -</span><br><span class="line"> <span class="keyword">done</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="variable">$group</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> /Users/alert/Library/Application\ Support/</span><br><span class="line">tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span></span><br><span class="line">tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span>|xargs rm -rf -</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%85%8D%E8%B4%B9ssl%E7%94%B3%E8%AF%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E5%85%8D%E8%B4%B9ssl%E7%94%B3%E8%AF%B7/" class="post-title-link" itemprop="url">免费ssl申请</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 13:27:45 / 修改时间：13:37:13" itemprop="dateCreated datePublished" datetime="2020-06-06T13:27:45+08:00">2020-06-06</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>700</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://freessl.cn/" target="_blank" rel="noopener">https://freessl.cn/</a>  免费证书申请</p>
+<h2 id="填入申请域名"><a href="#填入申请域名" class="headerlink" title="填入申请域名"></a>填入申请域名</h2><h2 id="生成CSR文件"><a href="#生成CSR文件" class="headerlink" title="生成CSR文件"></a>生成CSR文件</h2><p><a href="https://www.racent.com/generate-csr" target="_blank" rel="noopener">https://www.racent.com/generate-csr</a> CSR 在线生成</p>
+<h2 id="设置DNS-解析txt纪录"><a href="#设置DNS-解析txt纪录" class="headerlink" title="设置DNS 解析txt纪录"></a>设置DNS 解析txt纪录</h2><p>key：TXT 记录<br>值：记录值</p>
+<p>验证域名：wx.xxxx.com<br>TXT 记录：_dnsauth.wx<br>记录值：202004120717021oq4s1ogkvbr3jw70a48u8w9ib3bfhqfvzpfq6gdzcxrrdcml7</p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>nslookup -q=txt _dnsauth.gitlab.uhetrip.com</p>
+<h2 id="下载证书"><a href="#下载证书" class="headerlink" title="下载证书"></a>下载证书</h2><h2 id="配置到nginx中"><a href="#配置到nginx中" class="headerlink" title="配置到nginx中"></a>配置到nginx中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen              443 ssl;</span><br><span class="line">        server_name        wx.xxxx.com;</span><br><span class="line">        keepalive_timeout   70;</span><br><span class="line">        &#x2F;&#x2F; pem 是生成的证书，key是csr生成的key</span><br><span class="line">        ssl_certificate      wx.xxx.com&#x2F;full_chain.pem; </span><br><span class="line">        ssl_certificate_key  wx.xxxx.com&#x2F;wx.xxxxp.com.key;</span><br><span class="line">        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line">        &#x2F;&#x2F; 后端服务</span><br><span class="line">        location ~* &#123;</span><br><span class="line">            proxy_pass http:&#x2F;&#x2F;119.1.1.1:10090;</span><br><span class="line">            access_log  &#x2F;data&#x2F;log&#x2F;nginxlog&#x2F;weiinssl.log  main;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/idea%E5%8F%8D%E7%BC%96%E8%AF%91jar%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/idea%E5%8F%8D%E7%BC%96%E8%AF%91jar%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">idea反编译jar文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-06 12:59:16 / 修改时间：13:08:06" itemprop="dateCreated datePublished" datetime="2020-06-06T12:59:16+08:00">2020-06-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>166</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="创建一个-Maven-项目"><a href="#创建一个-Maven-项目" class="headerlink" title="创建一个 Maven 项目"></a>创建一个 Maven 项目</h2><p>将 jar 拖拽到项目中<br>右击 jar 选择 As a library<br>-&gt; 选择 存放位置 prject library<br>然后就会反编译 jar 得到 java 文件和 配置文件<br>从 jar 中找到<br>BOOT-INF<br>  classes<br>    com.xxx 数据文件<br>    yml xml 配置文件<br>  lib 依赖库<br>META-INF maven pom.xml 文件<br>org.xxx 程序类</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/SSL%E8%AF%81%E4%B9%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/SSL%E8%AF%81%E4%B9%A6/" class="post-title-link" itemprop="url">SSL证书</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-06 09:29:19" itemprop="dateCreated datePublished" datetime="2020-06-06T09:29:19+08:00">2020-06-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-14 14:31:39" itemprop="dateModified" datetime="2020-06-14T14:31:39+08:00">2020-06-14</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="概念及原理"><a href="#概念及原理" class="headerlink" title="概念及原理"></a>概念及原理</h2><p>公钥 -&gt; 私钥<br>证书: 其实包含三部分，用户的信息，用户的公钥，还有CA中心对该证书里面的信息的签名<br>根证书: 根证书是未被签名的公钥证书或自签名的证书。<br>证书数字签名(hash): 公钥密码解决保密性问题数字签名解决完整性问题和有效性问题<br>根证书-&gt; 中间证书 -&gt; 颁发的其他证书</p>
+<p>存储：<br>受信任的证书根植于主流浏览器的信任存储中。<br>Chrome -&gt; 设置 -&gt; 隐私和安全性 -&gt; 更多 -&gt; 管理证书</p>
+<p>验证：<br>当您的浏览器在网站上验证最终用户SSL证书时，它使用提供的公钥来验证签名并在证书链上向上移动一个链接。重复这个过程：对签名进行身份验证，并跟踪签名的证书链，直到最终到达<strong>浏览器信任存储中的一个根证书</strong>。如果它不能将证书链回其受信任的根，它就不会信任该证书。</p>
+<h2 id="自己签发根证书示例"><a href="#自己签发根证书示例" class="headerlink" title="自己签发根证书示例"></a>自己签发根证书示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简单演示使用 ip 签发证书</span></span><br><span class="line"><span class="comment"># 生成根证书</span></span><br><span class="line">openssl genrsa -out ca.key 4096</span><br><span class="line"></span><br><span class="line">openssl req -x509 -new -nodes -sha512 -days 3650 \</span><br><span class="line"> -subj <span class="string">"/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.0.69"</span> \</span><br><span class="line"> -key ca.key \</span><br><span class="line"> -out ca.crt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对根证书签名</span></span><br><span class="line">openssl genrsa -out mycert.key 4096</span><br><span class="line"></span><br><span class="line">openssl req -sha512 -new \</span><br><span class="line">    -subj <span class="string">"/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.0.69"</span> \</span><br><span class="line">    -key mycert.key \</span><br><span class="line">    -out mycert.csr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为registry生成证书</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"subjectAltName = IP:192.168.0.69"</span> &gt; extfile.cnf</span><br><span class="line"></span><br><span class="line">openssl x509 -req -sha512 -days 3650 \</span><br><span class="line">    -extfile extfile.cnf \</span><br><span class="line">    -CA ca.crt -CAkey ca.key -CAcreateserial \</span><br><span class="line">    -<span class="keyword">in</span> mycert.csr \</span><br><span class="line">    -out mycert.crt</span><br></pre></td></tr></table></figure>
+<p>ssh 暴力破解<br><a href="http://server.51cto.com/sOS-569326.htm" target="_blank" rel="noopener">http://server.51cto.com/sOS-569326.htm</a></p>
+<p><a href="https://www.bboysoul.com/2017/10/25/%E4%BD%BF%E7%94%A8SSHScan%E6%89%AB%E6%8F%8F%E7%A0%B4%E8%A7%A3ssh%E5%AF%86%E7%A0%81/" target="_blank" rel="noopener">https://www.bboysoul.com/2017/10/25/%E4%BD%BF%E7%94%A8SSHScan%E6%89%AB%E6%8F%8F%E7%A0%B4%E8%A7%A3ssh%E5%AF%86%E7%A0%81/</a></p>
+<p><a href="http://www.my-ip-neighbors.com" target="_blank" rel="noopener">http://www.my-ip-neighbors.com</a>   reverse ip lookup<br>www.sameip.org  whois<br>国内: <a href="http://www.cmd5.com" target="_blank" rel="noopener">http://www.cmd5.com</a> (收费很.强大)<br>国内：<a href="http://www.md5.com.cn/" target="_blank" rel="noopener">http://www.md5.com.cn/</a> (有特色，还没怎么用)<br>国内：www.xmd5.com(还不错)<br>国外：<a href="http://www.c0llision.net/webcrack.php(免费，还不错" target="_blank" rel="noopener">http://www.c0llision.net/webcrack.php(免费，还不错</a>)<br>国外：<a href="http://hashkiller.com/" target="_blank" rel="noopener">http://hashkiller.com/</a> (免费，相当强大!!!)<br>国外：<a href="http://ops.conus.info/(免费，少有的oracle" target="_blank" rel="noopener">http://ops.conus.info/(免费，少有的oracle</a> hash在线破解网站)<br><a href="http://www.c0llision.net/webcrack.php" target="_blank" rel="noopener">http://www.c0llision.net/webcrack.php</a>  破解HASH<br><a href="http://www.objectif-securite.ch/en/products.php" target="_blank" rel="noopener">http://www.objectif-securite.ch/en/products.php</a>  破解HASH<br>linxer<br>看雪 <a href="http://www.pediy.com/" target="_blank" rel="noopener">http://www.pediy.com/</a><br>unpack  www.unpack.cn</p>
+<p><a href="https://jobrest.gitbooks.io/kali-linux-cn/content/index.html" target="_blank" rel="noopener">https://jobrest.gitbooks.io/kali-linux-cn/content/index.html</a></p>
+<h2 id="使用-easyrsa-生成证书"><a href="#使用-easyrsa-生成证书" class="headerlink" title="使用 easyrsa 生成证书"></a>使用 easyrsa 生成证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/kubernetes-release/easy-rsa/easy-rsa.tar.gz</span><br><span class="line">tar xzf easy-rsa.tar.gz</span><br><span class="line"><span class="built_in">cd</span> easy-rsa-master/easyrsa3</span><br><span class="line">./easyrsa init-pki</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CA</span></span><br><span class="line">./easyrsa --batch <span class="string">"--req-cn=<span class="variable">$&#123;MASTER_IP&#125;</span>@`date +%s`"</span> build-ca nopass</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成服务器证书和密钥</span></span><br><span class="line">./easyrsa --subject-alt-name=<span class="string">"IP:<span class="variable">$&#123;MASTER_IP&#125;</span>,"</span>\</span><br><span class="line"><span class="string">"IP:<span class="variable">$&#123;MASTER_CLUSTER_IP&#125;</span>,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default.svc,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default.svc.cluster,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default.svc.cluster.local"</span> \</span><br><span class="line">--days=10000 \</span><br><span class="line">build-server-full server nopass</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝 pki/ca.crt、 pki/issued/server.crt 和 pki/private/server.key </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># API 服务器的启动参数中添加以下参数</span></span><br><span class="line">--client-ca-file=/yourdirectory/ca.crt</span><br><span class="line">--tls-cert-file=/yourdirectory/server.crt</span><br><span class="line">--tls-private-key-file=/yourdirectory/server.key</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/" class="post-title-link" itemprop="url">rancher使用维护</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-05 23:59:25" itemprop="dateCreated datePublished" datetime="2020-06-05T23:59:25+08:00">2020-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-14 13:37:48" itemprop="dateModified" datetime="2020-06-14T13:37:48+08:00">2020-06-14</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>707</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/rancher%E4%BD%BF%E7%94%A8%E7%BB%B4%E6%8A%A4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/helm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/helm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">helm安装使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-05 23:07:44" itemprop="dateCreated datePublished" datetime="2020-06-05T23:07:44+08:00">2020-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-12 23:51:44" itemprop="dateModified" datetime="2020-06-12T23:51:44+08:00">2020-06-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/helm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%AE%B9%E5%99%A8%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -288,781 +1037,6 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/k3s%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/k3s%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">k3s安装配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-05 18:23:16 / 修改时间：21:28:02" itemprop="dateCreated datePublished" datetime="2020-06-05T18:23:16+08:00">2020-06-05</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>59</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="https://rancher.com/docs/k3s/latest/en/" target="_blank" rel="noopener">K3S docs</a></li>
-</ul>
-<h1 id="k3s-概念及原理"><a href="#k3s-概念及原理" class="headerlink" title="k3s 概念及原理"></a>k3s 概念及原理</h1><ul>
-<li>helm controller</li>
-<li>service LB</li>
-<li>Traefik LB</li>
-<li>持久化和存储</li>
-<li>RootFS</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/img/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/img/" class="post-title-link" itemprop="url">img</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-05 17:07:18 / 修改时间：19:20:56" itemprop="dateCreated datePublished" datetime="2020-06-05T17:07:18+08:00">2020-06-05</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>10</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="内部使用，无内容展示"><a href="#内部使用，无内容展示" class="headerlink" title="内部使用，无内容展示"></a>内部使用，无内容展示</h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E4%B8%80%E7%AB%99%E5%BC%8F%E8%BF%90%E7%BB%B4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/%E4%B8%80%E7%AB%99%E5%BC%8F%E8%BF%90%E7%BB%B4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">一站式运维环境搭建</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-05 14:43:55" itemprop="dateCreated datePublished" datetime="2020-06-05T14:43:55+08:00">2020-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-12 23:17:52" itemprop="dateModified" datetime="2020-06-12T23:17:52+08:00">2020-06-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>240</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/%E4%B8%80%E7%AB%99%E5%BC%8F%E8%BF%90%E7%BB%B4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/rancher%E5%AE%89%E8%A3%85k8s/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/rancher%E5%AE%89%E8%A3%85k8s/" class="post-title-link" itemprop="url">rancher安装k8s</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-05 11:49:40" itemprop="dateCreated datePublished" datetime="2020-06-05T11:49:40+08:00">2020-06-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-12 23:24:43" itemprop="dateModified" datetime="2020-06-12T23:24:43+08:00">2020-06-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/06/rancher%E5%AE%89%E8%A3%85k8s/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/kubernetes%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/kubernetes%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/" class="post-title-link" itemprop="url">kubernetes备份恢复</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-05 09:43:17" itemprop="dateCreated datePublished" datetime="2020-06-05T09:43:17+08:00">2020-06-05</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/linux%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1%E5%89%8D%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/linux%E5%AE%89%E8%A3%85%E6%9C%8D%E5%8A%A1%E5%89%8D%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">linux安装服务前配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-03 08:49:50" itemprop="dateCreated datePublished" datetime="2020-06-03T08:49:50+08:00">2020-06-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-08 17:25:48" itemprop="dateModified" datetime="2020-06-08T17:25:48+08:00">2020-06-08</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="安装前配置"><a href="#安装前配置" class="headerlink" title="安装前配置"></a>安装前配置</h2><h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 停用防火墙</span></span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line"><span class="comment"># 查看</span></span><br><span class="line">iptables -L -n</span><br></pre></td></tr></table></figure>
-<h3 id="关闭-selinux"><a href="#关闭-selinux" class="headerlink" title="关闭 selinux"></a>关闭 selinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">"s/^SELINUX=enforcing/SELINUX=disabled/g"</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>
-<h3 id="关闭-swap"><a href="#关闭-swap" class="headerlink" title="关闭 swap"></a>关闭 swap</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br><span class="line">swapoff -a sed -i <span class="string">'s/.*swap.*/#&amp;/'</span> /etc/fstab</span><br></pre></td></tr></table></figure>
-<h3 id="NTP-配置"><a href="#NTP-配置" class="headerlink" title="NTP 配置"></a>NTP 配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install chrony -y</span><br><span class="line"><span class="comment"># vim /etc/chrony.conf</span></span><br><span class="line">sed -i <span class="string">"/^server/d"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp1.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp2.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf </span><br><span class="line">sed -i <span class="string">"/#allow/s/#//"</span> /etc/chrony.conf</span><br><span class="line">systemctl <span class="built_in">enable</span> chronyd.service;systemctl start chronyd.service</span><br></pre></td></tr></table></figure>
-<h3 id="配置国内yum-源"><a href="#配置国内yum-源" class="headerlink" title="配置国内yum 源"></a>配置国内yum 源</h3><a href="/2020/05/%E9%85%8D%E7%BD%AE%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/" title="配置国内各种镜像源">配置国内各种镜像源</a>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装下载工具</span></span><br><span class="line">yum install -y wget;</span><br><span class="line">rm  /etc/yum.repos.d/* -rf</span><br><span class="line"></span><br><span class="line"><span class="comment"># Aliyun 源</span></span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo</span><br></pre></td></tr></table></figure>
-<h3 id="DNS-配置"><a href="#DNS-配置" class="headerlink" title="DNS 配置"></a>DNS 配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;EOF&gt;/etc/resolv.conf</span><br><span class="line">nameserver 114.114.114.114</span><br><span class="line">nameserver 8.8.8.8</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<h3 id="局域网扫描"><a href="#局域网扫描" class="headerlink" title="局域网扫描"></a>局域网扫描</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># arping</span></span><br><span class="line">arping -I eth0 192.168.0.59 -b</span><br><span class="line"></span><br><span class="line"><span class="comment"># arp-scan</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/royhills/arp-scan</span><br><span class="line"><span class="built_in">cd</span> arp-scan</span><br><span class="line">autoreconf --install</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"><span class="comment"># or</span></span><br><span class="line">yum install epel-release</span><br><span class="line">yum install arp-scan</span><br><span class="line"></span><br><span class="line"><span class="comment"># 扫描</span></span><br><span class="line">arp-scan --interface=eth0 192.168.0.0/24</span><br><span class="line">arp-scan -l</span><br></pre></td></tr></table></figure>
-<h3 id="grep中进行非贪婪的匹配"><a href="#grep中进行非贪婪的匹配" class="headerlink" title="grep中进行非贪婪的匹配"></a>grep中进行非贪婪的匹配</h3><p>grep -o -P “http.*?,” xxx.file</p>
-<h3 id="Linux下Json格式化神器jq"><a href="#Linux下Json格式化神器jq" class="headerlink" title="Linux下Json格式化神器jq"></a>Linux下Json格式化神器jq</h3><p>yum -y install epel-release<br>yum -y install jq</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%88%9B%E5%BB%BAYum%E6%BA%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/%E5%88%9B%E5%BB%BAYum%E6%BA%90/" class="post-title-link" itemprop="url">创建Yum源</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-03 08:36:07" itemprop="dateCreated datePublished" datetime="2020-06-03T08:36:07+08:00">2020-06-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-04 09:25:20" itemprop="dateModified" datetime="2020-06-04T09:25:20+08:00">2020-06-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="自定义yum-仓库"><a href="#自定义yum-仓库" class="headerlink" title="自定义yum 仓库"></a>自定义yum 仓库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建yum仓库目录</span></span><br><span class="line">mkdir -p /application/yum/centos7/x86_64/</span><br><span class="line"><span class="built_in">cd</span> /application/yum/centos7/x86_64/</span><br><span class="line"><span class="comment"># 上传rpm包(略)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装createrepo软件</span></span><br><span class="line">yum -y install createrepo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化repodata索引文件</span></span><br><span class="line">createrepo -pdo /application/yum/centos7/x86_64/ /application/yum/centos7/x86_64/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 提供yum服务（使用python http）</span></span><br><span class="line"><span class="built_in">cd</span> /application/yum/centos6.6/x86_64/</span><br><span class="line">python -m SimpleHTTPServer 80 &amp;&gt;/dev/null &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加新的rpm包</span></span><br><span class="line">yum downloader pcre-devel openssl-devel </span><br><span class="line">createrepo --update /application/yum/centos6.6/x86_64/   </span><br><span class="line"></span><br><span class="line"><span class="comment"># 客户端配置</span></span><br><span class="line">[abc_com]</span><br><span class="line">name=Server</span><br><span class="line">baseurl=http://10.0.0.8</span><br><span class="line"><span class="built_in">enable</span>=1</span><br><span class="line">gpgcheck=0</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定使用yum库</span></span><br><span class="line">yum --enablerepo=abc_com --disablerepo=base,extras,updates,epel list </span><br><span class="line"></span><br><span class="line"><span class="comment"># 把ali的库指向自定义yum库</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'10.0.0.8 mirrors.aliyun.com'</span> &gt;&gt;/etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同步线上的yum库</span></span><br></pre></td></tr></table></figure>
-<h2 id="yum使用"><a href="#yum使用" class="headerlink" title="yum使用"></a>yum使用</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出 repo 库</span></span><br><span class="line">yum repolist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出repo所有包</span></span><br><span class="line">yum list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出已安装包</span></span><br><span class="line">yum list installed</span><br><span class="line">rpm -qa</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出可更新的包</span></span><br><span class="line">yum list updates</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出额外的包 </span></span><br><span class="line">yum list extras</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出依赖列表</span></span><br><span class="line">yum deplist zlib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 跳过依赖 --skip-broken</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出相关的包</span></span><br><span class="line">yum list php*</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出软件包提供的文件</span></span><br><span class="line">yum provides ss</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出包信息</span></span><br><span class="line">yum info zlib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出软件包所有文件</span></span><br><span class="line">rpm -ql zlib</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出文件所属的包</span></span><br><span class="line">rpm -qf /usr/lib64/libz.so.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搜索 nc命令 是哪个包提供的</span></span><br><span class="line">yum whatprovides <span class="string">"nc"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装包搜索</span></span><br><span class="line">yum search netstat</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装包</span></span><br><span class="line">yum -y install</span><br><span class="line">yum localinstall</span><br><span class="line"><span class="comment"># 指定库 --enablerepo=</span></span><br><span class="line"><span class="comment"># 指定下载目录 --downloaddir=</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 卸载包</span></span><br><span class="line">yum remove</span><br><span class="line"></span><br><span class="line"><span class="comment"># 升级包</span></span><br><span class="line">yum upgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 降级包</span></span><br><span class="line">yum downgrade</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列出分组信息</span></span><br><span class="line">yum grouplist</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装组</span></span><br><span class="line">yum groupinstall</span><br><span class="line"></span><br><span class="line"><span class="comment"># 组更新</span></span><br><span class="line">yum groupupdate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 组移除</span></span><br><span class="line">yum groupremove</span><br><span class="line"></span><br><span class="line"><span class="comment"># 组信息</span></span><br><span class="line">yum groupinfo</span><br><span class="line"></span><br><span class="line"><span class="comment"># localinstall</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装分类包</span></span><br><span class="line">yum -y install @base</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分类信息</span></span><br><span class="line">    103 @anaconda</span><br><span class="line">   9070 base</span><br><span class="line">    179 @base</span><br><span class="line">    250 extras</span><br><span class="line">    544 updates</span><br><span class="line">     23 @updates</span><br><span class="line"><span class="comment"># 查看yum 历史记录</span></span><br><span class="line">yum <span class="built_in">history</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清空缓存</span></span><br><span class="line">yum clean all</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建缓存</span></span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Gradle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/Gradle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Gradle安装使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-02 23:34:32" itemprop="dateCreated datePublished" datetime="2020-06-02T23:34:32+08:00">2020-06-02</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>0</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Maven%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/Maven%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">Maven安装使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-02 23:33:32" itemprop="dateCreated datePublished" datetime="2020-06-02T23:33:32+08:00">2020-06-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-12 19:01:41" itemprop="dateModified" datetime="2020-06-12T19:01:41+08:00">2020-06-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="https://maven.apache.org/" target="_blank" rel="noopener">Maven</a></li>
-<li><a href="https://mirror.bit.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz" target="_blank" rel="noopener">Maven download</a></li>
-<li><a href="https://maven.apache.org/ref/3.6.3/" target="_blank" rel="noopener">Maven docs</a></li>
-<li><a href="/2020/05/Java%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87/" title="Java环境配置">Java环境配置</a></li>
-<li><a href="https://mirrors.tuna.tsinghua.edu.cn/AdoptOpenJDK/" target="_blank" rel="noopener">openJDK 镜像</a></li>
-</ul>
-<h3 id="设置-mvn-环境"><a href="#设置-mvn-环境" class="headerlink" title="设置 mvn 环境"></a>设置 mvn 环境</h3><p>目录结构<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">mkdir mavenproject</span><br><span class="line">├── apache-maven-3.6.3</span><br><span class="line">├── demo <span class="comment"># maven 示例</span></span><br><span class="line">├── env</span><br><span class="line">├── gen.sh  <span class="comment"># 用来生成整个项目</span></span><br><span class="line">├── java11 -&gt; jdk-11.0.7</span><br><span class="line">├── java14 -&gt; jdk-14.0.1</span><br><span class="line">├── java8 -&gt; jdk1.8.0_251</span><br><span class="line">├── jdk-11.0.7</span><br><span class="line">├── jdk-14.0.1</span><br><span class="line">├── jdk1.8.0_251</span><br><span class="line">└── maven -&gt; apache-maven-3.6.3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 封装</span></span><br><span class="line">base64 -i ~/Downloads/jdk-8u251-linux-x64.tar.gz -o .a&amp;&amp;cat .a &gt;&gt; gen.sh</span><br><span class="line">base64 -i ~/Downloads/jdk-11.0.7_linux-x64_bin.tar.gz -o .b&amp;&amp;cat .b &gt;&gt; gen.sh</span><br><span class="line">base64 -i ~/Downloads/jdk-14.0.1_linux-x64_bin.tar.gz -o .c&amp;&amp;cat .c &gt;&gt; gen.sh</span><br><span class="line">base64 -i ~/Downloads/apache-maven-3.6.3-bin.tar.gz -o .c&amp;&amp;cat .d &gt;&gt; gen.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">rm -rf .a .b .c .d</span><br><span class="line">cat .a .b .c .d &gt;&gt; gen.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># mac 解包</span></span><br><span class="line">base64 -Dd -i a.tgz -o jdk-8u251-linux-x64.tar.tgz</span><br><span class="line">base64 -Dd -i b.tgz -o jdk-11.0.7_linux-x64_bin.tar.gz</span><br><span class="line">base64 -Dd -i c.tgz -o jdk-14.0.1_linux-x64_bin.tar.gz</span><br><span class="line">base64 -Dd -i d.tgz -o apache-maven-3.6.3-bin.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">sed -i <span class="string">""</span> <span class="string">'150,160d'</span> gen.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># centos base64</span></span><br><span class="line">yum -y install coreutils</span><br><span class="line">base64 -d &lt; a.tgz &gt; jdk-8u251-linux-x64.tar.tgz</span><br><span class="line">base64 -d &lt; b.tgz &gt; jdk-11.0.7_linux-x64_bin.tar.gz</span><br><span class="line">base64 -d &lt; c.tgz &gt; jdk-14.0.1_linux-x64_bin.tar.gz</span><br><span class="line">base64 -d &lt; d.tgz &gt; apache-maven-3.6.3-bin.tar.gz</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" target="_blank" rel="noopener">java8</a></li>
-<li><a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" target="_blank" rel="noopener">java11</a></li>
-<li><a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html" target="_blank" rel="noopener">java14</a></li>
-</ul>
-<h3 id="gen-sh-centos"><a href="#gen-sh-centos" class="headerlink" title="gen.sh (centos)"></a>gen.sh (centos)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'GEOF'</span> &gt;gen.sh</span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># packages</span></span><br><span class="line">grep -i linux /etc/redhat-release ||<span class="built_in">exit</span></span><br><span class="line"><span class="built_in">command</span> -v base64||yum -y install coreutils</span><br><span class="line"></span><br><span class="line">MAINDIR=<span class="variable">$PWD</span></span><br><span class="line"><span class="comment"># create directory</span></span><br><span class="line">mkdir -p env</span><br><span class="line">mkdir -p demo/src/main/java</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># java env</span></span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;env/java8.sh</span><br><span class="line">MAINDIR=<span class="variable">$PWD</span></span><br><span class="line">JAVA_HOME=<span class="variable">$&#123;MAINDIR&#125;</span>/java8</span><br><span class="line">CLASSPATH=<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line">PATH=<span class="variable">$&#123;MAINDIR&#125;</span>/java8/bin:/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:<span class="variable">$&#123;MAINDIR&#125;</span>/maven/bin</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME  CLASSPATH PATH</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;env/java11.sh</span><br><span class="line">MAINDIR=<span class="variable">$PWD</span></span><br><span class="line">JAVA_HOME=<span class="variable">$&#123;MAINDIR&#125;</span>/java11</span><br><span class="line">CLASSPATH=<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line">PATH=<span class="variable">$&#123;MAINDIR&#125;</span>/java11/bin:/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:<span class="variable">$&#123;MAINDIR&#125;</span>/maven/bin</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME  CLASSPATH PATH</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;env/java14.sh</span><br><span class="line">MAINDIR=<span class="variable">$PWD</span></span><br><span class="line">JAVA_HOME=<span class="variable">$&#123;MAINDIR&#125;</span>/java14</span><br><span class="line">CLASSPATH=<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br><span class="line">PATH=<span class="variable">$&#123;MAINDIR&#125;</span>/java14/bin:/usr/<span class="built_in">local</span>/bin:/usr/bin:/usr/<span class="built_in">local</span>/sbin:/usr/sbin:<span class="variable">$&#123;MAINDIR&#125;</span>/maven/bin</span><br><span class="line"><span class="built_in">export</span> JAVA_HOME  CLASSPATH PATH</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># uncompress jdk</span></span><br><span class="line">sed -n <span class="string">'150p'</span> <span class="variable">$0</span> &gt;a.tgz</span><br><span class="line">sed -n <span class="string">'151p'</span> <span class="variable">$0</span> &gt;b.tgz</span><br><span class="line">sed -n <span class="string">'152p'</span> <span class="variable">$0</span> &gt;c.tgz</span><br><span class="line">sed -n <span class="string">'153p'</span> <span class="variable">$0</span> &gt;d.tgz</span><br><span class="line">base64 -d &lt; a.tgz &gt; jdk-8u251-linux-x64.tar.tgz</span><br><span class="line">base64 -d &lt; b.tgz &gt; jdk-11.0.7_linux-x64_bin.tar.gz</span><br><span class="line">base64 -d &lt; c.tgz &gt; jdk-14.0.1_linux-x64_bin.tar.gz</span><br><span class="line">base64 -d &lt; d.tgz &gt; apache-maven-3.6.3-bin.tar.gz</span><br><span class="line">tar -zxf jdk-8u251-linux-x64.tar.tgz</span><br><span class="line">tar -zxf jdk-11.0.7_linux-x64_bin.tar.gz</span><br><span class="line">tar -zxf jdk-14.0.1_linux-x64_bin.tar.gz</span><br><span class="line">tar -zxf apache-maven-3.6.3-bin.tar.gz</span><br><span class="line">ln -sf jdk1.8.0_251 java8</span><br><span class="line">ln -sf jdk-11.0.7 java11</span><br><span class="line">ln -sf jdk-14.0.1 java14</span><br><span class="line">ln -sf apache-maven-3.6.3 maven</span><br><span class="line">rm -f *.tgz *.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># HelloWorld.java</span></span><br><span class="line">cat &lt;&lt;EOF &gt; demo/src/main/java/HelloWorld.java</span><br><span class="line">package com.tianmaying.mavendemo;</span><br><span class="line"></span><br><span class="line">import org.joda.time.LocalTime;</span><br><span class="line"></span><br><span class="line">public class HelloWorld &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        LocalTime currentTime = new LocalTime();</span><br><span class="line">        System.out.println(<span class="string">"The current local time is: "</span> + currentTime);</span><br><span class="line">        Greeter greeter = new Greeter();</span><br><span class="line">        System.out.println(greeter.sayHello());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"><span class="comment"># Greeter.java</span></span><br><span class="line">cat &lt;&lt;EOF &gt; demo/src/main/java/Greeter.java</span><br><span class="line">package com.tianmaying.mavendemo;</span><br><span class="line"></span><br><span class="line">public class Greeter &#123;</span><br><span class="line">    public String <span class="function"><span class="title">sayHello</span></span>() &#123;</span><br><span class="line">        <span class="built_in">return</span> <span class="string">"Hello world!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># pom.xml</span></span><br><span class="line">cat &lt;&lt;EOF &gt; demo/pom.xml</span><br><span class="line">&lt;?xml version=<span class="string">"1.0"</span> encoding=<span class="string">"UTF-8"</span>?&gt;</span><br><span class="line">&lt;project xmlns=<span class="string">"http://maven.apache.org/POM/4.0.0"</span> xmlns:xsi=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">    xsi:schemaLocation=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;gs-maven&lt;/artifactId&gt;</span><br><span class="line">    &lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line">    &lt;version&gt;0.1.0&lt;/version&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- tag::joda[] --&gt;</span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;joda-time&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;joda-time&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">    &lt;!-- end::joda[] --&gt;</span><br><span class="line"></span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;maven-shade-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;2.1&lt;/version&gt;</span><br><span class="line">                &lt;executions&gt;</span><br><span class="line">                    &lt;execution&gt;</span><br><span class="line">                        &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">                        &lt;goals&gt;</span><br><span class="line">                            &lt;goal&gt;shade&lt;/goal&gt;</span><br><span class="line">                        &lt;/goals&gt;</span><br><span class="line">                        &lt;configuration&gt;</span><br><span class="line">                            &lt;transformers&gt;</span><br><span class="line">                                &lt;transformer</span><br><span class="line">                                    implementation=<span class="string">"org.apache.maven.plugins.shade.resource.ManifestResourceTransformer"</span>&gt;</span><br><span class="line">                                    &lt;mainClass&gt;com.tianmaying.mavendemo.HelloWorld&lt;/mainClass&gt;</span><br><span class="line">                                &lt;/transformer&gt;</span><br><span class="line">                            &lt;/transformers&gt;</span><br><span class="line">                        &lt;/configuration&gt;</span><br><span class="line">                    &lt;/execution&gt;</span><br><span class="line">                &lt;/executions&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line">&lt;/project&gt;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建Java代码</span></span><br><span class="line"><span class="comment"># mvn compile</span></span><br><span class="line"><span class="comment"># mvn package</span></span><br><span class="line"><span class="comment"># mvn install</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 必须到149行</span></span><br><span class="line"><span class="built_in">exit</span></span><br><span class="line">GEOF</span><br></pre></td></tr></table></figure>
-<h3 id="maven-目录结构"><a href="#maven-目录结构" class="headerlink" title="maven 目录结构"></a>maven 目录结构</h3><figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">└── <span class="attribute">src</span></span><br><span class="line">    └── main</span><br><span class="line">        └── java</span><br></pre></td></tr></table></figure>
-<h3 id="配置-maven-镜像"><a href="#配置-maven-镜像" class="headerlink" title="配置 maven 镜像"></a>配置 maven 镜像</h3><p>conf/settings.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="代理库"><a href="#代理库" class="headerlink" title="代理库"></a>代理库</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">repository</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>spring<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/spring<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">releases</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">releases</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">snapshots</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">enabled</span>&gt;</span>true<span class="tag">&lt;/<span class="name">enabled</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">snapshots</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">repository</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1132,7 +1106,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">141</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1182,13 +1156,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">341k</span>
+    <span title="站点总字数">360k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:10</span>
+    <span title="站点阅读时长">5:27</span>
 </div>
 
         
