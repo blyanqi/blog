@@ -199,6 +199,3231 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/golang%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/golang%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">golang编程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-14 08:32:21" itemprop="dateCreated datePublished" datetime="2020-05-14T08:32:21+08:00">2020-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-19 10:51:39" itemprop="dateModified" datetime="2020-05-19T10:51:39+08:00">2020-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index"><span itemprop="name">编程语言</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Goloang"><a href="#Goloang" class="headerlink" title="Goloang"></a>Goloang</h2><ul>
+<li><a href="https://golang.org/" target="_blank" rel="noopener"> Golang </a></li>
+<li><a href="https://www.runoob.com/go/go-tutorial.html" target="_blank" rel="noopener"> 菜鸟教程 golang  </a></li>
+<li><a href="https://github.com/golang/go" target="_blank" rel="noopener"> Golang 源码 </a></li>
+<li><a href="https://github.com/avelino/awesome-go" target="_blank" rel="noopener"> awesome-go </a></li>
+<li><a href="https://draveness.me/golang/docs/part1-prerequisite/ch02-compile/golang-compile-intro/" target="_blank" rel="noopener">Go 语言设计与实现</a></li>
+</ul>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 包定义</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入模块</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"strconv"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 变量定义</span></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	i <span class="keyword">int</span></span><br><span class="line">	k <span class="keyword">int</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 常量定义</span></span><br><span class="line"><span class="keyword">const</span> (</span><br><span class="line">	city <span class="keyword">string</span> = <span class="string">"beijing"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 入口函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 变量 := 变量 + 字面常量</span></span><br><span class="line">	sum := i + <span class="number">10</span></span><br><span class="line">	<span class="comment">// 输出</span></span><br><span class="line">	fmt.Println(sum)</span><br><span class="line">	<span class="comment">// 浮点计算</span></span><br><span class="line">	fdiv := <span class="number">10</span> / <span class="number">0.3</span></span><br><span class="line">	fmt.Println(fdiv)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 把数值转成字符串</span></span><br><span class="line">	<span class="comment">// 使用 strconv 库来转换</span></span><br><span class="line">	fmt.Println(strconv.FormatFloat(fdiv, <span class="string">'f'</span>, <span class="number">-1</span>, <span class="number">64</span>))</span><br><span class="line">	<span class="comment">// 打印到屏幕</span></span><br><span class="line">	fmt.Printf(<span class="string">"x = %.15f\n"</span>, fdiv)</span><br><span class="line">	<span class="comment">// 以返回值形式返回</span></span><br><span class="line">	fmt.Println(fmt.Sprintf(<span class="string">"%.15f"</span>, fdiv))</span><br><span class="line"></span><br><span class="line">	<span class="comment">//把字符串转成数值</span></span><br><span class="line">	fmt.Println(strconv.Atoi(<span class="string">"0.333333"</span>))</span><br><span class="line">	fmt.Println(strconv.Atoi(<span class="string">"12345"</span>))</span><br><span class="line">	fmt.Println(strconv.Atoi(<span class="string">"123ead"</span>))</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 取余运算</span></span><br><span class="line">	fmt.Println(<span class="number">1</span> % <span class="number">7</span>) <span class="comment">// 比余数小取本身</span></span><br><span class="line">	fmt.Println(<span class="number">16</span> % <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line">	fmt.Println(<span class="string">"------------"</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用按位与位(乘法运算)获得循环数，相与数必须是：1，3，7，31，2^n-1</span></span><br><span class="line">	<span class="comment">// 00001001  9</span></span><br><span class="line">	<span class="comment">// 00000111  7</span></span><br><span class="line">	<span class="comment">//         = 0</span></span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">20</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i, i&amp;<span class="number">3</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用移位算乘法,因为字长为64，所以到第63次时变负值，64次溢出</span></span><br><span class="line">	<span class="keyword">var</span> i <span class="keyword">uint64</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">1</span>; i &lt; <span class="number">65</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i, <span class="number">1</span>&lt;&lt;i)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 包定义</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 入口函数</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 循环</span></span><br><span class="line">	<span class="comment">// 一重循环算法复杂度为 O(n)+1</span></span><br><span class="line">	<span class="keyword">var</span> i <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">		fmt.Println(i)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 二重循环 算法复杂度为 O(n^2) +2</span></span><br><span class="line">	<span class="keyword">var</span> k, j <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++ &#123;</span><br><span class="line">		<span class="keyword">for</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++ &#123;</span><br><span class="line">			fmt.Println(k, j)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 二重循环</span></span><br><span class="line">	<span class="comment">// 逐步递减</span></span><br><span class="line">	<span class="keyword">var</span> m, n <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> m = <span class="number">1</span>; m &lt; <span class="number">10</span>; m++ &#123;</span><br><span class="line">		<span class="keyword">for</span> n = <span class="number">0</span>; n &lt; <span class="number">10</span>/m; n++ &#123;</span><br><span class="line">			<span class="comment">// strings 库 提供对字符串的各种处理方法</span></span><br><span class="line">			fmt.Printf(<span class="string">"%d %s"</span>, n, strings.Repeat(<span class="string">"*"</span>, n))</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println()</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 逐步递增</span></span><br><span class="line">	<span class="keyword">var</span> c, d <span class="keyword">int</span></span><br><span class="line">	<span class="keyword">for</span> c = <span class="number">0</span>; c &lt; <span class="number">10</span>; c++ &#123;</span><br><span class="line">		<span class="keyword">for</span> d = <span class="number">0</span>; d &lt; <span class="number">2</span>*c; d++ &#123;</span><br><span class="line">			fmt.Printf(<span class="string">"%d %s"</span>, d, strings.Repeat(<span class="string">"*"</span>, d))</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println()</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 二分法猜数</span></span><br><span class="line">	<span class="keyword">var</span> num, g <span class="keyword">int</span></span><br><span class="line">	g = <span class="number">231</span></span><br><span class="line">	fmt.Println(<span class="string">"猜一个1000以内的数"</span>)</span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		fmt.Scan(&amp;num)</span><br><span class="line">		<span class="keyword">if</span> num &gt; g &#123;</span><br><span class="line">			fmt.Println(<span class="string">"猜的数大了"</span>)</span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> num == g &#123;</span><br><span class="line">			fmt.Println(<span class="string">"猜中了"</span>)</span><br><span class="line">			<span class="keyword">break</span></span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			fmt.Println(<span class="string">"猜的数小了"</span>)</span><br><span class="line">		&#125;</span><br><span class="line">		fmt.Println(num)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 数组</span></span><br><span class="line"><span class="keyword">var</span> arr [<span class="number">10</span>]<span class="keyword">int</span></span><br><span class="line"><span class="comment">// 切片</span></span><br><span class="line"><span class="keyword">var</span> slice []<span class="keyword">int</span></span><br><span class="line"><span class="comment">// map</span></span><br><span class="line"><span class="keyword">var</span> m <span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印 数组</span></span><br><span class="line"><span class="keyword">for</span> k, v := <span class="keyword">range</span> arr &#123;</span><br><span class="line">	fmt.Println(<span class="string">"array: "</span>, k, v)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印 切片</span></span><br><span class="line"><span class="keyword">for</span> k1, v1 := <span class="keyword">range</span> slice &#123;</span><br><span class="line">	fmt.Println(<span class="string">"slice: "</span>, k1, v1)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印 map</span></span><br><span class="line"><span class="comment">//for k2, v2 := range m &#123;</span></span><br><span class="line"><span class="comment">//	fmt.Println("map: ", k2, v2)</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line">slice = <span class="built_in">make</span>([]<span class="keyword">int</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment">// 打印 切片</span></span><br><span class="line"><span class="keyword">for</span> k3, v3 := <span class="keyword">range</span> slice &#123;</span><br><span class="line">	fmt.Println(<span class="string">"slice: "</span>, k3, v3)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 必须要初始化</span></span><br><span class="line">m = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>)</span><br><span class="line">m[<span class="number">1</span>] = <span class="string">"beijing"</span></span><br><span class="line">m[<span class="number">3</span>] = <span class="string">"shanghai"</span></span><br><span class="line"><span class="comment">// 打印 map</span></span><br><span class="line"><span class="keyword">for</span> k2, v2 := <span class="keyword">range</span> m &#123;</span><br><span class="line">	fmt.Println(<span class="string">"map: "</span>, k2, v2)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 打印长度</span></span><br><span class="line">fmt.Println(<span class="built_in">len</span>(arr))</span><br><span class="line">fmt.Println(<span class="built_in">len</span>(slice))</span><br><span class="line">fmt.Println(<span class="built_in">len</span>(m))</span><br><span class="line"></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(arr))</span><br><span class="line">fmt.Println(<span class="built_in">cap</span>(slice))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 数组，切片常用的方法</span></span><br><span class="line">fmt.Println(arr[:<span class="number">3</span>])</span><br><span class="line">fmt.Println(slice[<span class="number">2</span>:<span class="number">8</span>])</span><br><span class="line">fmt.Println(arr[:])</span><br><span class="line">sort.Ints(slice)</span><br><span class="line">s1 := []<span class="keyword">string</span>&#123;<span class="string">"abc"</span>, <span class="string">"zbc"</span>, <span class="string">"edf"</span>&#125;</span><br><span class="line">sort.Strings(s1)</span><br><span class="line">fmt.Println(<span class="string">"sort: "</span>, s1)</span><br><span class="line"><span class="built_in">copy</span>(slice, slice)</span><br><span class="line">slice = <span class="built_in">append</span>(slice, <span class="number">1</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line">fmt.Println(slice)</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">fmt.Println(m)</span><br><span class="line"><span class="built_in">delete</span>(m, <span class="number">3</span>)</span><br><span class="line">fmt.Println(m)</span><br><span class="line"><span class="built_in">println</span>(m[<span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 高级一点</span></span><br><span class="line"><span class="comment">// map key 是int 值是 切片</span></span><br><span class="line">mode1 := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]([]<span class="keyword">string</span>))</span><br><span class="line"><span class="comment">//定义一个map（key 是 string，值是个数组）</span></span><br><span class="line">mode2 := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]([<span class="number">10</span>]<span class="keyword">string</span>))</span><br><span class="line"><span class="comment">// 定义一个string 类型map，值是map类型（值的key 是string，值是string切片类型）</span></span><br><span class="line">mode3 := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>](<span class="keyword">map</span>[<span class="keyword">string</span>]([]<span class="keyword">string</span>)))</span><br><span class="line"><span class="comment">// 定义一个切片，值也是切片，类型string</span></span><br><span class="line">_ = <span class="built_in">make</span>([][]<span class="keyword">string</span>, <span class="number">10</span>)</span><br><span class="line"><span class="comment">// 定义一个切片，切片的值是二维切片，类型是string</span></span><br><span class="line">mode4 := <span class="built_in">make</span>([]([]([]<span class="keyword">string</span>)), <span class="number">10</span>)</span><br><span class="line"><span class="comment">// 定义一个三维数组</span></span><br><span class="line"><span class="keyword">var</span> arr1 [<span class="number">10</span>][<span class="number">10</span>][<span class="number">10</span>]<span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个结构体切片</span></span><br><span class="line"><span class="keyword">type</span> s <span class="keyword">struct</span> &#123;</span><br><span class="line">	id   <span class="keyword">int</span></span><br><span class="line">	name <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line">_ = <span class="built_in">make</span>([][]s, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个结构体指针类型的切片</span></span><br><span class="line">_ = <span class="built_in">make</span>([][]*s, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">fmt.Println(<span class="string">"map1: "</span>, mode1)</span><br><span class="line">fmt.Println(<span class="string">"map2: "</span>, mode2)</span><br><span class="line">fmt.Println(<span class="string">"map3: "</span>, mode3)</span><br><span class="line">fmt.Println(<span class="string">"slice4: "</span>, mode4)</span><br><span class="line">fmt.Println(<span class="string">"arr5: "</span>, arr1)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E5%87%BA%E5%A2%83%E6%97%85%E6%B8%B8%E5%B8%B8%E7%94%A8%E8%8B%B1%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E5%87%BA%E5%A2%83%E6%97%85%E6%B8%B8%E5%B8%B8%E7%94%A8%E8%8B%B1%E8%AF%AD/" class="post-title-link" itemprop="url">出境旅游常用英语</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-05-14 08:29:06 / 修改时间：08:29:50" itemprop="dateCreated datePublished" datetime="2020-05-14T08:29:06+08:00">2020-05-14</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index"><span itemprop="name">英语</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>出入境填表常用词汇</p>
+<p>姓：Family name，Surname</p>
+<p>名：First Name，Given name</p>
+<p>性别：sex，gender</p>
+<p>男：male；女：female</p>
+<p>国籍：nationality，country of citizenship</p>
+<p>护照号：passport number</p>
+<p>原住地：country of origin</p>
+<p>前往国：destination country</p>
+<p>登机城市：city where you boarded</p>
+<p>签证签发地：city where visa was issued</p>
+<p>签发日期：date of issue</p>
+<p>出生日期：date of birth，birth date</p>
+<p>年：year；月：month；日：day</p>
+<p>偕行人数：accompanying number</p>
+<p>签名：signature</p>
+<p>官方填写：official use only</p>
+<p>职业：occupation</p>
+<p>护照：Passport；签证：Visa</p>
+<p>登机、启程：Embarkation</p>
+<p>登岸：Disembarkation</p>
+<p>商务签证：Business Visa</p>
+<p>观光签证：Tourist Visa</p>
+<p>乘机常用词汇</p>
+<p>航站、终点站：Terminal</p>
+<p>入境大厅：Arrival Lobby</p>
+<p>出境大厅：Departure Lobby</p>
+<p>登机门号码：Gate Number</p>
+<p>登机证：Boarding Card，Boarding Pass</p>
+<p>机场税：Airport Tax</p>
+<p>登机手续办理处：Check in Counter</p>
+<p>海关申报处：Customs Service Area</p>
+<p>货币申报：Currency Declaration</p>
+<p>免税商品：Duty-Free Items</p>
+<p>大号：large；中号：medium；小号：small</p>
+<p>纪念品：Souvenir</p>
+<p>行李：Baggage，Luggage</p>
+<p>~ 1 / 11 ~</p>
+<p>托运的行李：Checked baggage</p>
+<p>行李领取处：Baggage claim area</p>
+<p>随身行李：Carry-on baggage</p>
+<p>行李牌：Baggage Tag</p>
+<p>行李推车：Luggage Cart</p>
+<p>退税处：Tax-free refund</p>
+<p>盥洗室（厕所）：Lavatory，washroom，toilet</p>
+<p>W.C.＝water closet，rest room</p>
+<p>男厕：Men’s，Gent’s，Gentlemen’s</p>
+<p>女厕：Women’s，Lady’s</p>
+<p>使用中：Occupied</p>
+<p>空闲：Vacant</p>
+<p>男（女）空服员：Steward（Stewardess）</p>
+<p>机内免税贩卖：In-Flight Sales</p>
+<p>钱币兑换常用词汇</p>
+<p>外币兑换店：Currency Exchange Shop</p>
+<p>汇率：Exchange rate</p>
+<p>旅行支票：Traveler’s check</p>
+<p>手续费：Commission</p>
+<p>银行买入价：We buy（Bid）</p>
+<p>银行卖出价：We sell（Ask）</p>
+<p>酒店常用词汇</p>
+<p>入住登记手续：Check-in</p>
+<p>客房服务：Room Service</p>
+<p>退房（时间）：Check Out（Time）</p>
+<p>前台：Front Desk，Reception</p>
+<p>酒店大堂：Lobby</p>
+<p>咖啡馆：Coffee shop</p>
+<p>服务员，侍者：waiter（餐厅、旅馆的服务生、行李员）</p>
+<p>电话叫醒服务：Wake Up Call，Morning Call</p>
+<p>日常用语</p>
+<p>你好，很高兴认识你：How do you do，I’m glad to meet you.（It’s nice meeting you.）</p>
+<p>请问你叫什么名字：May I have your name, please?</p>
+<p>我可以试穿一下吗：May I try it on?</p>
+<p>多少钱：How much?</p>
+<p>请把菜单给我：Please show me the menu.</p>
+<p>干杯：Cheers! Bottoms up!</p>
+<p>~ 2 / 11 ~</p>
+<p>我迷路了，您能告诉我怎么回饭店吗：I’m lost．Could you do me a favor to find my hotel?</p>
+<p>你能帮我拍照吗：Could you take a picture for me?</p>
+<p>非常感谢：Thank you very much.</p>
+<p>不客气：You’re welcome．</p>
+<p>我就是忍不住：I just couldn’t help it.</p>
+<p>让我们保持联系：Let’s keep in touch.</p>
+<p>我怎样能跟你联络上：How can I get in touch with you?</p>
+<p>我将会尽我最大努力：I’ll do my best.</p>
+<p>请稍等一下：Wait a moment please.</p>
+<p>你先请：After you</p>
+<p>我们该走了：We’d better be off.</p>
+<p>我真要累死了：I’m really dead.</p>
+<p>真是那样吗：Is that so?</p>
+<p>我不确切知道：I don’t know for sure.</p>
+<p>太好了，太棒了：That’s something.</p>
+<p>这主意真棒：Brilliant idea!</p>
+<p>此话当真：Do you really mean it?</p>
+<p>你帮了大忙：You are a great help.</p>
+<p>我身无分文：I’m broke.</p>
+<p>我一直不太喜欢这东西：I never liked it anyway.</p>
+<p>别跟我耍花招：Don’t play games with me!</p>
+<p>看情况再说：That depends.</p>
+<p>最全食物的英文翻译</p>
+<p>水果类（fruits）：</p>
+<p>火龙果 pitaya</p>
+<p>西红柿 tomato</p>
+<p>菠萝 pineapple</p>
+<p>西瓜watermelon</p>
+<p>香蕉banana</p>
+<p>柚子 shaddock （pomelo）</p>
+<p>橙子orange</p>
+<p>苹果apple</p>
+<p>柠檬lemon</p>
+<p>樱桃 cherry</p>
+<p>桃子peach</p>
+<p>梨 pear</p>
+<p>枣Chinese date （去核枣 pitted date ）</p>
+<p>~ 3 / 11 ~</p>
+<p>椰子coconut</p>
+<p>草莓 strawberry</p>
+<p>树莓 raspberry</p>
+<p>蓝莓 blueberry</p>
+<p>黑莓 blackberry</p>
+<p>葡萄 grape</p>
+<p>甘蔗 sugar cane</p>
+<p>芒果 mango</p>
+<p>木瓜 pawpaw或者papaya</p>
+<p>杏子 apricot 　</p>
+<p>油桃 nectarine</p>
+<p>柿子persimmon</p>
+<p>石榴pomegranate</p>
+<p>榴莲 jackfruit</p>
+<p>槟榔果 areca nut</p>
+<p>（西班牙产苦橙）bitter orange</p>
+<p>猕猴桃 kiwi fruit or Chinese gooseberry</p>
+<p>金橘cumquat</p>
+<p>蟠桃 flat peach</p>
+<p>荔枝 litchi</p>
+<p>青梅greengage</p>
+<p>山楂果 haw</p>
+<p>水蜜桃honey peach</p>
+<p>香瓜，甜瓜 musk melon</p>
+<p>李子plum</p>
+<p>杨梅 waxberry red bayberry</p>
+<p>桂圆 longan</p>
+<p>沙果 crab apple</p>
+<p>杨桃starfruit</p>
+<p>枇杷 loquat</p>
+<p>柑橘 tangerine</p>
+<p>莲雾wax-apple</p>
+<p>番石榴 guava</p>
+<p>肉、蔬菜类：</p>
+<p>南瓜（倭瓜） pumpkin cushaw</p>
+<p>甜玉米 Sweet corn</p>
+<p>牛肉beef</p>
+<p>猪肉pork</p>
+<p>羊肉 mutton</p>
+<p>羔羊肉lamb</p>
+<p>鸡肉chicken</p>
+<p>生菜 莴苣lettuce</p>
+<p>白菜 Chinese cabbage （celery cabbage）（甘蓝）</p>
+<p>卷心菜 cabbage</p>
+<p>萝卜 radish</p>
+<p>胡萝卜 carrot</p>
+<p>韭菜leek</p>
+<p>木耳 agarics</p>
+<p>豌豆 pea</p>
+<p>马铃薯（土豆） potato</p>
+<p>黄瓜 cucumber</p>
+<p>苦瓜 balsam pear</p>
+<p>秋葵 okra</p>
+<p>洋葱 onion</p>
+<p>芹菜 celery</p>
+<p>芹菜杆 celery sticks</p>
+<p>地瓜 sweet potato</p>
+<p>蘑菇 mushroom</p>
+<p>橄榄 olive</p>
+<p>菠菜spinach</p>
+<p>冬瓜 （Chinese）wax gourd</p>
+<p>~ 4 / 11 ~</p>
+<p>莲藕 lotus root</p>
+<p>紫菜 laver</p>
+<p>油菜 cole rape</p>
+<p>茄子 eggplant</p>
+<p>香菜 caraway</p>
+<p>枇杷loquat</p>
+<p>青椒 green pepper</p>
+<p>四季豆 青刀豆 garden bean</p>
+<p>银耳 silvery fungi</p>
+<p>腱子肉tendon</p>
+<p>肘子 pork joint</p>
+<p>茴香fennel（茴香油fennel oil 药用）</p>
+<p>鲤鱼carp</p>
+<p>咸猪肉bacon</p>
+<p>金针蘑 needle mushroom</p>
+<p>扁豆 lentil</p>
+<p>槟榔 areca</p>
+<p>牛蒡great burdock</p>
+<p>水萝卜 summer radish</p>
+<p>竹笋 bamboo shoot</p>
+<p>艾蒿Chinese mugwort</p>
+<p>绿豆mung bean</p>
+<p>毛豆green soy bean</p>
+<p>瘦肉 lean meat</p>
+<p>肥肉speck</p>
+<p>黄花菜 day lily （day lily bud）</p>
+<p>豆芽菜 bean sprout</p>
+<p>丝瓜 towel gourd</p>
+<p>(注：在美国丝瓜或用来做丝瓜茎loofah洗澡的，不是食用的)</p>
+<p>海鲜类（sea food）：</p>
+<p>虾仁 Peeled Prawns</p>
+<p>龙虾 lobster</p>
+<p>小龙虾 crayfish（退缩者）</p>
+<p>蟹 crab</p>
+<p>蟹足crab claws</p>
+<p>小虾（虾米） shrimp</p>
+<p>对虾、大虾 prawn</p>
+<p>（烤）鱿鱼（toast）squid</p>
+<p>海参 sea cucumber</p>
+<p>扇贝 scallop</p>
+<p>鲍鱼 sea-ear abalone</p>
+<p>小贝肉cockles</p>
+<p>牡蛎oyster</p>
+<p>鱼鳞scale</p>
+<p>海蜇jellyfish</p>
+<p>鳖 海龟turtle</p>
+<p>蚬 蛤 clam</p>
+<p>鲅鱼 culter</p>
+<p>鲳鱼 butterfish</p>
+<p>虾籽 shrimp egg</p>
+<p>鲢鱼 银鲤鱼chub silver carp</p>
+<p>黄花鱼 yellow croaker</p>
+<p>调料类（seasonings）：</p>
+<p>醋 vinegar</p>
+<p>酱油 soy</p>
+<p>盐 salt</p>
+<p>加碘盐 iodized salt</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E7%BC%96%E7%A8%8B%E8%8B%B1%E8%AF%AD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/05/%E7%BC%96%E7%A8%8B%E8%8B%B1%E8%AF%AD/" class="post-title-link" itemprop="url">编程英语</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-14 08:24:36" itemprop="dateCreated datePublished" datetime="2020-05-14T08:24:36+08:00">2020-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-26 22:25:57" itemprop="dateModified" datetime="2020-05-26T22:25:57+08:00">2020-05-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%8B%B1%E8%AF%AD/" itemprop="url" rel="index"><span itemprop="name">英语</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>18k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>17 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application</td>
+<td>应用程式 应用、应用程序 apply</td>
+</tr>
+<tr>
+<td>archi-tect-ure</td>
+<td>架构、系统架构 体系结构</td>
+</tr>
+<tr>
+<td>application framework</td>
+<td>应用程式框架、应用框架 应用程序框架</td>
+</tr>
+<tr>
+<td>end user</td>
+<td>终端用户</td>
+</tr>
+<tr>
+<td>design phase</td>
+<td>设计阶段</td>
+</tr>
+<tr>
+<td>design by contract</td>
+<td>契约式设计</td>
+</tr>
+<tr>
+<td>design pattern</td>
+<td>设计范式、设计样式 设计模式</td>
+</tr>
+<tr>
+<td>object oriented design</td>
+<td>面向对象的设计</td>
+</tr>
+<tr>
+<td>collective noun</td>
+<td>集体名词</td>
+</tr>
+<tr>
+<td>The contrasts with</td>
+<td>这与</td>
+</tr>
+<tr>
+<td>involved with</td>
+<td>参与</td>
+</tr>
+<tr>
+<td>bundled with</td>
+<td>捆绑一起</td>
+</tr>
+<tr>
+<td>published separately</td>
+<td>单独发布</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Application software (app for short) is a program or group of programs designed for end users. Examples of an application include a <strong>word processor</strong>, a <strong>spreadsheet</strong>, an <strong>accounting application</strong>, a <strong>web browser</strong>, an <strong>email client</strong>, a <strong>media player</strong>, a <strong>file viewer</strong>, <strong>simulators</strong>, a <strong>console game</strong> or a <strong>photo editor</strong>. The collective noun application software refers to all applications collectively.[1] This contrasts with system software, which is mainly involved with running the computer.</p>
+<p>Applications may be bundled with the computer and its system software or published separately, and may be coded as proprietary, open-source or university projects.[2] Apps built for mobile platforms are called mobile apps.</p>
+<h2 id="list-1"><a href="#list-1" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assign</td>
+<td>指派、指定、设值、赋值 赋值</td>
+</tr>
+<tr>
+<td>assignment</td>
+<td>指派、指定 赋值、分配</td>
+</tr>
+<tr>
+<td>assignment operator</td>
+<td>指派（赋值）运算子 = 赋值操作符</td>
+</tr>
+<tr>
+<td>associated</td>
+<td>相应的、相关的 相关的、关联、相应的</td>
+</tr>
+<tr>
+<td>associative container</td>
+<td>关联式容器（对应 sequential container）</td>
+</tr>
+<tr>
+<td>atomic</td>
+<td>不可分割的 原子的</td>
+</tr>
+<tr>
+<td>attribute</td>
+<td>属性 属性、特性</td>
+</tr>
+<tr>
+<td>audio</td>
+<td>音讯 音频</td>
+</tr>
+<tr>
+<td>A.I.（artificial intelligence ）</td>
+<td>人工智慧 人工智能</td>
+</tr>
+<tr>
+<td>background</td>
+<td>背景 背景（用於图形着色）</td>
+</tr>
+<tr>
+<td>argument</td>
+<td>引数（传给函式的值）。叁见 parameter 叁数、实质叁数、实叁、自变量</td>
+</tr>
+<tr>
+<td>array</td>
+<td>阵列 数组</td>
+</tr>
+<tr>
+<td>arrow</td>
+<td>（箭头）</td>
+</tr>
+<tr>
+<td>arrow operator</td>
+<td>运算子 箭头操作符</td>
+</tr>
+<tr>
+<td>assembly</td>
+<td>装配件</td>
+</tr>
+<tr>
+<td>assembly language</td>
+<td>组合语言 汇编语言</td>
+</tr>
+<tr>
+<td>assert(ion)</td>
+<td>断言</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-2"><a href="#list-2" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backward compatible</td>
+<td>回溯相容 向下兼容</td>
+</tr>
+<tr>
+<td>bandwidth</td>
+<td>频宽 带宽</td>
+</tr>
+<tr>
+<td>base class</td>
+<td>基础类别 基类</td>
+</tr>
+<tr>
+<td>base type</td>
+<td>基础型别 (等同於 base class)</td>
+</tr>
+<tr>
+<td>batch</td>
+<td>批次（意思是整批作业） 批处理</td>
+</tr>
+<tr>
+<td>benefit</td>
+<td>利益,收益</td>
+</tr>
+<tr>
+<td>best viable function</td>
+<td>最佳可行函式 最佳可行函式从 viable functions 中挑出的最佳吻合者</td>
+</tr>
+<tr>
+<td>binary search</td>
+<td>二分搜寻法 二分查找</td>
+</tr>
+<tr>
+<td>binary tree</td>
+<td>二元树 二叉树</td>
+</tr>
+<tr>
+<td>binary function</td>
+<td>二元函式 双叁函数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-3"><a href="#list-3" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>binary operator</td>
+<td>二元运算子 二元操作符</td>
+</tr>
+<tr>
+<td>binding</td>
+<td>系结 绑定</td>
+</tr>
+<tr>
+<td>bit</td>
+<td>(发音为beit)位元 位</td>
+</tr>
+<tr>
+<td>bit field</td>
+<td>位元栏 位域</td>
+</tr>
+<tr>
+<td>bitmap</td>
+<td>位元图 位图</td>
+</tr>
+<tr>
+<td>bitwise</td>
+<td>以 bit 为单元逐一┅</td>
+</tr>
+<tr>
+<td>bitwise copy</td>
+<td>以 bit 为单元进行复制；位元逐一复制 位拷贝</td>
+</tr>
+<tr>
+<td>block</td>
+<td>区块,区段 块、区块、语句块</td>
+</tr>
+<tr>
+<td>boolean</td>
+<td>布林值（真假值，true 或 false） 布尔值</td>
+</tr>
+<tr>
+<td>border</td>
+<td>边框、框线 边框</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-4"><a href="#list-4" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>brace (curly brace)</td>
+<td>大括弧、大括号 花括弧、花括号</td>
+</tr>
+<tr>
+<td>bracket (square brakcet)</td>
+<td>中括弧、中括号 方括弧、方括号</td>
+</tr>
+<tr>
+<td>breakpoint</td>
+<td>中断点 断点</td>
+</tr>
+<tr>
+<td>build</td>
+<td>建造、构筑、建置（MS 用语）</td>
+</tr>
+<tr>
+<td>build－in</td>
+<td>内建 内置</td>
+</tr>
+<tr>
+<td>bus</td>
+<td>汇流排 总线</td>
+</tr>
+<tr>
+<td>business</td>
+<td>商务,业务 业务</td>
+</tr>
+<tr>
+<td>buttons</td>
+<td>按钮 按钮</td>
+</tr>
+<tr>
+<td>byte</td>
+<td>位元组（由 8 bits 组成） 字节</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>快取 高速缓存</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-5"><a href="#list-5" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>call</td>
+<td>呼叫、叫用 调用</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>回呼 回调</td>
+</tr>
+<tr>
+<td>call operator</td>
+<td>call（函式呼叫）运算子调用操作符（同 function call operator）</td>
+</tr>
+<tr>
+<td>candidate</td>
+<td>function 候选函式 候选函数（在函式多载决议程序中出现的候选函式）</td>
+</tr>
+<tr>
+<td>chain</td>
+<td>串链（例 chain of function calls） 链</td>
+</tr>
+<tr>
+<td>character</td>
+<td>字元 字符</td>
+</tr>
+<tr>
+<td>check</td>
+<td>box 核取方块 (i.e. check button) 复选框</td>
+</tr>
+<tr>
+<td>checked exception</td>
+<td>可控式异常(Java)</td>
+</tr>
+<tr>
+<td>check button</td>
+<td>方钮 (i.e. check box) 复选按钮</td>
+</tr>
+<tr>
+<td>child</td>
+<td>class 子类别（或称为derived class, subtype 图表类型） 子类</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-6"><a href="#list-6" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>class</td>
+<td>类别 类</td>
+</tr>
+<tr>
+<td>class body</td>
+<td>类别本体 类体</td>
+</tr>
+<tr>
+<td>class declaration</td>
+<td>类别宣告、类别宣告式 类声明</td>
+</tr>
+<tr>
+<td>class definition</td>
+<td>类别定义、类别定义式 类定义</td>
+</tr>
+<tr>
+<td>class derivation</td>
+<td>list 类别衍化列 类继承列表</td>
+</tr>
+<tr>
+<td>class head</td>
+<td>类别表头 类头</td>
+</tr>
+<tr>
+<td>class hierarchy</td>
+<td>类别继承体系, 类别阶层 类层次体系</td>
+</tr>
+<tr>
+<td>class library</td>
+<td>类别程式库、类别库 类库</td>
+</tr>
+<tr>
+<td>class template</td>
+<td>类别模板、类别范本 类模板</td>
+</tr>
+<tr>
+<td>class template partial specializations</td>
+<td>类别模板偏特化 类模板部分特化</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-7"><a href="#list-7" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>class template specializations</td>
+<td>类别模板特化 类模板特化</td>
+</tr>
+<tr>
+<td>cleanup</td>
+<td>清理、善後 清理、清除</td>
+</tr>
+<tr>
+<td>client</td>
+<td>客端、客户端、客户 客户</td>
+</tr>
+<tr>
+<td>client－server</td>
+<td>主从架构 客户/服务器</td>
+</tr>
+<tr>
+<td>clipboard</td>
+<td>剪贴簿 剪贴板</td>
+</tr>
+<tr>
+<td>clone</td>
+<td>复制 克隆</td>
+</tr>
+<tr>
+<td>collection</td>
+<td>群集 集合</td>
+</tr>
+<tr>
+<td>combo box</td>
+<td>复合方块、复合框 组合框</td>
+</tr>
+<tr>
+<td>command line</td>
+<td>命令列 命令行 (系统文字模式下的整行执行命令)</td>
+</tr>
+<tr>
+<td>communication</td>
+<td>通讯 通讯</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-8"><a href="#list-8" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>compatible</td>
+<td>相容 兼容</td>
+</tr>
+<tr>
+<td>compile</td>
+<td>time 编译期 编译期、编译时</td>
+</tr>
+<tr>
+<td>compiler</td>
+<td>编译器 编译器</td>
+</tr>
+<tr>
+<td>component</td>
+<td>组件 组件</td>
+</tr>
+<tr>
+<td>composition</td>
+<td>复合、合成、组合 组合</td>
+</tr>
+<tr>
+<td>computer</td>
+<td>电脑、计算机 计算机、电脑</td>
+</tr>
+<tr>
+<td>concept</td>
+<td>概念 概念</td>
+</tr>
+<tr>
+<td>concrete</td>
+<td>具象的 实在的</td>
+</tr>
+<tr>
+<td>concurrent</td>
+<td>并行 并发</td>
+</tr>
+<tr>
+<td>configuration</td>
+<td>组态 配置</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-9"><a href="#list-9" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>connection</td>
+<td>连接，连线（网络,资料库） 连接</td>
+</tr>
+<tr>
+<td>constraint</td>
+<td>约束（条件）</td>
+</tr>
+<tr>
+<td>construct</td>
+<td>构件 构件</td>
+</tr>
+<tr>
+<td>container</td>
+<td>容器 容器（存放资料的某种结构如 list, vector…）</td>
+</tr>
+<tr>
+<td>containment</td>
+<td>内含 包容</td>
+</tr>
+<tr>
+<td>context</td>
+<td>背景关系、周遭环境、上下脉络 环境、上下文</td>
+</tr>
+<tr>
+<td>control</td>
+<td>控制元件、控件 控件</td>
+</tr>
+<tr>
+<td>console</td>
+<td>主控台 控制台</td>
+</tr>
+<tr>
+<td>const</td>
+<td>常数（constant 的缩写，C++ 关键字）</td>
+</tr>
+<tr>
+<td>constant</td>
+<td>常数（相对於 variable） 常量</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-10"><a href="#list-10" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>constructor</td>
+<td>（ctor） 建构式 构造函数（与class 同名的一种 member functions）</td>
+</tr>
+<tr>
+<td>copy</td>
+<td>(v) 复制、拷贝 拷贝</td>
+</tr>
+<tr>
+<td>copy</td>
+<td>(n) 复件, 副本</td>
+</tr>
+<tr>
+<td>cover</td>
+<td>涵盖 覆盖</td>
+</tr>
+<tr>
+<td>create</td>
+<td>创建、建立、产生、生成 创建</td>
+</tr>
+<tr>
+<td>creation</td>
+<td>产生、生成 创建</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>游标 光标</td>
+</tr>
+<tr>
+<td>custom</td>
+<td>订制、自定 定制</td>
+</tr>
+<tr>
+<td>data</td>
+<td>资料 数据</td>
+</tr>
+<tr>
+<td>database</td>
+<td>资料库 数据库</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-11"><a href="#list-11" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>database schema</td>
+<td>数据库结构纲目</td>
+</tr>
+<tr>
+<td>data member</td>
+<td>资料成员、成员变数 数据成员、成员变量</td>
+</tr>
+<tr>
+<td>data structure</td>
+<td>资料结构 数据结构</td>
+</tr>
+<tr>
+<td>datagram</td>
+<td>资料元 数据报文</td>
+</tr>
+<tr>
+<td>dead lock</td>
+<td>死结 死锁</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>除错 调试</td>
+</tr>
+<tr>
+<td>debugger</td>
+<td>除错器 调试器</td>
+</tr>
+<tr>
+<td>declaration</td>
+<td>宣告、宣告式 声明</td>
+</tr>
+<tr>
+<td>deduction</td>
+<td>推导（例：template argument deduction） 推导、推断</td>
+</tr>
+<tr>
+<td>default</td>
+<td>预设 缺省、默认</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-12"><a href="#list-12" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>defer</td>
+<td>延缓 推迟</td>
+</tr>
+<tr>
+<td>define</td>
+<td>定义 预定义</td>
+</tr>
+<tr>
+<td>definition</td>
+<td>定义、定义区、定义式 定义</td>
+</tr>
+<tr>
+<td>delegate</td>
+<td>委派、委托、委任 委托</td>
+</tr>
+<tr>
+<td>delegation</td>
+<td>（同上）</td>
+</tr>
+<tr>
+<td>demarshal</td>
+<td>反编列 散集</td>
+</tr>
+<tr>
+<td>dereference</td>
+<td>提领（取出指标所指物体的内容） 解叁考</td>
+</tr>
+<tr>
+<td>dereference operator dereference</td>
+<td>（提领）运算子 * 解叁考操作符</td>
+</tr>
+<tr>
+<td>derived</td>
+<td>class 衍生类别 派生类</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-13"><a href="#list-13" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>destroy</td>
+<td>摧毁、销毁</td>
+</tr>
+<tr>
+<td>destructor</td>
+<td>解构式 析构函数</td>
+</tr>
+<tr>
+<td>device</td>
+<td>装置、设备 设备</td>
+</tr>
+<tr>
+<td>dialog</td>
+<td>对话窗、对话盒 对话框</td>
+</tr>
+<tr>
+<td>directive</td>
+<td>指令（例：using directive） (编译)指示符</td>
+</tr>
+<tr>
+<td>directory</td>
+<td>目录 目录</td>
+</tr>
+<tr>
+<td>disk</td>
+<td>碟 盘</td>
+</tr>
+<tr>
+<td>dispatch</td>
+<td>分派 分派</td>
+</tr>
+<tr>
+<td>distributed computing</td>
+<td>分布式计算 (分布式电算) 分布式计算;分散式计算 (分散式电算)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-14"><a href="#list-14" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>document</td>
+<td>文件 文档</td>
+</tr>
+<tr>
+<td>dot operator</td>
+<td>dot（句点）运算子 . (圆)点操作符</td>
+</tr>
+<tr>
+<td>driver</td>
+<td>驱动程式 驱动（程序）</td>
+</tr>
+<tr>
+<td>dynamic binding</td>
+<td>动态系结 动态绑定</td>
+</tr>
+<tr>
+<td>efficiency</td>
+<td>效率 效率</td>
+</tr>
+<tr>
+<td>efficient</td>
+<td>高效 高效</td>
+</tr>
+<tr>
+<td>entity</td>
+<td>物体 实体、物体</td>
+</tr>
+<tr>
+<td>encapsulation</td>
+<td>封装 封装</td>
+</tr>
+<tr>
+<td>enclosing</td>
+<td>class 外围类别（与巢状类别 nested ( 嵌套的) class 有关）外围类</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-15"><a href="#list-15" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enum (enumeration )</td>
+<td>列举（一种 C++ 资料型别） 枚举</td>
+</tr>
+<tr>
+<td>enumerators</td>
+<td>列举元（enum 型别中的成员） 枚举成员、枚举器</td>
+</tr>
+<tr>
+<td>equal</td>
+<td>相等 相等</td>
+</tr>
+<tr>
+<td>equality</td>
+<td>相等性 相等性</td>
+</tr>
+<tr>
+<td>equality operator</td>
+<td>equality（等号）运算子 == 等号操作符</td>
+</tr>
+<tr>
+<td>equivalence</td>
+<td>等价性、等同性、对等性 等价性</td>
+</tr>
+<tr>
+<td>equivalent</td>
+<td>等价、等同、对等 等价</td>
+</tr>
+<tr>
+<td>escape</td>
+<td>code 转义码 转义码</td>
+</tr>
+<tr>
+<td>evaluate</td>
+<td>评估、求值、核定 评估</td>
+</tr>
+<tr>
+<td>event</td>
+<td>事件 事件</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-16"><a href="#list-16" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>event driven</td>
+<td>事件驱动的 事件驱动的</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>异常情况 异常</td>
+</tr>
+<tr>
+<td>exception declaration</td>
+<td>异常宣告（ref. C++ Primer 3/e, 11.3） 异常声明</td>
+</tr>
+<tr>
+<td>exception handling</td>
+<td>异常处理、异常处理机制 异常处理、异常处理机制</td>
+</tr>
+<tr>
+<td>exception specification</td>
+<td>异常规格（ref. C++ Primer 3/e, 11.4） 异常规范</td>
+</tr>
+<tr>
+<td>exit</td>
+<td>退离（指离开函式时的那一个执行点） 退出</td>
+</tr>
+<tr>
+<td>explicit</td>
+<td>明白的、明显的、显式 显式</td>
+</tr>
+<tr>
+<td>export</td>
+<td>汇出 引出、导出</td>
+</tr>
+<tr>
+<td>expression</td>
+<td>运算式、算式 表达式</td>
+</tr>
+<tr>
+<td>facility</td>
+<td>设施、设备 设施、设备</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-17"><a href="#list-17" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>feature</td>
+<td>特性</td>
+</tr>
+<tr>
+<td>field</td>
+<td>栏位,资料栏（Java） 字段, 值域（Java）</td>
+</tr>
+<tr>
+<td>file</td>
+<td>档案 文件</td>
+</tr>
+<tr>
+<td>firmware</td>
+<td>韧体 固件</td>
+</tr>
+<tr>
+<td>flag</td>
+<td>旗标 标记</td>
+</tr>
+<tr>
+<td>flash memory</td>
+<td>快闪记忆体 闪存</td>
+</tr>
+<tr>
+<td>flexibility</td>
+<td>弹性 灵活性</td>
+</tr>
+<tr>
+<td>flush</td>
+<td>清理、扫清 刷新</td>
+</tr>
+<tr>
+<td>font</td>
+<td>字型 字体</td>
+</tr>
+<tr>
+<td>form</td>
+<td>表单（programming 用语） 窗体</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-18"><a href="#list-18" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>formal parameter</td>
+<td>形式叁数 形式叁数</td>
+</tr>
+<tr>
+<td>forward declaration</td>
+<td>前置宣告 前置声明</td>
+</tr>
+<tr>
+<td>forwarding</td>
+<td>转呼叫,转发 转发</td>
+</tr>
+<tr>
+<td>forwarding function</td>
+<td>转呼叫函式,转发函式 转发函数</td>
+</tr>
+<tr>
+<td>fractal</td>
+<td>碎形 分形</td>
+</tr>
+<tr>
+<td>framework</td>
+<td>框架 框架</td>
+</tr>
+<tr>
+<td>full specialization</td>
+<td>全特化（ref. partial  specialization）</td>
+</tr>
+<tr>
+<td>function</td>
+<td>函式、函数 函数</td>
+</tr>
+<tr>
+<td>function call operator</td>
+<td>同 call operator</td>
+</tr>
+<tr>
+<td>function object</td>
+<td>函式物件（ref. C++ Primer 3/e, 12.3） 函数对象</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-19"><a href="#list-19" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function overloaded resolution</td>
+<td>函式多载决议程序 函数重载解决（方案）</td>
+</tr>
+<tr>
+<td>functionality</td>
+<td>功能、机能 功能</td>
+</tr>
+<tr>
+<td>function template</td>
+<td>函式模板、函式范本 函数模板</td>
+</tr>
+<tr>
+<td>functor</td>
+<td>仿函式 仿函式、函子</td>
+</tr>
+<tr>
+<td>game</td>
+<td>游戏 游戏</td>
+</tr>
+<tr>
+<td>generate</td>
+<td>生成</td>
+</tr>
+<tr>
+<td>generic</td>
+<td>泛型、一般化的 一般化的、通用的、泛化</td>
+</tr>
+<tr>
+<td>generic algorithm</td>
+<td>泛型演算法 通用算法</td>
+</tr>
+<tr>
+<td>getter</td>
+<td>(相对於 setter) 取值函式</td>
+</tr>
+<tr>
+<td>global</td>
+<td>全域的（对应於 local） 全局的</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-20"><a href="#list-20" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>global object</td>
+<td>全域物件 全局对象</td>
+</tr>
+<tr>
+<td>global scope resolution operator</td>
+<td>全域生存空间（范围决议）运算子 :: 全局范围解析操作符</td>
+</tr>
+<tr>
+<td>group</td>
+<td>群组</td>
+</tr>
+<tr>
+<td>group box</td>
+<td>群组方块 分组框</td>
+</tr>
+<tr>
+<td>guard clause</td>
+<td>卫述句 (Refactoring, p250) 卫语句</td>
+</tr>
+<tr>
+<td>GUI（Graphical User Interface）</td>
+<td>图形介面 图形界面</td>
+</tr>
+<tr>
+<td>hand shaking</td>
+<td>握手协商</td>
+</tr>
+<tr>
+<td>handle</td>
+<td>识别码、识别号、号码牌、权柄 句柄</td>
+</tr>
+<tr>
+<td>handler</td>
+<td>处理常式 处理函数</td>
+</tr>
+<tr>
+<td>hard－coded</td>
+<td>编死的 硬编码的</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-21"><a href="#list-21" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hard－copy</td>
+<td>硬拷图 屏幕截图</td>
+</tr>
+<tr>
+<td>hard disk</td>
+<td>硬碟 硬盘</td>
+</tr>
+<tr>
+<td>hardware</td>
+<td>硬体 硬件</td>
+</tr>
+<tr>
+<td>hash table</td>
+<td>杂凑表 哈希表、散列表</td>
+</tr>
+<tr>
+<td>header file</td>
+<td>表头档、标头档 头文件</td>
+</tr>
+<tr>
+<td>heap</td>
+<td>堆积 堆</td>
+</tr>
+<tr>
+<td>hierarchy</td>
+<td>阶层体系 层次结构（体系）</td>
+</tr>
+<tr>
+<td>hook</td>
+<td>挂钩 钩子</td>
+</tr>
+<tr>
+<td>hyperlink</td>
+<td>超链结 超链接</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-22"><a href="#list-22" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>icon</td>
+<td>图示、图标 图标</td>
+</tr>
+<tr>
+<td>IDE（integrated development environment）</td>
+<td>整合开发环境 集成开发环境</td>
+</tr>
+<tr>
+<td>identifier</td>
+<td>识别字、识别符号 标识符</td>
+</tr>
+<tr>
+<td>if and only if</td>
+<td>若且唯若 当且仅当</td>
+</tr>
+<tr>
+<td>Illinois</td>
+<td>伊利诺 伊利诺斯</td>
+</tr>
+<tr>
+<td>image</td>
+<td>影像 图象</td>
+</tr>
+<tr>
+<td>immediate base</td>
+<td>直接的（紧临的）上层 base class。 直接上层基类</td>
+</tr>
+<tr>
+<td>immediate derived</td>
+<td>直接的（紧临的）下层 derived class。 直接下层派生类</td>
+</tr>
+<tr>
+<td>immutability</td>
+<td>不变性</td>
+</tr>
+<tr>
+<td>immutable</td>
+<td>不可变（的）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-23"><a href="#list-23" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>implement</td>
+<td>实作、实现 实现</td>
+</tr>
+<tr>
+<td>implementation</td>
+<td>实作品、实作体、实作码、实件 实现</td>
+</tr>
+<tr>
+<td>implicit</td>
+<td>隐喻的、暗自的、隐式 隐式</td>
+</tr>
+<tr>
+<td>import</td>
+<td>汇入 导入</td>
+</tr>
+<tr>
+<td>increment operator</td>
+<td>累加运算子 ++ 增加操作符</td>
+</tr>
+<tr>
+<td>infinite loop</td>
+<td>无穷回圈 无限循环</td>
+</tr>
+<tr>
+<td>infinite recursive</td>
+<td>无穷递回 无限递归</td>
+</tr>
+<tr>
+<td>information</td>
+<td>资讯 信息</td>
+</tr>
+<tr>
+<td>infrastructure</td>
+<td>公共基础建设</td>
+</tr>
+<tr>
+<td>inheritance</td>
+<td>继承、继承机制 继承、继承机制</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-24"><a href="#list-24" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inline</td>
+<td>行内 内联</td>
+</tr>
+<tr>
+<td>inline expansion</td>
+<td>行内展开 内联展开</td>
+</tr>
+<tr>
+<td>initialization</td>
+<td>初始化（动作） 初始化</td>
+</tr>
+<tr>
+<td>initialization list</td>
+<td>初值列 初始值列表</td>
+</tr>
+<tr>
+<td>initialize</td>
+<td>初始化 初始化</td>
+</tr>
+<tr>
+<td>inner class</td>
+<td>内隐类别 内嵌类</td>
+</tr>
+<tr>
+<td>instance</td>
+<td>实体 实例（根据某种表述而实际产生的「东西」）</td>
+</tr>
+<tr>
+<td>instantiated</td>
+<td>具现化、实体化（常应用於 template） 实例化</td>
+</tr>
+<tr>
+<td>instantiation</td>
+<td>具现体、具现化实体（常应用於 template） 实例</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-25"><a href="#list-25" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>integer</td>
+<td>(integral ) 整数（的） 整型（的）</td>
+</tr>
+<tr>
+<td>integrate</td>
+<td>整合 集成</td>
+</tr>
+<tr>
+<td>interacts</td>
+<td>交谈、互动 交互</td>
+</tr>
+<tr>
+<td>interface</td>
+<td>介面 接口</td>
+</tr>
+<tr>
+<td>for GUI （Graphical  User Interface）</td>
+<td>介面 界面</td>
+</tr>
+<tr>
+<td>interpreter</td>
+<td>直译器 解释器</td>
+</tr>
+<tr>
+<td>invariants</td>
+<td>恒常性,约束条件 约束条件</td>
+</tr>
+<tr>
+<td>invoke</td>
+<td>唤起 调用</td>
+</tr>
+<tr>
+<td>iterate</td>
+<td>迭代（回圈一个轮回一个轮回地进行） 迭代</td>
+</tr>
+<tr>
+<td>iterative</td>
+<td>反覆的，迭代的</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-26"><a href="#list-26" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iterator</td>
+<td>迭代器（一种泛型指标） 迭代器</td>
+</tr>
+<tr>
+<td>iteration</td>
+<td>迭代（回圈每次轮回称为一个 iteration） 迭代</td>
+</tr>
+<tr>
+<td>item</td>
+<td>项目、条款 项、条款、项目</td>
+</tr>
+<tr>
+<td>laser</td>
+<td>雷射 激光</td>
+</tr>
+<tr>
+<td>level</td>
+<td>阶 层 (级) 例 high level 高阶 高层</td>
+</tr>
+<tr>
+<td>library</td>
+<td>程式库、函式库 库、函数库</td>
+</tr>
+<tr>
+<td>lifetime</td>
+<td>生命期、寿命 生命期、寿命</td>
+</tr>
+<tr>
+<td>link</td>
+<td>联结、连结 连接,链接</td>
+</tr>
+<tr>
+<td>linker</td>
+<td>联结器、连结器 连接器</td>
+</tr>
+<tr>
+<td>literal constant</td>
+<td>字面常数（例 3.14 或 “hi” 这等常数值） 字面常数</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-27"><a href="#list-27" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>list</td>
+<td>串列（linked－list） 列表、表、链表</td>
+</tr>
+<tr>
+<td>list box</td>
+<td>列表方块、列表框 列表框</td>
+</tr>
+<tr>
+<td>load</td>
+<td>载入 装载</td>
+</tr>
+<tr>
+<td>loader</td>
+<td>载入器 装载器、载入器</td>
+</tr>
+<tr>
+<td>local</td>
+<td>区域的（对应於 global） 局部的</td>
+</tr>
+<tr>
+<td>local object</td>
+<td>区域物件 局部对象</td>
+</tr>
+<tr>
+<td>lock</td>
+<td>机锁</td>
+</tr>
+<tr>
+<td>loop</td>
+<td>回圈 循环</td>
+</tr>
+<tr>
+<td>lvalue</td>
+<td>左值 左值</td>
+</tr>
+<tr>
+<td>macro</td>
+<td>巨集 宏</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-28"><a href="#list-28" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>magic</td>
+<td>number 魔术数字 魔法数</td>
+</tr>
+<tr>
+<td>maintain</td>
+<td>维护 维护</td>
+</tr>
+<tr>
+<td>manipulator</td>
+<td>操纵器（iostream 预先定义的一种东西） 操纵器</td>
+</tr>
+<tr>
+<td>marshal</td>
+<td>编列 列集;叁考 demarshal</td>
+</tr>
+<tr>
+<td>mechanism</td>
+<td>机制 机制</td>
+</tr>
+<tr>
+<td>member</td>
+<td>成员 成员</td>
+</tr>
+<tr>
+<td>member access operator</td>
+<td>成员取用运算子（有 dot 和 arrow 两种） 成员存取操作符</td>
+</tr>
+<tr>
+<td>member function</td>
+<td>成员函式 成员函数</td>
+</tr>
+<tr>
+<td>member initialization</td>
+<td>list 成员初值列 成员初始值列表</td>
+</tr>
+<tr>
+<td>memberwise</td>
+<td>以 member 为单元┅、members 逐一┅ 以成员为单位</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="list-29"><a href="#list-29" class="headerlink" title="list"></a>list</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>word</th>
+<th>trans</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>memberwise</td>
+<td>copy 以 members 为单元逐一复制</td>
+</tr>
+<tr>
+<td>memory</td>
+<td>记忆体 内存</td>
+</tr>
+<tr>
+<td>menu</td>
+<td>表单、选单 菜单</td>
+</tr>
+<tr>
+<td>message</td>
+<td>讯息 消息</td>
+</tr>
+<tr>
+<td>message based</td>
+<td>以讯息为基础的 基於消息的</td>
+</tr>
+<tr>
+<td>message loop</td>
+<td>讯息回圈 消息环</td>
+</tr>
+<tr>
+<td>method</td>
+<td>(java) 方法、行为、函式 方法</td>
+</tr>
+<tr>
+<td>meta－</td>
+<td>超－ 元-;例 meta－programming 超编程 元编程</td>
+</tr>
+<tr>
+<td>micro</td>
+<td>微</td>
+</tr>
+<tr>
+<td>middleware</td>
+<td>中介层 中间件</td>
+</tr>
+<tr>
+<td>modeling</td>
+<td>模塑</td>
+</tr>
+<tr>
+<td>modeling language</td>
+<td>塑模语言，建模语言</td>
+</tr>
+<tr>
+<td>modem</td>
+<td>数据机 调制解调器</td>
+</tr>
+<tr>
+<td>module</td>
+<td>模组 模块</td>
+</tr>
+<tr>
+<td>modifier</td>
+<td>饰词 修饰符</td>
+</tr>
+<tr>
+<td>most derived</td>
+<td>class 最末层衍生类别 最底层的派生类</td>
+</tr>
+<tr>
+<td>mouse</td>
+<td>滑鼠 鼠标</td>
+</tr>
+<tr>
+<td>mutable</td>
+<td>可变的 可变的</td>
+</tr>
+<tr>
+<td>multi－tasking</td>
+<td>多工 多任务</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>命名空间 名字空间、命名空间</td>
+</tr>
+<tr>
+<td>native</td>
+<td>原生的 本地的、固有的</td>
+</tr>
+<tr>
+<td>nested</td>
+<td>class 巢状类别 嵌套类</td>
+</tr>
+<tr>
+<td>network</td>
+<td>网路 网络</td>
+</tr>
+<tr>
+<td>network card</td>
+<td>网路卡 网卡</td>
+</tr>
+<tr>
+<td>object</td>
+<td>物件 对象</td>
+</tr>
+<tr>
+<td>object based</td>
+<td>以物件为基础的 基於对象的</td>
+</tr>
+<tr>
+<td>object file</td>
+<td>目的档 目标文件</td>
+</tr>
+<tr>
+<td>object model</td>
+<td>物件模型 对象模型</td>
+</tr>
+<tr>
+<td>object oriented</td>
+<td>物件导向的 面向对象的</td>
+</tr>
+<tr>
+<td>online</td>
+<td>线上 在线</td>
+</tr>
+<tr>
+<td>opaque</td>
+<td>不透明的</td>
+</tr>
+<tr>
+<td>operand</td>
+<td>运算元 操作数</td>
+</tr>
+<tr>
+<td>operating system</td>
+<td>(OS) 作业系统 操作系统</td>
+</tr>
+<tr>
+<td>operation</td>
+<td>操作、操作行为 操作</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>运算子 操作符、运算符</td>
+</tr>
+<tr>
+<td>option</td>
+<td>选项，可选方案 选项</td>
+</tr>
+<tr>
+<td>ordinary</td>
+<td>常规的 常规的</td>
+</tr>
+<tr>
+<td>overflow</td>
+<td>上限溢位（相对於 underflow） 溢出（underflow:下溢）</td>
+</tr>
+<tr>
+<td>overhead</td>
+<td>额外负担、额外开销 额外开销</td>
+</tr>
+<tr>
+<td>overload</td>
+<td>多载化、多载化、重载 重载</td>
+</tr>
+<tr>
+<td>overloaded</td>
+<td>function 多载化函式 重载的函数</td>
+</tr>
+<tr>
+<td>overloaded operator</td>
+<td>多载化运算子 被重载的操作符</td>
+</tr>
+<tr>
+<td>overloaded set</td>
+<td>多载集合 重载集合</td>
+</tr>
+<tr>
+<td>override</td>
+<td>改写、覆写 重载、改写、重新定义（在 derived class 中重新定义虚拟函式)</td>
+</tr>
+<tr>
+<td>package</td>
+<td>套件 包</td>
+</tr>
+<tr>
+<td>pair</td>
+<td>对组</td>
+</tr>
+<tr>
+<td>palette</td>
+<td>调色盘、组件盘、工具箱</td>
+</tr>
+<tr>
+<td>pane</td>
+<td>窗格 窗格（有时为嵌板之意，例 Java Content Pane）</td>
+</tr>
+<tr>
+<td>parallel</td>
+<td>平行 并行</td>
+</tr>
+<tr>
+<td>parameter</td>
+<td>叁数（函式叁数列上的变数） 叁数、形式叁数、形叁</td>
+</tr>
+<tr>
+<td>parameter list</td>
+<td>叁数列 叁数列表</td>
+</tr>
+<tr>
+<td>parent</td>
+<td>class 父类别（或称 base class） 父类</td>
+</tr>
+<tr>
+<td>parentheses</td>
+<td>小括弧、小括号 圆括弧、圆括号</td>
+</tr>
+<tr>
+<td>parse</td>
+<td>解析 解析</td>
+</tr>
+<tr>
+<td>part</td>
+<td>零件 部件</td>
+</tr>
+<tr>
+<td>partial specialization</td>
+<td>偏特化（ref. C++ Primer 3/e, 16.10） 局部特化（ref. full specialization）</td>
+</tr>
+<tr>
+<td>pass by address</td>
+<td>传址（函式引数的传递方式）（非正式用语）传地址</td>
+</tr>
+<tr>
+<td>pass by reference</td>
+<td>传址（函式引数的一种传递方式） 传地址, 按引用传递</td>
+</tr>
+<tr>
+<td>pass by value</td>
+<td>传值（函式引数的一种传递方式） 按值传递</td>
+</tr>
+<tr>
+<td>pattern</td>
+<td>范式、样式 模式</td>
+</tr>
+<tr>
+<td>performance</td>
+<td>效率、性能兼而有之 性能</td>
+</tr>
+<tr>
+<td>persistence</td>
+<td>永续性 持久性</td>
+</tr>
+<tr>
+<td>pixel</td>
+<td>图素、像素 像素</td>
+</tr>
+<tr>
+<td>placement delete ref</td>
+<td>C++ Primer 3/e, 15.8.2</td>
+</tr>
+<tr>
+<td>placement new ref</td>
+<td>C++ Primer 3/e, 15.8.2</td>
+</tr>
+<tr>
+<td>platform</td>
+<td>平台 平台</td>
+</tr>
+<tr>
+<td>pointer</td>
+<td>指标 指针;址位器（和址叁器 reference 形成对映，满好）</td>
+</tr>
+<tr>
+<td>poll</td>
+<td>轮询 轮询</td>
+</tr>
+<tr>
+<td>polymorphism</td>
+<td>多型 多态</td>
+</tr>
+<tr>
+<td>pop up</td>
+<td>冒起式、弹出式 弹出式</td>
+</tr>
+<tr>
+<td>port</td>
+<td>埠 端口</td>
+</tr>
+<tr>
+<td>postfix</td>
+<td>後置式、後序式 後置式</td>
+</tr>
+<tr>
+<td>precedence</td>
+<td>优先序（通常用於运算子的优先执行次序）</td>
+</tr>
+<tr>
+<td>prefix</td>
+<td>前置式、前序式 前置式</td>
+</tr>
+<tr>
+<td>preprocessor</td>
+<td>前处理器 预处理器</td>
+</tr>
+<tr>
+<td>prime</td>
+<td>质数 素数</td>
+</tr>
+<tr>
+<td>primitive</td>
+<td>type 基本型别 (不同於 base class,基础类别)</td>
+</tr>
+<tr>
+<td>print</td>
+<td>列印 打印</td>
+</tr>
+<tr>
+<td>printer</td>
+<td>印表机 打印机</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>优先权 (通常用於执行绪获得 CPU 时间的优先次序）</td>
+</tr>
+<tr>
+<td>procedure</td>
+<td>程序 过程</td>
+</tr>
+<tr>
+<td>procedural</td>
+<td>程序性的、程序式的 过程式的、过程化的</td>
+</tr>
+<tr>
+<td>process</td>
+<td>行程 进程</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>评测 评测</td>
+</tr>
+<tr>
+<td>profiler</td>
+<td>效能（效率）评测器 效能（性能）评测器</td>
+</tr>
+<tr>
+<td>programmer</td>
+<td>程式员 程序员</td>
+</tr>
+<tr>
+<td>programming</td>
+<td>编程、程式设计、程式化 编程</td>
+</tr>
+<tr>
+<td>progress</td>
+<td>进度指示器 进度指示器</td>
+</tr>
+<tr>
+<td>project</td>
+<td>专案 项目、工程</td>
+</tr>
+<tr>
+<td>property</td>
+<td>属性</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>协定 协议</td>
+</tr>
+<tr>
+<td>pseudo code</td>
+<td>假码、虚拟码、伪码 伪码</td>
+</tr>
+<tr>
+<td>qualified</td>
+<td>经过资格修饰（例如加上 scope 运算子） 限定</td>
+</tr>
+<tr>
+<td>qualifier</td>
+<td>资格修饰词、饰词 限定修饰词</td>
+</tr>
+<tr>
+<td>quality</td>
+<td>品质 质量</td>
+</tr>
+<tr>
+<td>queue</td>
+<td>伫列 队列</td>
+</tr>
+<tr>
+<td>radian</td>
+<td>径度 弧度</td>
+</tr>
+<tr>
+<td>radio</td>
+<td>button 圆钮 单选按钮</td>
+</tr>
+<tr>
+<td>raise</td>
+<td>引发（常用来表示发出一个 exception） 引起、引发</td>
+</tr>
+<tr>
+<td>random number</td>
+<td>随机数、乱数 随机数</td>
+</tr>
+<tr>
+<td>range</td>
+<td>范围、区间（用於 STL 时） 范围、区间</td>
+</tr>
+<tr>
+<td>rank</td>
+<td>等级、分等（ref. C++Primer 3/e 9,15章） 等级</td>
+</tr>
+<tr>
+<td>raw</td>
+<td>生鲜的、未经处理的 未经处理的</td>
+</tr>
+<tr>
+<td>record</td>
+<td>记录 记录</td>
+</tr>
+<tr>
+<td>recordset</td>
+<td>记录集 记录集</td>
+</tr>
+<tr>
+<td>recursive</td>
+<td>递回 递归</td>
+</tr>
+<tr>
+<td>re－direction</td>
+<td>重导向 重定向</td>
+</tr>
+<tr>
+<td>refactoring</td>
+<td>重构、重整 重构</td>
+</tr>
+<tr>
+<td>refer</td>
+<td>取用 叁考</td>
+</tr>
+<tr>
+<td>refer to</td>
+<td>指向、指涉、指代</td>
+</tr>
+<tr>
+<td>reference</td>
+<td>（C++ 中类似指标的东西，相当於 “化身”） 引用、叁考 址叁器, see pointer</td>
+</tr>
+<tr>
+<td>register</td>
+<td>暂存器 寄存器</td>
+</tr>
+<tr>
+<td>reflection</td>
+<td>反射 反射、映像</td>
+</tr>
+<tr>
+<td>relational</td>
+<td>database 关联式资料库 关系数据库</td>
+</tr>
+<tr>
+<td>represent</td>
+<td>表述，表现 表述，表现</td>
+</tr>
+<tr>
+<td>resolve</td>
+<td>决议（为算式中的符号名称寻找 解析 对应之宣告式的过程）</td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>决议程序、决议过程 解析过程</td>
+</tr>
+<tr>
+<td>resolution</td>
+<td>解析度 分辨率</td>
+</tr>
+<tr>
+<td>restriction</td>
+<td>局限</td>
+</tr>
+<tr>
+<td>return</td>
+<td>传回、回返 返回</td>
+</tr>
+<tr>
+<td>return type</td>
+<td>回返型别 返回类型</td>
+</tr>
+<tr>
+<td>return value</td>
+<td>回返值 返回值</td>
+</tr>
+<tr>
+<td>robust</td>
+<td>强固、稳健 健壮</td>
+</tr>
+<tr>
+<td>robustness</td>
+<td>强固性、稳健性 健壮性</td>
+</tr>
+<tr>
+<td>routine</td>
+<td>常式 例程</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>执行期 运行期、运行时</td>
+</tr>
+<tr>
+<td>common language runtime (CLR)</td>
+<td>译为通用语言运行时</td>
+</tr>
+<tr>
+<td>rvalue</td>
+<td>右值 右值</td>
+</tr>
+<tr>
+<td>save</td>
+<td>储存 存储</td>
+</tr>
+<tr>
+<td>schedule</td>
+<td>排程 调度</td>
+</tr>
+<tr>
+<td>scheduler</td>
+<td>排程器 调度程序</td>
+</tr>
+<tr>
+<td>scheme</td>
+<td>结构纲目、组织纲目</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>bar 卷轴 滚动条</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>生存空间、生存范围、范畴、作用域 生存空间</td>
+</tr>
+<tr>
+<td>scope operator</td>
+<td>生存空间（范围决议）运算子 :: 生存空间操作符</td>
+</tr>
+<tr>
+<td>scope resolution operator</td>
+<td>生存空间决议运算子 生存空间解析操作符（与scope operator同）</td>
+</tr>
+<tr>
+<td>screen</td>
+<td>萤幕 屏幕</td>
+</tr>
+<tr>
+<td>search</td>
+<td>搜寻 查找</td>
+</tr>
+<tr>
+<td>semantics</td>
+<td>语意 语义</td>
+</tr>
+<tr>
+<td>sequential container</td>
+<td>序列式容器 顺序式容器（对应於 associative container）</td>
+</tr>
+<tr>
+<td>server</td>
+<td>伺服器、伺服端 服务器、服务端</td>
+</tr>
+<tr>
+<td>serial</td>
+<td>串行</td>
+</tr>
+<tr>
+<td>serialization</td>
+<td>次第读写,序列化 序列化 (serialize) </td>
+</tr>
+<tr>
+<td>setter</td>
+<td>(相对於 getter) 设值函式</td>
+</tr>
+<tr>
+<td>signal</td>
+<td>信号</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>标记式、签名式、署名式 签名</td>
+</tr>
+<tr>
+<td>slider</td>
+<td>滚轴 滑块</td>
+</tr>
+<tr>
+<td>slot</td>
+<td>条孔、槽 槽</td>
+</tr>
+<tr>
+<td>smart pointer</td>
+<td>灵巧指标、精灵指标 智能指针</td>
+</tr>
+<tr>
+<td>snapshot</td>
+<td>萤幕快照（图） 屏幕截图</td>
+</tr>
+<tr>
+<td>specialization</td>
+<td>特殊化、特殊化定义、特殊化宣告 特化</td>
+</tr>
+<tr>
+<td>specification</td>
+<td>规格 规格、规范</td>
+</tr>
+<tr>
+<td>splitter</td>
+<td>分裂视窗 切分窗口</td>
+</tr>
+<tr>
+<td>software</td>
+<td>软体 软件</td>
+</tr>
+<tr>
+<td>solution</td>
+<td>解法,解决方案 方案</td>
+</tr>
+<tr>
+<td>source</td>
+<td>原始码 源码、源代码</td>
+</tr>
+<tr>
+<td>stack</td>
+<td>(d)堆叠 栈</td>
+</tr>
+<tr>
+<td>stack unwinding</td>
+<td>堆叠辗转开解（此词用於 exception 主题） 栈辗转开解 *</td>
+</tr>
+<tr>
+<td>standard</td>
+<td>标准程式库</td>
+</tr>
+<tr>
+<td>standard template library</td>
+<td>标准模板程式库</td>
+</tr>
+<tr>
+<td>statement</td>
+<td>述句 语句、声明</td>
+</tr>
+<tr>
+<td>status bar</td>
+<td>状态列、状态栏 状态条</td>
+</tr>
+<tr>
+<td>STL</td>
+<td>见 standard template library</td>
+</tr>
+<tr>
+<td>stream</td>
+<td>资料流、串流 流</td>
+</tr>
+<tr>
+<td>string</td>
+<td>字串 字符串</td>
+</tr>
+<tr>
+<td>subroutine</td>
+<td>子程序调用序列</td>
+</tr>
+<tr>
+<td>subscript operator 下标运算子</td>
+<td>下标操作符</td>
+</tr>
+<tr>
+<td>subtype</td>
+<td>子型别 子类型</td>
+</tr>
+<tr>
+<td>support</td>
+<td>支援 支持</td>
+</tr>
+<tr>
+<td>suspend</td>
+<td>虚悬 挂起</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td>符号 记号</td>
+</tr>
+<tr>
+<td>syntax</td>
+<td>语法 语法</td>
+</tr>
+<tr>
+<td>tag</td>
+<td>标签 标记 索引标签,页签</td>
+</tr>
+<tr>
+<td>target</td>
+<td>标的（例 target pointer ：标的指标） 目标</td>
+</tr>
+<tr>
+<td>task switch</td>
+<td>工作切换 任务切换</td>
+</tr>
+<tr>
+<td>template</td>
+<td>模板、范本 模板</td>
+</tr>
+<tr>
+<td>template argument deduction</td>
+<td>模板引数推导 模板叁数推导</td>
+</tr>
+<tr>
+<td>template explicit specialization</td>
+<td>模板显式特化（版本） 模板显式特化</td>
+</tr>
+<tr>
+<td>template parameter</td>
+<td>模板叁数 模板叁数</td>
+</tr>
+<tr>
+<td>temporary object</td>
+<td>暂时物件 临时对象</td>
+</tr>
+<tr>
+<td>text</td>
+<td>文字 文本</td>
+</tr>
+<tr>
+<td>text file</td>
+<td>程式本文档（放置程式原始码的档案） 文本文件</td>
+</tr>
+<tr>
+<td>thread</td>
+<td>执行绪 线程</td>
+</tr>
+<tr>
+<td>thread safe</td>
+<td>多绪安全 多线程安全</td>
+</tr>
+<tr>
+<td>throw</td>
+<td>丢掷（常指发出一个 exception） 丢掷、引发</td>
+</tr>
+<tr>
+<td>token</td>
+<td>语汇单元 符号、标记</td>
+</tr>
+<tr>
+<td>transaction</td>
+<td>交易 事务</td>
+</tr>
+<tr>
+<td>transparent(ly)</td>
+<td>透通的(地)</td>
+</tr>
+<tr>
+<td>traverse</td>
+<td>巡访（来回走动） 遍历</td>
+</tr>
+<tr>
+<td>trigger</td>
+<td>触发 触发</td>
+</tr>
+<tr>
+<td>type</td>
+<td>型别 类型</td>
+</tr>
+<tr>
+<td>UML unified modeling language</td>
+<td>统一建模语言</td>
+</tr>
+<tr>
+<td>unary function</td>
+<td>一元函式 单叁函数</td>
+</tr>
+<tr>
+<td>unary operator</td>
+<td>一元运算子 一元操作符</td>
+</tr>
+<tr>
+<td>underflow</td>
+<td>下限溢位（相对於 overflow） 下溢</td>
+</tr>
+<tr>
+<td>unchecked</td>
+<td>exception 不可控异常(Java)</td>
+</tr>
+<tr>
+<td>unqualified</td>
+<td>未经资格修饰（而直接取用）unwinding  ref . stack  unwinding </td>
+</tr>
+<tr>
+<td>user</td>
+<td>使用者、用户 用户</td>
+</tr>
+<tr>
+<td>user interface</td>
+<td>使用者介面、用户介面、人机介面 用户界面</td>
+</tr>
+<tr>
+<td>variable</td>
+<td>变数（相对於常数 const） 变量</td>
+</tr>
+<tr>
+<td>vector</td>
+<td>向量（一种容器，有点类似 array） 向量、矢量</td>
+</tr>
+<tr>
+<td>viable</td>
+<td>可实行的、可行的 可行的</td>
+</tr>
+<tr>
+<td>viable function</td>
+<td>可行函式 可行函数（从 candidate functions 中挑出者）</td>
+</tr>
+<tr>
+<td>video</td>
+<td>视讯 视频</td>
+</tr>
+<tr>
+<td>view</td>
+<td>(1) 视图(document/view) 文档/视图</td>
+</tr>
+<tr>
+<td>view</td>
+<td>(2) 映件</td>
+</tr>
+<tr>
+<td>virtual</td>
+<td>function 虚拟函式 虚函数</td>
+</tr>
+<tr>
+<td>virtual machine</td>
+<td>虚拟机器 虚拟机</td>
+</tr>
+<tr>
+<td>virtual memory</td>
+<td>虚拟记忆体 虚内存, 虚存</td>
+</tr>
+<tr>
+<td>volatile</td>
+<td>易挥发的、易变的</td>
+</tr>
+<tr>
+<td>vowel</td>
+<td>母音 元音字母</td>
+</tr>
+<tr>
+<td>window</td>
+<td>视窗 窗口</td>
+</tr>
+<tr>
+<td>window function</td>
+<td>视窗函式 窗口函数</td>
+</tr>
+<tr>
+<td>window procedure</td>
+<td>视窗函式 窗口过程</td>
+</tr>
+<tr>
+<td>word</td>
+<td>字 单词</td>
+</tr>
+<tr>
+<td>word processor</td>
+<td>文书处理器 字处理器</td>
+</tr>
+<tr>
+<td>wrapper</td>
+<td>外覆、外包 包装absence 缺席</td>
+</tr>
+<tr>
+<td>access</td>
+<td>访问存取通路进入</td>
+</tr>
+<tr>
+<td>achieve</td>
+<td>实现完成</td>
+</tr>
+<tr>
+<td>acquire</td>
+<td>获得</td>
+</tr>
+<tr>
+<td>adjacency list method</td>
+<td>邻接表表示法</td>
+</tr>
+<tr>
+<td>adjacency matrix  method</td>
+<td>邻接矩阵表示法</td>
+</tr>
+<tr>
+<td>algorithm</td>
+<td>算法</td>
+</tr>
+<tr>
+<td>allocate</td>
+<td>留下分配</td>
+</tr>
+<tr>
+<td>analog</td>
+<td>推论</td>
+</tr>
+<tr>
+<td>append</td>
+<td>添加</td>
+</tr>
+<tr>
+<td>archive</td>
+<td>档案归档</td>
+</tr>
+<tr>
+<td>array</td>
+<td>数组</td>
+</tr>
+<tr>
+<td>assign</td>
+<td>分配</td>
+</tr>
+<tr>
+<td>assume</td>
+<td>假设</td>
+</tr>
+<tr>
+<td>assurance</td>
+<td>确信信任</td>
+</tr>
+<tr>
+<td>ATM(asynchronous transfer mode )</td>
+<td>异步传输模式</td>
+</tr>
+<tr>
+<td>b.. real programs kernels</td>
+<td>实程序核心程序</td>
+</tr>
+<tr>
+<td>b.. toy benchmark synthetic benchmark</td>
+<td>简单基准程序复合基准程序</td>
+</tr>
+<tr>
+<td>balance</td>
+<td>平衡</td>
+</tr>
+<tr>
+<td>bandwidth</td>
+<td>带宽</td>
+</tr>
+<tr>
+<td>batch</td>
+<td>一批一组</td>
+</tr>
+<tr>
+<td>benchmark</td>
+<td>基准测试程序</td>
+</tr>
+<tr>
+<td>best-fit algorithm</td>
+<td>最佳适应算法</td>
+</tr>
+<tr>
+<td>BFS(breadth first search )</td>
+<td>广度优先搜索法</td>
+</tr>
+<tr>
+<td>binary</td>
+<td>二进制</td>
+</tr>
+<tr>
+<td>binary relation</td>
+<td>二元关系</td>
+</tr>
+<tr>
+<td>binary tree</td>
+<td>二叉树</td>
+</tr>
+<tr>
+<td>bit series</td>
+<td>比特序列</td>
+</tr>
+<tr>
+<td>black-box white-box</td>
+<td>黑盒白盒</td>
+</tr>
+<tr>
+<td>block miss</td>
+<td>块失效</td>
+</tr>
+<tr>
+<td>blocked</td>
+<td>阻塞(等待状态也称阻塞或封锁状态)</td>
+</tr>
+<tr>
+<td>boundary</td>
+<td>界线分界</td>
+</tr>
+<tr>
+<td>bridge</td>
+<td>网桥</td>
+</tr>
+<tr>
+<td>bubble  sort</td>
+<td>冒泡排序</td>
+</tr>
+<tr>
+<td>calculation</td>
+<td>计算</td>
+</tr>
+<tr>
+<td>candidate key</td>
+<td>候选键(辅键)</td>
+</tr>
+<tr>
+<td>capability</td>
+<td>能力才能</td>
+</tr>
+<tr>
+<td>capacity</td>
+<td>容量</td>
+</tr>
+<tr>
+<td>cartesian product</td>
+<td>笛卡尔积</td>
+</tr>
+<tr>
+<td>CASE(com.. aided sof.. engineering)</td>
+<td>计算机辅助软件工程</td>
+</tr>
+<tr>
+<td>CCP(communication control processor )</td>
+<td>通信控制处理机</td>
+</tr>
+<tr>
+<td>cell</td>
+<td>信元</td>
+</tr>
+<tr>
+<td>characteristic</td>
+<td>特征特性</td>
+</tr>
+<tr>
+<td>circuit switching</td>
+<td>线路交换</td>
+</tr>
+<tr>
+<td>circular wait</td>
+<td>循环等待</td>
+</tr>
+<tr>
+<td>CISC(complex instruction set computer )</td>
+<td>复杂指令集计算机</td>
+</tr>
+<tr>
+<td>class</td>
+<td>类</td>
+</tr>
+<tr>
+<td>Client/Server</td>
+<td>客户机/服务器</td>
+</tr>
+<tr>
+<td>clock cycle clock rate</td>
+<td>时钟周期时钟频率</td>
+</tr>
+<tr>
+<td>coaxial cable</td>
+<td>同轴电缆</td>
+</tr>
+<tr>
+<td>cohesion coupling</td>
+<td>内聚耦合</td>
+</tr>
+<tr>
+<td>coincidental logical procedural functional</td>
+<td>偶然内聚逻辑内聚过程内聚功能内聚</td>
+</tr>
+<tr>
+<td>combination</td>
+<td>联合配合</td>
+</tr>
+<tr>
+<td>common</td>
+<td>公用的共同的</td>
+</tr>
+<tr>
+<td>communication</td>
+<td>通信</td>
+</tr>
+<tr>
+<td>complement number</td>
+<td>补码</td>
+</tr>
+<tr>
+<td>component</td>
+<td>成分</td>
+</tr>
+<tr>
+<td>concept</td>
+<td>概念观念</td>
+</tr>
+<tr>
+<td>condition</td>
+<td>情况状况</td>
+</tr>
+<tr>
+<td>conform</td>
+<td>符合</td>
+</tr>
+<tr>
+<td>consist</td>
+<td>组成存在</td>
+</tr>
+<tr>
+<td>constrain</td>
+<td>约束</td>
+</tr>
+<tr>
+<td>contain</td>
+<td>包含</td>
+</tr>
+<tr>
+<td>correspond</td>
+<td>(corresponding) 相符合(相应的一致的)</td>
+</tr>
+<tr>
+<td>CPETT</td>
+<td>计算机性能评价工具与技术</td>
+</tr>
+<tr>
+<td>CPI</td>
+<td>每条指令需要的周期数</td>
+</tr>
+<tr>
+<td>CSMA/CD</td>
+<td>带冲突检测的载波监听多路访问</td>
+</tr>
+<tr>
+<td>cursor</td>
+<td>游标</td>
+</tr>
+<tr>
+<td>cyclic redundancy check</td>
+<td>循环冗余校验</td>
+</tr>
+<tr>
+<td>database: integrity consistency restory</td>
+<td>完整性一致性可恢复性</td>
+</tr>
+<tr>
+<td>database: security efficiency</td>
+<td>数据库设计的目标: 安全性效率</td>
+</tr>
+<tr>
+<td>deadlock: mutual exclusion</td>
+<td>死锁条件: 互斥</td>
+</tr>
+<tr>
+<td>deadlock: circular wait no preemption</td>
+<td>死锁条件: 循环等待狗熊先权</td>
+</tr>
+<tr>
+<td>decimal</td>
+<td>十进位的</td>
+</tr>
+<tr>
+<td>decision</td>
+<td>决定判断</td>
+</tr>
+<tr>
+<td>decomposition</td>
+<td>双重的混合的</td>
+</tr>
+<tr>
+<td>decrease</td>
+<td>减少</td>
+</tr>
+<tr>
+<td>definition</td>
+<td>定义</td>
+</tr>
+<tr>
+<td>definition phase</td>
+<td>定义阶段</td>
+</tr>
+<tr>
+<td>demonstrate</td>
+<td>证明</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>determine |限定<br>development phase |开发阶段<br>DFS(depth first search)|深度优先搜索法<br>diagram| 图表<br>Difference Manchester| 差分曼彻斯特<br>directed graph undirected graph |有向图无向图<br>distinguish| 辩认区别<br>distributed| system 分布式系统<br>divide division| 分开除除法<br>divide union intersection difference |除并交差<br>document| 文件文档<br>DQDB(distributed queue dual bus) |分布队列双总线<br>draw |绘制<br>dual |二元的双的<br>dynamic design process| 动态定义过程<br>element |元素要素<br>elevator (scan) algorithm |电梯算法又称扫描算法<br>encapsulation inheritance|封装(压缩) 继承(遗传)<br>encode |译成密码<br>entity | 实体<br>entity integrity  rule | 实体完整性规则<br>equal |相等的<br>equation | 方程式等式<br>estimate | 估计判断<br>Ethernet | 以太网<br>evolution | 发展演化<br>exceed |超过<br>exchange sort |交换排序<br>exclusive locks |排它锁(简记为X 锁)<br>execute | 实现执行<br>exhibit |表现展示陈列<br>existence |存在发生<br>expertise |专门技术<br>external (internal ) fragmentation | 外(内)碎片<br>fault page fault |中断过错页中断<br>FDDI(fiber distributed data interface) |光纤分布式数据接口<br>FDM(frequency division multiplexing |频分多路复用<br>fiber optic cable | 光缆<br>FIFO replacement policy | 先进先出替换算法<br>figure |数字图形<br>final |最后的最终的<br>first normal form |第一范式<br>floppy | 活动盘片(软盘)<br>foreign key domain tuple | 外来键值域元组<br>form |形状形式<br>formula |公式表达式<br>foundation |基础根据基金<br>frame page frame |帧结构页结构<br>frequency |频率<br>FTP(File Transfer Protocol ) |文件传送服务<br>function |函数<br>functionally dependent |函数依赖<br>gateway | 网间连接器<br>gather | 聚集采集推测<br>general |-purose registers 通用寄存器<br>generate | 产生<br>grade |等级标准<br>graph  (graphic )| 图<br>Gopher |将用户的请求自动转换成<br>guarantee |保证确定<br>hash table hash function collision | 哈希表哈希函数(散列函数) 碰撞<br>HDLC（High-level Data Link Control）|面向比特型数据链路层协议<br>hit rate |命中率<br>host | 主计算机<br>host language statement |主语言语句<br>hypertext | 超级文本<br>illustrate | 举例说明<br>independent | 独立的<br>index |索引<br>indirect |间接的<br>influence |有影响的<br>initially | 最初开头<br>insertion sort | 插入排序<br>instruction format | 指令格式<br>instruction set |指令集<br>interface |接口分界面连接体<br>internal | 内部的内在的<br>interrupt |中断<br>IPC （Information Processing Center）|工业过程控制<br>ISAM VSAM |索引顺序存取方法虚拟存储存取方法<br>ISAM: （Index Sequential  Access Mode ）|<br>VSAM: (Virtual Storage Access Method)|<br>join natural join semi join |连接自然连接半连接<br>judgment |判断<br>kernel executive supervisor user |核心执行管理用户<br>kernels | 核心程序<br>key comparison | 键(码)值比较<br>LAN(local area network) |局域网<br>load |负载载入<br>logical functional |逻辑内聚功能内聚<br>longitudinal |水平的<br>loop | 圈环状<br>maintain |维护保养供给<br>maintanence phase | 维护(保养)阶段<br>MAN(metropolitan area network) |城域网<br>Manchester |曼彻斯特<br>map |地图映射图<br>matrix |矩阵点阵<br>memory reference | 存储器参量<br>message switching |报文交换<br>method |方法技巧<br>MFLOP(million floating point operate)|ps 每秒百万次浮点运算<br>minimum | 最小的<br>MIPS(millions of instructions per second) |每秒百万条指令<br>module |单位基准<br>monitor (model benchmark physcal) method |监视(模型基准物理)法<br>multilevel data flow chart | 分层数据流图<br>multiple | 复合的多样的<br>multiple-term formula | 多项式<br>multiplexing | 多路复用技术<br>multiplication |乘法<br>mutual exclusion | 互相排斥<br>non-key attributes | 非码属性<br>null |零空<br>Nyquist |奈奎斯特<br>object oriented | 对象趋向的使适应的<br>object oriented analysis | 面向对象的分析<br>object oriented databases |面向对象数据库</p>
+<p>object oriented implementation |面向对象的实现<br>obtain | 获得<br>occupy | 占有居住于<br>occurrence | 事件<br>odd | 奇数的<br>even|偶数<br>one-dimensional array |一维数组<br>OODB(object oriented data base) |面向对象数据库<br>OOM(object oriented method) |面向对象的方法<br>oom: information object message class |信息对象消息类<br>oom: instance method message passing | 实例方法消息传递<br>open system |开放系统<br>operand | 操作数<br>optimized | 尽量充分利用<br>optional |任选的非强制的<br>organize |组织<br>overflow | 溢出<br>overlapping register windows |重叠寄存器窗口<br>packet switching | 报文分组交换<br>page fault | 页面失效<br>page replacement algorithm | 页替换算法<br>paged segments| 段页式管理<br>PCB(process control block) |进程控制块<br>peer entites |对等实体<br>perform |表演执行<br>period| 时期周期<br>permit | 许可准许<br>phase |阶段局面状态<br>physical data link network layer |物理层数据链路层网络层<br>pipeline | 管道<br>platter track cluster |面磁道簇<br>predicate |谓语<br>preemption | 有优先权的<br>prefix (Polish form) |前缀(波兰表达式)<br>preorder | inorder postorder 前序中序后序<br>presentation application layer |表示层应用层<br>primary key attributes |主码属性<br>principle | 原则方法<br>procedural coincidental |过程内聚偶然内聚<br>process | 过程加工处理<br>proficient |精通<br>program debugging | 程序排错<br>projection  selection join | 投影选择连接<br>proposition |主张建议陈述<br>protocal |协议<br>prototype | 原型样板<br>prototyping method (model ) |原型化周期(模型)<br>pseudo-code |伪码(又称程序设计语言PDL)<br>punctuation | 标点<br>purpose |目的意图<br>quality |质量品质<br>queue |队列<br>ready blocked running |就绪阻塞(等待) 运行<br>real page number |实页数<br>real programs |实程序<br>redirected |重定向<br>redundency  |冗余<br>reference integrity rule |引用完整性规则<br>referred to as |把…..当作<br>regard |关于<br>register (registry ) |寄存器登记注册挂号<br>regularly |定期的常规的<br>relation | 关系<br>relay | 中继<br>reliability | 可信赖的<br>repeater | 中继器<br>replacement | 替换<br>represent |代表象征<br>request indication response confirm |请求指示响应确认<br>resource |资源<br>response |回答响应<br>RISC(reduced instruction set computer) |精简指令集计算机<br>robustness | 健壮性<br>router | 路由器<br>scheme | 计划图表<br>sector head cylinder | 扇区磁头柱面<br>selection sort | 选择排序<br>semaphores| 信号<br>sequence | 序列顺序<br>Shanon |香农<br>share locks |共享锁(简记为S 锁)<br>short path critical path |最短路径关键路径<br>signal | 信号<br>signal-to-noise ratio | 信噪比B/N<br>similar | 相似的<br>SISD SIMD MISD MIMD |<em> 指令流</em> 数据流<br>SMDS |交换多兆位数据服务<br>software development phase | 软件开发阶段<br>software engineering | 软件工程<br>software portability | 软件可移植性<br>software requirements specification | 软件需求说明书<br>solve | 解决<br>sort | 种类方式分类排序<br>spanning tree |跨越树(生成树)<br>specify | 指定说明<br>speedup | 加速比<br>SSTF(shortest-seek-time-first) |最短寻道时间优先(磁盘调度算法)<br>stack strategy non-stack strategy |堆栈型非堆栈型<br>starvation | 饥饿匮乏<br>statement |陈述<br>storage | 贮藏库<br>store procedures | 存储过程<br>strategy | 战略兵法计划<br>strict | 严密的<br>styles | 文体风格<br>subgroup | 循环的<br>subset| 子集子设备<br>superclass subclass abstract class |超类子类抽象类<br>suppose | 假定<br>symbolic | 象征的符号的<br>synthetic benchmark |复合基准程序<br>system testing |系统测试<br>Systolic | 脉动阵列<br>table |表表格桌子<br>TDM(time division multiplexing)| 时分多路复用<br>technology | 工艺技术<br>terminal | 终端<br>testing phase | 测试阶段<br>theta select project theta join | θ选择投影θ连接<br>time complexity | 时间复杂度<br>timestamping |时标技术<br>Token Bus |令牌总线<br>Token Ring | 令牌环<br>toy benchmark | 简单基准程序<br>transaction | 事务记录<br>transmit  |传送<br>transport layer session layer |传输层会话层<br>traversal method |遍历方法<br>triggers store procedures| 触发器存储过程<br>ORACLE |系统<br>underflow |下溢<br>unique | 唯一的<br>unit system acceptance testing |单元测试系统测试确认测试<br>universe | 宇宙全世界<br>update | 更新<br>value  |值<br>variable | 变量<br>vertical | 垂直的<br>vertice edge | 顶点(结点) 边<br>via | 经过<br>virtual memory system |虚拟存储系统<br>WAN(wide area network) |广域网<br>waterfall model | 瀑布模型<br>white noise | 白噪声<br>write-back(copy-back) |写回法<br>write-through(store-through) | 写直达法<br>WWW(world wide web) |万维网</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%8B%B1%E8%AF%AD1500%E8%AF%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -10144,279 +13369,10 @@ var _hmt = _hmt || [];
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/Dart%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/Dart%E8%AF%AD%E8%A8%80%E5%BC%80%E5%8F%91/" class="post-title-link" itemprop="url">Dart语言开发</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-13 18:30:00 / 修改时间：18:36:42" itemprop="dateCreated datePublished" datetime="2020-05-13T18:30:00+08:00">2020-05-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BB%88%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">终端开发</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>Dart是谷歌开发的计算机编程语言，后来被Ecma (ECMA-408)认定为标准  。它被用于web、服务器、移动应用和物联网等领域的开发。它是宽松开源许可证（修改的BSD证书）下的开源软件。</p>
-<p>Dart是面向对象的、类定义的、单继承的语言。它的语法类似C语言，可以转译为JavaScript，支持接口(interfaces)、混入(mixins)、抽象类(abstract classes)、具体化泛型(reified generics)、可选类型(optional typing)和sound type system 。</p>
-</blockquote>
-<p><a href="https://dart.dev/guides" target="_blank" rel="noopener">Dart docs</a></p>
-<h2 id="Install-Dart-for-mac"><a href="#Install-Dart-for-mac" class="headerlink" title="Install Dart for mac"></a>Install Dart for mac</h2><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">brew</span> <span class="string">tap dart-lang/dart</span></span><br><span class="line"><span class="attr">brew</span> <span class="string">install dart</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dart</span> <span class="string">--version</span></span><br><span class="line"><span class="comment"># google 源，需要翻墙</span></span><br></pre></td></tr></table></figure>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line"># Hello World</span><br><span class="line"># 入口函数</span><br><span class="line">main()&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"hello world"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># <span class="keyword">const</span> (常量定义)</span><br><span class="line"><span class="keyword">const</span> 编译时常量</span><br><span class="line"><span class="keyword">final</span> 运行时常量</span><br><span class="line"></span><br><span class="line"># Variables( 强类型，类型推断 <span class="keyword">var</span> )</span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'Voyager I'</span>;</span><br><span class="line"><span class="keyword">var</span> year = <span class="number">1977</span>;</span><br><span class="line"><span class="keyword">var</span> antennaDiameter = <span class="number">3.7</span>;</span><br><span class="line"><span class="keyword">var</span> flybyObjects = [<span class="string">'Jupiter'</span>, <span class="string">'Saturn'</span>, <span class="string">'Uranus'</span>, <span class="string">'Neptune'</span>];</span><br><span class="line"><span class="keyword">var</span> image = &#123;</span><br><span class="line">  <span class="string">'tags'</span>: [<span class="string">'saturn'</span>],</span><br><span class="line">  <span class="string">'url'</span>: <span class="string">'//path/to/saturn.jpg'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"># 字符串</span><br><span class="line"><span class="string">',",'</span><span class="string">''</span></span><br><span class="line"></span><br><span class="line"># 字符串拼接</span><br><span class="line">+,<span class="string">""</span></span><br><span class="line"></span><br><span class="line"># 类型 </span><br><span class="line"><span class="built_in">int</span></span><br><span class="line"><span class="built_in">double</span></span><br><span class="line">string</span><br><span class="line"><span class="built_in">bool</span></span><br><span class="line"><span class="keyword">null</span></span><br><span class="line"></span><br><span class="line"># <span class="keyword">is</span> 类型判断</span><br><span class="line">variable <span class="keyword">is</span> <span class="built_in">String</span> # 判断类型</span><br><span class="line"></span><br><span class="line"># 类型定义 <span class="keyword">typedef</span></span><br><span class="line"></span><br><span class="line"># container</span><br><span class="line">list [] # 列表</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">List</span>()</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">List</span>&lt;Sting&gt;() #类型限定</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span> &#123;&#125; # 集合</span><br><span class="line">map &#123;&#125; # 映射</span><br><span class="line"></span><br><span class="line"># 方法遍历</span><br><span class="line">s1.forEach((v) &#123;</span><br><span class="line">    <span class="built_in">print</span>(v);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"># 运算符</span><br><span class="line">~/ 取整</span><br><span class="line">?? 为空赋值</span><br><span class="line">toString() </span><br><span class="line">parse() 类型转换</span><br><span class="line"></span><br><span class="line"># Control flow statements</span><br><span class="line"><span class="keyword">if</span></span><br><span class="line"><span class="keyword">for</span></span><br><span class="line"><span class="keyword">for</span> <span class="keyword">in</span></span><br><span class="line"><span class="keyword">while</span></span><br><span class="line"></span><br><span class="line"># Functions</span><br><span class="line"># 支持匿名函数 fn=()&#123;&#125;</span><br><span class="line"></span><br><span class="line"># 箭头函数（函数体一行）</span><br><span class="line">flybyObjects.where((name) =&gt; name.contains(<span class="string">'turn'</span>)).forEach(<span class="built_in">print</span>);</span><br><span class="line"></span><br><span class="line"># 自运行函数</span><br><span class="line">(()&#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">"hello"</span>);</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"># 支持闭包</span><br><span class="line">a 会变成全局变量</span><br><span class="line">func1() &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line">  <span class="built_in">int</span> innerfunc() &#123;</span><br><span class="line">    <span class="keyword">return</span> a++;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> innerfunc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 可选参数 [<span class="built_in">int</span> age] &#123;&#125;</span><br><span class="line"># 默认参数 [<span class="built_in">int</span> age=<span class="number">30</span>]</span><br><span class="line"># 命名参数 age:<span class="number">30</span></span><br><span class="line"># 参数</span><br><span class="line"></span><br><span class="line"># Comments</span><br><span class="line"><span class="comment">//,/**/</span></span><br><span class="line"></span><br><span class="line"># Imports</span><br><span class="line"><span class="comment">// Importing core libraries</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'dart:math'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Importing libraries from external packages</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'package:test/test.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Importing files</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'path/to/my_other_file.dart'</span>;</span><br><span class="line"></span><br><span class="line"># Classes</span><br><span class="line"># <span class="built_in">Object</span> 根类</span><br><span class="line"># 类中获取属性 $name $&#123;<span class="keyword">this</span>.age&#125;</span><br><span class="line"># 命名构造函数 类名.name()&#123;&#125;</span><br><span class="line"># 保护属性 _name</span><br><span class="line"># 动态属性 <span class="keyword">set</span> <span class="keyword">get</span></span><br><span class="line"># 静态属性，静态方法 <span class="keyword">static</span>，对象方法中可以调用静态属性</span><br><span class="line">?   条件运算符 p?.<span class="keyword">new</span>()</span><br><span class="line"><span class="keyword">as</span>  类型转换 (p1 <span class="keyword">as</span> Person)</span><br><span class="line"><span class="keyword">is</span>  类型判断</span><br><span class="line">..  级联操作</span><br><span class="line">p1..name=<span class="string">"value"</span></span><br><span class="line">  ..age=<span class="number">30</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 定义类</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spacecraft</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 属性</span></span><br><span class="line">  <span class="built_in">String</span> name;</span><br><span class="line">  <span class="built_in">DateTime</span> launchDate;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造函数</span></span><br><span class="line">  Spacecraft(<span class="keyword">this</span>.name, <span class="keyword">this</span>.launchDate) &#123;</span><br><span class="line">    <span class="comment">// Initialization code goes here.</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 析构</span></span><br><span class="line">  Spacecraft.unlaunched(<span class="built_in">String</span> name) : <span class="keyword">this</span>(name, <span class="keyword">null</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 动态属性</span></span><br><span class="line">  <span class="built_in">int</span> <span class="keyword">get</span> launchYear =&gt;</span><br><span class="line">      launchDate?.year; <span class="comment">// read-only non-final property</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 方法</span></span><br><span class="line">  <span class="keyword">void</span> describe() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'Spacecraft: <span class="subst">$name</span>'</span>);</span><br><span class="line">    <span class="keyword">if</span> (launchDate != <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="built_in">int</span> years =</span><br><span class="line">          <span class="built_in">DateTime</span>.now().difference(launchDate).inDays ~/</span><br><span class="line">              <span class="number">365</span>;</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">'Launched: <span class="subst">$launchYear</span> (<span class="subst">$years</span> years ago)'</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">'Unlaunched'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># use Class</span><br><span class="line"><span class="keyword">var</span> voyager = Spacecraft(<span class="string">'Voyager I'</span>, <span class="built_in">DateTime</span>(<span class="number">1977</span>, <span class="number">9</span>, <span class="number">5</span>));</span><br><span class="line">voyager.describe();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> voyager3 = Spacecraft.unlaunched(<span class="string">'Voyager III'</span>);</span><br><span class="line">voyager3.describe();</span><br><span class="line"></span><br><span class="line"># Inheritance(单继承)</span><br><span class="line"># 抽象类不能直接被实例化</span><br><span class="line"># 继承 <span class="keyword">extends</span> (单继承) <span class="keyword">super</span>() 调用父类，<span class="meta">@override</span> 覆写</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Orbiter</span> <span class="keyword">extends</span> <span class="title">Spacecraft</span> </span>&#123;</span><br><span class="line">  <span class="built_in">num</span> altitude;</span><br><span class="line">  Orbiter(<span class="built_in">String</span> name, <span class="built_in">DateTime</span> launchDate, <span class="keyword">this</span>.altitude)</span><br><span class="line">      : <span class="keyword">super</span>(name, launchDate);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Mixins （代码复用）</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Piloted</span> </span>&#123;</span><br><span class="line">  <span class="built_in">int</span> astronauts = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">void</span> describeCrew() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'Number of astronauts: <span class="subst">$astronauts</span>'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PilotedCraft</span> <span class="keyword">extends</span> <span class="title">Spacecraft</span> <span class="title">with</span> <span class="title">Piloted</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ···</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Interfaces and <span class="keyword">abstract</span> classes(没有接口关键字，实现抽象类)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MockSpaceship</span> <span class="keyword">implements</span> <span class="title">Spacecraft</span> </span>&#123;</span><br><span class="line">  <span class="comment">// ···</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Describable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">void</span> describe();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> describeWithEmphasis() &#123;</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'========='</span>);</span><br><span class="line">    describe();</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">'========='</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># 泛型 T 传入类型 getData&lt;<span class="built_in">String</span>&gt;(<span class="string">"abc"</span>)</span><br><span class="line"></span><br><span class="line"># Async（异步支持，显示声明）</span><br><span class="line"><span class="keyword">async</span> 定义为异步方法</span><br><span class="line"><span class="keyword">await</span> 等待异步完成</span><br><span class="line"></span><br><span class="line"># Exceptions</span><br><span class="line"><span class="keyword">throw</span></span><br><span class="line"><span class="keyword">try</span>&#123;&#125;<span class="keyword">on</span>&#123;&#125;<span class="keyword">finally</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"># 系统库，第三方库（pub），自定义库</span><br><span class="line"><span class="keyword">import</span> <span class="string">'dart:math'</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">'lib/Http.dart'</span>；</span><br><span class="line"></span><br><span class="line">https:<span class="comment">//pub.dev/packages</span></span><br><span class="line">pubspec.yaml</span><br><span class="line">pub <span class="keyword">get</span></span><br><span class="line"></span><br><span class="line"># 包重命名</span><br><span class="line"><span class="keyword">import</span> <span class="string">"lib/http.dart"</span> <span class="keyword">as</span> httpv1</span><br><span class="line"></span><br><span class="line"># 包的过滤</span><br><span class="line"><span class="keyword">import</span> <span class="string">"lib/http.dart"</span> <span class="keyword">show</span> httpv1;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"lib/http.dart"</span> <span class="keyword">hide</span> httpv1;</span><br><span class="line"></span><br><span class="line"># 库分片 <span class="keyword">part</span></span><br><span class="line"># 库到处 <span class="keyword">export</span></span><br><span class="line"># 库延迟加载 deffered</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/golang-mod%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/golang-mod%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">golang-mod使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-05-13 18:26:48 / 修改时间：18:27:21" itemprop="dateCreated datePublished" datetime="2020-05-13T18:26:48+08:00">2020-05-13</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>527</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Goloang"><a href="#Goloang" class="headerlink" title="Goloang"></a>Goloang</h2><blockquote>
-<p><a href="https://golang.org/" target="_blank" rel="noopener"> Golang </a></p>
-<p><a href="https://www.runoob.com/go/go-tutorial.html" target="_blank" rel="noopener"> 菜鸟教程 golang  </a></p>
-</blockquote>
-<h2 id="go-mod-使用"><a href="#go-mod-使用" class="headerlink" title="go mod 使用"></a>go mod 使用</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">go.mod 提供了module, require、<span class="keyword">replace</span>和<span class="keyword">exclude</span> 四个命令</span><br><span class="line"><span class="keyword">module</span> 语句指定包的名字（路径）</span><br><span class="line">require 语句指定的依赖项模块</span><br><span class="line"><span class="keyword">replace</span> 语句可以替换依赖项模块</span><br><span class="line"><span class="keyword">exclude</span> 语句可以忽略依赖项模块</span><br><span class="line"></span><br><span class="line"><span class="keyword">go</span> <span class="keyword">list</span> -m -u <span class="keyword">all</span> 来检查可以升级的<span class="keyword">package</span></span><br><span class="line"><span class="keyword">go</span> <span class="keyword">get</span> -u need-<span class="keyword">upgrade</span>-<span class="keyword">package</span> 升级后会将新的依赖版本更新到</span><br><span class="line"><span class="keyword">go</span> <span class="keyword">get</span> <span class="keyword">package</span>@<span class="keyword">version</span> 将会升级到指定的版本号<span class="keyword">version</span></span><br><span class="line"><span class="keyword">go</span> <span class="keyword">get</span> -u 升级所有依赖</span><br></pre></td></tr></table></figure>
-<p>创建一个 go mod 项目<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mkdir project</span><br><span class="line"></span><br><span class="line">export GOPATH=<span class="string">"/Users/alert/go"</span></span><br><span class="line">export GOROOT=<span class="string">"/usr/local/go"</span></span><br><span class="line">export GO111MODULE=on</span><br><span class="line">export GOPROXY=https:<span class="comment">//goproxy.io</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">go</span> env GOPATH</span><br><span class="line"><span class="keyword">go</span> mod init</span><br><span class="line">touch main.<span class="keyword">go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译运行，不生成可执行文件</span></span><br><span class="line"><span class="keyword">go</span> run main.<span class="keyword">go</span></span><br><span class="line"><span class="comment">// 项目编译</span></span><br><span class="line"><span class="keyword">go</span> build</span><br><span class="line"><span class="comment">// 编译后安装到 bin 目录</span></span><br><span class="line"><span class="keyword">go</span> install</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/05/kubernetes%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/05/kubernetes%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">kubernetes安装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-05-13 18:08:48" itemprop="dateCreated datePublished" datetime="2020-05-13T18:08:48+08:00">2020-05-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-12 23:21:17" itemprop="dateModified" datetime="2020-06-12T23:21:17+08:00">2020-06-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%AE%B9%E5%99%A8%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">容器技术</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>13k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>11 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          Here's something encrypted, password is required to continue reading.
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/05/kubernetes%E5%AE%89%E8%A3%85/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -10482,7 +13438,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -10532,13 +13488,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">360k</span>
+    <span title="站点总字数">364k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:27</span>
+    <span title="站点阅读时长">5:31</span>
 </div>
 
         
