@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Elasticsearch使用http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;2017&#x2F;08&#x2F;elasticsearch.htmlhttps:&#x2F;&#x2F;es.xiaoleilu.com&#x2F; 三、新建和删除 Index新建 Index，可以直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫weather的 Index。 $ curl -X PUT ‘localhost:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch管理">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/Elasticsearch%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="Elasticsearch使用http:&#x2F;&#x2F;www.ruanyifeng.com&#x2F;blog&#x2F;2017&#x2F;08&#x2F;elasticsearch.htmlhttps:&#x2F;&#x2F;es.xiaoleilu.com&#x2F; 三、新建和删除 Index新建 Index，可以直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫weather的 Index。 $ curl -X PUT ‘localhost:">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-17T02:48:47.000Z">
+<meta property="article:modified_time" content="2020-07-11T03:03:25.204Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/Elasticsearch%E7%AE%A1%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Elasticsearch管理 | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Elasticsearch%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Elasticsearch管理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-17 10:48:47" itemprop="dateCreated datePublished" datetime="2020-06-17T10:48:47+08:00">2020-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:03:25" itemprop="dateModified" datetime="2020-07-11T11:03:25+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BIGDATA/" itemprop="url" rel="index"><span itemprop="name">BIGDATA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Elasticsearch使用<br><a href="http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2017/08/elasticsearch.html</a><br><a href="https://es.xiaoleilu.com/" target="_blank" rel="noopener">https://es.xiaoleilu.com/</a></p>
+<p>三、新建和删除 Index<br>新建 Index，可以直接向 Elastic 服务器发出 PUT 请求。下面的例子是新建一个名叫weather的 Index。</p>
+<p>$ curl -X PUT ‘localhost:9200/weather’<br>服务器返回一个 JSON 对象，里面的acknowledged字段表示操作成功。</p>
+<p>{<br>  “acknowledged”:true,<br>  “shards_acknowledged”:true<br>}<br>然后，我们发出 DELETE 请求，删除这个 Index。</p>
+<p>$ curl -X DELETE ‘localhost:9200/weather’<br>四、中文分词设置<br>首先，安装中文分词插件。这里使用的是 ik，也可以考虑其他插件（比如 smartcn）。</p>
+<p>$ ./bin/elasticsearch-plugin install <a href="https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v5.5.1/elasticsearch-analysis-ik-5.5.1.zip" target="_blank" rel="noopener">https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v5.5.1/elasticsearch-analysis-ik-5.5.1.zip</a><br>上面代码安装的是5.5.1版的插件，与 Elastic 5.5.1 配合使用。</p>
+<p>接着，重新启动 Elastic，就会自动加载这个新安装的插件。</p>
+<p>然后，新建一个 Index，指定需要分词的字段。这一步根据数据结构而异，下面的命令只针对本文。基本上，凡是需要搜索的中文字段，都要单独设置一下。</p>
+<p>$ curl -X PUT ‘localhost:9200/accounts’ -d ‘<br>{<br>  “mappings”: {<br>    “person”: {<br>      “properties”: {<br>        “user”: {<br>          “type”: “text”,<br>          “analyzer”: “ik_max_word”,<br>          “search_analyzer”: “ik_max_word”<br>        },<br>        “title”: {<br>          “type”: “text”,<br>          “analyzer”: “ik_max_word”,<br>          “search_analyzer”: “ik_max_word”<br>        },<br>        “desc”: {<br>          “type”: “text”,<br>          “analyzer”: “ik_max_word”,<br>          “search_analyzer”: “ik_max_word”<br>        }<br>      }<br>    }<br>  }<br>}’<br>上面代码中，首先新建一个名称为accounts的 Index，里面有一个名称为person的 Type。person有三个字段。</p>
+<p>user<br>title<br>desc<br>这三个字段都是中文，而且类型都是文本（text），所以需要指定中文分词器，不能使用默认的英文分词器。</p>
+<p>Elastic 的分词器称为 analyzer。我们对每个字段指定分词器。</p>
+<p>“user”: {<br>  “type”: “text”,<br>  “analyzer”: “ik_max_word”,<br>  “search_analyzer”: “ik_max_word”<br>}<br>上面代码中，analyzer是字段文本的分词器，search_analyzer是搜索词的分词器。ik_max_word分词器是插件ik提供的，可以对文本进行最大数量的分词。</p>
+<p>五、数据操作<br>5.1 新增记录<br>向指定的 /Index/Type 发送 PUT 请求，就可以在 Index 里面新增一条记录。比如，向/accounts/person发送请求，就可以新增一条人员记录。</p>
+<p>$ curl -X PUT ‘localhost:9200/accounts/person/1’ -d ‘<br>{<br>  “user”: “张三”,<br>  “title”: “工程师”,<br>  “desc”: “数据库管理”<br>}’<br>服务器返回的 JSON 对象，会给出 Index、Type、Id、Version 等信息。</p>
+<p>{<br>  “_index”:”accounts”,<br>  “_type”:”person”,<br>  “_id”:”1”,<br>  “_version”:1,<br>  “result”:”created”,<br>  “_shards”:{“total”:2,”successful”:1,”failed”:0},<br>  “created”:true<br>}<br>如果你仔细看，会发现请求路径是/accounts/person/1，最后的1是该条记录的 Id。它不一定是数字，任意字符串（比如abc）都可以。</p>
+<p>新增记录的时候，也可以不指定 Id，这时要改成 POST 请求。</p>
+<p>$ curl -X POST ‘localhost:9200/accounts/person’ -d ‘<br>{<br>  “user”: “李四”,<br>  “title”: “工程师”,<br>  “desc”: “系统管理”<br>}’<br>上面代码中，向/accounts/person发出一个 POST 请求，添加一个记录。这时，服务器返回的 JSON 对象里面，_id字段就是一个随机字符串。</p>
+<p>{<br>  “_index”:”accounts”,<br>  “_type”:”person”,<br>  “_id”:”AV3qGfrC6jMbsbXb6k1p”,<br>  “_version”:1,<br>  “result”:”created”,<br>  “_shards”:{“total”:2,”successful”:1,”failed”:0},<br>  “created”:true<br>}<br>注意，如果没有先创建 Index（这个例子是accounts），直接执行上面的命令，Elastic 也不会报错，而是直接生成指定的 Index。所以，打字的时候要小心，不要写错 Index 的名称。</p>
+<p>5.2 查看记录<br>向/Index/Type/Id发出 GET 请求，就可以查看这条记录。</p>
+<p>$ curl ‘localhost:9200/accounts/person/1?pretty=true’<br>上面代码请求查看/accounts/person/1这条记录，URL 的参数pretty=true表示以易读的格式返回。</p>
+<p>返回的数据中，found字段表示查询成功，_source字段返回原始记录。</p>
+<p>{<br>  “_index” : “accounts”,<br>  “_type” : “person”,<br>  “_id” : “1”,<br>  “_version” : 1,<br>  “found” : true,<br>  “_source” : {<br>    “user” : “张三”,<br>    “title” : “工程师”,<br>    “desc” : “数据库管理”<br>  }<br>}<br>如果 Id 不正确，就查不到数据，found字段就是false。</p>
+<p>$ curl ‘localhost:9200/weather/beijing/abc?pretty=true’</p>
+<p>{<br>  “_index” : “accounts”,<br>  “_type” : “person”,<br>  “_id” : “abc”,<br>  “found” : false<br>}<br>5.3 删除记录<br>删除记录就是发出 DELETE 请求。</p>
+<p>$ curl -X DELETE ‘localhost:9200/accounts/person/1’<br>这里先不要删除这条记录，后面还要用到。</p>
+<p>5.4 更新记录<br>更新记录就是使用 PUT 请求，重新发送一次数据。</p>
+<p>$ curl -X PUT ‘localhost:9200/accounts/person/1’ -d ‘<br>{<br>    “user” : “张三”,<br>    “title” : “工程师”,<br>    “desc” : “数据库管理，软件开发”<br>}’ </p>
+<p>{<br>  “_index”:”accounts”,<br>  “_type”:”person”,<br>  “_id”:”1”,<br>  “_version”:2,<br>  “result”:”updated”,<br>  “_shards”:{“total”:2,”successful”:1,”failed”:0},<br>  “created”:false<br>}<br>上面代码中，我们将原始数据从”数据库管理”改成”数据库管理，软件开发”。 返回结果里面，有几个字段发生了变化。</p>
+<p>“_version” : 2,<br>“result” : “updated”,<br>“created” : false<br>可以看到，记录的 Id 没变，但是版本（version）从1变成2，操作类型（result）从created变成updated，created字段变成false，因为这次不是新建记录。</p>
+<p>六、数据查询<br>6.1 返回所有记录<br>使用 GET 方法，直接请求/Index/Type/_search，就会返回所有记录。</p>
+<p>$ curl ‘localhost:9200/accounts/person/_search’</p>
+<p>{<br>  “took”:2,<br>  “timed_out”:false,<br>  “_shards”:{“total”:5,”successful”:5,”failed”:0},<br>  “hits”:{<br>    “total”:2,<br>    “max_score”:1.0,<br>    “hits”:[<br>      {<br>        “_index”:”accounts”,<br>        “_type”:”person”,<br>        “_id”:”AV3qGfrC6jMbsbXb6k1p”,<br>        “_score”:1.0,<br>        “_source”: {<br>          “user”: “李四”,<br>          “title”: “工程师”,<br>          “desc”: “系统管理”<br>        }<br>      },<br>      {<br>        “_index”:”accounts”,<br>        “_type”:”person”,<br>        “_id”:”1”,<br>        “_score”:1.0,<br>        “_source”: {<br>          “user” : “张三”,<br>          “title” : “工程师”,<br>          “desc” : “数据库管理，软件开发”<br>        }<br>      }<br>    ]<br>  }<br>}<br>上面代码中，返回结果的 took字段表示该操作的耗时（单位为毫秒），timed_out字段表示是否超时，hits字段表示命中的记录，里面子字段的含义如下。</p>
+<p>total：返回记录数，本例是2条。<br>max_score：最高的匹配程度，本例是1.0。<br>hits：返回的记录组成的数组。<br>返回的记录中，每条记录都有一个_score字段，表示匹配的程序，默认是按照这个字段降序排列。</p>
+<p>6.2 全文搜索<br>Elastic 的查询非常特别，使用自己的查询语法，要求 GET 请求带有数据体。</p>
+<p>$ curl ‘localhost:9200/accounts/person/_search’  -d ‘<br>{<br>  “query” : { “match” : { “desc” : “软件” }}<br>}’<br>上面代码使用 Match 查询，指定的匹配条件是desc字段里面包含”软件”这个词。返回结果如下。</p>
+<p>{<br>  “took”:3,<br>  “timed_out”:false,<br>  “_shards”:{“total”:5,”successful”:5,”failed”:0},<br>  “hits”:{<br>    “total”:1,<br>    “max_score”:0.28582606,<br>    “hits”:[<br>      {<br>        “_index”:”accounts”,<br>        “_type”:”person”,<br>        “_id”:”1”,<br>        “_score”:0.28582606,<br>        “_source”: {<br>          “user” : “张三”,<br>          “title” : “工程师”,<br>          “desc” : “数据库管理，软件开发”<br>        }<br>      }<br>    ]<br>  }<br>}<br>Elastic 默认一次返回10条结果，可以通过size字段改变这个设置。</p>
+<p>$ curl ‘localhost:9200/accounts/person/_search’  -d ‘<br>{<br>  “query” : { “match” : { “desc” : “管理” }},<br>  “size”: 1<br>}’<br>上面代码指定，每次只返回一条结果。</p>
+<p>还可以通过from字段，指定位移。</p>
+<p>$ curl ‘localhost:9200/accounts/person/_search’  -d ‘<br>{<br>  “query” : { “match” : { “desc” : “管理” }},<br>  “from”: 1,<br>  “size”: 1<br>}’<br>上面代码指定，从位置1开始（默认是从位置0开始），只返回一条结果。</p>
+<p>6.3 逻辑运算<br>如果有多个搜索关键字， Elastic 认为它们是or关系。</p>
+<p>$ curl ‘localhost:9200/accounts/person/_search’  -d ‘<br>{<br>  “query” : { “match” : { “desc” : “软件 系统” }}<br>}’<br>上面代码搜索的是软件 or 系统。</p>
+<p>如果要执行多个关键词的and搜索，必须使用布尔查询。</p>
+<p>$ curl ‘localhost:9200/accounts/person/_search’  -d ‘<br>{<br>  “query”: {<br>    “bool”: {<br>      “must”: [<br>        { “match”: { “desc”: “软件” } },<br>        { “match”: { “desc”: “系统” } }<br>      ]<br>    }<br>  }<br>}’</p>
+<h2 id="一旦在存储超过95％的磁盘中的节点上分配了一个或多个分片的任何索引，该索引将被强制进入只读模式"><a href="#一旦在存储超过95％的磁盘中的节点上分配了一个或多个分片的任何索引，该索引将被强制进入只读模式" class="headerlink" title="一旦在存储超过95％的磁盘中的节点上分配了一个或多个分片的任何索引，该索引将被强制进入只读模式"></a>一旦在存储超过95％的磁盘中的节点上分配了一个或多个分片的任何索引，该索引将被强制进入只读模式</h2><p>PUT _settings<br>    {<br>    “index”: {<br>    “blocks”: {<br>    “read_only_allow_delete”: “false”<br>    }<br>    }<br>    }</p>
+<p>curl -XPUT -H “Content-Type: application/json” <a href="http://localhost:9200/_all/_settings" target="_blank" rel="noopener">http://localhost:9200/_all/_settings</a> -d ‘{“index.blocks.read_only_allow_delete”: null}’</p>
+<p>建立索引</p>
+<p>PUT twitter/_doc/1<br>{<br>    “user” : “kimchy”,<br>    “post_date” : “2009-11-15T14:12:12”,<br>    “message” : “trying out Elasticsearch”<br>}</p>
+<p>curl -XPUT 127.0.0.1:9200/lcc_redis_xx -d “”</p>
+<h1 id="获取redis-数据"><a href="#获取redis-数据" class="headerlink" title="获取redis 数据"></a>获取redis 数据</h1><p>redis</p>
+<p>lcc<em>redis_bx  count(min)<br>lcc_redis</em>*</p>
+<p>100G</p>
+<p>1、创建索引：curl -XPUT <a href="http://localhost:9200/test1/es/1" target="_blank" rel="noopener">http://localhost:9200/test1/es/1</a> -d “{\”first_name\”:\”test1\”}”<br>通过文件导入：curl -XPOST 127.0.0.1:9200/bank/account/_bulk?pretty —data-binary @accounts.json</p>
+<p>curl -H ‘Content-Type: application/json’ -XPUT 119.84.8.44:60116/lcc_redis_lcfr_f/_doc/1 -d “{}”</p>
+<p>2、查询索引：curl -XPOST 127.0.0.1:9200/aaa/_search?pretty -d “{\”query\”: { \”match_all\”: {} }}”<br>　　　　　　curl -XGET 127.0.0.1:9200/aaa/_search?pretty -d “{\”query\”: { \”match_all\”: {} }}”<br>　　　　　　curl -XGET 127.0.0.1:9200/aaa/bbb/222<br>3、修改索引：curl -XPUT “<a href="http://localhost:9200/fendo/account/222" target="_blank" rel="noopener">http://localhost:9200/fendo/account/222</a>“ -d “{\”first_name\”:\”fk\”}<br>4、删除索引：curl -XDELETE <a href="http://127.0.0.1:9200/fendo/account/222" target="_blank" rel="noopener">http://127.0.0.1:9200/fendo/account/222</a><br>5、查看所有索引：curl localhost:9200/_cat/indices?v</p>
+<p>curl -H “Content-Type: application/json” -XPOST 192.168.14.173:32000/test_index_1221/test_type/5 -d ‘{‘user_name’:”xiaoming”}’</p>
+<p>分片管理</p>
+<p>GET _ilm/policy/engine-result</p>
+<p>PUT _ilm/policy/engine-result<br>{<br>  “policy”: {<br>    “phases”: {<br>      “hot”: {<br>        “actions”: {<br>          “rollover”: {<br>            “max_age”: “14d”,<br>            “max_size”: “90G”<br>          },<br>          “set_priority”: {<br>            “priority”: 100<br>          }<br>        }<br>      },<br>      “warm”: {<br>        “min_age”: “14d”,<br>        “actions”: {<br>          “forcemerge”: {<br>            “max_num_segments”: 1<br>          },<br>          “allocate”: {<br>            “number_of_replicas”: 0<br>          },<br>          “set_priority”: {<br>            “priority”: 50<br>          }<br>        }<br>      },<br>      “cold”: {<br>        “min_age”: “30d”,<br>        “actions”: {<br>          “freeze”: {}<br>        }<br>      },<br>      “delete”: {<br>        “min_age”: “210d”,<br>        “actions”: {<br>          “delete”: {}<br>        }<br>      }<br>    }<br>  }<br>}</p>
+<p>POST /engine-result/_flush</p>
+<h1 id="bin-bash"><a href="#bin-bash" class="headerlink" title="!/bin/bash"></a>!/bin/bash</h1><p>time=$(date -d ‘-3days’ +’%Y.%m.%d’)<br>curl -XDELETE -u elastic:56781234 <a href="http://localhost:9200/engine-result-${time}*" target="_blank" rel="noopener">http://localhost:9200/engine-result-${time}*</a><br>curl -XDELETE -u elastic:56781234 <a href="http://localhost:9200/ota-query-${time}*" target="_blank" rel="noopener">http://localhost:9200/ota-query-${time}*</a></p>
+<p>GET /_cat/indices/?v</p>
+<p>GET .kibana/_search<br>{<br>  “_source”: [“index-pattern.title”],<br>  “query”: {<br>    “term”: {<br>      “type”: “index-pattern”<br>    }<br>  }<br>}</p>
+<p>POST /engine-result-2019.09.09-000001/_close</p>
+<p>DELETE /engine-result-2019.09.09-000001</p>
+<p>POST /engine-result/_flush</p>
+<p>GET /engine-result/_mapping?pretty</p>
+<p>GET _ilm/policy/engine-result</p>
+<p>PUT _ilm/policy/engine-result<br>{<br>  “policy” : {<br>      “phases” : {<br>        “hot” : {<br>          “min_age” : “0ms”,<br>          “actions” : {<br>            “rollover” : {<br>              “max_size” : “10gb”,<br>              “max_age” : “1d”<br>            },<br>            “set_priority” : {<br>              “priority” : 100<br>            }<br>          }<br>        },<br>        “cold”: {<br>        “min_age”: “1d”,<br>        “actions”: {<br>          “freeze”: {}<br>        }<br>        },<br>        “delete”: {<br>        “min_age”: “1d”,<br>        “actions”: {<br>          “delete”: {}<br>        }<br>      }<br>      }<br>    }<br>}</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/Elasticsearch%E5%AE%89%E8%A3%85/" rel="prev" title="elasticsearch安装">
+      <i class="fa fa-chevron-left"></i> elasticsearch安装
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/Elasticsearch/" rel="next" title="Elasticsearch">
+      Elasticsearch <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一旦在存储超过95％的磁盘中的节点上分配了一个或多个分片的任何索引，该索引将被强制进入只读模式"><span class="nav-number">1.</span> <span class="nav-text">一旦在存储超过95％的磁盘中的节点上分配了一个或多个分片的任何索引，该索引将被强制进入只读模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取redis-数据"><span class="nav-number"></span> <span class="nav-text">获取redis 数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bin-bash"><span class="nav-number"></span> <span class="nav-text">!&#x2F;bin&#x2F;bash</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7:54</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

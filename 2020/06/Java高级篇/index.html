@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="java编程 Java高级篇  SpringMVC Springboot spring java help IBM cn community Servlet Docs Java API  枚举类（enum）无法被继承无法通过new操作符创建enum的实例每个实例都是引用类型的唯一实例可以将enum类型用于switch语句因为enum是一个class，每个枚举的值都是class实例 Java 异常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java高级篇">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/Java%E9%AB%98%E7%BA%A7%E7%AF%87/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="java编程 Java高级篇  SpringMVC Springboot spring java help IBM cn community Servlet Docs Java API  枚举类（enum）无法被继承无法通过new操作符创建enum的实例每个实例都是引用类型的唯一实例可以将enum类型用于switch语句因为enum是一个class，每个枚举的值都是class实例 Java 异常">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-26T06:41:21.000Z">
+<meta property="article:modified_time" content="2020-07-11T03:32:30.156Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/Java%E9%AB%98%E7%BA%A7%E7%AF%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java高级篇 | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Java%E9%AB%98%E7%BA%A7%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java高级篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-26 14:41:21" itemprop="dateCreated datePublished" datetime="2020-06-26T14:41:21+08:00">2020-06-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:32:30" itemprop="dateModified" datetime="2020-07-11T11:32:30+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="/2020/05/Java%E7%BC%96%E7%A8%8B/" title="java编程">java编程</a></li>
+<li><a href="/2020/06/Java%E9%AB%98%E7%BA%A7%E7%AF%87/" title="Java高级篇">Java高级篇</a></li>
+<li></li>
+<li><a href="/2020/06/SpringMVC/" title="SpringMVC">SpringMVC</a></li>
+<li><a href="/2020/06/Springboot/" title="Springboot">Springboot</a></li>
+<li><a href="https://spring.io" target="_blank" rel="noopener">spring</a></li>
+<li><a href="https://docs.oracle.com/en/" target="_blank" rel="noopener">java help</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/" target="_blank" rel="noopener">IBM cn community</a></li>
+<li><a href="https://www.javatpoint.com/servlet-tutorial" target="_blank" rel="noopener">Servlet Docs</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/14/docs/api/index.html" target="_blank" rel="noopener">Java API</a></li>
+</ul>
+<h2 id="枚举类（enum）"><a href="#枚举类（enum）" class="headerlink" title="枚举类（enum）"></a>枚举类（enum）</h2><p>无法被继承<br>无法通过new操作符创建enum的实例<br>每个实例都是引用类型的唯一实例<br>可以将enum类型用于switch语句<br>因为enum是一个class，每个枚举的值都是class实例</p>
+<h2 id="Java-异常处理"><a href="#Java-异常处理" class="headerlink" title="Java 异常处理"></a>Java 异常处理</h2><h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p>java 除了基本数据类型外，其余的都是class类型。<br>JVM 启动 -&gt; Class -&gt; class -&gt; class instance<br>JVM 为每个class 类创建了 Class 实例，并保存所有 class 的信息。<br>通过 Class实例获取class 信息的方法叫反射。</p>
+<p>获取 Class 实例<br>String.class;<br>s.getClass();<br>Class.forName(“java.lang.String”)</p>
+<p>实例比较 ==<br>instanceof 判断数据类型</p>
+<p>通过Class实例获取的信息有哪些？<br>cls.getPackage()<br>cls.getName();<br>cls.getSimpleName();<br>cls.getSuperclass();<br>cls.getMethods();<br>cls.getConstructors();<br>cls.getFields();<br>cls.getAnnotations();</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Class cls = String.class</span></span><br><span class="line">Class cls = Class.forName(<span class="string">"java.lang.String"</span>);</span><br><span class="line">Method[]  m = cls.getMethods();</span><br><span class="line"><span class="keyword">for</span> (Method mm:m</span><br><span class="line">      ) &#123;</span><br><span class="line">    System.out.println(mm.toString());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>断言<br>cls.isArray()<br>cls.isAnnotation();<br>cls.isInstance()</p>
+<p>创建实例<br>cls.newInstance()</p>
+<blockquote>
+<p>通过 SecurityManager 来反射阻止对 private 访问。</p>
+</blockquote>
+<h2 id="注解-Annotation"><a href="#注解-Annotation" class="headerlink" title="注解 Annotation"></a>注解 Annotation</h2><p>元注解<br>  @Target 可以应用于源码的位置，约束。<br>  @Retention 定义注解的生命周期，默认是 class。<br>    编译期<br>    class 期<br>    运行期<br>  @Repeatable<br>  @Inherited 定义注解是否能被继承</p>
+<p>定义注解（使用元注解配置注解）<br>@interface</p>
+<p>处理注解(使用反射处理注解)</p>
+<blockquote>
+<p>可以在运行期读取 RUNTIME 类型的注解</p>
+<p>注解本身对程序逻辑没有任何影响</p>
+<p>Annotation 也是类</p>
+</blockquote>
+<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><p>定义泛型 <T><br>使用泛型 <String></String></T></p>
+<blockquote>
+<p>不必对泛型进行强制转换，编译器会检查泛型类型。</p>
+</blockquote>
+<p>编译器推断泛型类型</p>
+<h2 id="转型-Cast"><a href="#转型-Cast" class="headerlink" title="转型 Cast"></a>转型 Cast</h2><p>向上转型<br>向下转型</p>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><ul>
+<li><a href="/2020/05/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="设计模式">设计模式</a>
+</li>
+</ul>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><ul>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux_for_real_time/8/html/reference_guide/index" target="_blank" rel="noopener">Linux Process and Thread Reference</a></li>
+</ul>
+<p>Java 线程</p>
+<blockquote>
+<p>一个java程序是一个JVM进程<br>main() 负责启动多个线程<br>new Thread() 一个线程对象，实现 run() 访问<br>当一个类已经从另一个类派生，无法继承 Thread 类,可以使用Runable接口，实现一个run方法</p>
+</blockquote>
+<p>线程状态<br>    new<br>    runnable<br>    blocked<br>    waiting<br>    time waiting<br>    termiated</p>
+<p>线程优先级</p>
+<p>线程终止<br>    return 返回<br>    异常终止<br>    stop防止强制终止</p>
+<p>主线程等待子线程结束 join()<br>线程阻塞 Thread.sleep(),this.wait()<br>中断线程 interrupt(),设置开关 while(switch)<br>共享变量设置 volatile 关键字，实现两个功能，获取主内存的最新值，解除乱序执行。<br>    主内存变量<br>    线程副本变量</p>
+<ul>
+<li>守护线程 setDaemon<pre><code>  守护线程不能持有任何资源
+  守护线程用来处理定时任务
+</code></pre>  线程同步 synchronized 语句块<pre><code>  原子操作：一个或一系列不可中断的操作
+      基本类型赋值是原子操作，long和double除外
+      引用类型赋值是原子操作
+      局部变量不需要同步
+  同步方法 synchronized void method(){}
+  类同步   synchronized static
+</code></pre>  线程安全<pre><code>  不变的类 String Integer LocalDate
+  没有成员变量的类 Math
+  正确使用 synchronized 类 StringBuffer
+</code></pre>  死锁<pre><code>  不同线程获取不同对象的锁会形成死锁
+  解决死锁
+      获取锁顺序一致   
+</code></pre>  线程等待 this.wait() 需要唤醒，会释放锁<br>  唤醒线程 this.notify()，this.notifyAll()<br>  线程超时</li>
+</ul>
+<ul>
+<li>高级concurrent包<br>concurrent 包 1.5&gt;<pre><code>java.util.concurrent.locks.ReentrantLock 包
+ReentrantLock 替换 synchronized try{}finally{}
+    lock()
+    tryLock(10)
+临界区代码：任何时候只有一个线程执行
+ReadWriteLock
+Condition
+    await 释放锁，等待
+    signal 唤醒某个等待线程
+    signalAll 唤醒所有等待线程
+BlockingQueue
+java.util.Collections 包
+Collection 提供把非线程安全的集合转换成线程安全的
+java.util.concurrent.ConcurrentHashMap 包
+java.util.concurrent.atomic 包 无锁的线程安全
+    计数器
+    累加器
+</code></pre></li>
+<li><p>线程池<br>  ExecutorService<br>  NewFixedThreadPool(); 固定线程<br>  CacheTreadPool(); 动态调整<br>  SigleTreadExecutor(); 单线程<br>  ScheduledThreadExcutor(); </p>
+<pre><code>  FixRate
+  FixDelay
+</code></pre><p>  submit() 提交任务<br>  shutdown() 关闭线程池</p>
+</li>
+<li><p>Callable 线程返回值处理<br>  Callable</p>
+<pre><code>  call()
+  get() 任务没结束，阻塞
+</code></pre><p>  Future 获取线程将返回的值<br>  CompletableFature</p>
+<pre><code>  thenAccept 正确执行异步回调方法
+  exceptionally 异常执行异步回调方法
+</code></pre><p>  可以串行执行</p>
+<pre><code>  thenApplyAsync
+</code></pre><p>  可以并行执行</p>
+<pre><code>  Anyof
+  Allof
+</code></pre></li>
+<li><p>Fork/Join 并行计算<br>  Fork/Join<br>  RecursiveTask 类</p>
+<pre><code>  invokeAll 并行运行
+</code></pre><p>  ForkJoinPool</p>
+</li>
+<li><p>ThreadLocal应用 线程数据绑定 MAP结构<br>  线程数据绑定 MAP结构<br>  TreadLocal<br>  get<br>  remove</p>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="prev" title="设计模式">
+      <i class="fa fa-chevron-left"></i> 设计模式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="next" title="Java面向对象">
+      Java面向对象 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类（enum）"><span class="nav-number">1.</span> <span class="nav-text">枚举类（enum）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-异常处理"><span class="nav-number">2.</span> <span class="nav-text">Java 异常处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射"><span class="nav-number">3.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注解-Annotation"><span class="nav-number">4.</span> <span class="nav-text">注解 Annotation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛型"><span class="nav-number">5.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转型-Cast"><span class="nav-number">6.</span> <span class="nav-text">转型 Cast</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式"><span class="nav-number">7.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">8.</span> <span class="nav-text">线程</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7:54</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

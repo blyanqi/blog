@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Docker安装 jenkins docs jenkins 插件镜像 jenkins 中文社区 jenkins github zh jenkins plugins center jenkins dockerfile  jenkins github  清华大学镜像源  docker-compose 安装JENKINS_UC：主要的插件更新中心，会提供Jenkin 长期支持的版本。默认值就是 htt">
@@ -28,7 +28,7 @@
 <meta property="og:description" content="Docker安装 jenkins docs jenkins 插件镜像 jenkins 中文社区 jenkins github zh jenkins plugins center jenkins dockerfile  jenkins github  清华大学镜像源  docker-compose 安装JENKINS_UC：主要的插件更新中心，会提供Jenkin 长期支持的版本。默认值就是 htt">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-14T00:38:02.000Z">
-<meta property="article:modified_time" content="2020-06-12T08:24:12.188Z">
+<meta property="article:modified_time" content="2020-07-11T03:27:41.838Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-12 16:24:12" itemprop="dateModified" datetime="2020-06-12T16:24:12+08:00">2020-06-12</time>
+                <time title="修改时间：2020-07-11 11:27:41" itemprop="dateModified" datetime="2020-07-11T11:27:41+08:00">2020-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/devops/" itemprop="url" rel="index"><span itemprop="name">devops</span></a>
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
                 </span>
             </span>
 
@@ -308,8 +308,8 @@ var _hmt = _hmt || [];
 <h2 id="jenkins-maven-配置"><a href="#jenkins-maven-配置" class="headerlink" title="jenkins maven 配置"></a>jenkins maven 配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 系统工具 -&gt; 全局配置工具 -&gt; Maven -&gt;</span></span><br><span class="line">Name: maven3</span><br><span class="line">MAVEN_HOME: /var/jenkins_home/jdk/maven/</span><br></pre></td></tr></table></figure>
 <h2 id="jenkins-jdk-配置"><a href="#jenkins-jdk-配置" class="headerlink" title="jenkins jdk 配置"></a>jenkins jdk 配置</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 系统工具 -&gt; 全局配置工具 -&gt; jdk -&gt;</span></span><br><span class="line">Name: jdk8</span><br><span class="line">JAVA_HOME: /var/jenkins_home/jdk/jdk1.8.0_251/</span><br></pre></td></tr></table></figure>
 <h2 id="项目设置-webhook"><a href="#项目设置-webhook" class="headerlink" title="项目设置 webhook"></a>项目设置 webhook</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitlab，pipeline 插件</span></span><br><span class="line"><span class="comment"># 到项目用户的setting 中获取一个 token</span></span><br><span class="line">J2X9KnkY2JWJCUz7xmdu</span><br><span class="line"></span><br><span class="line"><span class="comment"># Credentials</span></span><br><span class="line">Scope	：Global (Jenkins, nodes, items, all child items, etc)</span><br><span class="line">API token	：Concealed</span><br><span class="line">ID：leader</span><br><span class="line">Description	：youlv 项目</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 config -&gt; gitlab connection</span></span><br><span class="line">Enable authentication <span class="keyword">for</span> <span class="string">'/project'</span> end-point	（selected）	</span><br><span class="line">GitLab connections	</span><br><span class="line"> 	Connection name	：gitlab1</span><br><span class="line"> 	Gitlab host URL	：http://119.84.8.43:10097/</span><br><span class="line"> 	Credentials	：GitLab API token (youlv 项目)</span><br><span class="line"></span><br><span class="line"><span class="comment"># jenkins iterm 中 -&gt; general -&gt; GitHub project</span></span><br><span class="line">Project url	: http://119.84.8.43:10097/youlv/b1.git</span><br><span class="line">GitLab Connection	: gitlab1</span><br><span class="line"></span><br><span class="line"><span class="comment"># Build Triggers</span></span><br><span class="line">Build when a change is pushed to GitLab. GitLab webhook URL: http://182.92.67.154:8080/project/youlv	</span><br><span class="line"> 	Enabled GitLab triggers	</span><br><span class="line">    Push Events		</span><br><span class="line">    Opened Merge Request Events		</span><br><span class="line">    Accepted Merge Request Events		</span><br><span class="line">    Closed Merge Request Events		</span><br><span class="line">    Rebuild open Merge Requests	: Never</span><br><span class="line"> 	Approved Merge Requests (EE-only)		</span><br><span class="line"> 	Comments		</span><br><span class="line"> 	Comment (regex) <span class="keyword">for</span> triggering a build	</span><br><span class="line">Jenkins please retry a build</span><br><span class="line">--- advanced</span><br><span class="line">Enable [ci-skip]		</span><br><span class="line"> 	Ignore WIP Merge Requests		</span><br><span class="line"> 	Set build description to build cause (eg. Merge request or Git Push )		</span><br><span class="line"> 	Build on successful pipeline events		</span><br><span class="line"> 	Pending build name <span class="keyword">for</span> pipeline	</span><br><span class="line"> 	Cancel pending merge request builds on update		</span><br><span class="line"> 	Allowed branches	</span><br><span class="line"> Allow all branches to trigger this job	</span><br><span class="line"> Filter branches by name	</span><br><span class="line"> Filter branches by regex	</span><br><span class="line">Filter merge request by label	</span><br><span class="line"> 	Secret token: 3f18efd9425b48db84e609de4a4d925b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 gitlab 创建 webhook 填入以下信息</span></span><br><span class="line"><span class="comment"># project -&gt; setting -&gt; webhook</span></span><br><span class="line">webhook URL: http://182.92.67.154:8080/project/youlv</span><br><span class="line">Secret token: 3f18efd9425b48db84e609de4a4d925b</span><br><span class="line"><span class="comment"># 设置 master 库事件</span></span><br><span class="line">Trigger</span><br><span class="line">Push events: master</span><br><span class="line">SSL verification</span><br><span class="line">Enable SSL verification ： NO</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先要 commit 一次再触发测试,参考 gitlab 项目示例</span></span><br></pre></td></tr></table></figure>
-<a href="/2020/06/gitlab%E9%A1%B9%E7%9B%AE%E7%A4%BA%E4%BE%8B/" title="gitlab项目示例">gitlab项目示例</a>
-<a href="/2020/06/jenkinsK8s/" title="jenkinsK8s CI">jenkinsK8s CI</a>
+
+
 <p>/var/jenkins_home/workspace/youlv</p>
 <h2 id="java-github-jenkins-maven"><a href="#java-github-jenkins-maven" class="headerlink" title="java + github + jenkins + maven"></a>java + github + jenkins + maven</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># java</span></span><br><span class="line"><span class="comment"># github</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># jenkins</span></span><br><span class="line"><span class="comment">## 新增 maven 插件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># groovy 语法（http://www.groovy-lang.org/documentation.html）</span></span><br><span class="line">node &#123;</span><br><span class="line">   def mvnHome</span><br><span class="line">   stage(<span class="string">'Preparation'</span>) &#123; // <span class="keyword">for</span> display purposes</span><br><span class="line">      // 下载源码</span><br><span class="line">      git <span class="string">'https://github.com/jglick/simple-maven-project-with-tests.git'</span></span><br><span class="line">      // 获取maven插件</span><br><span class="line">      mvnHome = tool <span class="string">'maven3'</span></span><br><span class="line">   &#125;</span><br><span class="line">   stage(<span class="string">'Build'</span>) &#123;</span><br><span class="line">      // Run the maven build</span><br><span class="line">      withEnv([<span class="string">"MVN_HOME=<span class="variable">$mvnHome</span>"</span>]) &#123;</span><br><span class="line">         <span class="keyword">if</span> (isUnix()) &#123;</span><br><span class="line">            sh <span class="string">'"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'</span></span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            bat(/<span class="string">"%MVN_HOME%\bin\mvn"</span> -Dmaven.test.failure.ignore clean package/)</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   // 成功后单元测试</span><br><span class="line">   stage(<span class="string">'Results'</span>) &#123;</span><br><span class="line">      junit <span class="string">'**/target/surefire-reports/TEST-*.xml'</span></span><br><span class="line">      archiveArtifacts <span class="string">'target/*.jar'</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// <span class="comment"># unstable(单元测试错误)</span></span><br><span class="line">// &lt;!DOCTYPE suite SYSTEM <span class="string">"http://testng.org/testng-1.0.dtd"</span> &gt;</span><br></pre></td></tr></table></figure>
 <h2 id="jenkins-备份还原"><a href="#jenkins-备份还原" class="headerlink" title="jenkins 备份还原"></a>jenkins 备份还原</h2><p>安装 backup 插件<br>设置好备份目录 /var/jenkins_home/backup<br>可以设置为： no shutdown<br>开始备份 -&gt;<br>还原备份 -&gt; 还原的时间稍长</p>
@@ -332,8 +332,8 @@ var _hmt = _hmt || [];
       <i class="fa fa-chevron-left"></i> 编程方法
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/05/Docker/" rel="next" title="Docker 使用">
-      Docker 使用 <i class="fa fa-chevron-right"></i>
+    <a href="/2020/05/Jenkins/" rel="next" title="jenkins">
+      jenkins <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -407,14 +407,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -457,13 +457,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">364k</span>
+    <span title="站点总字数">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:31</span>
+    <span title="站点阅读时长">7:54</span>
 </div>
 
         

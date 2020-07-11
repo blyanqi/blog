@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="概念编译器g++ -v 示例1234567#include &lt;iostream&gt;using namespace std;int main()&amp;#123;    cout &lt;&lt; &quot;Hello, world!&quot; &lt;&lt; endl;    return 0;&amp;#125; 基本语法对象 - 对象具有状态和行为。类 - 类可以定义为描述对象行为&#x2F;状态的模板&#x2F;蓝图。方法 -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++语言">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/C-%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="概念编译器g++ -v 示例1234567#include &lt;iostream&gt;using namespace std;int main()&amp;#123;    cout &lt;&lt; &quot;Hello, world!&quot; &lt;&lt; endl;    return 0;&amp;#125; 基本语法对象 - 对象具有状态和行为。类 - 类可以定义为描述对象行为&#x2F;状态的模板&#x2F;蓝图。方法 -">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-19T01:23:25.000Z">
+<meta property="article:modified_time" content="2020-07-11T03:34:46.180Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/C-%E8%AF%AD%E8%A8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C++语言 | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/C-%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++语言
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-19 09:23:25" itemprop="dateCreated datePublished" datetime="2020-06-19T09:23:25+08:00">2020-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:34:46" itemprop="dateModified" datetime="2020-07-11T11:34:46+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>编译器<br>g++ -v</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello, world!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><p>对象 - 对象具有状态和行为。<br>类 - 类可以定义为描述对象行为/状态的模板/蓝图。<br>方法 - 从基本上说，一个方法表示一种行为。<br>即时变量 - 每个对象都有其独特的即时变量。<br>命名空间是 C++ 中一个相对新的概念。</p>
+<h3 id="基本的内置类型"><a href="#基本的内置类型" class="headerlink" title="基本的内置类型"></a>基本的内置类型</h3><p>宽字符型 wchar_t</p>
+<p>类型限定符<br>const    const 类型的对象在程序执行期间不能被修改改变。<br>volatile    修饰符 volatile 告诉编译器不需要优化volatile声明的变量，让程序可以直接从内存中读取变量。对于一般的变量编译器会对变量进行优化，将内存中的变量值放在寄存器中以加快读写效率。<br>restrict    由 restrict 修饰的指针是唯一一种访问它所指向的对象的方式。只有 C99 增加了新的类型限定符 restrict。</p>
+<p>存储类<br>mutable<br>thread_local (C++11)<br>使用 thread_local 说明符声明的变量仅可在它在其上创建的线程上访问。 变量在创建线程时创建，并在销毁线程时销毁。</p>
+<blockquote>
+<p>从 C++ 17 开始，auto 关键字不再是 C++ 存储类说明符，且 register 关键字被弃用。</p>
+</blockquote>
+<h2 id="杂项运算符"><a href="#杂项运算符" class="headerlink" title="杂项运算符"></a>杂项运算符</h2><p>sizeof    sizeof 运算符返回变量的大小。例如，sizeof(a) 将返回 4，其中 a 是整数。<br>Condition ? X : Y    条件运算符。如果 Condition 为真 ? 则值为 X : 否则值为 Y。<br>,    逗号运算符会顺序执行一系列运算。整个逗号表达式的值是以逗号分隔的列表中的最后一个表达式的值。<br>.（点）和 -&gt;（箭头）    成员运算符用于引用类、结构和共用体的成员。<br>Cast    强制转换运算符把一种数据类型转换为另一种数据类型。例如，int(2.2000) 将返回 2。<br>&amp;    指针运算符 &amp; 返回变量的地址。例如 &a; 将给出变量的实际地址。</p>
+<ul>
+<li>指针运算符 <em> 指向一个变量。例如，</em>var; 将指向变量 var。</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引用传递</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;x, <span class="keyword">int</span> &amp;y)</span> <span class="comment">// 声明引用类型 &amp;x</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> temp;</span><br><span class="line">   temp = x; <span class="comment">/* 保存地址 x 的值 */</span></span><br><span class="line">   x = y;    <span class="comment">/* 把 y 赋值给 x */</span></span><br><span class="line">   y = temp; <span class="comment">/* 把 x 赋值给 y  */</span></span><br><span class="line">  </span><br><span class="line">   <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">swap(a, b);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指针传递</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *x, <span class="keyword">int</span> *y)</span> <span class="comment">//此处的 *x 是定义</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">int</span> temp;</span><br><span class="line">   temp = *x;    <span class="comment">// 此处的 *x 是取值 ，上面是定义。这也是指针最容易搞混的地方</span></span><br><span class="line">   *x = *y;        <span class="comment">/* 把 y 赋值给 x */</span></span><br><span class="line">   *y = temp;    <span class="comment">/* 把 x 赋值给 y */</span></span><br><span class="line">  </span><br><span class="line">   <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line">swap(&amp;a, &amp;b);</span><br></pre></td></tr></table></figure>
+<p>参数的默认值<br>int sum(int a, int b=20)</p>
+<p>Lambda 函数与表达式</p>
+<blockquote>
+<p>C++11 提供了对匿名函数的支持,称为 Lambda 函数(也叫 Lambda 表达式)。<br><a href="int x, int y"></a> -&gt; int { int z = x + y; return z + x; }<br>传递方式   参数      返回值    函数体</p>
+</blockquote>
+<p>[]   // 沒有定义任何变量。使用未定义变量会引发错误。<br>[&amp;]  // 引用传递<br>[=]  // 值传递</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>C++ 引入的 string 类类型<br>string str1 = “Hello”;<br>string str2 = “World”;<br>str1 = str2 //复制<br>str3 = str1 + str2; //连接<br>len = str2.size(); //求长度</p>
+<p>strcpy( str3, str1); //复制<br>strcat( str1, str2); //连接<br>len = strlen(str1); //求长度</p>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p>在变量声明的时候，如果没有确切的地址可以赋值，为指针变量赋一个 NULL 值是一个良好的编程习惯。<br>指针的算术运算</p>
+<p><strong>引用 vs 指针</strong><br>不存在空引用。引用必须连接到一块合法的内存。<br>一旦引用被初始化为一个对象，就不能被指向到另一个对象。指针可以在任何时候指向到另一个对象。<br>引用必须在创建时被初始化。指针可以在任何时间被初始化。<br>int&amp;  r = i; // r 指向 i</p>
+<p><strong>指针 vs 数组</strong></p>
+<blockquote>
+<p>数组名就是数组首地址</p>
+</blockquote>
+<p>int  var[MAX] = {10, 100, 200};<br>int  *ptr;<br>// 指针中的数组地址<br>ptr = var;</p>
+<p><strong>指针数组</strong><br>const char *names[MAX] = {<br>                   “Zara Ali”,<br>                   “Hina Ali”,<br>                   “Nuha Ali”,<br>                   “Sara Ali”,<br>   };</p>
+<p><strong>指向指针的指针</strong></p>
+<p><strong>传递指针给函数</strong></p>
+<p><strong>从函数返回指针</strong></p>
+<h2 id="日期-amp-时间"><a href="#日期-amp-时间" class="headerlink" title="日期 &amp; 时间"></a>日期 &amp; 时间</h2><p>ctime<br>// 基于当前系统的当前日期/时间<br>time_t now = time(0);</p>
+<p>// 把 now 转换为字符串形式<br>char* dt = ctime(&amp;now);</p>
+<p> // 把 now 转换为 tm 结构<br>tm *gmtm = gmtime(&amp;now);<br>dt = asctime(gmtm);</p>
+<h2 id="基本的输入输出"><a href="#基本的输入输出" class="headerlink" title="基本的输入输出"></a>基本的输入输出</h2><p>iostream<br>iomanip<br>fstream</p>
+<p>cout &lt;&lt; “请输入您的名称： “;<br>cin &gt;&gt; name;<br>cerr &lt;&lt;<br>clog &lt;&lt;</p>
+<h2 id="类定义"><a href="#类定义" class="headerlink" title="类定义"></a>类定义</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Box</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">      <span class="keyword">double</span> length;   <span class="comment">// 盒子的长度</span></span><br><span class="line">      <span class="keyword">double</span> breadth;  <span class="comment">// 盒子的宽度</span></span><br><span class="line">      <span class="keyword">double</span> <span class="built_in">height</span>;   <span class="comment">// 盒子的高度</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>类成员函数(方法)</strong><br>double Box::getVolume(void)<br>myBox.getVolume();<br><strong>类访问修饰符</strong><br>public everywhere<br>private class<br>protectd subclass</p>
+<p><strong>构造函数 &amp; 析构函数</strong><br>class Line<br>{<br>   public:<br>      void setLength( double len );<br>      double getLength( void );<br>      Line();  // 这是构造函数</p>
+<p>   private:<br>      double length;<br>};</p>
+<p>// 构造函数,与类同名<br>Line::Line(void)</p>
+<p>// 析构函数,与类同名前加波浪号<br>Line::~Line(void)<br>{<br>    cout &lt;&lt; “Object is being deleted” &lt;&lt; endl;<br>}</p>
+<p><strong>拷贝构造函数</strong><br>如果在类中没有定义拷贝构造函数，编译器会自行定义一个。<br>Line( int len );             // 简单的构造函数<br>Line( const Line &amp;obj);      // 拷贝构造函数<br>~Line();                     // 析构函数</p>
+<p>以下情况都会调用拷贝构造函数：<br>（1）一个对象以值传递的方式传入函数体（传参）<br>（2）一个对象以值传递的方式从函数返回（返回）<br>（3）一个对象需要通过另外一个对象进行初始化。（注入：把一个对象传递到另一个对象内部）</p>
+<p><strong>友元函数</strong><br>类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员。<br>友元函数并不是成员函数。<br>// 在类中声明<br>friend void printWidth( Box box );<br>// 友元类（ClassTwo 的所有成员函数作为类 ClassOne 的友元）<br>friend class ClassTwo;</p>
+<p><strong>内联函数</strong><br>inline int Max(int x, int y)<br>编译器会把该函数的代码副本放置在每个调用该函数的地方。<br>引入内联函数的目的是为了解决程序中函数调用的效率问题。<br>而对于其他的函数，都是在运行时候才被替代。这其实就是个空间代价换时间的i节省。</p>
+<p><strong>this 指针</strong><br>每一个对象都能通过 this 指针来访问自己的地址。this 指针是所有成员函数的隐含参数。<br>在类中<br>this-&gt;Volume()</p>
+<p><strong>指向类的指针</strong><br>Box Box2(8.5, 6.0, 2.0);    // Declare box2<br>Box *ptrBox;                // Declare pointer to a class.</p>
+<p>// 保存第一个对象的地址<br>ptrBox = &Box1;<br>ptrBox-&gt;Volume()</p>
+<p><strong>类的静态成员</strong><br>作为类的计数器很方便<br>静态属性<br>static int objectCount;<br>当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本。</p>
+<p>静态方法<br>static int getCount()<br>{<br> return objectCount;<br>}</p>
+<p><strong>继承</strong><br>// 单继承<br>class Rectangle: public Shape<br>// 多继承<br>class Rectangle: public Shape, public PaintCost<br>public 是继承基类成员后采用修饰符<br>派生类（子类）<br>基类(父类)<br>下列情况不能被继承：<br>    基类的构造函数、析构函数和拷贝构造函数。<br>    基类的重载运算符。<br>    基类的友元函数。</p>
+<p><strong>函数重载和运算符重载</strong><br>//函数重载<br>void print(int i)<br>void print(double  f)<br>void print(char c[])<br>//运算符重载(自定义一些运算，使用内置的运算符)<br>Box operator+(const Box&amp; b)<br>Box3 = Box1 + Box2;</p>
+<p>不可重载的运算符列表<br>    .：成员访问运算符<br>    .<em>, -&gt;</em>：成员指针访问运算符<br>    ::：域运算符<br>    sizeof：长度运算符<br>    ?:：条件运算符</p>
+<pre><code>#： 预处理符号
+</code></pre><p><strong>多态</strong><br>多态按字面的意思就是多种形态。<br>当类之间存在层次结构，并且类之间是通过继承关联时，就会用到多态。</p>
+<p>虚函数<br>告诉编译器不要静态链接到该函数。<br>纯虚函数（只定义不实现）<br>virtual int area() = 0;</p>
+<p><strong>数据抽象</strong><br>只向外界提供关键信息，并隐藏其后台的实现细节，即只表现必要的信息而不呈现细节。<br>数据抽象是一种依赖于接口和实现分离的编程（设计）技术。</p>
+<p><strong>数据封装</strong><br>把数据和操作数据的函数捆绑在一起的机制。<br>通常情况下，我们都会设置类成员状态为私有（private），除非我们真的需要将其暴露，这样才能保证良好的封装性。<br>这通常应用于数据成员，但它同样适用于所有成员，包括虚函数。</p>
+<p><strong>接口（抽象类）</strong><br>如果类中至少有一个函数被声明为纯虚函数，则这个类就是抽象类。</p>
+<p><strong>文件和流</strong><br>ofstream outfile; //写<br>    outfile &lt;&lt; data &lt;&lt; endl;<br>ifstream infile;  //读<br>    infile &gt;&gt; data;</p>
+<p>fstream<br>open()</p>
+<p>cin.getline(data, 100);<br>close()</p>
+<p>open参数<br>ios::app //追加<br>ios::ate //定位到文件尾<br>ios::in  //读取<br>ios::out //写入<br>ios::trunc //从头开始重写</p>
+<p><strong>异常处理</strong><br>throw // 抛出一个异常<br>catch // 捕获异常<br>try   // follow 异常</p>
+<p>标准的异常<br>std::exception</p>
+<p>定义新的异常<br>struct MyException : public exception<br>what() //异常类提供的一个公共方法，它已被所有子异常类重载</p>
+<p><strong>动态内存</strong><br>栈：在函数内部声明的所有变量都将占用栈内存。<br>堆：这是程序中未使用的内存，在程序运行时可用于动态分配内存。</p>
+<p>new 和 delete 运算符<br>pvalue  = new double;   // 为变量请求内存,放到堆里<br>pvalue  = new char[20]; // 为变量请求内存<br>Box* myBoxArray = new Box[4]; //对象<br>delete pvalue;        // 释放 pvalue 所指向的内存</p>
+<p>new 与 malloc() 函数相比，其主要的优点是，new 不只是分配了内存，它还创建了对象。</p>
+<p><strong>命名空间</strong></p>
+<blockquote>
+<p>命名空间可以嵌套</p>
+</blockquote>
+<p>// 声明命名空间<br>namespace first_space{<br>   void func(){<br>      cout &lt;&lt; “Inside first_space” &lt;&lt; endl;<br>   }<br>}</p>
+<p>// 调用命名空间中的函数<br>first_space::func();</p>
+<p>// using namespace<br>using namespace first_space;<br>func();</p>
+<p><strong>模板</strong><br>函数模板<br>template <typename t><br>类模板<br>template <class t></class></typename></p>
+<p>// 定义<br>template <class t><br>class Stack {<br>  private:<br>    vector<T> elems;     // 元素 </T></class></p>
+<p>  public:<br>    void push(T const&amp;);  // 入栈<br>    void pop();               // 出栈<br>    T top() const;            // 返回栈顶元素<br>    bool empty() const{       // 如果为空则返回真。<br>        return elems.empty();<br>    }<br>}; </p>
+<p>// 使用<br>Stack<int>         intStack;  // int 类型的栈<br>Stack<string> stringStack;    // string 类型的栈 </string></int></p>
+<p><strong>预处理器指令</strong><br>预定义宏<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">__LINE__	这会在程序编译时包含当前行号。</span><br><span class="line">__FILE__	这会在程序编译时包含当前文件名。</span><br><span class="line">__DATE__	这会包含一个形式为 <span class="built_in">month</span>/<span class="built_in">day</span>/<span class="built_in">year</span> 的字符串，它表示把源文件转换为目标代码的日期。</span><br><span class="line">__TIME__	这会包含一个形式为 <span class="built_in">hour</span>:<span class="built_in">minute</span>:<span class="built_in">second</span> 的字符串，它表示程序被编译的时间。</span><br></pre></td></tr></table></figure></p>
+<p><strong>信号处理</strong><br>csiganl<br>signal 函数，用来捕获突发事件。<br>第一个参数是一个整数，代表了信号的编号；第二个参数是一个指向信号处理函数的指针。</p>
+<p>raise() 函数，生成信号</p>
+<p>// 定义信号处理<br>void signalHandler( int signum )<br>// 注册信号 SIGINT 和信号处理程序<br>signal(SIGINT, signalHandler);</p>
+<p>常见的信号<br>SIGABRT    程序的异常终止，如调用 abort。<br>SIGFPE    错误的算术运算，比如除以零或导致溢出的操作。<br>SIGILL    检测非法指令。<br>SIGINT    程序终止(interrupt)信号。<br>SIGSEGV    非法访问内存。<br>SIGTERM    发送到程序的终止请求。</p>
+<p><strong>多线程</strong></p>
+<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <pthread.h></pthread.h></h1><p>pthread_create() 创建线程<br>//参数依次是：创建的线程id，线程参数，调用的函数，传入的函数参数<br>int ret = pthread_create(&amp;tids[i], NULL, say_hello, NULL);</p>
+<p>pthread_exit(status) 终止线程<br>pthread_exit(NULL);</p>
+<p>连接和分离线程</p>
+<blockquote>
+<p>当创建一个线程时，它的某个属性会定义它是否是可连接的（joinable）或可分离的（detached）。只有创建时定义为可连接的线程才可以被连接。如果线程创建时被定义为可分离的，则它永远也不能被连接。</p>
+</blockquote>
+<p>// 站主线程角度<br>pthread_join() // 连接<br>pthread_detach() // 分离</p>
+<p>pthread_attr_t attr;<br>pthread_attr_init(&amp;attr);<br>pthread_attr_setdetachstate(&amp;attr, PTHREAD_CREATE_JOINABLE);<br>pthread_attr_destroy(&amp;attr);</p>
+<h2 id="Web-编程"><a href="#Web-编程" class="headerlink" title="Web 编程"></a>Web 编程</h2><p><strong>CGI</strong><br>CGI 规范目前是由 NCSA 维护的。<br>是一种用于外部网关程序与信息服务器（如 HTTP 服务器）对接的接口标准。<br>能够与 Web 服务器以及客户端进行交互的标准协议。</p>
+<p><strong>HTTP 头信息</strong></p>
+<p><strong>CGI 环境变量</strong></p>
+<p><strong>C++ CGI 库</strong></p>
+<p><strong>Get 方法</strong></p>
+<p><strong>POST 方法</strong></p>
+<p><strong>表单</strong></p>
+<p><strong>cookie</strong></p>
+<p><strong>文件上传</strong></p>
+<p>httpd.conf<br><figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">Directory</span> <span class="string">"/var/www/cgi-bin"</span>&gt;</span><br><span class="line">   AllowOverride <span class="keyword">None</span></span><br><span class="line">   <span class="keyword">Options</span> ExecCGI</span><br><span class="line">   <span class="keyword">Order</span> allow,deny</span><br><span class="line">   Allow from all</span><br><span class="line">&lt;/<span class="keyword">Directory</span>&gt;</span><br><span class="line"> </span><br><span class="line">&lt;<span class="keyword">Directory</span> <span class="string">"/var/www/cgi-bin"</span>&gt;</span><br><span class="line"><span class="keyword">Options</span> <span class="keyword">All</span></span><br><span class="line">&lt;/<span class="keyword">Directory</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    </span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"Content-type:text/html\r\n\r\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;html&gt;\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;head&gt;\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;title&gt;Hello World - 第一个 CGI 程序&lt;/title&gt;\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;/head&gt;\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;body&gt;\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;h2&gt;Hello World! 这是我的第一个 CGI 程序&lt;/h2&gt;\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;/body&gt;\n"</span>;</span><br><span class="line">   <span class="built_in">cout</span> &lt;&lt; <span class="string">"&lt;/html&gt;\n"</span>;</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="STL"><a href="#STL" class="headerlink" title="STL"></a>STL</h2><p>C++ STL（标准模板库）是一套功能强大的 C++ 模板类<br>提供了通用的模板类和函数，这些模板类和函数可以实现多种流行和常用的算法和数据结构，如向量、链表、队列、栈。</p>
+<p>容器（Containers）<br>算法（Algorithms）<br>迭代器（iterators）</p>
+<h2 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h2><p><a href="http://www.hal9k.com/cug/" target="_blank" rel="noopener">Free Country</a><br><a href="https://www.thefreecountry.com/sourcecode/cpp.shtml" target="_blank" rel="noopener">C and C++ Users Group</a><br><a href="https://www.boost.org/" target="_blank" rel="noopener">Boost</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/C%E8%AF%AD%E8%A8%80/" rel="prev" title="C语言">
+      <i class="fa fa-chevron-left"></i> C语言
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/WebServices/" rel="next" title="WebServices">
+      WebServices <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例"><span class="nav-number">1.1.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法"><span class="nav-number">1.2.</span> <span class="nav-text">基本语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本的内置类型"><span class="nav-number">1.3.</span> <span class="nav-text">基本的内置类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#杂项运算符"><span class="nav-number">2.</span> <span class="nav-text">杂项运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串"><span class="nav-number">4.</span> <span class="nav-text">字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针"><span class="nav-number">5.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期-amp-时间"><span class="nav-number">6.</span> <span class="nav-text">日期 &amp; 时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本的输入输出"><span class="nav-number">7.</span> <span class="nav-text">基本的输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类定义"><span class="nav-number">8.</span> <span class="nav-text">类定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include"><span class="nav-number"></span> <span class="nav-text">include </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web-编程"><span class="nav-number">1.</span> <span class="nav-text">Web 编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#STL"><span class="nav-number">2.</span> <span class="nav-text">STL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源"><span class="nav-number">3.</span> <span class="nav-text">资源</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7:54</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

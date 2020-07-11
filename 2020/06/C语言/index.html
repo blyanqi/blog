@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="mingw  概念C11C11（也被称为C1X）指ISO标准ISO&#x2F;IEC 9899:2011，是当前最新的C语言标准。在它之前的C语言标准为C99。多线程（Multithreading）支持 gcc 编译器gcc -v C 程序主要包括以下部分：  预处理器指令 #开头  函数  变量  语句 &amp; 表达式  注释 基本语法123456789#include &lt;stdio.h&amp;gt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/C%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="mingw  概念C11C11（也被称为C1X）指ISO标准ISO&#x2F;IEC 9899:2011，是当前最新的C语言标准。在它之前的C语言标准为C99。多线程（Multithreading）支持 gcc 编译器gcc -v C 程序主要包括以下部分：  预处理器指令 #开头  函数  变量  语句 &amp; 表达式  注释 基本语法123456789#include &lt;stdio.h&amp;gt">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-19T01:23:21.000Z">
+<meta property="article:modified_time" content="2020-07-11T03:34:44.068Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/C%E8%AF%AD%E8%A8%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>C语言 | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/C%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C语言
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-19 09:23:21" itemprop="dateCreated datePublished" datetime="2020-06-19T09:23:21+08:00">2020-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:34:44" itemprop="dateModified" datetime="2020-07-11T11:34:44+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <ul>
+<li><a href="http://www.mingw.org/" target="_blank" rel="noopener">mingw</a></li>
+</ul>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>C11<br>C11（也被称为C1X）指ISO标准ISO/IEC 9899:2011，是当前最新的C语言标准。在它之前的C语言标准为C99。<br>多线程（Multithreading）支持</p>
+<p>gcc 编译器<br>gcc -v</p>
+<p>C 程序主要包括以下部分：<br>  预处理器指令 #开头<br>  函数<br>  变量<br>  语句 &amp; 表达式<br>  注释</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 我的第一个 C 程序 */</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello, World! \n"</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>整数类型和浮点类型<br>枚举类型<br>void 类型<br>派生类型<br>  指针类型<br>  数组类型<br>  结构类型<br>  共用体类型<br>  函数类型</p>
+<p>char,short,int,long(signed，unsigned)<br>float,long,double</p>
+<p>sizeof(int)</p>
+<p>void类型<br>函数返回为空<br>函数参数为空<br>指针指向 void<br>类型为 void <em> 的指针代表对象的地址，而不是类型。返回指向 void 的指针，可以转换为任何数据类型。内存分配函数 void </em>malloc( size_t size )。</p>
+<h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><p>extern关键字声明变量名而不定义它。<br>如果需要在一个源文件中引用另外一个源文件中定义的变量，如果需要在一个源文件中引用另外一个源文件中定义的变量。</p>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>常量是固定值，在程序执行期间不会改变。这些固定的值，又叫做字面量。<br>定义常量<br>  使用 #define 预处理器。<br>  使用 const 关键字。</p>
+<h3 id="存储类"><a href="#存储类" class="headerlink" title="存储类"></a>存储类</h3><p>auto（所有局部变量默认的存储类）<br>register（定义存储在寄存器中而不是 RAM 中的局部变量，定义 ‘register’ 并不意味着变量将被存储在寄存器中，它意味着变量可能存储在寄存器中，这取决于硬件和实现的限制。）<br>static<br>static 存储类指示编译器在程序的生命周期内保持局部变量的存在。<br>static 修饰符也可以应用于全局变量。当 static 修饰全局变量时，会使变量的作用域限制在声明它的文件内。<br>extern<br>extern 存储类用于提供一个全局变量的引用，全局变量对所有的程序文件都是可见的。</p>
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><p>b=++a 先加加再赋值<br>b=a++ 先赋值再加加</p>
+<p>杂项运算符<br>sizeof() 返回变量的大小<br>&amp; 取变量的地址<br>* 指向一个变量<br>? : 条件表达式</p>
+<p>运算符优先级<br>括号 &gt; 算术运算 &gt; 逻辑运算 &gt; 赋值运算</p>
+<h3 id="控制语句"><a href="#控制语句" class="headerlink" title="控制语句"></a>控制语句</h3><p>while<br>for<br>do…while</p>
+<p>break<br>continue<br>goto</p>
+<p>switch(){case var:break;default:}</p>
+<h3 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h3><p>enum color { red=1, green, blue };<br>enum  color favorite_color;<br>printf(“请输入你喜欢的颜色: (1. red, 2. green, 3. blue): “);<br>scanf(“%d”, &amp;favorite_color);</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>声明<br>return_type function_name( parameter list );<br>定义<br>return_type function_name( parameter list )<br>{<br>   body of the function<br>}<br>使用<br>function_name( parameter list )</p>
+<p>作用域规则<br>局部变量<br>全局变量<br>形式参数</p>
+<p>变量初始化<br>int    0<br>char    ‘\0’<br>float    0<br>double    0<br>pointer    NULL</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>type arrayName [ arraySize ];<br>初始化数组<br>double balance[5] = {1000.0, 2.0, 3.4, 7.0, 50.0};<br>访问数组元素<br>double salary = balance[9];</p>
+<p>多维数组<br>type name[size1][size2]…[sizeN];</p>
+<p>初始化二维数组<br>int a[3][4] = {<br> {0, 1, 2, 3} ,   /<em>  初始化索引号为 0 的行 </em>/<br> {4, 5, 6, 7} ,   /<em>  初始化索引号为 1 的行 </em>/<br> {8, 9, 10, 11}   /<em>  初始化索引号为 2 的行 </em>/<br>};</p>
+<p>从函数返回数组<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 要生成和返回随机数的函数 */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> * <span class="title">getRandom</span><span class="params">( )</span> <span class="comment">// 此处返回定义为 * </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span>  r[<span class="number">10</span>];</span><br><span class="line">  <span class="keyword">int</span> i;</span><br><span class="line">  <span class="comment">/* 设置种子 */</span></span><br><span class="line">  srand( (<span class="keyword">unsigned</span>)time( <span class="literal">NULL</span> ) );</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">  &#123;</span><br><span class="line">     r[i] = rand();</span><br><span class="line">     <span class="built_in">printf</span>( <span class="string">"r[%d] = %d\n"</span>, i, r[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> r; <span class="comment">//数组返回</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>指向数组的指针<br>double *p;<br>double balance[10];<br>p = balance;</p>
+<p>传递数组给函数<br>void myFunction(int *param)<br>void myFunction(int param[10])<br>void myFunction(int param[])</p>
+<h3 id="enum-枚举"><a href="#enum-枚举" class="headerlink" title="enum(枚举)"></a>enum(枚举)</h3><p>enum　枚举名　{枚举元素1,枚举元素2,……};<br>enum DAY<br>{<br>      MON=1, TUE, WED, THU, FRI, SAT, SUN<br>};</p>
+<h3 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h3><p>&amp; 取地址<br>%p 打印<br>指针是一个变量，其值为另一个变量的地址。<br>int    <em>ip;    /</em> 一个整型的指针 <em>/<br>double </em>dp;    /<em> 一个 double 型的指针 </em>/<br>float  <em>fp;    /</em> 一个浮点型的指针 <em>/<br>char   </em>ch;     /<em> 一个字符型的指针 </em>/</p>
+<p>NULL 指针<br>int  *ptr = NULL;<br>printf(“ptr 的地址是 %p\n”, ptr  );<br>ptr 的地址是 0x0</p>
+<p>判断<br>if(ptr)     /<em> 如果 p 非空，则完成 </em>/<br>if(!ptr)    /<em> 如果 p 为空，则完成 </em>/</p>
+<p>指针的算术运算<br>可以对指针进行四种算术运算：++、—、+、-。<br>指针的比较 ==、&lt; 和 &gt;</p>
+<p>指针数组<br>int <em>ptr[MAX];<br>使用
+</em>ptr[i];</p>
+<p>指向指针的指针(多级指针)<br>int <strong>var; // 两级指针<br>int *</strong>var; // 三级指针</p>
+<p>传递指针给函数<br>声明<br>void getSeconds(unsigned long *par);<br>使用<br>getSeconds( &amp;sec );</p>
+<p>/<em> 函数声明 </em>/<br>double getAverage(int <em>arr, int size);<br>/</em> 带有 5 个元素的整型数组  <em>/<br>int balance[5] = {1000, 2, 3, 17, 50};<br>/</em> 传递一个指向数组的指针作为参数 */<br>avg = getAverage( balance, 5 ) ; // 数组名本身就是指针</p>
+<p>从函数返回指针<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 要生成和返回随机数的函数 */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> * <span class="title">getRandom</span><span class="params">( )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">static</span> <span class="keyword">int</span>  r[<span class="number">10</span>];</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">   <span class="comment">/* 设置种子 */</span></span><br><span class="line">   srand( (<span class="keyword">unsigned</span>)time( <span class="literal">NULL</span> ) );</span><br><span class="line">   <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">   &#123;</span><br><span class="line">      r[i] = rand();</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, r[i] );</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="函数指针-重中之重"><a href="#函数指针-重中之重" class="headerlink" title="函数指针(重中之重)"></a>函数指针(重中之重)</h3><p>函数指针是指向函数的指针变量。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数指针变量的声明</span></span><br><span class="line"><span class="comment">// 声明一个指向同样参数、返回值的函数指针类型</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*fun_ptr)</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>; </span><br><span class="line"><span class="comment">// 声明一个fun_ptr变量指向一个函数，这个函数有两个整型参数，返回值为整型</span></span><br></pre></td></tr></table></figure></p>
+<p>回调函数<br>函数指针作为某个函数的参数.<br>函数指针变量可以作为某个函数的参数来使用的，回调函数就是一个通过函数指针调用的函数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">populate_array</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">size_t</span> arraySize, <span class="keyword">int</span> (*getNextValue)(<span class="keyword">void</span>))</span> <span class="comment">//此处定义了个函数指针</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;arraySize; i++)</span><br><span class="line">        <span class="built_in">array</span>[i] = getNextValue();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 把函数指针定义拿出来，单独定义。</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">int</span> <span class="params">(*getNextValue)</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">populate_array</span><span class="params">(<span class="keyword">int</span> *<span class="built_in">array</span>, <span class="keyword">size_t</span> arraySize,getNextValue)</span> <span class="comment">//使用函数指针</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i=<span class="number">0</span>; i&lt;arraySize; i++)</span><br><span class="line">        <span class="built_in">array</span>[i] = getNextValue(); <span class="comment">//使用函数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现面向对象的C<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法</span></span><br><span class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*say)</span><span class="params">(<span class="keyword">char</span>*)</span></span>;</span><br><span class="line"><span class="comment">// 类</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span>* name,</span><br><span class="line">  <span class="keyword">int</span> age,</span><br><span class="line">  say,</span><br><span class="line">&#125; person;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现方法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sayimpl</span><span class="params">(<span class="keyword">char</span>* content)</span></span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"say: %s"</span>,content);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line">person p1=person&#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法绑定</span></span><br><span class="line">p1.say = sayimpl;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法调用</span></span><br><span class="line">p1.say(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h3><p>字符串实际上是使用 null 字符 ‘\0’ 终止的一维字符数组。<br>char greeting[6] = {‘H’, ‘e’, ‘l’, ‘l’, ‘o’, ‘\0’};<br>char greeting[] = “Hello”;</p>
+<p>操作字符串的函数<br>strcpy(s1, s2);<br>strcat(s1, s2);<br>strlen(s1);<br>strcmp(s1, s2);<br>// index<br>strchr(s1, ch);<br>strstr(s1, s2);</p>
+<h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>struct tag {<br>    member-list<br>    member-list<br>    member-list<br>    …<br>} variable-list ;</p>
+<p>tag 是结构体标签<br>member-list 是标准的变量定义<br>variable-list 结构变量</p>
+<p>访问结构成员：我们使用成员访问运算符（.）<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span>  title[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  author[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  subject[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span>   book_id;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span> <span class="title">Book1</span>;</span>        <span class="comment">/* 声明 Book1，类型为 Books */</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span> <span class="title">Book2</span>;</span>        <span class="comment">/* 声明 Book2，类型为 Books */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 等价</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span>  title[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  author[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  subject[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span>   book_id;</span><br><span class="line">&#125;Book1,Book2;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* Book1 详述 */</span></span><br><span class="line"><span class="built_in">strcpy</span>( Book1.title, <span class="string">"C Programming"</span>);</span><br><span class="line"><span class="built_in">strcpy</span>( Book1.author, <span class="string">"Nuha Ali"</span>);</span><br><span class="line"><span class="built_in">strcpy</span>( Book1.subject, <span class="string">"C Programming Tutorial"</span>);</span><br><span class="line">Book1.book_id = <span class="number">6495407</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出 Book1 信息 */</span></span><br><span class="line"><span class="built_in">printf</span>( <span class="string">"Book 1 title : %s\n"</span>, Book1.title);</span><br><span class="line"><span class="built_in">printf</span>( <span class="string">"Book 1 author : %s\n"</span>, Book1.author);</span><br><span class="line"><span class="built_in">printf</span>( <span class="string">"Book 1 subject : %s\n"</span>, Book1.subject);</span><br><span class="line"><span class="built_in">printf</span>( <span class="string">"Book 1 book_id : %d\n"</span>, Book1.book_id);</span><br><span class="line"></span><br><span class="line"><span class="comment">//结构作为函数参数</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span>  title[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  author[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  subject[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span>   book_id;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* 函数声明 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printBook</span><span class="params">( struct Books book )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//指向结构的指针</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Books</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span>  title[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  author[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  subject[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span>   book_id;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">/* 函数声明 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printBook</span><span class="params">( struct Books *book )</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 通过传 Book1 的地址来输出 Book1 信息 */</span></span><br><span class="line">printBook( &amp;Book1 );</span><br></pre></td></tr></table></figure></p>
+<h3 id="位域"><a href="#位域" class="headerlink" title="位域"></a>位域</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">bs</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a:<span class="number">8</span>;</span><br><span class="line">    <span class="keyword">int</span> b:<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> c:<span class="number">6</span>;</span><br><span class="line">&#125;data,*pdata;</span><br><span class="line"><span class="comment">// 说明 data 为 bs 变量，共占两个字节。其中位域 a 占 8 位，位域 b 占 2 位，位域 c 占 6 位。</span></span><br><span class="line"><span class="comment">// data.a 结构体变量访问结构体元素</span></span><br><span class="line"><span class="comment">// pdata-&gt;a 结构体指针访问结构体元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="共用体"><a href="#共用体" class="headerlink" title="共用体"></a>共用体</h3><p>共用体是一种特殊的数据类型，允许您在相同的内存位置存储不同的数据类型。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> Data</span><br><span class="line">&#123;</span><br><span class="line">   <span class="keyword">int</span> i;</span><br><span class="line">   <span class="keyword">float</span> f;</span><br><span class="line">   <span class="keyword">char</span>  str[<span class="number">20</span>];</span><br><span class="line">&#125; data;</span><br><span class="line"><span class="comment">// 现在，Data 类型的变量可以存储一个整数、一个浮点数，或者一个字符串。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问共用体成员</span></span><br><span class="line"><span class="comment">// 我们使用成员访问运算符（.）</span></span><br><span class="line"><span class="built_in">printf</span>( <span class="string">"data.str : %s\n"</span>, data.str);</span><br></pre></td></tr></table></figure></p>
+<h3 id="typedef"><a href="#typedef" class="headerlink" title="typedef"></a>typedef</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> BYTE;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Books</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">   <span class="keyword">char</span>  title[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  author[<span class="number">50</span>];</span><br><span class="line">   <span class="keyword">char</span>  subject[<span class="number">100</span>];</span><br><span class="line">   <span class="keyword">int</span>   book_id;</span><br><span class="line">&#125; Book;</span><br><span class="line"></span><br><span class="line"><span class="comment">// typedef vs #define</span></span><br><span class="line"><span class="comment">// typedef 仅限于为类型定义符号名称，#define 不仅可以为类型定义别名，也能为数值定义别名，比如您可以定义 1 为 ONE。</span></span><br><span class="line"><span class="comment">// typedef 是由编译器执行解释的，#define 语句是由预编译器进行处理的。</span></span><br></pre></td></tr></table></figure>
+<h3 id="输入-amp-输出"><a href="#输入-amp-输出" class="headerlink" title="输入 &amp; 输出"></a>输入 &amp; 输出</h3><p>getchar() &amp; putchar() 函数<br>  函数从屏幕读取下一个可用的字符，并把它返回为一个整数。</p>
+<p>gets() &amp; puts() 函数<br>  函数从 stdin 读取一行到 s 所指向的缓冲区<br>  函数把字符串 s 和一个尾随的换行符写入到 stdout</p>
+<p>scanf() 和 printf() 函数<br>  函数从标准输入流 stdin 读取输入</p>
+<h3 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h3><p>FILE <em>fopen( const char </em> filename, const char <em> mode );<br>int fclose( FILE </em>fp );</p>
+<p>int fputc( int c, FILE <em>fp );<br>int fputs( const char </em>s, FILE *fp );</p>
+<p>int fgetc( FILE <em> fp );<br>char </em>fgets( char <em>buf, int n, FILE </em>fp );</p>
+<p>二进制 I/O 函数<br>size_t fread(void <em>ptr, size_t size_of_elements, size_t number_of_elements, FILE </em>a_file);<br>size_t fwrite(const void <em>ptr, size_t size_of_elements, size_t number_of_elements, FILE </em>a_file);</p>
+<h3 id="宏处理"><a href="#宏处理" class="headerlink" title="宏处理"></a>宏处理</h3><h1 id="define-定义宏"><a href="#define-定义宏" class="headerlink" title="define    定义宏"></a>define    定义宏</h1><h1 id="include-包含一个源代码文件"><a href="#include-包含一个源代码文件" class="headerlink" title="include    包含一个源代码文件"></a>include    包含一个源代码文件</h1><h1 id="undef-取消已定义的宏"><a href="#undef-取消已定义的宏" class="headerlink" title="undef    取消已定义的宏"></a>undef    取消已定义的宏</h1><h1 id="ifdef-如果宏已经定义，则返回真"><a href="#ifdef-如果宏已经定义，则返回真" class="headerlink" title="ifdef    如果宏已经定义，则返回真"></a>ifdef    如果宏已经定义，则返回真</h1><h1 id="ifndef-如果宏没有定义，则返回真"><a href="#ifndef-如果宏没有定义，则返回真" class="headerlink" title="ifndef    如果宏没有定义，则返回真"></a>ifndef    如果宏没有定义，则返回真</h1><h1 id="if-如果给定条件为真，则编译下面代码"><a href="#if-如果给定条件为真，则编译下面代码" class="headerlink" title="if    如果给定条件为真，则编译下面代码"></a>if    如果给定条件为真，则编译下面代码</h1><h1 id="else-if-的替代方案"><a href="#else-if-的替代方案" class="headerlink" title="else    #if 的替代方案"></a>else    #if 的替代方案</h1><h1 id="elif-如果前面的-if-给定条件不为真，当前条件为真，则编译下面代码"><a href="#elif-如果前面的-if-给定条件不为真，当前条件为真，则编译下面代码" class="headerlink" title="elif    如果前面的 #if 给定条件不为真，当前条件为真，则编译下面代码"></a>elif    如果前面的 #if 给定条件不为真，当前条件为真，则编译下面代码</h1><h1 id="endif-结束一个-if……-else-条件编译块"><a href="#endif-结束一个-if……-else-条件编译块" class="headerlink" title="endif    结束一个 #if……#else 条件编译块"></a>endif    结束一个 #if……#else 条件编译块</h1><h1 id="error-当遇到标准错误时，输出错误消息"><a href="#error-当遇到标准错误时，输出错误消息" class="headerlink" title="error    当遇到标准错误时，输出错误消息"></a>error    当遇到标准错误时，输出错误消息</h1><h1 id="pragma-使用标准化方法，向编译器发布特殊的命令到编译器中"><a href="#pragma-使用标准化方法，向编译器发布特殊的命令到编译器中" class="headerlink" title="pragma    使用标准化方法，向编译器发布特殊的命令到编译器中"></a>pragma    使用标准化方法，向编译器发布特殊的命令到编译器中</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_ARRAY_LENGTH 20</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消定义</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">undef</span>  FILE_SIZE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_SIZE 42</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> MESSAGE</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> MESSAGE <span class="meta-string">"You wish!"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> DEBUG</span></span><br><span class="line">   <span class="comment">/* Your debugging statements here */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 预定义宏</span></span><br><span class="line">__DATE__	当前日期，一个以 <span class="string">"MMM DD YYYY"</span> 格式表示的字符常量。</span><br><span class="line">__TIME__	当前时间，一个以 <span class="string">"HH:MM:SS"</span> 格式表示的字符常量。</span><br><span class="line">__FILE__	这会包含当前文件名，一个字符串常量。</span><br><span class="line">__LINE__	这会包含当前行号，一个十进制常量。</span><br><span class="line">__STDC__	当编译器以 ANSI 标准编译时，则定义为 <span class="number">1</span>。</span><br><span class="line"></span><br><span class="line"><span class="comment">// 预处理器运算符</span></span><br><span class="line"><span class="comment">// 宏延续运算符（\）</span></span><br><span class="line"><span class="comment">// 字符串常量化运算符（#）</span></span><br><span class="line"><span class="comment">// 当需要把一个宏的参数转换为字符串常量时，则使用字符串常量化运算符（#）。</span></span><br><span class="line"><span class="comment">// 定义</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span>  message_for(a, b)  \</span></span><br><span class="line">    <span class="built_in">printf</span>(#a <span class="string">" and "</span> #b <span class="string">": We love you!\n"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 替换</span></span><br><span class="line">message_for(Carole, Debra);</span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">Carole <span class="keyword">and</span> Debra: We love you!</span><br><span class="line"></span><br><span class="line"><span class="comment">// 标记粘贴运算符（##）</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> tokenpaster(n) printf (<span class="meta-string">"token"</span> #n <span class="meta-string">" = %d"</span>, token##n)</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line">tokenpaster(<span class="number">34</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line"><span class="built_in">printf</span> (<span class="string">"token34 = %d"</span>, token34);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined (MESSAGE)</span></span><br><span class="line">   <span class="meta">#<span class="meta-keyword">define</span> MESSAGE <span class="meta-string">"You wish!"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数化的宏</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX(x,y) ((x) &gt; (y) ? (x) : (y))</span></span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Max between 20 and 10 is %d\n"</span>, MAX(<span class="number">10</span>, <span class="number">20</span>));  </span><br><span class="line"><span class="comment">// 结果</span></span><br><span class="line">Max between <span class="number">20</span> <span class="keyword">and</span> <span class="number">10</span> is <span class="number">20</span></span><br><span class="line"><span class="comment">// 预处理完结果，其实本质是进行了替换</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Max between 20 and 10 is %d\n"</span>, ((<span class="number">10</span>) &gt; (<span class="number">20</span>) ? (<span class="number">10</span>) : (<span class="number">20</span>)));</span><br></pre></td></tr></table></figure>
+<h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在系统目录的标准列表中搜索名为 file 的文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;file&gt;</span></span></span><br><span class="line"><span class="comment">// 包含当前文件的目录中搜索名为 file 的文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"file"</span></span></span><br><span class="line"><span class="comment">// 只引用一次头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HEADER_FILE</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HEADER_FILE</span></span><br><span class="line"></span><br><span class="line">the entire header file file</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 有条件引用</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> SYSTEM_1</span></span><br><span class="line">   <span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"system_1.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> SYSTEM_2</span></span><br><span class="line">   <span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"system_2.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">elif</span> SYSTEM_3</span></span><br><span class="line">   ...</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 宏名称代替</span></span><br><span class="line"> <span class="meta">#<span class="meta-keyword">define</span> SYSTEM_H <span class="meta-string">"system_1.h"</span></span></span><br><span class="line"> ...</span><br><span class="line"> <span class="meta">#<span class="meta-keyword">include</span> SYSTEM_H</span></span><br></pre></td></tr></table></figure>
+<h3 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h3><p>(type_name) expression</p>
+<p>整数提升</p>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>errno.h<br>errno //错误号<br>perror() //函数显示您传给它的字符串<br>strerror() //返回一个指针，指针指向当前 errno 值的文本表示形式。<br>extern int errno ;<br>fprintf(stderr, “错误号: %d\n”, errno);<br>程序退出状态<br>EXIT_SUCCESS<br>EXIT_FAILURE</p>
+<h3 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h3><p>递归用来处理规模越来越小的问题<br>递归三要素<br>  递归入口<br>  退出条件</p>
+<h3 id="可变参数"><a href="#可变参数" class="headerlink" title="可变参数"></a>可变参数</h3><p>stdarg.h<br>// 定义<br>int func(int, … )<br>// 处理<br>va_list valist; // 定义一个参数列表<br>va_start(valist, num); // 对valist 赋值<br>va_arg(valist, int); // 处理列表元素<br>va_end(valist); // 清理 valist</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><p>stdlib.h<br>void <em>calloc(int num, int size); //在内存中动态地分配 num 个长度为 size 的连续空间，并将每一个字节都初始化为 0。<br>void free(void </em>address); //释放 address 所指向的内存块,释放的是动态分配的内存空间。</p>
+<p>void <em>malloc(int num); //在堆区分配一块指定大小的内存空间，用来存放数据。(不会被初始化)<br>void </em>realloc(void *address, int newsize); // 该函数重新分配内存，把内存扩展到 newsize。</p>
+<p>/<em> 动态分配内存 </em>/<br>description = (char <em>)malloc( 200 </em> sizeof(char) );</p>
+<p>// 扩展动态分配<br>description = (char <em>)malloc( 30 </em> sizeof(char) );<br>description = (char <em>) realloc( description, 100 </em> sizeof(char) );<br>free(description);</p>
+<h3 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h3><p>int main( int argc, char *argv[] )</p>
+<h3 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h3><p>冒泡排序<br>选择排序<br>插入排序<br>希尔排序<br>归并排序<br>快速排序</p>
+<ul>
+<li><a href="https://www.runoob.com/cprogramming/c-examples.html" target="_blank" rel="noopener">C 语言实例</a></li>
+<li><a href="https://www.runoob.com/cprogramming/c-100-examples.html" target="_blank" rel="noopener">C 语言经典100例</a></li>
+</ul>
+<h3 id="C-标准库介绍"><a href="#C-标准库介绍" class="headerlink" title="C 标准库介绍"></a>C 标准库介绍</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>头文件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>assert.h</td>
+<td></td>
+</tr>
+<tr>
+<td>ctype.h</td>
+<td>字符处理</td>
+</tr>
+<tr>
+<td>errno.h</td>
+<td>错误处理</td>
+</tr>
+<tr>
+<td>float.h</td>
+<td>浮点数处理</td>
+</tr>
+<tr>
+<td>limits.h</td>
+<td>宏限制了各种变量类型（比如 char、int 和 long）的值。</td>
+</tr>
+<tr>
+<td>locale.h</td>
+<td>日期格式和货币符号</td>
+</tr>
+<tr>
+<td>math.h</td>
+<td>各种数学函数</td>
+</tr>
+<tr>
+<td>setjmp.h</td>
+<td>环境变量</td>
+</tr>
+<tr>
+<td>signal.h</td>
+<td>信号处理</td>
+</tr>
+<tr>
+<td>stdarg.h</td>
+<td>可变函数处理</td>
+</tr>
+<tr>
+<td>stddef.h</td>
+<td>宏定义</td>
+</tr>
+<tr>
+<td>stdio.h</td>
+<td>输入输出</td>
+</tr>
+<tr>
+<td>stdlib.h</td>
+<td>工具函数</td>
+</tr>
+<tr>
+<td>string.h</td>
+<td>字符串处理</td>
+</tr>
+<tr>
+<td>time.h</td>
+<td>时间处理函数</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/%E5%B9%B3%E5%8F%B0%E5%88%86%E6%9E%90/" rel="prev" title="平台分析">
+      <i class="fa fa-chevron-left"></i> 平台分析
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/C-%E8%AF%AD%E8%A8%80/" rel="next" title="C++语言">
+      C++语言 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本语法"><span class="nav-number">2.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">2.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量声明"><span class="nav-number">2.2.</span> <span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量"><span class="nav-number">2.3.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储类"><span class="nav-number">2.4.</span> <span class="nav-text">存储类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符"><span class="nav-number">2.5.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制语句"><span class="nav-number">2.6.</span> <span class="nav-text">控制语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入输出"><span class="nav-number">2.7.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.8.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">2.9.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enum-枚举"><span class="nav-number">2.10.</span> <span class="nav-text">enum(枚举)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">2.11.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数指针-重中之重"><span class="nav-number">2.12.</span> <span class="nav-text">函数指针(重中之重)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串处理"><span class="nav-number">2.13.</span> <span class="nav-text">字符串处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体"><span class="nav-number">2.14.</span> <span class="nav-text">结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位域"><span class="nav-number">2.15.</span> <span class="nav-text">位域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共用体"><span class="nav-number">2.16.</span> <span class="nav-text">共用体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typedef"><span class="nav-number">2.17.</span> <span class="nav-text">typedef</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入-amp-输出"><span class="nav-number">2.18.</span> <span class="nav-text">输入 &amp; 输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件读写"><span class="nav-number">2.19.</span> <span class="nav-text">文件读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#宏处理"><span class="nav-number">2.20.</span> <span class="nav-text">宏处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#define-定义宏"><span class="nav-number"></span> <span class="nav-text">define    定义宏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#include-包含一个源代码文件"><span class="nav-number"></span> <span class="nav-text">include    包含一个源代码文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undef-取消已定义的宏"><span class="nav-number"></span> <span class="nav-text">undef    取消已定义的宏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ifdef-如果宏已经定义，则返回真"><span class="nav-number"></span> <span class="nav-text">ifdef    如果宏已经定义，则返回真</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ifndef-如果宏没有定义，则返回真"><span class="nav-number"></span> <span class="nav-text">ifndef    如果宏没有定义，则返回真</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#if-如果给定条件为真，则编译下面代码"><span class="nav-number"></span> <span class="nav-text">if    如果给定条件为真，则编译下面代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#else-if-的替代方案"><span class="nav-number"></span> <span class="nav-text">else    #if 的替代方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#elif-如果前面的-if-给定条件不为真，当前条件为真，则编译下面代码"><span class="nav-number"></span> <span class="nav-text">elif    如果前面的 #if 给定条件不为真，当前条件为真，则编译下面代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#endif-结束一个-if……-else-条件编译块"><span class="nav-number"></span> <span class="nav-text">endif    结束一个 #if……#else 条件编译块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#error-当遇到标准错误时，输出错误消息"><span class="nav-number"></span> <span class="nav-text">error    当遇到标准错误时，输出错误消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pragma-使用标准化方法，向编译器发布特殊的命令到编译器中"><span class="nav-number"></span> <span class="nav-text">pragma    使用标准化方法，向编译器发布特殊的命令到编译器中</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#头文件"><span class="nav-number">0.1.</span> <span class="nav-text">头文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制类型转换"><span class="nav-number">0.2.</span> <span class="nav-text">强制类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误处理"><span class="nav-number">0.3.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归"><span class="nav-number">0.4.</span> <span class="nav-text">递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变参数"><span class="nav-number">0.5.</span> <span class="nav-text">可变参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存管理"><span class="nav-number">0.6.</span> <span class="nav-text">内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令行参数"><span class="nav-number">0.7.</span> <span class="nav-text">命令行参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序算法"><span class="nav-number">0.8.</span> <span class="nav-text">排序算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-标准库介绍"><span class="nav-number">0.9.</span> <span class="nav-text">C 标准库介绍</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7:54</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

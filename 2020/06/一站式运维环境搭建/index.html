@@ -17,15 +17,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+  <meta name="description" content="主机自动化安装 Cobbler   服务自动化部署 使用Ansible大规模部署   openstack 私有云安装（适用规模大的环境） OpenStack安装   非私有云安装 (适用于规模小的环境)  KMV虚拟化   docker 安装 Docker安装部署   k8s 集群部署  or    docker 私有镜像仓库搭建 Harbor安装配置   dockerfile 容器镜像制作 容器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一站式运维环境搭建">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/06/%E4%B8%80%E7%AB%99%E5%BC%8F%E8%BF%90%E7%BB%B4%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="主机自动化安装 Cobbler   服务自动化部署 使用Ansible大规模部署   openstack 私有云安装（适用规模大的环境） OpenStack安装   非私有云安装 (适用于规模小的环境)  KMV虚拟化   docker 安装 Docker安装部署   k8s 集群部署  or    docker 私有镜像仓库搭建 Harbor安装配置   dockerfile 容器镜像制作 容器">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-05T06:43:55.000Z">
 <meta property="article:modified_time" content="2020-06-12T15:17:52.272Z">
@@ -250,7 +250,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>240</span>
+              <span>208</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -269,7 +269,50 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="Oh, these decrypted content cannot be verified, but you can still have a look."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="Hey, password is required here." /><label>Hey, password is required here.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="d7518add8c4b638dab598f1a04a4339c416d0673756962d515f9781de136809f">4dc7a94a957e0b6d366c4c57187f63c514b1838b6a28f070585cad84b1e80383823afa5695960eaf613334f5875bdfb08adf1b54968bae6f75323815871b97903d058ec2fb386405a9e110ec1beeb740f6856f37547d36edc7f37ad366d7409f1e297077bc40f01b219ff8cb5c589c06e7432033e859424280a9c215351504277ea5b72d0a3c88b439afcfcfdc4e7aebded72679b1186438d29cb186b1eb3d2a604610de7591ead960e6ac6a0fdc7050e1bd9c77129452c3e7353826a87967055af468b3eb78f35467f5e7c59312a86363202783497075341dfaf2f44295e15ec54e836936e224c6ad1fe2433cd11e99370f64b0de0f69b152d849268c6476a23b28e7f52e32b4036ec7ddc6491c30dbf1f17a6a57562c8153b4c7b0dec8a3e08d0b10ca2f9008c383d0e405355efaf9e4b7312b054cb98d2efc70cfbe8cfa569e5549c98c40924da24335d4b75d505bf8c0ddefd378e38fe37ab3045a212325782143f794f4d359e21179e7934d77e626c0c72d0b8b7a857afc1d2e1d0a42f179194918ed9482a1478e38a6ca10d2e2fbc24c0a45fbca85cfda1b90d7b3976db8ad925bf82514205db69b337976df4a6fccf1004e8b0853b77db34101b25d217afa9b3245e8a0192edbde797d420e088ffc16a408bda324bc7a6aacfe64498de3d662248720113de879d955aa130bf1652cbc6b6aed7b4ab487ca31a2dcad7307cf4278261002c196d431c1204a4bfc89878bf244f0ec2e2bef88b1760ed462def728ac5948806f0159f6ecef7a2d50a5b4409200e597655bf3f5e13bc1594a7883e5721564df15a537b7e73fdf308e19e223d14869d27a9423de4e4ecd9cd9a0de5457ec7f9b1ff83322ef29e86868456b7c8a9789f8eb68317402bd8e0a72243e04c29776bc671c33b1b4ae54485655fb09777df83f552e2bd2628113210fbb4ca521cb6dfd699e2502f93ec5693e755f471dc17ad47637f3073be199d4797b41e356524bd8da0d35d5e5665bfc816fdb962d32ea3071ddf1541db37da384211778de61e69cef599a0a4c6674c51271a6be7b32338e312f03b81bae7626695979a5e55634bac001114f173cb578fd4deabf3f831e7de8e2cee5c23ad4a8fbe3cb1281c78da5497dd1aa6370816d9c1817b937699dc4b7d4680798730df18aa133f6bb637cb20b97c2b5e94ababc27294f7ca807ef0bbaa625561b09bd9e71063055f7ce51a06356a226db967e2aa4ee2a20359893ccdac639a17fb7f8f4a20de0fe03118c363b6324bcd1de01e6f7c4d1ecd4778b2fef0da21c33b814d40904e06bcb9df2bd63ba3120ac7e5e0d4d895f388c46324541605b77e2e61464f75229b1e92b1a516d72486fd420356feea5aff98704bb3d66fb6c0e6ac5f6756ff2cc097eda318bb6f2e507db72501d7e4033f67f232077ba84c8dbe64c3e9dd8232ca6dae0380dd399f712b0e65d0330abf579e2283092e640f60001f0e34467175646850ce022ee57cf3027a0aae3ca4d1027155e333edd745bfd1d27281be69b68599e9cd79e4da4f89eb21adb5797c6ec6d21bdb980f600e41800ac3198d6fa9e72c1698328b699e08f63bcd8fb25bf36d15510ece87a6dd85d1c05f91085e4aabde8d49fe19075ae5ff33796bed1e3d13e05eff8685db4866c71b40a6b9d59853341061198dd390d55fbff7df9ad8d077f933c034552df21ab57c8c58331d099ab2e7dc172fb30fd2079afffd15777eef2bcfe1c58187650c23222075e38c5d4c8c52394c10489aa5cf3670e8180a832afd7895d7e1e6dec9368d5e445cee85c95f9204b6c29770f94ebf3317648190f4d9d376411a3ef555f30b1ff54a1dd79b3415a33f1a248724377ea1031918b1c7ede5912fc436f53ab3a146af59c0123dc45d6cd336651776f0ff7e0453b00fab93f7369c9b7c22d2890ffd3cbaa7bd7da943eb788887145529e408070423e356b3adc49374b80e0890492f627bacdaf34e7fca4ddb2d7b965c09f4b6f656732189325f729891ea22f4179466347db57b171d1419b8212a1c2813a23e7006da8d29ddfa3a7479aa6f6ba88913136936d87f35403eadf4d58c5e7cb691c825ee49992eacd49b07d56d995c1c3c908f00dec15ed2130c6c3ebb39ac19544454ad15169f80e77a225e0241b8edf7e7c6eea6f5a9eaaad56a4132be4154339c94ad20489972b1fd5c8a6f15d20b37f0cba2d72eb4e96d72543d2e38d344bd5e0074336ab1123e36e861c76f1e4407c779953bfba55b1d6b034b58de7469fc46178ab71370ff2da4ad778b227b6362bacaae4645c6200bdec4a3ca00295d21bb219502ada303ca03db23583a74f0efb097e2e298bd09342aa26e37026bd927c69492a7644f201fe601a409b1f2ea54131b5e0764a6f9e5011193f8586947440c07bb7da78fde0eef61ae61aa1e97ab84ca5ed2bd5e79ed6231bf7994971bf9c65a99baa93a5087c434751f73b1cad1f49ca0649d10bdbbce8521f6b8a4212e0db65f8298a475e6457ee34a29e6dfc1dbc347e301d5b9fd20053edddf8401dd87675c34fe83a4796f93eb93bf173b3c40eca768344dad72e992e88a769f7b43d8d3f38e695bae5b6f8bc4e149106fc1f33da6a999be5d36dabad9509528060bc36a40c49b7e2a3301c09bb1199bad3c2e3652b00e4dd986a5528e6b9b987ca1d432f3702a4d316373e2a89190596564377762ea483185b884c2bdc93187ff1edc2dac1d63fcf5a7ed575cff4bce88d92aa786de20d73298b76c6d03feb8c829e5f899d38a0d36b2dfcbc23227131b81126ede13ac9098a0bfb6044af36486b557e8d41d65851d0838315a1f0a26a6126d597673497924c3d035ccb98b95faf9d0e6f8146602ea479eee9cf688c56d52bba8cc59c55df86731b498927ad40e08fc685a05a776af6919644e7d2a4555a707d54c51c827a1de9545f836ee806736016638796cb3c72862e2efb0d57b1b51f24a2bdf8a992ec50a285c8b543df09633dbaaaeceeb8f5d6782ec59ac962d815908b4e9a6bdd28ce4369312fa5bd75ed019b942b7e636aa0e26889ad6b1ad70797a5a10db285713d9d21999f9ceb3c6df364dc9b98078a5a6a9cc28a538b549dc37c3bc7e8edab7bd0a3ade83f9c07698a9c4839bc8283a3e170f12840c5e38dfb2cff9ef9737c03616c2ac0d3aa92028a9048247bb62ebfc03ae02de71a1325b2c07f838b6ba17bb0c47cb6e03b8df6d7ffca20bd9911e40d7345c186f5693b34f710416211d423ae60ea3e6d77f4a63e83478ffd6c4b1d38184d3dba9f2be1c53a71a00ab86489cac7f87a8244a877ddb82ce2da5383c860ea5c39ffadbfca303da22459f2da71c24dd3c7bf41dbcc5ad359c18a47720fcca758f033af62d36bd24bad3632e82abd231840a575c6ea286fdbc79c193e97ceb634a962a3a683c3e4c1093196aec1ebd476874e52e75037aa4a4df286f400779a48e570c57af67257c7c22ed0ec17fdcc13d8a6b5eb306c77d5658415f177cb4a136a0a9944e1eb8cc5ec8819d51c62166c41052c867dfc166859578c9f43733402c7d733d0fdd319baf1dcd863a35d9b9b6dc1d60a498e8140eae5e00ab220c441c1faa878439ed43b75b2ded02c5797ba33f07d6415a72832eac83f64b882ae6ea02c73004b3517b90a09fee4c1a8ae2ad47411e14e17f2c30bc93e84e06bbfb08a33ba04d7caebc18acd79eede6cab7498b850675ecaeab1ebf7544ffed5202d850bf6658dbf9726f2fbf85116a6f50f7c0f4cde443ea40842ab24beb462cd687d8afaa8d663f4dfee927588117ea60ed2f835fb5cd6d885882a3d548aab3f6db8eae04d70657c25e60af34629a01aef2e30dc73a53e33084d5f08acf436033a6f2ad7cd9d98c84a9aab7bd2ba76bb5b27be1bbbf004304d7df11ea03c4a7294c0ffaec07c21c78d978681181e770741936f0ad727d978136e9cd8c045d6612fa30d208c1ff93ee1e395b338611d63ff75c712b42b03d9db0ca0b7a97da5e3023707ad4a3508d9b43f8561b512f5649fa5e881bec0ff93288c1c88dbc26f732e540a0fc740ee8e4b00ab6844973cc4a979353946f0012ef02f49cec2c84c78bd60c5fb7b3a576eb973c544e6d25e867282146c0b6e61c2f9ef369ceb54a7e1876d8260a590284c3ef8bf32c7fa9e787569c1fed4d762c62eebad3b2c3001f81d47344df7af83213a65545d14ea033589b78812fd13974ab2f5be2b86e70f2a2dd80cd34267c82e141a80322f00be5e25486e3aa2ed36004abc09632aeb605ca3e31549b0fd857da6dd97ded93073938b2a5f146d5ab89911ccf1ab42b2769f877c50cae5e0575a51e7e6e6d7133834fc7067902a7e6e9a5a7c12956714012025e96a4c2f1b524b6ee8ab7e4d583432ba059b13a56f5ea635e09da88e062468bdb00dce42f0e660605e14e4753eb7e3c4383e220fb702b74ca088bcef8ddaba67722b92d4b5fbddbcf2b38050644f3f7e0e842ebb05f83f9d320f1d95b741abbd50f46aabbacd17b82fc64863c97579fd704db94a6563b9dc47541a7d29edebe57e9ad465bb5b4b86f945e162a25b5719af9915636238</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+        <h2 id="主机自动化安装"><a href="#主机自动化安装" class="headerlink" title="主机自动化安装"></a>主机自动化安装</h2><ul>
+<li><a href="/2020/05/Cobbler/" title="Cobbler">Cobbler</a>
+</li>
+</ul>
+<h2 id="服务自动化部署"><a href="#服务自动化部署" class="headerlink" title="服务自动化部署"></a>服务自动化部署</h2><ul>
+<li><a href="/2020/05/Ansible%E4%BD%BF%E7%94%A8/" title="使用Ansible大规模部署">使用Ansible大规模部署</a>
+</li>
+</ul>
+<h2 id="openstack-私有云安装（适用规模大的环境）"><a href="#openstack-私有云安装（适用规模大的环境）" class="headerlink" title="openstack 私有云安装（适用规模大的环境）"></a>openstack 私有云安装（适用规模大的环境）</h2><ul>
+<li><a href="/2020/05/OpenStack%E5%AE%89%E8%A3%85/" title="OpenStack安装">OpenStack安装</a>
+</li>
+</ul>
+<h2 id="非私有云安装-适用于规模小的环境"><a href="#非私有云安装-适用于规模小的环境" class="headerlink" title="非私有云安装 (适用于规模小的环境)"></a>非私有云安装 (适用于规模小的环境)</h2><ul>
+<li></li>
+<li><a href="/2020/05/KVM%E5%AE%89%E8%A3%85/" title="KMV虚拟化">KMV虚拟化</a>
+</li>
+</ul>
+<h2 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h2><ul>
+<li><a href="/2020/05/Docker%E5%AE%89%E8%A3%85/" title="Docker安装部署">Docker安装部署</a>
+</li>
+</ul>
+<h2 id="k8s-集群部署"><a href="#k8s-集群部署" class="headerlink" title="k8s 集群部署"></a>k8s 集群部署</h2><ul>
+<li></li>
+<li>or</li>
+<li>
+</li>
+</ul>
+<h2 id="docker-私有镜像仓库搭建"><a href="#docker-私有镜像仓库搭建" class="headerlink" title="docker 私有镜像仓库搭建"></a>docker 私有镜像仓库搭建</h2><ul>
+<li><a href="/2020/05/Harbor%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="Harbor安装配置">Harbor安装配置</a>
+</li>
+</ul>
+<h2 id="dockerfile-容器镜像制作"><a href="#dockerfile-容器镜像制作" class="headerlink" title="dockerfile 容器镜像制作"></a>dockerfile 容器镜像制作</h2><ul>
+<li><a href="/2020/05/Dockerfile/" title="容器镜像制作">容器镜像制作</a>
+</li>
+</ul>
+<h2 id="ELK-环境搭建"><a href="#ELK-环境搭建" class="headerlink" title="ELK 环境搭建"></a>ELK 环境搭建</h2><ul>
+<li><a href="/2020/05/ELK%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" title="ELK安装配置">ELK安装配置</a>
+</li>
+</ul>
+<h2 id="运维监控"><a href="#运维监控" class="headerlink" title="运维监控"></a>运维监控</h2><ul>
+<li><a href="/2020/05/Openfalcon/" title="Openfalcon安装">Openfalcon安装</a></li>
+<li><a href="/2020/05/Prometheus/" title="prometheus安装">prometheus安装</a></li>
+</ul>
+
     </div>
 
     
@@ -284,7 +327,7 @@ var _hmt = _hmt || [];
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/06/rancher%E5%AE%89%E8%A3%85k8s/" rel="prev" title="rancher安装k8s">
+    <a href="/2020/06/Rancher%E5%AE%89%E8%A3%85k8s/" rel="prev" title="rancher安装k8s">
       <i class="fa fa-chevron-left"></i> rancher安装k8s
     </a></div>
       <div class="post-nav-item">
@@ -349,6 +392,7 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#主机自动化安装"><span class="nav-number">1.</span> <span class="nav-text">主机自动化安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务自动化部署"><span class="nav-number">2.</span> <span class="nav-text">服务自动化部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#openstack-私有云安装（适用规模大的环境）"><span class="nav-number">3.</span> <span class="nav-text">openstack 私有云安装（适用规模大的环境）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非私有云安装-适用于规模小的环境"><span class="nav-number">4.</span> <span class="nav-text">非私有云安装 (适用于规模小的环境)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-安装"><span class="nav-number">5.</span> <span class="nav-text">docker 安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k8s-集群部署"><span class="nav-number">6.</span> <span class="nav-text">k8s 集群部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-私有镜像仓库搭建"><span class="nav-number">7.</span> <span class="nav-text">docker 私有镜像仓库搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dockerfile-容器镜像制作"><span class="nav-number">8.</span> <span class="nav-text">dockerfile 容器镜像制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ELK-环境搭建"><span class="nav-number">9.</span> <span class="nav-text">ELK 环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运维监控"><span class="nav-number">10.</span> <span class="nav-text">运维监控</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -362,14 +406,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -412,13 +456,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">364k</span>
+    <span title="站点总字数">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:31</span>
+    <span title="站点阅读时长">7:54</span>
 </div>
 
         

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="elasticsearchES概念cluster：集群中有多个节点，其中有一个为主节点，这个主节点是可以通过选举产生的，主从节点是对于集群内部来说的。es的一个概念就是去中心化，字面上理解就是无中心节点。在逻辑上是个整体，你与任何一个节点的通信和与整个es集群通信是等价的。 shards：分片的数量只能在索引创建前指定，并且索引创建后不能更改。分片索引 replicas：代表索引副本，es可以设置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Elasticsearch">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/Elasticsearch/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="elasticsearchES概念cluster：集群中有多个节点，其中有一个为主节点，这个主节点是可以通过选举产生的，主从节点是对于集群内部来说的。es的一个概念就是去中心化，字面上理解就是无中心节点。在逻辑上是个整体，你与任何一个节点的通信和与整个es集群通信是等价的。 shards：分片的数量只能在索引创建前指定，并且索引创建后不能更改。分片索引 replicas：代表索引副本，es可以设置">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-17T02:49:52.000Z">
+<meta property="article:modified_time" content="2020-07-11T03:03:10.220Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/Elasticsearch/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Elasticsearch | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Elasticsearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Elasticsearch
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-17 10:49:52" itemprop="dateCreated datePublished" datetime="2020-06-17T10:49:52+08:00">2020-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:03:10" itemprop="dateModified" datetime="2020-07-11T11:03:10+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BIGDATA/" itemprop="url" rel="index"><span itemprop="name">BIGDATA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>elasticsearch<br>ES概念<br>cluster：<br>集群中有多个节点，其中有一个为主节点，这个主节点是可以通过选举产生的，主从节点是对于集群内部来说的。es的一个概念就是去中心化，字面上理解就是无中心节点。<br>在逻辑上是个整体，你与任何一个节点的通信和与整个es集群通信是等价的。</p>
+<p>shards：<br>分片的数量只能在索引创建前指定，并且索引创建后不能更改。<br>分片索引</p>
+<p>replicas：<br>代表索引副本，es可以设置多个索引的副本，副本的作用一是提高系统的容错性，当某个节点某个分片损坏或丢失时可以从副本中恢复。二是提高es的查询效率，es会自动对搜索请求进行负载均衡。</p>
+<p>gateway：<br>索引保存，当这个es集群关闭再重新启动时就会从gateway中读取索引备份数据。</p>
+<p>discovery.zen：<br>节点自动发现，多播，广播方式。它先通过广播寻找存在的节点，再通过多播协议来进行节点之间的通信，同时也支持点对点的交互。</p>
+<p>recovery：<br>数据源，通过读取river中的数据并把它索引到es中，官方的river有couchDB的，RabbitMQ的，Twitter的，Wikipedia的。</p>
+<p>Transport：<br>代表es内部节点或集群与客户端的交互方式，默认内部是使用tcp协议进行交互，同时它支持http协议（json格式）、thrift、servlet、memcached、zeroMQ等的传输协议（通过插件方式集成）。</p>
+<p>基本概念<br>2.1 Node 与 Cluster<br>Elastic 本质上是一个分布式数据库，允许多台服务器协同工作，每台服务器可以运行多个 Elastic 实例。<br>单个 Elastic 实例称为一个节点（node）。一组节点构成一个集群（cluster）。</p>
+<p>2.2 Index<br>Elastic 会索引所有字段，经过处理后写入一个反向索引（Inverted Index）。查找数据的时候，直接查找该索引。</p>
+<p>所以，Elastic 数据管理的顶层单位就叫做 Index（索引）。它是单个数据库的同义词。每个 Index （即数据库）的名字必须是小写。</p>
+<p>下面的命令可以查看当前节点的所有 Index。<br>$ curl -X GET ‘<a href="http://localhost:9200/_cat/indices?v" target="_blank" rel="noopener">http://localhost:9200/_cat/indices?v</a>‘</p>
+<p>2.3 Document<br>Index 里面单条的记录称为 Document（文档）。许多条 Document 构成了一个 Index。</p>
+<p>Document 使用 JSON 格式表示，下面是一个例子。<br>{<br>  “user”: “张三”,<br>  “title”: “工程师”,<br>  “desc”: “数据库管理”<br>}<br>同一个 Index 里面的 Document，不要求有相同的结构（scheme），但是最好保持相同，这样有利于提高搜索效率。</p>
+<p>2.4 Type<br>Document 可以分组，比如weather这个 Index 里面，可以按城市分组（北京和上海），也可以按气候分组（晴天和雨天）。这种分组就叫做 Type，它是虚拟的逻辑分组，用来过滤 Document。</p>
+<p>不同的 Type 应该有相似的结构（schema），举例来说，id字段不能在这个组是字符串，在另一个组是数值。这是与关系型数据库的表的一个区别。性质完全不同的数据（比如products和logs）应该存成两个 Index，而不是一个 Index 里面的两个 Type（虽然可以做到）。</p>
+<p>下面的命令可以列出每个 Index 所包含的 Type。</p>
+<p>$ curl ‘localhost:9200/_mapping?pretty=true’<br>根据规划，Elastic 6.x 版只允许每个 Index 包含一个 Type，7.x 版将会彻底移除 Type。</p>
+<p>elasticsearch</p>
+<p>Node 多节点<br>Cluster 集群<br>Document 文档<br>Index 索引<br>Type 类型<br>Field 字段<br>Shards 分片<br>Replicas  复制集</p>
+<p>非结构化的数据</p>
+<p>结构化数据</p>
+<p>elasticsearch 架构</p>
+<p>广播方式寻找节点<br>http 传输</p>
+<p>插件<br>中文分词<br>状态监控<br>Solr 知识搜索<br>Elasticsearch 只支持json</p>
+<p>XML(SOAP),占带宽，解析慢<br>JSON，短小精悍，解析快</p>
+<p>表现层状态转化<br>资源—URI<br>API操作<br>GET：获取<br>POST：新建<br>PUT:更新<br>DELETE：删除</p>
+<p>curl -i<br>curl -v<br>curl -o output<br>curl -X POST<br>curl —trace</p>
+<p>单模式<br>多模式</p>
+<p>安装<br>系统准备<br>JDK—&gt; Elasticsearch 对应关系<br>./elasticsearch -d</p>
+<p>插件<br>Head web 管理 elasticsearch<br>Bigdesk 集群监控工具<br>Mavel 插件<br>plugin-install elasticsearch/marvel/latest<br><a href="http://locathost:9200/_plugin/marvel" target="_blank" rel="noopener">http://locathost:9200/_plugin/marvel</a></p>
+<p>分词插件</p>
+<p>同步插件</p>
+<p>倒排索引<br>关键词-》文档 （文档id，位置，频次）</p>
+<p>创建索引<br>名称 分片数 副本</p>
+<p>创建文档</p>
+<p>获取文档</p>
+<p>获取指定字段<br>/1?_source=title</p>
+<p>更新<br>/1/_update</p>
+<p>删除</p>
+<p>内置字段以及类型<br>_uid<br>_id<br>_type<br>_source<br>_all<br>_analyzer<br>_boost<br>_parent<br>_routing<br>_index<br>_size<br>_timestamp<br>_ttl</p>
+<p>字段类型<br>String<br>Integer/long<br>Float/double<br>Boolean<br>Null<br>Date</p>
+<p>多模式<br>获取<br>_mget</p>
+<p>获取指定字段</p>
+<p>批量操作bulk（\n分隔符）<br>CIUD<br>_bulk<br>metadata<br>body</p>
+<p>ram设置对bulk处理有性能影响</p>
+<p>版本控制<br>悲观锁，乐观锁<br>内部版本控制  _version<br>外部版本控制  version=5&amp;version_type=external</p>
+<p>Mapping 映射<br>一旦建立映射，就不能修改现有映射（修改方法，现有映射建立别名，再创建一个新映射，将别名指向映射）<br>静态映射<br>动态映射<br>没见过的字段时，动态映射可以决定该字段类型</p>
+<p>store 是否存储<br>index 是否索引<br>null_value 设置空值<br>boost 设置字段权重<br>index_analyer 索引时用分析器<br>search_analyzer 搜索时用的分析器<br>analyzer 索引搜索时使用分析器<br>include_in_all 排除某个字段<br>index_name 字段名称<br>norms 计算权值</p>
+<p>“settings”:{},<br>“mappings”:{}<br>_all/_mapping</p>
+<p>查询<br>基本查询<br>/_search?q=title:keyword<br>可以跨索引名搜索<br>_score: 打分<br>“terms”{<br>“preview”:[“”,””],<br>“minimum_match”:1 #1 or #2 and<br>}<br>“from”:10 #从第几行<br>“size”: 20 #返回条数</p>
+<p>“slop”:2 #间隔单词<br>“fields”:<br>支持通配符<br>“sort”:[]<br>“prefix”:<br>“range”:<br>“wildcard”:<br>“fuzzy”: #模糊查询-可以相识查询<br>“fuzzy_like_this”:<br>“fuzzy_like_this_field”:<br>“more_like_this”:<br>“more_like_this_field”:<br>“match_all”: #查询所有</p>
+<p>过滤<br>filter （相当于where）</p>
+<p>“bool”: # and or<br>must<br>should<br>must_not</p>
+<p>嵌套查询<br>“or”:[]<br>“not”:[]</p>
+<p>gt<br>lt<br>gte<br>lte</p>
+<p>过滤空和非空<br>exists<br>missing</p>
+<p>cache 缓存<br>segment<br>bigset<br>“_cache”:true</p>
+<p>组合查询<br>bool<br>coordination #关键词计分<br>boosting<br>positive<br>negative<br>negative_boost</p>
+<p>constant_score</p>
+<p>indices #多索引查询</p>
+<p>logstash<br>插件<br>导入yum 源<br>yum install logstash<br>日志格式<br>时间 主机名 message<br>配置<br>处理输入input<br>处理filter<br>处理output</p>
+<p>区域<br>数据类型<br>布尔<br>字节<br>字符串<br>数值<br>数组<br>哈希<br>编码解码<br>密码型<br>路径<br>注释</p>
+<h1 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h1><p>字段引用<br>%{[][]}</p>
+<p>插件<br>inputs<br>codecs<br>filters<br>outputs<br>Gemfile #记录插件<br>plugin install pluginname</p>
+<p>gem source -l<br><a href="https://ruby.taobao.org" target="_blank" rel="noopener">https://ruby.taobao.org</a></p>
+<p>kibana</p>
+<p>集群 &gt; 节点 &gt; 类型 &gt; 文档 &gt; 属性<br>cluster &gt; node &gt; type &gt; documents &gt; attibute</p>
+<p>index &gt; documents<br>       type<br>index :表<br>documents ：纪录<br>type ：按维度分类</p>
+<p>shards : 分片<br>replicas : 副本<br>一个 index 可以有 3个分片（跟node 节点相同） 2个副本集。这样任一节点失败都不会导致数据丢失。</p>
+<p>mapping ：映射，是指把documents field 映射成 对应的类型<br>gateway : 路由，控制数据存储的分片<br>_id: routeid </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/Elasticsearch%E7%AE%A1%E7%90%86/" rel="prev" title="Elasticsearch管理">
+      <i class="fa fa-chevron-left"></i> Elasticsearch管理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/Metricbeats/" rel="next" title="metricbeats">
+      metricbeats <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#条件判断"><span class="nav-number">1.</span> <span class="nav-text">条件判断</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7:54</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

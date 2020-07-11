@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="*计算机科普 tips计算工具绳结：算盘：记住计算过程的状态步进计算器差分机分析机打孔卡片制表机计算表电子计算机开关继电器电子管二极管晶体管 层层抽象进位 计数器布尔代数逻辑的数学分析NOTAND 串连OR 并连XOR and + not + and 并连 or 二进制bitbyte数据块 32bit，64bit 32位色负数 二进制第一位 1非整数  32bit 第一位表示正负，2-9位表示指数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机科学">
+<meta property="og:url" content="http://blog.yanqi.cf/2020/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/index.html">
+<meta property="og:site_name" content="blyanqi@163.com">
+<meta property="og:description" content="*计算机科普 tips计算工具绳结：算盘：记住计算过程的状态步进计算器差分机分析机打孔卡片制表机计算表电子计算机开关继电器电子管二极管晶体管 层层抽象进位 计数器布尔代数逻辑的数学分析NOTAND 串连OR 并连XOR and + not + and 并连 or 二进制bitbyte数据块 32bit，64bit 32位色负数 二进制第一位 1非整数  32bit 第一位表示正负，2-9位表示指数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-06-28T02:52:53.000Z">
+<meta property="article:modified_time" content="2020-07-11T03:35:08.212Z">
+<meta property="article:author" content="yan qi">
+<meta property="article:tag" content="运维、自动化、devops、容器架构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.yanqi.cf/2020/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>计算机科学 | blyanqi@163.com</title>
+  
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?829697829f3ae7ddf2c38de42e2f8f5d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line toggle-line-first"></span>
+        <span class="toggle-line toggle-line-middle"></span>
+        <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">blyanqi@163.com</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算机科学
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-28 10:52:53" itemprop="dateCreated datePublished" datetime="2020-06-28T10:52:53+08:00">2020-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:35:08" itemprop="dateModified" datetime="2020-07-11T11:35:08+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>*<a href="https://www.bilibili.com/video/BV1EW411u7th?from=search&amp;seid=11013015744420288055" target="_blank" rel="noopener">计算机科普</a></p>
+<h2 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h2><p>计算工具<br>绳结：<br>算盘：记住计算过程的状态<br>步进计算器<br>差分机<br>分析机<br>打孔卡片制表机<br>计算表<br>电子计算机<br>开关继电器<br>电子管<br>二极管<br>晶体管</p>
+<p>层层抽象<br>进位</p>
+<h2 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h2><p>布尔代数<br>逻辑的数学分析<br>NOT<br>AND 串连<br>OR 并连<br>XOR and + not + and 并连 or</p>
+<p>二进制<br>bit<br>byte<br>数据块 32bit，64bit</p>
+<p>32位色<br>负数 二进制第一位 1<br>非整数  32bit 第一位表示正负，2-9位表示指数。剩余23存整数<br>浮点数存储方式<br>字符 ASCII 128 A 65 a 95<br>UNICODE<br>分块</p>
+<p>算术逻辑单元 ALU<br>  算术单元<br>  逻辑单元<br>XOR 作为加法器<br>半累加器 XOR + AND 完成进位<br>全累加器 1+1 需要一个全累加器。否则 1+1 会等于0,进位没了<br>两个半累加器相连+ OR门检查进位<br>8位累加器，需要一个半累加器，7个全累加器，第9位溢出<br>溢出<br>进位会造成延迟，使用超前加法器</p>
+<p>进一步抽象成8位ALU<br>8位输入1，8位输入2，操作码为4位，标志位为3位（溢出，zero，negative）<br>输出8位</p>
+<p>RAM<br>锁存器： OR + AND + NOT<br>锁存器需要把一端回环，用 NOT做复位器。<br>输入1则存1，输入0则存0</p>
+<p>8位的锁存器叫寄存器 SRAM<br>多路复用器<br>256位内存需要8位地址，前四位表示列，后四位表示行。<br>一个数据位，一个写入线，一个读取线</p>
+<p>DRAM<br>NVRAM</p>
+<p>中央处理器<br>微系统<br>opcode<br>地址寄存器<br>指令寄存器<br>decode<br>时钟速度<br>超频-即更改时钟频率<br>降频-减低时钟频率使cpu运转的慢些。节能<br>自动调整时钟频率</p>
+<p>指令和程序<br>HALT 停止<br>指令长度<br>可变长执行</p>
+<p>高级CPU设计<br>减少晶体管切换时间<br>使用缓存<br>  CACHE HIT<br>  CACHE MISS<br>  DIRTY BIT<br>指令流水线<br>  FETCH<br>  DECODE<br>  EXECUTE<br>  数据依赖停止流水线<br>乱序执行<br>推测执行<br>分支预测<br>多核处理<br>多CPU架构<br>总体上为了一个时钟周期内处理更多的指令</p>
+<p>编程<br>打孔带<br>伪代码<br>操作码表<br>汇编器<br>A-0<br>FORTRAN<br>COBOL 通用语言<br>程序员<br>60年代:ALGOL,LISP,BASIC<br>70年代:Pascal,C,Smalltalk<br>80年代:C++,Objective-C,Perl<br>90年代:Python,Ruby,Java<br>2000:Swift,C#,Go</p>
+<p>语法<br>变量<br>控制语句<br>函数<br>库</p>
+<p>算法：解决问题的步骤<br>排序<br>  冒泡<br>  选择<br>  归并<br>图<br>  所有组合的可能性是N!<br>  Dijkstra算法<br>数据结构<br>  数组<br>  字符串以O结尾<br>  结构体<br>  队列<br>  栈<br>  Tree<br>图灵机<br>  可判定性问题<br>  状态：运行的状态<br>  规则：描述机器做什么<br>  读写头：<br>  左移：<br>  右移：<br>  图灵完整<br>  停机问题<br>  图灵测试<br>软件工程<br>  代码库<br>集成电路&amp;摩尔定律<br>  VLSI软件<br>操作系统<br>  特权指令<br>  多任务处理<br>  虚拟内存<br>    内存映射<br>  动态内存分配<br>  分时操作系统Multics<br>  Unix</p>
+<p>内存&amp;存储介质<br>  纸卡 80*12<br>  磁带<br>  磁鼓<br>  磁盘<br>  软磁盘<br>  光盘<br>  U盘<br>  SSD盘</p>
+<p>文件系统<br>  文件格式<br>  元数据<br>  文件头<br>  音频<br>    WAV<br>  图像<br>    BMP<br>  文件系统<br>    文件格式<br>    文件状态</p>
+<p>压缩<br>  无损压缩<br>    文本<br>    软件<br>    霍夫曼树<br>  有损压缩<br>    音频<br>    图像<br>    视频</p>
+<p>命令行界面<br>  电传打字机<br>屏幕&amp;2D图像显示<br>  80 * 25 2000个字符<br>  CREAN BUFFER<br>  矢量绘图：占用内存小<br>  VRAM：帧缓存区</p>
+<p>个人计算机革命<br>  创新降低学习成本<br>  GUI 事件驱动编程</p>
+<p>3D 图像用户界面<br>  正交投影<br>  透视投影<br>  三角形平面<br>  fillrate<br>  羽化<br>  画家算法<br>  阴暗处理<br>  纹理映射</p>
+<p>计算机网路<br>  交换<br>  路由<br>互联网<br>  IP<br>  UDP<br>  TCP<br>  CHECKSUM<br>  域名<br>万维网<br>  webpage<br>  HTML<br>  CSS<br>  JavaScript<br>  超链接<br>  URL<br>  HTTP<br>  searchEngine<br>    spider<br>    index<br>    fulltextsearch<br>  网络目录<br>  网络中立<br>计算机安全<br>  不规矩<br>  原力<br>  保证数据的保密性，完整性，可用性。<br>  保密性：只有有权限的人才能读取计算机系统和数据<br>  完整性：只有有权限的人才能使用修改的系统数据<br>  可用性：有权限的人，任何时候可以访问自己的系统和数据<br>  威胁模型分析<br>  身份认证<br>  暴力攻击<br>  双认证<br>  机密级别<br>  隔离沙盒<br>黑客&amp;攻击<br>  安全评估，白帽子<br>  欺骗别人<br>    钓鱼网站<br>    假托<br>    邮件木马<br>  加长验证间隔<br>  缓冲区一处<br>  边界检查<br>  代码注入，sql注入<br>  利用漏洞<br>加密<br>  编码<br>  解码<br>  统计数据字母出现频率<br>  DES<br>  AES<br>  RSA</p>
+<p>机器学习&amp;人工智能<br>  特征，增加特征就是增加新维度<br>  分类<br>  训练数据<br>  标记数据<br>  决策树<br>  超平面<br>  人工神经网络<br>    输入层，一个维度一个输入节点<br>    隐含层<br>      （权重 * 输入值）累加 - 偏差值<br>      权重和偏差值随机设定<br>      标记数据训练这两个值<br>      激活函数，把值限制再-1，1之间<br>    输出层，一个分类一个输出节点<br>计算机视觉<br>  边缘色差<br>  核过滤器<br>  核，卷积（累加求和）<br>    -1 0 1<br>    -1 0 1<br>    -1 0 1<br>  不同的核用来匹配不同特征<br>  卷积神经网络<br>    用核进行多层卷积<br>    最终识别出物体的局部：人脸识别<br>    根据识别的图像确定表情<br>自然语言处理<br>  计算机语言，词汇少，结构化<br>  自然语言，大量的词汇，一词多义，多种口音，模糊语义<br>  对话系统<br>  理解系统<br>  语音识别<br>    音素识别<br>  语音合成技术</p>
+<p>机器人<br>  机械时钟<br>  CNC机械<br>  控制回路 负反馈回路<br>    传感器<br>    Error<br>    动作<br>  PID 控制器<br>    比例控制<br>    误差<br>    目标值</p>
+<p>计算机心理学<br>  易用度：达到目的的效率有多高<br>  直观功能<br>  专业知识<br>  情感计算<br>  增强凝视</p>
+<p>教育<br>  主动学习<br>  个性化学习<br>  贝叶斯只是追踪<br>  失误概率<br>未来<br>  复杂度刹车<br>  生产力的提升和人口就业</p>
+<p>总结：<br>整体视频内容都是点到为止，但绝对不影响对计算机整个领域的贯通。阐述的基本原理，收益匪浅！<br>有兴趣一定要学习一下。<br>目前的AI虽然是弱AI,人脑处理的过程是综合处理的过程。<br>语言识别和图像识别结合起来能把文字和图像对应上。这样就能完成联想。<br>故联想的过程是不是大脑在分类做排序的过程。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/JNI/" rel="prev" title="JNI">
+      <i class="fa fa-chevron-left"></i> JNI
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/07/PCIDSS%E5%90%88%E8%A7%84nginx%E9%85%8D%E7%BD%AE/" rel="next" title="PCIDSS合规nginx配置">
+      PCIDSS合规nginx配置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tips"><span class="nav-number">1.</span> <span class="nav-text">tips</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计数器"><span class="nav-number">2.</span> <span class="nav-text">计数器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yan qi</p>
+  <div class="site-description" itemprop="description">君子学以聚之，问以辩之，宽以居之，仁以行之。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">227</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2017 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">by yanqi.</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">521k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">7:54</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

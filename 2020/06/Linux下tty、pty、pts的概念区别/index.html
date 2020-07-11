@@ -17,15 +17,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
+  <meta name="description" content="概念tty （Teletype）终端设备的统称。tty设备包括虚拟控制台，串口以及伪终端设备。pty 虚拟终端 pseudo-tty  pts(pseudo-terminal slave)是pty的实现方法  ptmx(pseudo-terminal master)配合使用实现pty  伪终端(Pseudo Terminal)是成对的逻辑终端设备(即master和slave设备, 对master的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下tty、pty、pts的概念区别">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/06/Linux%E4%B8%8Btty%E3%80%81pty%E3%80%81pts%E7%9A%84%E6%A6%82%E5%BF%B5%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
+<meta property="og:description" content="概念tty （Teletype）终端设备的统称。tty设备包括虚拟控制台，串口以及伪终端设备。pty 虚拟终端 pseudo-tty  pts(pseudo-terminal slave)是pty的实现方法  ptmx(pseudo-terminal master)配合使用实现pty  伪终端(Pseudo Terminal)是成对的逻辑终端设备(即master和slave设备, 对master的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-14T03:59:13.000Z">
 <meta property="article:modified_time" content="2020-06-15T07:48:01.434Z">
@@ -260,7 +260,9 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="Oh, these decrypted content cannot be verified, but you can still have a look."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="Hey, password is required here." /><label>Hey, password is required here.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="5906aa21f40ca48b8224176318c05bd4d677576bb80cf71ea21ddc8dfb50d80d">4dc7a94a957e0b6d366c4c57187f63c514b1838b6a28f070585cad84b1e80383823afa5695960eaf613334f5875bdfb08adf1b54968bae6f75323815871b97903d058ec2fb386405a9e110ec1beeb740f6856f37547d36edc7f37ad366d7409f1e297077bc40f01b219ff8cb5c589c06e7432033e859424280a9c215351504277ea5b72d0a3c88b439afcfcfdc4e7aebded72679b1186438d29cb186b1eb3d2a604610de7591ead960e6ac6a0fdc7050e1bd9c77129452c3e7353826a87967059238e40ac7ccbfc9ce6d9ef1a3d21f5921fbc633f13e1517964bff47f59aa7526075d3a4c864b360b3c9fcb1bddb9ee35edba3262617f73180d12a180cfd884714d43542ec5a444ac814f56080141bafe76befb97b90b49bc14fded0fb729309f7cffc750f55a847fb6578377423270ee7aa0b47c0a2cbefad56310bbbbc293c6ed2078942fb7f27e22f1cb2a58a3706de9fb0aeedbc4c1d9187d30ee51f2c09627652c70c9e27faa7dcfbd345fdcce8e5973dcec87722c209197aa7d615ea5d0021f08b24d974a6928a85100fd32c9aecbb5edae7cfd30a734cb3273cd470add1027662b96953dd11a2651ca873589d07e6792b378f2d9fc3ed4419de7ab8e8926a59c98551a52414057efb88df3e84eec400b9885ee98fa24066fc1ee5355f3e9549166945a192a77199dbfd8e67c46cda93fd29759551026fb6f6c7eec85cc54bde41dfbad78f7b93c47c1b7df1ddc61835aa0fb1e893684d249d6635c63952bb9abc87acffaf91a6f44b76f81e0bfa0decc03e54224329534828befb2cf8be6ac9a305a2910c07a11e1cfa7aa13b39291f98f727f0c99256bd47a9e3130c6a648e915a80a684dc1179d928a3535f15ac9efd5d2d492b218f1958a68161dbbda9ed2f75fc853df655b57e60005a1dad2df8def785ce06ff663808a2a6e15c53fcc0d36ce600452ec193c5729130a3025eefad600882b2a6e2665b18165f90146157d525ce70fb378d7dbc142a7356f5d213a8f78ad79286519b704d1342b33f6ddcae7e802542db89d0f413361d07580b5141b9d38152103f9cb594f7d1145dcaee59bcceac8e3cdc0f4c106e11b6b3e04886ae2887f948697644452d21ab491a2d2478cb98264de61925bf1949bf89fb9ed8ce050b2230021f5c8e49e215043872abdb9c0031dfd6460068902eeea8fef36edfea0bafff616208aa0791bffe79a67671aef37f3187f6648ab5895753497af1a6a276018ae95005fbf69d1ed0b44b7987347445918f67b514c805c3c29a7fa5a57835bf4b72ab3200ac59641af748922fa6ceb9eac233e742666f8f518a8fadaf5452ed4888c52a9e1dc69b3a69c27f7dde9e4a0fa8d5dad06521a8000a1eebe7b70c62a7700910be42100c5b7b35373d6b22a0e2780c8432d205eb92239e0c9afd2a9db2dbe7fd19ae7e0665065a212bbf9dfd84afef32cc1829bd560b2e57a5f7f704cbe6518a38363145f127eee659dc63fd6ec1e6df371689cce84466131883a2ff68f5db3ca7bd60153c653a676ba24f2393eec06f5baee4a75f471ac9ed1cad7b529e800b66239d7235660f8e8d9b09edaffbac170246bd66752ff634877d9fb3d17082ffc81c1456c12b2709cebc4330bf12594c9f13087706a5388251b4a1e08bec1f556aa37c624344cb6ed181546c82bf29deffaa75fe955632201cf8af4ea6c580882ddf4f74b7b1554ddb07276753926bc60f7d87fbee3fbcc827647d7d79eec1409d56b4a163222c06f25dbfa9629183bfe6f68f11c59e913876bdbb240ca9a364fac6d86f882621ac1a00ec8867e11538c64f4cc91d7fb696e4bea9c3402afe292d2ca1c70c41e0876775dd711dfa47b041d776c71a880c449cd8286212b0193ba5b4f4104c92b3517fee25050b5f7e5f43f42215eb6d4f7f6c2c9f5ca4ff301f93a087bb98189d56137e474b8ed3d293a1458e378aebe0bf4eee10683ffef2b2f54e7ee1e12929eb7fc8bd677e04ec9998808085fe8afb5755aa7e7f9d61cd8bdc08fd9d0df336e5e6bfac589bb36468a39f831a8f925bb99b98dda76a25fbd73108e9308222a3bfa6a778307fd79be2fb9fef146897d87a79d64211e035107ad5a730540761e9e63058d8fca14624c250f92bae5f99eb28bab89311331e8b602a65ebc7871d4aa3cf8416a19d85f4333414cfbb707959b86a603149a71a4feed00ed8da5387667581a4e88619e5fb7abf124084e5639cb6d8483cfd058fc9bbb462da339229a6ce8f3a2acb331f272cfb9016643a6cad53ce39394f285e3f808509e3ef</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+        <h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>tty （Teletype）终端设备的统称。tty设备包括虚拟控制台，串口以及伪终端设备。<br>pty 虚拟终端 pseudo-tty<br>  pts(pseudo-terminal slave)是pty的实现方法<br>  ptmx(pseudo-terminal master)配合使用实现pty<br>  伪终端(Pseudo Terminal)是成对的逻辑终端设备(即master和slave设备, 对master的操作会反映到slave上)。<br>/dev/console 控制台(通过串口显示器连上去的那个)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line">tty</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"ag"</span> &gt;/dev/pts/0</span><br><span class="line"><span class="comment"># 两个 ssh 会话间通信</span></span><br><span class="line"><span class="comment"># pts1</span></span><br><span class="line">cat &lt;/dev/pts/0</span><br><span class="line"><span class="comment"># pts2</span></span><br><span class="line">cat /etc/passwd &gt;/dev/pts/0</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -340,6 +342,7 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -353,14 +356,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -403,13 +406,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">364k</span>
+    <span title="站点总字数">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:31</span>
+    <span title="站点阅读时长">7:54</span>
 </div>
 
         

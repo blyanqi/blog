@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/gitflow-install/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%9B%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -213,112 +213,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/gitflow-install/" class="post-title-link" itemprop="url">gitflow_install</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-10 11:27:03 / 修改时间：12:24:32" itemprop="dateCreated datePublished" datetime="2020-06-10T11:27:03+08:00">2020-06-10</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Gitflow安装"><a href="#Gitflow安装" class="headerlink" title="Gitflow安装"></a>Gitflow安装</h2><h3 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本"></a>安装脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'GEOF'</span> &gt;gitflow-installer.sh</span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># git-flow make-less installer for *nix systems, by Rick Osborne</span></span><br><span class="line"><span class="comment"># Based on the git-flow core Makefile:</span></span><br><span class="line"><span class="comment"># http://github.com/nvie/gitflow/blob/master/Makefile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Licensed under the same restrictions as git-flow:</span></span><br><span class="line"><span class="comment"># http://github.com/nvie/gitflow/blob/develop/LICENSE</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Does this need to be smarter for each host OS?</span></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$INSTALL_PREFIX</span>"</span> ] ; <span class="keyword">then</span></span><br><span class="line">	INSTALL_PREFIX=<span class="string">"/usr/local/bin"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$REPO_NAME</span>"</span> ] ; <span class="keyword">then</span></span><br><span class="line">	REPO_NAME=<span class="string">"gitflow"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$REPO_HOME</span>"</span> ] ; <span class="keyword">then</span></span><br><span class="line">	REPO_HOME=<span class="string">"http://github.com/nvie/gitflow.git"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">EXEC_FILES=<span class="string">"git-flow"</span></span><br><span class="line">SCRIPT_FILES=<span class="string">"git-flow-init git-flow-feature git-flow-hotfix git-flow-release git-flow-support git-flow-version gitflow-common gitflow-shFlags"</span></span><br><span class="line">SUBMODULE_FILE=<span class="string">"gitflow-shFlags"</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"### gitflow no-make installer ###"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">	uninstall)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Uninstalling git-flow from <span class="variable">$INSTALL_PREFIX</span>"</span></span><br><span class="line">		<span class="keyword">if</span> [ -d <span class="string">"<span class="variable">$INSTALL_PREFIX</span>"</span> ] ; <span class="keyword">then</span></span><br><span class="line">			<span class="keyword">for</span> script_file <span class="keyword">in</span> <span class="variable">$SCRIPT_FILES</span> <span class="variable">$EXEC_FILES</span> ; <span class="keyword">do</span></span><br><span class="line">				<span class="built_in">echo</span> <span class="string">"rm -vf <span class="variable">$INSTALL_PREFIX</span>/<span class="variable">$script_file</span>"</span></span><br><span class="line">				rm -vf <span class="string">"<span class="variable">$INSTALL_PREFIX</span>/<span class="variable">$script_file</span>"</span></span><br><span class="line">			<span class="keyword">done</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">echo</span> <span class="string">"The '<span class="variable">$INSTALL_PREFIX</span>' directory was not found."</span></span><br><span class="line">			<span class="built_in">echo</span> <span class="string">"Do you need to set INSTALL_PREFIX ?"</span></span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">		<span class="built_in">exit</span></span><br><span class="line">		;;</span><br><span class="line">	<span class="built_in">help</span>)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Usage: [environment] gitflow-installer.sh [install|uninstall]"</span></span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Environment:"</span></span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"   INSTALL_PREFIX=<span class="variable">$INSTALL_PREFIX</span>"</span></span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"   REPO_HOME=<span class="variable">$REPO_HOME</span>"</span></span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"   REPO_NAME=<span class="variable">$REPO_NAME</span>"</span></span><br><span class="line">		<span class="built_in">exit</span></span><br><span class="line">		;;</span><br><span class="line">	*)</span><br><span class="line">		<span class="built_in">echo</span> <span class="string">"Installing git-flow to <span class="variable">$INSTALL_PREFIX</span>"</span></span><br><span class="line">		<span class="keyword">if</span> [ -d <span class="string">"<span class="variable">$REPO_NAME</span>"</span> -a -d <span class="string">"<span class="variable">$REPO_NAME</span>/.git"</span> ] ; <span class="keyword">then</span></span><br><span class="line">			<span class="built_in">echo</span> <span class="string">"Using existing repo: <span class="variable">$REPO_NAME</span>"</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">echo</span> <span class="string">"Cloning repo from GitHub to <span class="variable">$REPO_NAME</span>"</span></span><br><span class="line">			git <span class="built_in">clone</span> <span class="string">"<span class="variable">$REPO_HOME</span>"</span> <span class="string">"<span class="variable">$REPO_NAME</span>"</span></span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">		<span class="keyword">if</span> [ -f <span class="string">"<span class="variable">$REPO_NAME</span>/<span class="variable">$SUBMODULE_FILE</span>"</span> ] ; <span class="keyword">then</span></span><br><span class="line">			<span class="built_in">echo</span> <span class="string">"Submodules look up to date"</span></span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			<span class="built_in">echo</span> <span class="string">"Updating submodules"</span></span><br><span class="line">			lastcwd=<span class="variable">$PWD</span></span><br><span class="line">			<span class="built_in">cd</span> <span class="string">"<span class="variable">$REPO_NAME</span>"</span></span><br><span class="line">			git submodule init</span><br><span class="line">			git submodule update</span><br><span class="line">			<span class="built_in">cd</span> <span class="string">"<span class="variable">$lastcwd</span>"</span></span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">		install -v -d -m 0755 <span class="string">"<span class="variable">$INSTALL_PREFIX</span>"</span></span><br><span class="line">		<span class="keyword">for</span> exec_file <span class="keyword">in</span> <span class="variable">$EXEC_FILES</span> ; <span class="keyword">do</span></span><br><span class="line">			install -v -m 0755 <span class="string">"<span class="variable">$REPO_NAME</span>/<span class="variable">$exec_file</span>"</span> <span class="string">"<span class="variable">$INSTALL_PREFIX</span>"</span></span><br><span class="line">		<span class="keyword">done</span></span><br><span class="line">		<span class="keyword">for</span> script_file <span class="keyword">in</span> <span class="variable">$SCRIPT_FILES</span> ; <span class="keyword">do</span></span><br><span class="line">			install -v -m 0644 <span class="string">"<span class="variable">$REPO_NAME</span>/<span class="variable">$script_file</span>"</span> <span class="string">"<span class="variable">$INSTALL_PREFIX</span>"</span></span><br><span class="line">		<span class="keyword">done</span></span><br><span class="line">		<span class="built_in">exit</span></span><br><span class="line">		;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line">GEOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行</span></span><br><span class="line">sh gitflow-installer.sh</span><br></pre></td></tr></table></figure>
-<h3 id="gitflow-版本分支"><a href="#gitflow-版本分支" class="headerlink" title="gitflow 版本分支"></a>gitflow 版本分支</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>分支</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>develop 分支</td>
-<td>开发版</td>
-</tr>
-<tr>
-<td>-&gt; feature 分支</td>
-<td>新功能</td>
-</tr>
-<tr>
-<td>release 分支</td>
-<td>发布版</td>
-</tr>
-<tr>
-<td>master 分支</td>
-<td>稳定版，审核</td>
-</tr>
-<tr>
-<td>-&gt;hotfix 分支</td>
-<td>修复线上bug</td>
-</tr>
-</tbody>
-</table>
-</div>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">curl -L -O https://raw.github.com/nvie/gitflow/develop/contrib/gitflow-installer.sh</span><br><span class="line">sudo bash gitflow-installer.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># master、develop、feature、relase、hotfix等分支 </span></span><br><span class="line"><span class="comment"># 常用指令</span></span><br><span class="line">指令|解释</span><br><span class="line">-|-</span><br><span class="line">git flow init |初始化</span><br><span class="line">git flow feature start MYFEATURE|开始新Feature</span><br><span class="line">git flow feature publish MYFEATURE|Publish一个Feature</span><br><span class="line">git flow feature pull origin MYFEATURE|获取Publish的Feature</span><br><span class="line">git flow feature finish MYFEATURE|完成一个Feature</span><br><span class="line">git flow release start RELEASE [BASE]|开始一个Release</span><br><span class="line">git flow release publish RELEASE|Publish一个Release</span><br><span class="line">git flow release finish RELEASE|发布Release</span><br><span class="line">git flow hotfix start VERSION [BASENAME]|开始一个Hotfix</span><br><span class="line">git flow hotfix finish VERSION|发布一个Hotfix</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/jenkinsK8s/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/jenkinsK8s/" class="post-title-link" itemprop="url">jenkinsK8s</a>
+            <a href="/2020/07/java%E6%B3%A8%E8%A7%A3%E5%92%8C%E5%8F%8D%E5%B0%84%E5%92%8C%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">java注解和反射和泛型</a>
         </h2>
 
         <div class="post-meta">
@@ -328,116 +223,14 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-09 14:12:33" itemprop="dateCreated datePublished" datetime="2020-06-09T14:12:33+08:00">2020-06-09</time>
+              <time title="创建时间：2020-07-07 19:50:50" itemprop="dateCreated datePublished" datetime="2020-07-07T19:50:50+08:00">2020-07-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-12 22:18:59" itemprop="dateModified" datetime="2020-06-12T22:18:59+08:00">2020-06-12</time>
-              </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>使用jenkins 进行 k8s 发布</p>
-<p>jenkins 上安装 Git,Maven,JDK,helm</p>
-<ul>
-<li><a href="/2020/05/Jenkins/" title="Jenkins docker安装">Jenkins docker安装</a></li>
-<li><a href="/2020/06/helm%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" title="Helm安装">Helm安装</a></li>
-<li>
-</li>
-</ul>
-<h2 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h2><p>源码 + dockerfile<br>|（gitlab）<br>发布到 master<br>| (触发 webhook)<br>jenkins 构建<br>| (执行 build-image.sh,将镜像发送到 registry仓库）<br>ssh<br>| (执行对应的 helm 把镜像推送到 k8s 集群)<br>finished</p>
-<h3 id="源代码要求"><a href="#源代码要求" class="headerlink" title="源代码要求"></a>源代码要求</h3><p>源代码中需要包含 dockerfile<br>git clone <a href="http://119.84.8.43:10097/youlv/go-meta-auth-service.git" target="_blank" rel="noopener">http://119.84.8.43:10097/youlv/go-meta-auth-service.git</a><br>git add ./*<br>git commit -m “v1.0.0”<br>git push</p>
-<h3 id="新建-view，新建项目"><a href="#新建-view，新建项目" class="headerlink" title="新建 view，新建项目"></a>新建 view，新建项目</h3><p>view:youlv<br>project: go-meta-auth-service</p>
-<h3 id="配置-webhook"><a href="#配置-webhook" class="headerlink" title="配置 webhook"></a>配置 webhook</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">url:</span><span class="string">http:</span><span class="comment">//182.92.67.154:8080/project/go-meta-auth-service</span></span><br><span class="line">Secret <span class="string">token:</span> <span class="number">86</span>cf9557098741074f10a43721368fd2</span><br></pre></td></tr></table></figure>
-<h3 id="设置-ssh-key"><a href="#设置-ssh-key" class="headerlink" title="设置 ssh key"></a>设置 ssh key</h3><p>ssh-keygen -t rsa -C “youremail@example.com”<br>cat ~/.ssh/id_rsa.pub<br>把 公钥复制到gitlab 项目中</p>
-<h2 id="创建pipeline"><a href="#创建pipeline" class="headerlink" title="创建pipeline"></a>创建pipeline</h2><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">pipeline &#123;</span><br><span class="line">   agent any</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 获取jenkins 配置</span></span><br><span class="line">   tools &#123;</span><br><span class="line">      <span class="comment">// 获取maven插件</span></span><br><span class="line">      maven <span class="string">"maven3"</span></span><br><span class="line">      jdk <span class="string">"jdk8"</span></span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 设置环境变量</span></span><br><span class="line">   environment&#123;</span><br><span class="line">       <span class="comment">// JAVA_HOME = tool "jdk8"</span></span><br><span class="line">       VERSION_ID=<span class="string">"$&#123;BUILD_ID&#125;"</span></span><br><span class="line">       GIT_PROJECT_ADDR=<span class="string">"http://119.84.8.43:13201/go-meta/go-meta-service.git"</span> <span class="comment">//项目的git地址</span></span><br><span class="line">       JENKINS_WORKSPACE=<span class="string">"/var/jenkins_home/workspace"</span>    <span class="comment">//jenkins存放文件的地址</span></span><br><span class="line">       PROJECT_NAME=<span class="string">"$&#123;JOB_NAME&#125;"</span>       <span class="comment">// 项目名</span></span><br><span class="line">       JAR_NAME=<span class="string">"$&#123;PROJECT_NAME&#125;-0.0.$&#123;VERSION_ID&#125;.jar"</span>   <span class="comment">// 项目生成的jar的名字</span></span><br><span class="line">       IMAGE_NAME=<span class="string">"$&#123;PROJECT_NAME&#125;"</span>                    <span class="comment">// 镜像名一般和项目名相同</span></span><br><span class="line">       IMAGE_ADDR=<span class="string">"119.84.8.43:10096/youlv/go-meta-auth-service"</span>    <span class="comment">// 镜像的位置</span></span><br><span class="line">       </span><br><span class="line">   &#125;</span><br><span class="line">   stages&#123;</span><br><span class="line">       stage('prepare')&#123;</span><br><span class="line">           steps&#123;</span><br><span class="line">               <span class="keyword">sh</span> <span class="string">"rm -rf ./*"</span></span><br><span class="line">               <span class="keyword">sh</span> <span class="string">"printenv"</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       stage('pull source')&#123;</span><br><span class="line">           steps&#123;</span><br><span class="line">               echo <span class="string">"pull source"</span></span><br><span class="line">               <span class="comment">// git credentialsId: 'go-meta-service', url: 'http://119.84.8.43:13201/go-meta/go-meta-service.git'</span></span><br><span class="line">               git branch: 'dev', credentialsId: 'go-<span class="keyword">meta</span>-service', url: 'http:<span class="comment">//119.84.8.43:13201/go-meta/go-meta-service.git'</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       stage('build')&#123;</span><br><span class="line">           steps&#123;</span><br><span class="line">               echo <span class="string">"build"</span></span><br><span class="line">               <span class="comment">//sh "mvn -Dmaven.test.failure.ignore=true clean package"</span></span><br><span class="line">               <span class="comment">//sh "mvn clean"</span></span><br><span class="line">               <span class="comment">//sh "mvn package"</span></span><br><span class="line">               <span class="keyword">sh</span> <span class="string">"mvn -Dmaven.test.failure.ignore=true -pl go-meta-auth-service -am clean package"</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       stage(<span class="string">"make image"</span>)&#123;</span><br><span class="line">           steps&#123;</span><br><span class="line">               echo <span class="string">"make image"</span></span><br><span class="line">               <span class="keyword">sh</span> '''<span class="keyword">cat</span> &lt;&lt;'EOF' &gt; dockerfile</span><br><span class="line">FROM centos</span><br><span class="line"><span class="keyword">RUN</span> <span class="keyword">rm</span> -f /etc/localtime \</span><br><span class="line">&amp;&amp; ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \</span><br><span class="line">&amp;&amp; echo <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span><br><span class="line"></span><br><span class="line">ARG project=go-<span class="keyword">meta</span>-auth-service</span><br><span class="line">ARG jdk_dir=/opt/java</span><br><span class="line"><span class="keyword">RUN</span> <span class="keyword">mkdir</span> -p <span class="variable">$&#123;jdk_dir&#125;</span>/<span class="keyword">app</span></span><br><span class="line">ADD http:<span class="comment">//127.0.0.1/jdk-8u251-linux-x64.tar.tgz $&#123;jdk_dir&#125;</span></span><br><span class="line">WORKDIR <span class="variable">$&#123;jdk_dir&#125;</span></span><br><span class="line"><span class="keyword">RUN</span> tar -xzf jdk-8u251-linux-x64.tar.tgz&amp;&amp; <span class="keyword">rm</span> -f jdk-8u251-linux-x64.tar.tgz</span><br><span class="line">ADD <span class="variable">$&#123;project&#125;</span>/target/go-<span class="keyword">meta</span>-auth-service-1.0.0.jar <span class="variable">$&#123;jdk_dir&#125;</span>/<span class="keyword">app</span></span><br><span class="line">ENV PATH <span class="string">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$&#123;jdk_dir&#125;/jdk1.8.0_251/bin"</span></span><br><span class="line"># EXPOSE 22</span><br><span class="line">EXPOSE 9090</span><br><span class="line">WORKDIR /opt/java/<span class="keyword">app</span>/</span><br><span class="line">CMD [<span class="string">"/bin/bash"</span>,<span class="string">"-c"</span>,<span class="string">"java -jar -Dserver.port=9090 ./go-meta-auth-service-1.0.0.jar"</span>]</span><br><span class="line">'''</span><br><span class="line">                <span class="keyword">sh</span> 'docker build -t <span class="variable">$&#123;IMAGE_ADDR&#125;</span>:latest .'</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       stage('push image')&#123;</span><br><span class="line">           steps&#123;</span><br><span class="line">               <span class="keyword">sh</span> <span class="string">"docker login 119.84.8.43:10096 -u yanqi -p yanqi"</span></span><br><span class="line">               <span class="keyword">sh</span> <span class="string">"docker push $&#123;IMAGE_ADDR&#125;:latest"</span></span><br><span class="line">               <span class="keyword">sh</span> <span class="string">"docker logout"</span></span><br><span class="line">               <span class="keyword">sh</span> <span class="string">"curl http://119.84.8.43:10096/v2/_catalog"</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="web-服务提供jdk包下载"><a href="#web-服务提供jdk包下载" class="headerlink" title="web 服务提供jdk包下载"></a>web 服务提供jdk包下载</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="symbol">http:</span>/<span class="regexp">/tengine.taobao.org/download</span><span class="regexp">/tengine-2.3.2.tar.gz</span></span><br><span class="line"><span class="regexp">yum -y install pcre-devel openssl-devel</span></span><br><span class="line"><span class="regexp">./configure</span> --prefix=<span class="regexp">/opt/tengine</span></span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<h3 id="dockerfile"><a href="#dockerfile" class="headerlink" title="dockerfile"></a>dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt; dockerfile</span><br><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> rm -f /etc/localtime \</span></span><br><span class="line"><span class="bash">&amp;&amp; ln -sv /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \</span></span><br><span class="line"><span class="bash">&amp;&amp; <span class="built_in">echo</span> <span class="string">"Asia/Shanghai"</span> &gt; /etc/timezone</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">ARG</span> project=go-meta-auth-service</span><br><span class="line"><span class="keyword">ARG</span> jdk_dir=/opt/java</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p <span class="variable">$&#123;jdk_dir&#125;</span>/app</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> http://127.0.0.1/jdk-8u251-linux-x64.tar.tgz <span class="variable">$&#123;jdk_dir&#125;</span></span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> <span class="variable">$&#123;jdk_dir&#125;</span></span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> tar -xzf jdk-8u251-linux-x64.tar.tgz&amp;&amp; rm -f jdk-8u251-linux-x64.tar.tgz</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> <span class="variable">$&#123;project&#125;</span>/target/go-meta-auth-service-1.0.0.jar <span class="variable">$&#123;jdk_dir&#125;</span>/app</span></span><br><span class="line"><span class="keyword">ENV</span> PATH <span class="string">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/root/bin:$&#123;jdk_dir&#125;/jdk1.8.0_251/bin"</span></span><br><span class="line"><span class="comment"># EXPOSE 22</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">9090</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /opt/java/app/</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"/bin/bash"</span>,<span class="string">"-c"</span>,<span class="string">"java -jar -Dserver.port=9090 ./go-meta-auth-service-1.0.0.jar"</span>]</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-<h2 id="jenkins-插件"><a href="#jenkins-插件" class="headerlink" title="jenkins 插件"></a>jenkins 插件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># gitlab 插件</span></span><br><span class="line"><span class="comment"># maven 插件</span></span><br></pre></td></tr></table></figure>
-<h3 id="git-拉取源码"><a href="#git-拉取源码" class="headerlink" title="git 拉取源码"></a>git 拉取源码</h3><p>使用 Gitlab Hook Plugin</p>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">mvnHome</span></span></span><br><span class="line"><span class="function">   <span class="title">stage</span></span>(<span class="symbol">'Preparatio</span>n') &#123; <span class="comment">// for display purposes</span></span><br><span class="line">      git <span class="symbol">'https</span>:<span class="comment">//github.com/itcrazy2016/springboot-demo.git'</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="mvn-build"><a href="#mvn-build" class="headerlink" title="mvn build"></a>mvn build</h3><p>/root/.jenkins/workspace/springboot-demo<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">   <span class="keyword">def</span> mvnHome</span><br><span class="line">   stage(<span class="string">'Preparation'</span>) &#123; <span class="comment">// for display purposes</span></span><br><span class="line">      git <span class="string">'https://github.com/wuzhenzhao/springboot-demo.git'</span></span><br><span class="line">   &#125;</span><br><span class="line">   dir(<span class="string">'/root/.jenkins/workspace/springboot-demo/springboot-demo'</span>) &#123; <span class="comment">// 切换到/home/jenkins目录中做一些事情</span></span><br><span class="line">    <span class="comment">// some block</span></span><br><span class="line">    stage(<span class="string">'Maven Build'</span>) &#123; </span><br><span class="line">       sh <span class="string">"mvn clean package"</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="git-push触发jenkins自动构建"><a href="#git-push触发jenkins自动构建" class="headerlink" title="git push触发jenkins自动构建"></a>git push触发jenkins自动构建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在github上配置jenkins的webhook地址，</span></span><br><span class="line"><span class="comment"># 配置GitHub Server  [系统管理]-&gt;[系统配置]-&gt;[找到github服务器]-&gt;找到Github，这里有 Web Hook的地址：</span></span><br><span class="line"><span class="comment"># 选择构建触发器，并且选择Github Hook触发</span></span><br><span class="line"><span class="comment"># 生成Personal access tokens</span></span><br><span class="line"><span class="comment"># Jenkins访问github需要授权，所以在github上生成token交给jenkins使用，即 Personal access tokens.</span></span><br><span class="line"><span class="comment"># github的Settings[个人信息右上角]--&gt;Developer settings--&gt;Personal access tokens</span></span><br></pre></td></tr></table></figure>
-<h3 id="build-amp-push镜像"><a href="#build-amp-push镜像" class="headerlink" title="build&amp;push镜像"></a>build&amp;push镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># springboot-demo-build-image.sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入到springboot-demo目录</span></span><br><span class="line"><span class="built_in">cd</span> ../springboot-demo</span><br><span class="line"><span class="comment"># 编写Dockerfile文件</span></span><br><span class="line">cat &lt;&lt;EOF &gt; Dockerfile</span><br><span class="line">FROM openjdk:8-jre-alpine</span><br><span class="line">COPY target/springboot-demo-1.0-SNAPSHOT.jar /springboot-demo.jar</span><br><span class="line">ENTRYPOINT [<span class="string">"java"</span>,<span class="string">"-jar"</span>,<span class="string">"/springboot-demo.jar"</span>]</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Dockerfile created successfully!"</span></span><br><span class="line"><span class="comment"># 基于指定目录下的Dockerfile构建镜像</span></span><br><span class="line">docker build -t registry.cn-hangzhou.aliyuncs.com/wuzz-docker/springboot-demo:v1.0 .</span><br><span class="line"><span class="comment"># push镜像，这边需要阿里云镜像仓库登录，在当前安装了jenkins主机上登录</span></span><br><span class="line">docker push registry.cn-hangzhou.aliyuncs.com/wuzz-docker/springboot-demo:v1.0</span><br></pre></td></tr></table></figure>
-<h3 id="使用shell-进行构建"><a href="#使用shell-进行构建" class="headerlink" title="使用shell 进行构建"></a>使用shell 进行构建</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">   <span class="keyword">def</span> mvnHome</span><br><span class="line">   stage(<span class="string">'Preparation'</span>) &#123; <span class="comment">// for display purposes</span></span><br><span class="line">      git <span class="string">'https://github.com/wuzhenzhao/springboot-demo.git'</span></span><br><span class="line">   &#125;</span><br><span class="line">   dir(<span class="string">'/root/.jenkins/workspace/springboot-demo/springboot-demo'</span>) &#123; <span class="comment">// 切换到/home/jenkins目录中做一些事情</span></span><br><span class="line">    <span class="comment">// some block</span></span><br><span class="line">    stage(<span class="string">'Maven Build'</span>) &#123; </span><br><span class="line">       sh <span class="string">"mvn clean package"</span></span><br><span class="line">    &#125;</span><br><span class="line">    stage(<span class="string">'Build Image'</span>) &#123;</span><br><span class="line">           sh <span class="string">"/root/.jenkins/workspace/scripts/springboot-demo-build-image.sh"</span></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="编写-build-image-sh"><a href="#编写-build-image-sh" class="headerlink" title="编写 build-image.sh"></a>编写 build-image.sh</h1><h3 id="使用-helm-部署到k8s"><a href="#使用-helm-部署到k8s" class="headerlink" title="使用 helm 部署到k8s"></a>使用 helm 部署到k8s</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">node &#123;</span><br><span class="line">   <span class="keyword">def</span> mvnHome</span><br><span class="line">   stage(<span class="string">'Preparation'</span>) &#123; <span class="comment">// for display purposes</span></span><br><span class="line">      git <span class="string">'https://github.com/wuzhenzhao/springboot-demo.git'</span></span><br><span class="line">   &#125;</span><br><span class="line">   dir(<span class="string">'/root/.jenkins/workspace/springboot-demo/springboot-demo'</span>) &#123; <span class="comment">// 切换到/home/jenkins目录中做一些事情</span></span><br><span class="line">    <span class="comment">// some block</span></span><br><span class="line">    stage(<span class="string">'Maven Build'</span>) &#123; </span><br><span class="line">       sh <span class="string">"mvn clean package"</span></span><br><span class="line">    &#125;</span><br><span class="line">    stage(<span class="string">'Build Image'</span>) &#123;</span><br><span class="line">           sh <span class="string">"/root/.jenkins/workspace/scripts/springboot-demo-build-image.sh"</span></span><br><span class="line">    &#125;</span><br><span class="line">    stage(<span class="string">'K8S Deploy'</span>) &#123;</span><br><span class="line">        sh <span class="string">"/root/.jenkins/workspace/scripts/k8s-deploy-springboot-demo.sh"</span></span><br><span class="line">    &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Ali%E5%85%AC%E6%9C%89%E4%BA%91%E7%AE%A1%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/Ali%E5%85%AC%E6%9C%89%E4%BA%91%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">Ali公有云管理</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-08 12:47:59" itemprop="dateCreated datePublished" datetime="2020-06-08T12:47:59+08:00">2020-06-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-10 10:12:07" itemprop="dateModified" datetime="2020-06-10T10:12:07+08:00">2020-06-10</time>
+                <time title="修改时间：2020-07-11 11:37:31" itemprop="dateModified" datetime="2020-07-11T11:37:31+08:00">2020-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -445,261 +238,12 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%85%AC%E6%9C%89%E4%BA%91/" itemprop="url" rel="index"><span itemprop="name">公有云</span></a>
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
                 </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>243</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id><a href="#" class="headerlink" title=" "></a> </h2><ul>
-<li><p>计算引擎</p>
-<ul>
-<li>虚拟化</li>
-<li>容器</li>
-<li>nodejs</li>
-</ul>
-</li>
-<li><p>数据库</p>
-</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算资源成本(月)</span></span><br><span class="line">CPU: 85元/C/月</span><br><span class="line">MEMORY: 10元/G/月</span><br><span class="line">DISK: 0.35元/G/月</span><br><span class="line">NETFLOW: 0.6/G</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实例成本</span></span><br><span class="line">40C,192G=5280元/月</span><br><span class="line">1C,1G,20G=52元/月</span><br><span class="line"></span><br><span class="line"><span class="comment"># k8s 集群成本</span></span><br><span class="line">CPU: 24core</span><br><span class="line">MEM: 96G</span><br><span class="line">DISK: 500G  31/小时 31*24*30  29760元/月</span><br><span class="line"></span><br><span class="line"><span class="comment"># 价格另算</span></span><br><span class="line">SLB</span><br><span class="line">NAT</span><br><span class="line">弹性IP</span><br><span class="line"><span class="comment"># admin#123.Com</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># IDC 托管成本</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">华为交换机基本配置命令详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-07 11:37:14 / 修改时间：11:38:35" itemprop="dateCreated datePublished" datetime="2020-06-07T11:37:14+08:00">2020-06-07</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="华为交换机基本配置命令详解"><a href="#华为交换机基本配置命令详解" class="headerlink" title="华为交换机基本配置命令详解"></a>华为交换机基本配置命令详解</h2><p>1、配置文件相关命令<br>system-view                    进入特权模式<br>display current-configuration      显示当前生效的配置<br>display saved-configuration        显示flash中配置文件，即下次上电启动时所用的配置文件<br>reset saved-configuration           檫除旧的配置文件<br>reboot                                          交换机重启<br>display version                             显示系统版本信息</p>
-<p>2、基本配置<br>super password                          修改特权用户密码<br>sysname                                     交换机命名<br>interface GigabitEthernet 1/0/1            进入接口视图<br>interface vlan 1                           进入接口视图<br>ip address 192.168.100.253 255.255.255.0            配置VLAN的IP地址<br>ip route-static 0.0.0.0 0.0.0.0 10.1.1.1     静态路由＝网关</p>
-<p>3、telnet配置<br>user-interface vty 0 4                                                                                     进入虚拟终端<br>[S3026-ui-vty0-4]authentication-mode password                                     设置口令模式<br>[S3026-ui-vty0-4]set authentication password simple fesf1qaz               设置口令<br>[S3026-ui-vty0-4]user-role network-admin                                                 用户级</p>
-<p>4、端口配置<br>[Quidway-Ethernet1/0/1]duplex {half|full|auto}                    配置端口工作状态<br>[Quidway-Ethernet1/0/1]speed {10|100|auto}                      配置端口工作速率<br>[Quidway-Ethernet1/0/1]flow-control                                  配置端口流控<br>[Quidway-Ethernet1/0/1]mdi {across|auto|normal}              配置端口平接扭接<br>[Quidway-Ethernet1/0/1]port link-type {trunk|access|hybrid}     设置端口工作模式<br>[Quidway-Ethernet1/0/1]undo shutdown                                     激活端口<br>[Quidway-Ethernet1/0/2]quit                                                        退出系统视图</p>
-<p>5、链路聚合配置</p>
-<p>[DeviceA] link-aggregation group 1 mode manual       创建手工聚合组1<br>[Qw_A] interface ethernet 1/0/1                     将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1<br>[Qw_A-Ethernet1/0/1] interface ethernet 1/0/2    将以太网端口Ethernet1/0/1加入聚合组1<br>[Qw_A-Ethernet1/0/2] port link-aggregation group 1<br>[Qw_A] link-aggregation group 1 service-type tunnel     # 在手工聚合组的基础上创建tunnel业务环回组。<br>[Qw_A] interface ethernet 1/0/1               将以太网端口Ethernet1/0/1加入业务环回组。<br>[Qw_A-Ethernet1/0/1] undo stp<br>[Qw_A-Ethernet1/0/1] port link-aggregation group 1</p>
-<p>6、端口镜像<br>monitor-port        　指定镜像端口<br>port mirror     　　 指定被镜像端口<br>port mirror int_list observing-port int_type int_num  指定镜像和被镜像</p>
-<p>以太网端口有三种链路类型：Access、Hybrid和Trunk。<br>   Access类型的端口只能属于1个VLAN，一般用于连接计算机的端口；<br>   Trunk类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，一般用于交换机之间连接的端口；<br>    Hybrid类型的端口可以允许多个VLAN通过，可以接收和发送多个VLAN的报文，可以用于交换机之间连接，也可以用于连接用户的计算机。<br>    Hybrid端口和Trunk端口在接收数据时，处理方法是一样的，唯一不同之处在于发送数据时：Hybrid端口可以允许多个VLAN的报文发送时不打标签，而Trunk端口只允许缺省VLAN的报文发送时不打标签。</p>
-<p>7、VLAN配置<br>vlan 4                                 　　　　　　   创建VLAN<br>[Quidway-vlan4]port ethernet 1/0/1 to ethernet 1/0/4 　　　  在VLAN中增加端口</p>
-<p>① 配置基于access的VLAN<br>[Quidway-Ethernet1/0/2]port access vlan 4          　　　　　 当前端口加入到VLAN<br>注意：缺省情况下，端口的链路类型为Access类型，所有Access端口均属于且只属于VLAN1</p>
-<p>② 配置基于trunk的VLAN<br>[Quidway-Ethernet 1/0/24]port link-type trunk                        设置当前端口为trunk<br>[Quidway-Ethernet 1/0/24]port trunk permit vlan {ID|All}     　设trunk允许的VLAN<br>注意：所有端口缺省情况下都是允许VLAN1的报文通过的<br>[Quidway-Ethernet1/0/2]port trunk pvid vlan 34   　　　　　  设置trunk端口的PVID</p>
-<p>③ 配置基于Hybrid端口的VLAN<br>[Quidway-Ethernet1/0/2]port link-type hybrid              配置端口的链路类型为Hybrid类型<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan-id-list { tagged | untagged }  允许指定的VLAN通过当前Hybrid端口<br>注意：缺省情况下，所有Hybrid端口只允许VLAN1通过<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan vlan-id      设置Hybrid端口的缺省VLAN<br>注意：缺省情况下，Hybrid端口的缺省VLAN为VLAN1</p>
-<p>④ VLAN描述<br>description string                      　　　　 指定VLAN描述字符<br>undo description                         　　  　删除VLAN描述字符<br>display vlan [vlan_id]                               查看VLAN设置</p>
-<p>⑤ 私有VLAN配置<br>[Qw_A-vlanx]isolate-user-vlan enable          　　　 　　设置主vlan<br>[Qw_A]Isolate-user-vlan  secondary  　　　 　　           设置主vlan包括的子vlan<br>[Quidway-Ethernet1/0/2]port hybrid pvid vlan      　　 设置vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid pvid             　　  删除vlan的pvid<br>[Quidway-Ethernet1/0/2]port hybrid vlan vlan_id_list untagged 　设置无标识的vlan</p>
-<p>如果包的vlan id与PVId一致，则去掉vlan信息. 默认PVID=1。<br>所以设置PVID为所属vlan id, 设置可以互通的vlan为untagged.</p>
-<p>8、STP配置<br>stp {enable|disable}                               设置生成树,默认关闭<br>stp mode rstp                                        设置生成树模式为rstp<br>stp priority 8192                         　　　 设置交换机的优先级<br>stp root {primary|secondary}             　设置为根或根的备份<br>[Quidway-Ethernet0/1]stp cost 200      设置交换机端口的花费</p>
-<p>display mac-address                            显示地址表信息<br>display mac-address aging-time         显示地址表动态表项的老化时间<br>display port-mac                                  显示用户配置的以太网端口MAC地址的起始值</p>
-<p>2、端口隔离配置</p>
-<p>① 通过端口隔离特性，用户可以将需要进行控制的端口加入到一个隔离组中，实现隔离组中的端口之间二层、三层数据的隔离，既增强了网络的安全性，也为用户提供了灵活的组网方案。</p>
-<p>[Sysname] interface ethernet1/0/2   将以太网端口Ethernet1/0/2加入隔离组。<br>[Sysname-Ethernet1/0/2] port isolate<br>[Sysname] display isolate port      显示隔离组中的端口信息</p>
-<p>② 配置隔离组后，只有隔离组内各个端口之间的报文不能互通，隔离组内端口与隔离组外端口以及隔离组外端口之间的通信不会受到影响。<br>③ 端口隔离特性与以太网端口所属的VLAN无关。<br>④ 当汇聚组中的某个端口加入或离开隔离组后，本设备中同一汇聚组内的其它端口，均会自动加入或离开该隔离组。<br>⑤ 对于既处于某个聚合组又处于某个隔离组的一组端口，其中的一个端口离开聚合组时不会影响其他端口，即其他端口仍将处于原聚合组和原隔离组中。<br>⑥ 如果某个聚合组中的端口同时属于某个隔离组，当在系统视图下直接删除该聚合组后，该聚合组中的端口仍将处于该隔离组中。<br>⑦ 当隔离组中的某个端口加入聚合组时，该聚合组中的所有端口，会自动加入隔离组中。</p>
-<p>13、端口安全配置<br>[Switch] port-security enable     启动端口安全功能<br>[Switch] interface Ethernet 1/0/1  进入以太网Ethernet1/0/1端口视图<br>[Switch-Ethernet1/0/1] port-security max-mac-count 80<br>设置端口允许接入的最大MAC地址数为80<br>[Switch-Ethernet1/0/1] port-security port-mode autolearn  配置端口的安全模式为autolearn<br>[Switch-Ethernet1/0/1] mac-address security 0001-0002-0003 vlan 1<br>将Host 的MAC地址0001-0002-0003作为Security MAC添加到VLAN 1中<br>[Switch-Ethernet1/0/1] port-security intrusion-mode disableport-temporarily<br>设置Intrusion Protection特性被触发后，暂时关闭该端口<br>[Switch]port-security timer disableport 30       关闭时间为30秒。</p>
-<p>14、端口绑定配置<br>通过端口绑定特性，网络管理员可以将用户的MAC地址和IP地址绑定到指定的端口上。进行绑定操作后，交换机只对从该端口收到的指定MAC地址和IP地址的用户发出的报文进行转发，提高了系统的安全性，增强了对网络安全的监控。</p>
-<p>[Qw_A-Ethernet1/0/1] am user-bind mac-addr 0001-0002-0003 ip-addr 10.12.1.1<br>将Host 1的MAC地址和IP地址绑定到Ethernet1/0/1端口。<br>有的交换机上绑定的配置不一样<br>[Qw_A] interface ethernet 1/0/2<br>[Qw_A-Ethernet1/0/2] user-bind ip-address 192.168.0.3 mac-address 0001-0203-0405<br>端口过滤配置<br>[Qw_A] interface ethernet1/0/1      配置端口Ethernet1/0/1的端口过滤功能。<br>[Qw_A-Ethernet1/0/1] ip check source ip-address mac-address<br>[Qw_A] dhcp-snooping             开启DHCP Snooping功能。<br>[Qw_A] interface ethernet1/0/2<br>设置与DHCP服务器相连的端口Ethernet1/0/2为信任端口。<br>[Qw_A-Ethernet1/0/2] dhcp-snooping trust<br>在端口Ethernet1/0/1上启用IP过滤功能，防止客户端使用伪造的不同源IP地址对服务器进行攻击</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/ceph%E5%AD%98%E5%82%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">ceph存储配置</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-07 10:51:38 / 修改时间：10:52:02" itemprop="dateCreated datePublished" datetime="2020-06-07T10:51:38+08:00">2020-06-07</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="http://docs.ceph.org.cn/start/" target="_blank" rel="noopener">ceph 安装配置</a></p>
-<h2 id><a href="#" class="headerlink" title=" "></a> </h2>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E9%A2%98%E5%BA%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/%E9%80%BB%E8%BE%91%E6%80%9D%E7%BB%B4%E9%A2%98%E5%BA%93/" class="post-title-link" itemprop="url">逻辑思维题库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-06 13:37:29 / 修改时间：13:40:51" itemprop="dateCreated datePublished" datetime="2020-06-06T13:37:29+08:00">2020-06-06</time>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
             </span>
 
           <br>
@@ -746,7 +290,7 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/jetbrain%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/javaGUI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -760,238 +304,7 @@ var _hmt = _hmt || [];
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/06/jetbrain%E8%BD%AF%E4%BB%B6%E5%8D%B8%E8%BD%BD/" class="post-title-link" itemprop="url">jetbrain软件卸载</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-06 13:28:53 / 修改时间：13:30:42" itemprop="dateCreated datePublished" datetime="2020-06-06T13:28:53+08:00">2020-06-06</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>799</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="写了个脚本卸载"><a href="#写了个脚本卸载" class="headerlink" title="写了个脚本卸载"></a>写了个脚本卸载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'EOF'</span> &gt;uninstalljetbrain.sh</span><br><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># 产品列表</span></span><br><span class="line">group=<span class="string">"AppCode</span></span><br><span class="line"><span class="string">CLion</span></span><br><span class="line"><span class="string">DataGrip</span></span><br><span class="line"><span class="string">Datalore</span></span><br><span class="line"><span class="string">dotTrace</span></span><br><span class="line"><span class="string">Exposed</span></span><br><span class="line"><span class="string">GoLand</span></span><br><span class="line"><span class="string">Hub</span></span><br><span class="line"><span class="string">IntelliJ</span></span><br><span class="line"><span class="string">JetBrains</span></span><br><span class="line"><span class="string">Kotlin</span></span><br><span class="line"><span class="string">KotlinConf</span></span><br><span class="line"><span class="string">Ktor</span></span><br><span class="line"><span class="string">MPS</span></span><br><span class="line"><span class="string">PhpStorm</span></span><br><span class="line"><span class="string">PyCharm</span></span><br><span class="line"><span class="string">Resharper</span></span><br><span class="line"><span class="string">Resharper C++</span></span><br><span class="line"><span class="string">Rider</span></span><br><span class="line"><span class="string">RubyMine</span></span><br><span class="line"><span class="string">Space</span></span><br><span class="line"><span class="string">TeamCity</span></span><br><span class="line"><span class="string">Toolbox App</span></span><br><span class="line"><span class="string">Upsource</span></span><br><span class="line"><span class="string">Webstorm</span></span><br><span class="line"><span class="string">YouTrack"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 项目安装目录</span></span><br><span class="line">dir=<span class="string">"/Users/alert/Library/Preferences/</span></span><br><span class="line"><span class="string">/Users/alert/Library/Caches/</span></span><br><span class="line"><span class="string">/Users/alert/Library/Logs/"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> d <span class="keyword">in</span> <span class="variable">$dir</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$d</span></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="variable">$group</span></span><br><span class="line"> <span class="keyword">do</span></span><br><span class="line">  <span class="built_in">echo</span> $(<span class="built_in">pwd</span>) <span class="variable">$s</span></span><br><span class="line">  tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span></span><br><span class="line">  tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span>|xargs rm -rf -</span><br><span class="line"> <span class="keyword">done</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> s <span class="keyword">in</span> <span class="variable">$group</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="built_in">cd</span> /Users/alert/Library/Application\ Support/</span><br><span class="line">tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span></span><br><span class="line">tree ./ -L 1|awk <span class="string">'&#123;print $2&#125;'</span>|grep -i <span class="string">"\&lt;<span class="variable">$s</span>"</span>|xargs rm -rf -</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E5%85%8D%E8%B4%B9ssl%E7%94%B3%E8%AF%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/%E5%85%8D%E8%B4%B9ssl%E7%94%B3%E8%AF%B7/" class="post-title-link" itemprop="url">免费ssl申请</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-06 13:27:45 / 修改时间：13:37:13" itemprop="dateCreated datePublished" datetime="2020-06-06T13:27:45+08:00">2020-06-06</time>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>700</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://freessl.cn/" target="_blank" rel="noopener">https://freessl.cn/</a>  免费证书申请</p>
-<h2 id="填入申请域名"><a href="#填入申请域名" class="headerlink" title="填入申请域名"></a>填入申请域名</h2><h2 id="生成CSR文件"><a href="#生成CSR文件" class="headerlink" title="生成CSR文件"></a>生成CSR文件</h2><p><a href="https://www.racent.com/generate-csr" target="_blank" rel="noopener">https://www.racent.com/generate-csr</a> CSR 在线生成</p>
-<h2 id="设置DNS-解析txt纪录"><a href="#设置DNS-解析txt纪录" class="headerlink" title="设置DNS 解析txt纪录"></a>设置DNS 解析txt纪录</h2><p>key：TXT 记录<br>值：记录值</p>
-<p>验证域名：wx.xxxx.com<br>TXT 记录：_dnsauth.wx<br>记录值：202004120717021oq4s1ogkvbr3jw70a48u8w9ib3bfhqfvzpfq6gdzcxrrdcml7</p>
-<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>nslookup -q=txt _dnsauth.gitlab.uhetrip.com</p>
-<h2 id="下载证书"><a href="#下载证书" class="headerlink" title="下载证书"></a>下载证书</h2><h2 id="配置到nginx中"><a href="#配置到nginx中" class="headerlink" title="配置到nginx中"></a>配置到nginx中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">        listen              443 ssl;</span><br><span class="line">        server_name        wx.xxxx.com;</span><br><span class="line">        keepalive_timeout   70;</span><br><span class="line">        &#x2F;&#x2F; pem 是生成的证书，key是csr生成的key</span><br><span class="line">        ssl_certificate      wx.xxx.com&#x2F;full_chain.pem; </span><br><span class="line">        ssl_certificate_key  wx.xxxx.com&#x2F;wx.xxxxp.com.key;</span><br><span class="line">        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line">        ssl_ciphers         HIGH:!aNULL:!MD5;</span><br><span class="line">        &#x2F;&#x2F; 后端服务</span><br><span class="line">        location ~* &#123;</span><br><span class="line">            proxy_pass http:&#x2F;&#x2F;119.1.1.1:10090;</span><br><span class="line">            access_log  &#x2F;data&#x2F;log&#x2F;nginxlog&#x2F;weiinssl.log  main;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/idea%E5%8F%8D%E7%BC%96%E8%AF%91jar%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/idea%E5%8F%8D%E7%BC%96%E8%AF%91jar%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">idea反编译jar文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-06-06 12:59:16 / 修改时间：13:08:06" itemprop="dateCreated datePublished" datetime="2020-06-06T12:59:16+08:00">2020-06-06</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/develop/" itemprop="url" rel="index"><span itemprop="name">develop</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>166</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="创建一个-Maven-项目"><a href="#创建一个-Maven-项目" class="headerlink" title="创建一个 Maven 项目"></a>创建一个 Maven 项目</h2><p>将 jar 拖拽到项目中<br>右击 jar 选择 As a library<br>-&gt; 选择 存放位置 prject library<br>然后就会反编译 jar 得到 java 文件和 配置文件<br>从 jar 中找到<br>BOOT-INF<br>  classes<br>    com.xxx 数据文件<br>    yml xml 配置文件<br>  lib 依赖库<br>META-INF maven pom.xml 文件<br>org.xxx 程序类</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/SSL%E8%AF%81%E4%B9%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/SSL%E8%AF%81%E4%B9%A6/" class="post-title-link" itemprop="url">SSL证书</a>
+            <a href="/2020/07/javaGUI/" class="post-title-link" itemprop="url">javaGUI</a>
         </h2>
 
         <div class="post-meta">
@@ -1001,15 +314,28 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-06-06 09:29:19" itemprop="dateCreated datePublished" datetime="2020-06-06T09:29:19+08:00">2020-06-06</time>
+              <time title="创建时间：2020-07-07 19:50:13" itemprop="dateCreated datePublished" datetime="2020-07-07T19:50:13+08:00">2020-07-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-14 14:31:39" itemprop="dateModified" datetime="2020-06-14T14:31:39+08:00">2020-06-14</time>
+                <time title="修改时间：2020-07-11 11:37:27" itemprop="dateModified" datetime="2020-07-11T11:37:27+08:00">2020-07-11</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
 
           <br>
             <span class="post-meta-item" title="本文字数">
@@ -1017,7 +343,276 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.3k</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/%E7%94%B5%E5%95%86%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">电商项目</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-06 13:03:43" itemprop="dateCreated datePublished" datetime="2020-07-06T13:03:43+08:00">2020-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:35:27" itemprop="dateModified" datetime="2020-07-11T11:35:27+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>149</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>登录<br>注册<br>邮箱激活</p>
+<p>用户中心<br>分页</p>
+<p>列表页<br>详情页</p>
+<p>购物车</p>
+<p>支付方式</p>
+<p>后台</p>
+<p>项目立项<br>-&gt; 需求分析<br>  用户模块<br>  商品相关<br>  购物车相关<br>  订单相关<br>  后台模块<br>-&gt; 原型设计<br>-&gt; 架构设计<br> -&gt; 数据库设计<br> -&gt; 模块代码实现和单元测试<br>-&gt; UI设计<br> -&gt; 前端设计<br>-: 代码整合<br>-&gt; 集成测试<br>-&gt; 网站发布</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/GoAndQT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/GoAndQT/" class="post-title-link" itemprop="url">GoAndQT</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-06 02:15:01" itemprop="dateCreated datePublished" datetime="2020-07-06T02:15:01+08:00">2020-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:35:58" itemprop="dateModified" datetime="2020-07-11T11:35:58+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>86</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="qt-for-mac"><a href="#qt-for-mac" class="headerlink" title="qt for mac"></a>qt for mac</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew search qt</span><br><span class="line">brew install qt</span><br><span class="line">brew cask install qt-creator</span><br><span class="line">brew cask install qt-design</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/Go-gtk3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/Go-gtk3/" class="post-title-link" itemprop="url">Go-gtk3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-05 19:33:32" itemprop="dateCreated datePublished" datetime="2020-07-05T19:33:32+08:00">2020-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:35:51" itemprop="dateModified" datetime="2020-07-11T11:35:51+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1036,15 +631,501 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="概念及原理"><a href="#概念及原理" class="headerlink" title="概念及原理"></a>概念及原理</h2><p>公钥 -&gt; 私钥<br>证书: 其实包含三部分，用户的信息，用户的公钥，还有CA中心对该证书里面的信息的签名<br>根证书: 根证书是未被签名的公钥证书或自签名的证书。<br>证书数字签名(hash): 公钥密码解决保密性问题数字签名解决完整性问题和有效性问题<br>根证书-&gt; 中间证书 -&gt; 颁发的其他证书</p>
-<p>存储：<br>受信任的证书根植于主流浏览器的信任存储中。<br>Chrome -&gt; 设置 -&gt; 隐私和安全性 -&gt; 更多 -&gt; 管理证书</p>
-<p>验证：<br>当您的浏览器在网站上验证最终用户SSL证书时，它使用提供的公钥来验证签名并在证书链上向上移动一个链接。重复这个过程：对签名进行身份验证，并跟踪签名的证书链，直到最终到达<strong>浏览器信任存储中的一个根证书</strong>。如果它不能将证书链回其受信任的根，它就不会信任该证书。</p>
-<h2 id="自己签发根证书示例"><a href="#自己签发根证书示例" class="headerlink" title="自己签发根证书示例"></a>自己签发根证书示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 简单演示使用 ip 签发证书</span></span><br><span class="line"><span class="comment"># 生成根证书</span></span><br><span class="line">openssl genrsa -out ca.key 4096</span><br><span class="line"></span><br><span class="line">openssl req -x509 -new -nodes -sha512 -days 3650 \</span><br><span class="line"> -subj <span class="string">"/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.0.69"</span> \</span><br><span class="line"> -key ca.key \</span><br><span class="line"> -out ca.crt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对根证书签名</span></span><br><span class="line">openssl genrsa -out mycert.key 4096</span><br><span class="line"></span><br><span class="line">openssl req -sha512 -new \</span><br><span class="line">    -subj <span class="string">"/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.0.69"</span> \</span><br><span class="line">    -key mycert.key \</span><br><span class="line">    -out mycert.csr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为registry生成证书</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"subjectAltName = IP:192.168.0.69"</span> &gt; extfile.cnf</span><br><span class="line"></span><br><span class="line">openssl x509 -req -sha512 -days 3650 \</span><br><span class="line">    -extfile extfile.cnf \</span><br><span class="line">    -CA ca.crt -CAkey ca.key -CAcreateserial \</span><br><span class="line">    -<span class="keyword">in</span> mycert.csr \</span><br><span class="line">    -out mycert.crt</span><br></pre></td></tr></table></figure>
-<p>ssh 暴力破解<br><a href="http://server.51cto.com/sOS-569326.htm" target="_blank" rel="noopener">http://server.51cto.com/sOS-569326.htm</a></p>
-<p><a href="https://www.bboysoul.com/2017/10/25/%E4%BD%BF%E7%94%A8SSHScan%E6%89%AB%E6%8F%8F%E7%A0%B4%E8%A7%A3ssh%E5%AF%86%E7%A0%81/" target="_blank" rel="noopener">https://www.bboysoul.com/2017/10/25/%E4%BD%BF%E7%94%A8SSHScan%E6%89%AB%E6%8F%8F%E7%A0%B4%E8%A7%A3ssh%E5%AF%86%E7%A0%81/</a></p>
-<p><a href="http://www.my-ip-neighbors.com" target="_blank" rel="noopener">http://www.my-ip-neighbors.com</a>   reverse ip lookup<br>www.sameip.org  whois<br>国内: <a href="http://www.cmd5.com" target="_blank" rel="noopener">http://www.cmd5.com</a> (收费很.强大)<br>国内：<a href="http://www.md5.com.cn/" target="_blank" rel="noopener">http://www.md5.com.cn/</a> (有特色，还没怎么用)<br>国内：www.xmd5.com(还不错)<br>国外：<a href="http://www.c0llision.net/webcrack.php(免费，还不错" target="_blank" rel="noopener">http://www.c0llision.net/webcrack.php(免费，还不错</a>)<br>国外：<a href="http://hashkiller.com/" target="_blank" rel="noopener">http://hashkiller.com/</a> (免费，相当强大!!!)<br>国外：<a href="http://ops.conus.info/(免费，少有的oracle" target="_blank" rel="noopener">http://ops.conus.info/(免费，少有的oracle</a> hash在线破解网站)<br><a href="http://www.c0llision.net/webcrack.php" target="_blank" rel="noopener">http://www.c0llision.net/webcrack.php</a>  破解HASH<br><a href="http://www.objectif-securite.ch/en/products.php" target="_blank" rel="noopener">http://www.objectif-securite.ch/en/products.php</a>  破解HASH<br>linxer<br>看雪 <a href="http://www.pediy.com/" target="_blank" rel="noopener">http://www.pediy.com/</a><br>unpack  www.unpack.cn</p>
-<p><a href="https://jobrest.gitbooks.io/kali-linux-cn/content/index.html" target="_blank" rel="noopener">https://jobrest.gitbooks.io/kali-linux-cn/content/index.html</a></p>
-<h2 id="使用-easyrsa-生成证书"><a href="#使用-easyrsa-生成证书" class="headerlink" title="使用 easyrsa 生成证书"></a>使用 easyrsa 生成证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">curl -LO https://storage.googleapis.com/kubernetes-release/easy-rsa/easy-rsa.tar.gz</span><br><span class="line">tar xzf easy-rsa.tar.gz</span><br><span class="line"><span class="built_in">cd</span> easy-rsa-master/easyrsa3</span><br><span class="line">./easyrsa init-pki</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CA</span></span><br><span class="line">./easyrsa --batch <span class="string">"--req-cn=<span class="variable">$&#123;MASTER_IP&#125;</span>@`date +%s`"</span> build-ca nopass</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成服务器证书和密钥</span></span><br><span class="line">./easyrsa --subject-alt-name=<span class="string">"IP:<span class="variable">$&#123;MASTER_IP&#125;</span>,"</span>\</span><br><span class="line"><span class="string">"IP:<span class="variable">$&#123;MASTER_CLUSTER_IP&#125;</span>,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default.svc,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default.svc.cluster,"</span>\</span><br><span class="line"><span class="string">"DNS:kubernetes.default.svc.cluster.local"</span> \</span><br><span class="line">--days=10000 \</span><br><span class="line">build-server-full server nopass</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拷贝 pki/ca.crt、 pki/issued/server.crt 和 pki/private/server.key </span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># API 服务器的启动参数中添加以下参数</span></span><br><span class="line">--client-ca-file=/yourdirectory/ca.crt</span><br><span class="line">--tls-cert-file=/yourdirectory/server.crt</span><br><span class="line">--tls-private-key-file=/yourdirectory/server.key</span><br></pre></td></tr></table></figure>
+          <ul>
+<li><a href="https://github.com/gotk3/gotk3" target="_blank" rel="noopener">gotk3</a></li>
+<li><a href="https://developer.gnome.org/gtk3/stable/" target="_blank" rel="noopener">docs </a></li>
+<li><a href="https://gitlab.gnome.org/GNOME/gtk-osx/-/blob/master/gtk-osx-setup.sh" target="_blank" rel="noopener">install.sh </a></li>
+<li><a href="https://github.com/gotk3/gotk3-examples/tree/master/gtk-examples" target="_blank" rel="noopener">GTK3 example</a></li>
+</ul>
+<h2 id="install-gtk-for-mac"><a href="#install-gtk-for-mac" class="headerlink" title="install gtk for mac"></a>install gtk for mac</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># download</span></span><br><span class="line">curl https://gitlab.gnome.org/GNOME/gtk-osx/-/raw/master/gtk-osx-setup.sh?inline=<span class="literal">false</span> -o gtk-osx-setup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行</span></span><br><span class="line">sh gtk-osx-setup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment">#or</span></span><br><span class="line">brew install gtk+3</span><br><span class="line"></span><br><span class="line"><span class="comment"># </span></span><br><span class="line">/usr/<span class="built_in">local</span>/Cellar/gtk+3/3.24.18_1: 714 files, 53.2MB</span><br></pre></td></tr></table></figure>
+<h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>mkdir mygo-gtk<br>touch main.go<br><figure class="highlight go"><figcaption><span>使用的是 mattn/go-gtk</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/mattn/go-gtk/gtk"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 初始化</span></span><br><span class="line">	gtk.Init(<span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 应用代码</span></span><br><span class="line">	window := gtk.NewWindow(gtk.WINDOW_TOPLEVEL)</span><br><span class="line">	window.SetTitle(<span class="string">"first windows"</span>)</span><br><span class="line">	window.SetSizeRequest(<span class="number">800</span>, <span class="number">500</span>)</span><br><span class="line">	window.Show()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 事件循环</span></span><br><span class="line">	gtk.Main()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>go mod init<br>go mod tidy</p>
+<p>go run main.go</p>
+<h2 id="官方推荐-go-binding"><a href="#官方推荐-go-binding" class="headerlink" title="官方推荐 go binding"></a>官方推荐 go binding</h2><figure class="highlight go"><figcaption><span>使用的是 gotk3/gotk3</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"github.com/gotk3/gotk3/gtk"</span></span><br><span class="line">	<span class="string">"log"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Initialize GTK without parsing any command line arguments.</span></span><br><span class="line">	gtk.Init(<span class="literal">nil</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create a new toplevel window, set its title, and connect it to the</span></span><br><span class="line">	<span class="comment">// "destroy" signal to exit the GTK main loop when it is destroyed.</span></span><br><span class="line">	win, err := gtk.WindowNew(gtk.WINDOW_TOPLEVEL)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"Unable to create window:"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	win.SetTitle(<span class="string">"Simple Example"</span>)</span><br><span class="line">	win.Connect(<span class="string">"destroy"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		gtk.MainQuit()</span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Create a new label widget to show in the window.</span></span><br><span class="line">	l, err := gtk.LabelNew(<span class="string">"Hello, gotk3!"</span>)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		log.Fatal(<span class="string">"Unable to create label:"</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Add the label to the window.</span></span><br><span class="line">	win.Add(l)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Set the default window size.</span></span><br><span class="line">	win.SetDefaultSize(<span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Recursively show all widgets contained in this window.</span></span><br><span class="line">	win.ShowAll()</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Begin executing the GTK main loop.  This blocks until</span></span><br><span class="line">	<span class="comment">// gtk.MainQuit() is run.</span></span><br><span class="line">	gtk.Main()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="集成开发工具-glade"><a href="#集成开发工具-glade" class="headerlink" title="集成开发工具 glade"></a>集成开发工具 glade</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">brew install glade</span><br><span class="line"></span><br><span class="line">If you need to have libxml2 first <span class="keyword">in</span> your PATH run:</span><br><span class="line">  <span class="built_in">echo</span> <span class="string">'export PATH="/usr/local/opt/libxml2/bin:$PATH"'</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"></span><br><span class="line">For compilers to find libxml2 you may need to <span class="built_in">set</span>:</span><br><span class="line">  <span class="built_in">export</span> LDFLAGS=<span class="string">"-L/usr/local/opt/libxml2/lib"</span></span><br><span class="line">  <span class="built_in">export</span> CPPFLAGS=<span class="string">"-I/usr/local/opt/libxml2/include"</span></span><br><span class="line"></span><br><span class="line">For pkg-config to find libxml2 you may need to <span class="built_in">set</span>:</span><br><span class="line">  <span class="built_in">export</span> PKG_CONFIG_PATH=<span class="string">"/usr/local/opt/libxml2/lib/pkgconfig"</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/Fyne%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/Fyne%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Fyne使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-04 23:33:56" itemprop="dateCreated datePublished" datetime="2020-07-04T23:33:56+08:00">2020-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:35:47" itemprop="dateModified" datetime="2020-07-11T11:35:47+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>675</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Fyne使用OpenGL实现立即模式跨平台GUI。</p>
+<ul>
+<li><a href="https://github.com/fyne-io/fyne" target="_blank" rel="noopener">fyne github</a></li>
+<li><a href="https://developer.fyne.io/started/firstapp" target="_blank" rel="noopener">started</a></li>
+<li><a href="https://fyne.io/develop/" target="_blank" rel="noopener">docs</a></li>
+<li><a href="https://github.com/fyne-io/examples" target="_blank" rel="noopener">examples</a></li>
+</ul>
+<h1 id="创建一个APP"><a href="#创建一个APP" class="headerlink" title="创建一个APP"></a>创建一个APP</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir gui</span><br><span class="line">go mod init</span><br><span class="line">go tidy</span><br></pre></td></tr></table></figure>
+<h2 id="First-app"><a href="#First-app" class="headerlink" title="First app"></a>First app</h2><figure class="highlight go"><figcaption><span>First gui</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fyne.io/fyne/app"</span></span><br><span class="line">	<span class="string">"fyne.io/fyne/widget"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	a := app.New()            <span class="comment">// 新建了一个app</span></span><br><span class="line">	w := a.NewWindow(<span class="string">"Hello"</span>) <span class="comment">// 为app新建了一个窗口</span></span><br><span class="line"></span><br><span class="line">	hello := widget.NewLabel(<span class="string">"Hello Fyne!"</span>) <span class="comment">// 新建了一个标签</span></span><br><span class="line">	w.SetContent(widget.NewVBox(            <span class="comment">// 在窗口中设置内容</span></span><br><span class="line">		hello, <span class="comment">// 放入了hello 标签</span></span><br><span class="line">		widget.NewButton(<span class="string">"Hi!"</span>, <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; <span class="comment">// 创建了一个button，设置了事件函数</span></span><br><span class="line">			hello.SetText(<span class="string">"Welcome :)"</span>)</span><br><span class="line">		&#125;),</span><br><span class="line">	))</span><br><span class="line"></span><br><span class="line">	w.ShowAndRun() <span class="comment">// 进入循环事件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载</span></span><br><span class="line">go get fyne.io/fyne/cmd/fyne_demo/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">fyne_demo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 所在位置</span></span><br><span class="line">ls ../../pkg/mod/fyne.io/fyne\@v1.3.0/</span><br></pre></td></tr></table></figure>
+<p><a href="https://www.gtk.org/" target="_blank" rel="noopener">https://www.gtk.org/</a></p>
+<p><a href="https://glade.gnome.org/" target="_blank" rel="noopener">https://glade.gnome.org/</a></p>
+<p><a href="https://www.gtk.org/docs/language-bindings/" target="_blank" rel="noopener">https://www.gtk.org/docs/language-bindings/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/gotags/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/gotags/" class="post-title-link" itemprop="url">gotags</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-02 12:54:50" itemprop="dateCreated datePublished" datetime="2020-07-02T12:54:50+08:00">2020-07-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:37:49" itemprop="dateModified" datetime="2020-07-11T11:37:49+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">编程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B/JAVA/" itemprop="url" rel="index"><span itemprop="name">JAVA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>63</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://fyne.io/develop/cross-compiling" target="_blank" rel="noopener">fyne</a><br><a href="https://www.vugu.org/doc/start" target="_blank" rel="noopener">https://www.vugu.org/doc/start</a><br><a href="https://github.com/andlabs/ui" target="_blank" rel="noopener">https://github.com/andlabs/ui</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/07/PCIDSS%E5%90%88%E8%A7%84nginx%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/PCIDSS%E5%90%88%E8%A7%84nginx%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">PCIDSS合规nginx配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-07-01 21:10:45" itemprop="dateCreated datePublished" datetime="2020-07-01T21:10:45+08:00">2020-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:36:46" itemprop="dateModified" datetime="2020-07-11T11:36:46+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <ul>
+<li><a href="https://infinisign.com/tools/sslcheck/" target="_blank" rel="noopener">证书检测</a></li>
+<li><a href="https://baike.baidu.com/item/PCI%20DSS/10470398?fr=aladdin" target="_blank" rel="noopener">PCI DSS</a></li>
+</ul>
+<p><strong>证书链</strong>：DigiCert Global Root CA<br><strong>传输协议</strong>：TLSv1.1 TLSv1.2 TLSv1.3<br><strong>加密套件</strong>：AES128+EECDH:AES128+EDH<br><strong>设备兼容性</strong>：Android，Chrome，Firefox，IE</p>
+<p><strong>Let’s Encrypt</strong>是由ISRG（Internet Security Research Group）提供的免费SSL项目，现由Linux基金会托管。<br><figure class="highlight bash"><figcaption><span>免费SSL证书</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/letsencrypt/letsencrypt</span><br><span class="line"></span><br><span class="line"><span class="comment"># cert.pem 服务器证书</span></span><br><span class="line"><span class="comment"># privkey.pem 是证书私钥</span></span><br><span class="line"><span class="comment"># 换成自己的域名即可</span></span><br></pre></td></tr></table></figure><br><strong>OpenSSL</strong> 是用 C 写的一套 SSL 和 TLS 开源实现。<br><strong>SSL</strong>协议，是一种安全传输协议。<br><strong>TLS</strong>是SSL v3.0的升级版。<br><strong>HTTPS</strong>:通过 SSL（Secure Socket Layer，安全套接层）建立安全的通信线路，再进行 HTTP 通信。<br><strong>OCSP</strong>（OCSP，Online Certificate Status Protocol）:协议规定了服务器和客户端应用程序的通讯语法。在线证书状态协议给了用户的到期的证书一个宽限期，这样他们就可以在更新以前的一段时间内继续访问服务器。</p>
+<figure class="highlight nginx"><figcaption><span>NGINX ssl配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;  </span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> infinisign.com;</span><br><span class="line">    <span class="attribute">root</span>   /home/static;</span><br><span class="line">    <span class="attribute">index</span> index.php index.html index.htm;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 全站HTTPS(SSL)重定向</span></span><br><span class="line">    <span class="attribute">if</span> (<span class="variable">$scheme</span> = http ) &#123; </span><br><span class="line">        <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$host</span><span class="variable">$request_uri</span>; </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 配置证书路径</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span> /opt/ssl/infinisign.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /opt/ssl/infinisign.key;</span><br><span class="line">    <span class="comment"># 配置加密套件</span></span><br><span class="line">    <span class="attribute">ssl_ciphers</span> <span class="string">'AES128+EECDH:AES128+EDH:!aNULL'</span>;</span><br><span class="line">    <span class="comment"># 配置SSLv2和SSLv3安全漏洞</span></span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line">    <span class="attribute">ssl_session_cache</span> shared:SSL:<span class="number">10m</span>;</span><br><span class="line">    <span class="comment"># 配置OCSP装订</span></span><br><span class="line">    <span class="attribute">ssl_stapling</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">ssl_stapling_verify</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">resolver</span> <span class="number">8.8.4.4</span> <span class="number">8.8.8.8</span> valid=<span class="number">300s</span>;</span><br><span class="line">    <span class="attribute">resolver_timeout</span> <span class="number">10s</span>;</span><br><span class="line">    <span class="comment"># 使用服务器端的首选算法</span></span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="comment"># DHE 密钥交换</span></span><br><span class="line">    <span class="attribute">ssl_dhparam</span> /etc/ssl/certs/dhparam.pem;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment"># 生成密钥</span></span><br><span class="line"><span class="attribute">cd</span> /etc/ssl/certs</span><br><span class="line">openssl dhparam -out dhparam.pem <span class="number">4096</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><figcaption><span>ApacheSSL 配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;VirtualHost *:443&gt;</span></span><br><span class="line">    <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> /home/wwwroot/www.vpser.net   //网站目录</span><br><span class="line">    <span class="attribute"><span class="nomarkup">ServerName</span></span> www.vpser.net:443   //域名</span><br><span class="line">    <span class="attribute">ServerAdmin</span> licess@vpser.net      //邮箱</span><br><span class="line">    <span class="attribute">ErrorLog</span> <span class="string">"/home/wwwlogs/www.vpser.net-error_log"</span>   //错误日志</span><br><span class="line">    <span class="attribute">CustomLog</span> <span class="string">"/home/wwwlogs/www.vpser.net-access_log"</span> common    //访问日志</span><br><span class="line">    <span class="attribute">SSLEngine</span> <span class="literal">on</span></span><br><span class="line">    <span class="attribute">SSLCertificateFile</span> /etc/letsencrypt/live/www.test.net/fullchain.pem   //改一下里面的域名就行，不建议更换路径</span><br><span class="line">    <span class="attribute">SSLCertificateKeyFile</span> /etc/letsencrypt/live/www.test.net/privkey.pem    //改一下里面的域名就行，不建议更换路径</span><br><span class="line">    &lt;Directory "/home/wwwroot/www.vpser.net"&gt;   //网站目录</span><br><span class="line">        <span class="attribute">SetOutputFilter</span> DEFLATE</span><br><span class="line">        <span class="attribute"><span class="nomarkup">Options</span></span> FollowSymLinks</span><br><span class="line">        <span class="attribute">AllowOverride</span> <span class="literal">All</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</span><br><span class="line">        <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></span><br><span class="line">        <span class="attribute">DirectoryIndex</span> index.html index.php</span><br><span class="line">     <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># intermediate configuration, tweak to your needs</span></span><br><span class="line"><span class="attribute">SSLProtocol</span>             <span class="literal">all</span> -SSLv3</span><br><span class="line"><span class="attribute">SSLCipherSuite</span>          ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS</span><br><span class="line"><span class="attribute">SSLHonorCipherOrder</span>     <span class="literal">on</span></span><br><span class="line"><span class="attribute">SSLCompression</span>          <span class="literal">off</span></span><br><span class="line"><span class="attribute">SSLSessionTickets</span>       <span class="literal">off</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># OCSP Stapling, only in httpd 2.3.3 and later</span></span><br><span class="line"><span class="attribute">SSLUseStapling</span>          <span class="literal">on</span></span><br><span class="line"><span class="attribute">SSLStaplingResponderTimeout</span> 5</span><br><span class="line"><span class="attribute">SSLStaplingReturnResponderErrors</span> <span class="literal">off</span></span><br><span class="line"><span class="attribute">SSLStaplingCache</span>        shmcb:/var/run/ocsp(128000)</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" class="post-title-link" itemprop="url">计算机科学</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-28 10:52:53" itemprop="dateCreated datePublished" datetime="2020-06-28T10:52:53+08:00">2020-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:35:08" itemprop="dateModified" datetime="2020-07-11T11:35:08+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">计算机</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>*<a href="https://www.bilibili.com/video/BV1EW411u7th?from=search&amp;seid=11013015744420288055" target="_blank" rel="noopener">计算机科普</a></p>
+<h2 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h2><p>计算工具<br>绳结：<br>算盘：记住计算过程的状态<br>步进计算器<br>差分机<br>分析机<br>打孔卡片制表机<br>计算表<br>电子计算机<br>开关继电器<br>电子管<br>二极管<br>晶体管</p>
+<p>层层抽象<br>进位</p>
+<h2 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h2><p>布尔代数<br>逻辑的数学分析<br>NOT<br>AND 串连<br>OR 并连<br>XOR and + not + and 并连 or</p>
+<p>二进制<br>bit<br>byte<br>数据块 32bit，64bit</p>
+<p>32位色<br>负数 二进制第一位 1<br>非整数  32bit 第一位表示正负，2-9位表示指数。剩余23存整数<br>浮点数存储方式<br>字符 ASCII 128 A 65 a 95<br>UNICODE<br>分块</p>
+<p>算术逻辑单元 ALU<br>  算术单元<br>  逻辑单元<br>XOR 作为加法器<br>半累加器 XOR + AND 完成进位<br>全累加器 1+1 需要一个全累加器。否则 1+1 会等于0,进位没了<br>两个半累加器相连+ OR门检查进位<br>8位累加器，需要一个半累加器，7个全累加器，第9位溢出<br>溢出<br>进位会造成延迟，使用超前加法器</p>
+<p>进一步抽象成8位ALU<br>8位输入1，8位输入2，操作码为4位，标志位为3位（溢出，zero，negative）<br>输出8位</p>
+<p>RAM<br>锁存器： OR + AND + NOT<br>锁存器需要把一端回环，用 NOT做复位器。<br>输入1则存1，输入0则存0</p>
+<p>8位的锁存器叫寄存器 SRAM<br>多路复用器<br>256位内存需要8位地址，前四位表示列，后四位表示行。<br>一个数据位，一个写入线，一个读取线</p>
+<p>DRAM<br>NVRAM</p>
+<p>中央处理器<br>微系统<br>opcode<br>地址寄存器<br>指令寄存器<br>decode<br>时钟速度<br>超频-即更改时钟频率<br>降频-减低时钟频率使cpu运转的慢些。节能<br>自动调整时钟频率</p>
+<p>指令和程序<br>HALT 停止<br>指令长度<br>可变长执行</p>
+<p>高级CPU设计<br>减少晶体管切换时间<br>使用缓存<br>  CACHE HIT<br>  CACHE MISS<br>  DIRTY BIT<br>指令流水线<br>  FETCH<br>  DECODE<br>  EXECUTE<br>  数据依赖停止流水线<br>乱序执行<br>推测执行<br>分支预测<br>多核处理<br>多CPU架构<br>总体上为了一个时钟周期内处理更多的指令</p>
+<p>编程<br>打孔带<br>伪代码<br>操作码表<br>汇编器<br>A-0<br>FORTRAN<br>COBOL 通用语言<br>程序员<br>60年代:ALGOL,LISP,BASIC<br>70年代:Pascal,C,Smalltalk<br>80年代:C++,Objective-C,Perl<br>90年代:Python,Ruby,Java<br>2000:Swift,C#,Go</p>
+<p>语法<br>变量<br>控制语句<br>函数<br>库</p>
+<p>算法：解决问题的步骤<br>排序<br>  冒泡<br>  选择<br>  归并<br>图<br>  所有组合的可能性是N!<br>  Dijkstra算法<br>数据结构<br>  数组<br>  字符串以O结尾<br>  结构体<br>  队列<br>  栈<br>  Tree<br>图灵机<br>  可判定性问题<br>  状态：运行的状态<br>  规则：描述机器做什么<br>  读写头：<br>  左移：<br>  右移：<br>  图灵完整<br>  停机问题<br>  图灵测试<br>软件工程<br>  代码库<br>集成电路&amp;摩尔定律<br>  VLSI软件<br>操作系统<br>  特权指令<br>  多任务处理<br>  虚拟内存<br>    内存映射<br>  动态内存分配<br>  分时操作系统Multics<br>  Unix</p>
+<p>内存&amp;存储介质<br>  纸卡 80*12<br>  磁带<br>  磁鼓<br>  磁盘<br>  软磁盘<br>  光盘<br>  U盘<br>  SSD盘</p>
+<p>文件系统<br>  文件格式<br>  元数据<br>  文件头<br>  音频<br>    WAV<br>  图像<br>    BMP<br>  文件系统<br>    文件格式<br>    文件状态</p>
+<p>压缩<br>  无损压缩<br>    文本<br>    软件<br>    霍夫曼树<br>  有损压缩<br>    音频<br>    图像<br>    视频</p>
+<p>命令行界面<br>  电传打字机<br>屏幕&amp;2D图像显示<br>  80 * 25 2000个字符<br>  CREAN BUFFER<br>  矢量绘图：占用内存小<br>  VRAM：帧缓存区</p>
+<p>个人计算机革命<br>  创新降低学习成本<br>  GUI 事件驱动编程</p>
+<p>3D 图像用户界面<br>  正交投影<br>  透视投影<br>  三角形平面<br>  fillrate<br>  羽化<br>  画家算法<br>  阴暗处理<br>  纹理映射</p>
+<p>计算机网路<br>  交换<br>  路由<br>互联网<br>  IP<br>  UDP<br>  TCP<br>  CHECKSUM<br>  域名<br>万维网<br>  webpage<br>  HTML<br>  CSS<br>  JavaScript<br>  超链接<br>  URL<br>  HTTP<br>  searchEngine<br>    spider<br>    index<br>    fulltextsearch<br>  网络目录<br>  网络中立<br>计算机安全<br>  不规矩<br>  原力<br>  保证数据的保密性，完整性，可用性。<br>  保密性：只有有权限的人才能读取计算机系统和数据<br>  完整性：只有有权限的人才能使用修改的系统数据<br>  可用性：有权限的人，任何时候可以访问自己的系统和数据<br>  威胁模型分析<br>  身份认证<br>  暴力攻击<br>  双认证<br>  机密级别<br>  隔离沙盒<br>黑客&amp;攻击<br>  安全评估，白帽子<br>  欺骗别人<br>    钓鱼网站<br>    假托<br>    邮件木马<br>  加长验证间隔<br>  缓冲区一处<br>  边界检查<br>  代码注入，sql注入<br>  利用漏洞<br>加密<br>  编码<br>  解码<br>  统计数据字母出现频率<br>  DES<br>  AES<br>  RSA</p>
+<p>机器学习&amp;人工智能<br>  特征，增加特征就是增加新维度<br>  分类<br>  训练数据<br>  标记数据<br>  决策树<br>  超平面<br>  人工神经网络<br>    输入层，一个维度一个输入节点<br>    隐含层<br>      （权重 * 输入值）累加 - 偏差值<br>      权重和偏差值随机设定<br>      标记数据训练这两个值<br>      激活函数，把值限制再-1，1之间<br>    输出层，一个分类一个输出节点<br>计算机视觉<br>  边缘色差<br>  核过滤器<br>  核，卷积（累加求和）<br>    -1 0 1<br>    -1 0 1<br>    -1 0 1<br>  不同的核用来匹配不同特征<br>  卷积神经网络<br>    用核进行多层卷积<br>    最终识别出物体的局部：人脸识别<br>    根据识别的图像确定表情<br>自然语言处理<br>  计算机语言，词汇少，结构化<br>  自然语言，大量的词汇，一词多义，多种口音，模糊语义<br>  对话系统<br>  理解系统<br>  语音识别<br>    音素识别<br>  语音合成技术</p>
+<p>机器人<br>  机械时钟<br>  CNC机械<br>  控制回路 负反馈回路<br>    传感器<br>    Error<br>    动作<br>  PID 控制器<br>    比例控制<br>    误差<br>    目标值</p>
+<p>计算机心理学<br>  易用度：达到目的的效率有多高<br>  直观功能<br>  专业知识<br>  情感计算<br>  增强凝视</p>
+<p>教育<br>  主动学习<br>  个性化学习<br>  贝叶斯只是追踪<br>  失误概率<br>未来<br>  复杂度刹车<br>  生产力的提升和人口就业</p>
+<p>总结：<br>整体视频内容都是点到为止，但绝对不影响对计算机整个领域的贯通。阐述的基本原理，收益匪浅！<br>有兴趣一定要学习一下。<br>目前的AI虽然是弱AI,人脑处理的过程是综合处理的过程。<br>语言识别和图像识别结合起来能把文字和图像对应上。这样就能完成联想。<br>故联想的过程是不是大脑在分类做排序的过程。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/JNI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/JNI/" class="post-title-link" itemprop="url">JNI</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-27 11:12:45 / 修改时间：15:22:38" itemprop="dateCreated datePublished" datetime="2020-06-27T11:12:45+08:00">2020-06-27</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id><a href="#" class="headerlink" title=" "></a> </h2><p>Java Native Interface<br>java 调用 非java 代码</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>1、创建一个Java类 touch HelloJni.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;<span class="string">'EOF'</span>&gt;HelloJni.java</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloJni</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span>&#123;</span><br><span class="line">		System.loadLibrary(<span class="string">"HelloJni"</span>);	 <span class="comment">// 此处是加载 lib 库，名称要与库名一致</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">		HelloJni helloJni = <span class="keyword">new</span> HelloJni();</span><br><span class="line">		helloJni.sayHello();</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">native</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译</span></span><br><span class="line">javac HelloJni.java</span><br></pre></td></tr></table></figure></p>
+<p>2、创建 jni 头文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建 jni 头文件</span></span><br><span class="line">javah -o ./HelloJni.h -classpath ./ -jni HelloJni</span><br><span class="line">or</span><br><span class="line">javah -d ./jni -classpath ./ -jni HelloJni</span><br></pre></td></tr></table></figure></p>
+<p>3、创建 c 代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt;'EOF'&gt;HelloJni.c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"HelloJni.h"</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">/*该方法在HelloJni.h中声明</span></span><br><span class="line"><span class="comment">  JNIEXPORT和JNICALL都是JNI中的关键字</span></span><br><span class="line"><span class="comment">  JNIEnv对应java线程中调用的JNI环境，通过这个参数可以调用一些JNI函数</span></span><br><span class="line"><span class="comment">  jobject对应当前java线程中调用本地方法的对象</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">JNIEXPORT <span class="keyword">void</span> JNICALL Java_HelloJni_sayHello</span><br><span class="line">  (JNIEnv * env, jobject obj)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"HelloJni! This is my first jni call.\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure></p>
+<p>4、 编译成 dll<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -I"/root/data/jenkins/jdk/java8/include/" 头文件搜索路径</span></span><br><span class="line"><span class="comment"># windows中使用 xxx.dll linux中使用 .so</span></span><br><span class="line">gcc -fPIC -I<span class="string">"/root/data/jenkins/jdk/java8/include/"</span> -I<span class="string">"/root/data/jenkins/jdk/java8/include/linux"</span>  -shared -o HelloJni.so HelloJni.c</span><br></pre></td></tr></table></figure></p>
+<p>5、复制dll 到 lib(必须以 libXXX开头)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp HelloJni.so /root/data/jenkins/jdk/java8/jre/lib/amd64/libHelloJni.so</span><br></pre></td></tr></table></figure></p>
+<p>6、执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行</span></span><br><span class="line">java HelloJni</span><br><span class="line">---</span><br><span class="line">HelloJni! This is my first jni call.</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -1063,7 +1144,7 @@ var _hmt = _hmt || [];
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1129,14 +1210,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1179,13 +1260,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">364k</span>
+    <span title="站点总字数">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:31</span>
+    <span title="站点阅读时长">7:54</span>
 </div>
 
         

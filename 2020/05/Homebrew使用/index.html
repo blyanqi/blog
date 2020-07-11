@@ -17,18 +17,18 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Homebrew Install Homebrew12# ruby 写的管理包管理工具&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot; using12345678910111213141516171819brew install wget把软件包安装到">
+  <meta name="description" content="Homebrew HomebrewmacOS（或 Linux）缺失的软件包的管理器使用 Homebrew 安装 Apple（或您的 Linux 系统）没有预装但 你需要的东西。Homebrew 会将软件包安装到独立目录，并将其文件软链接至 &#x2F;usr&#x2F;local 。Homebrew 不会将文件安装到它本身目录之外，所以您可将 Homebrew 安装到任意位置。使用 brew cask 安装 macO">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Homebrew使用">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/05/Homebrew%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="Homebrew Install Homebrew12# ruby 写的管理包管理工具&#x2F;bin&#x2F;bash -c &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install.sh)&quot; using12345678910111213141516171819brew install wget把软件包安装到">
+<meta property="og:description" content="Homebrew HomebrewmacOS（或 Linux）缺失的软件包的管理器使用 Homebrew 安装 Apple（或您的 Linux 系统）没有预装但 你需要的东西。Homebrew 会将软件包安装到独立目录，并将其文件软链接至 &#x2F;usr&#x2F;local 。Homebrew 不会将文件安装到它本身目录之外，所以您可将 Homebrew 安装到任意位置。使用 brew cask 安装 macO">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-05-14T01:22:48.000Z">
-<meta property="article:modified_time" content="2020-06-09T07:49:40.848Z">
+<meta property="article:modified_time" content="2020-07-11T03:27:45.862Z">
 <meta property="article:author" content="yan qi">
 <meta property="article:tag" content="运维、自动化、devops、容器架构">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-06-09 15:49:40" itemprop="dateModified" datetime="2020-06-09T15:49:40+08:00">2020-06-09</time>
+                <time title="修改时间：2020-07-11 11:27:45" itemprop="dateModified" datetime="2020-07-11T11:27:45+08:00">2020-07-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -240,7 +240,7 @@ var _hmt = _hmt || [];
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mactools/" itemprop="url" rel="index"><span itemprop="name">mactools</span></a>
+                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
                 </span>
             </span>
 
@@ -250,7 +250,7 @@ var _hmt = _hmt || [];
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -270,10 +270,13 @@ var _hmt = _hmt || [];
 
       
         <p><a href="https://brew.sh/index_zh-cn" target="_blank" rel="noopener">Homebrew</a></p>
+<h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><p>macOS（或 Linux）缺失的软件包的管理器<br>使用 Homebrew 安装 Apple（或您的 Linux 系统）没有预装但 你需要的东西。<br>Homebrew 会将软件包安装到独立目录，并将其文件软链接至 /usr/local 。<br>Homebrew 不会将文件安装到它本身目录之外，所以您可将 Homebrew 安装到任意位置。<br>使用 brew cask 安装 macOS 应用程序、字体和插件以及其他非开源软件。</p>
 <h3 id="Install-Homebrew"><a href="#Install-Homebrew" class="headerlink" title="Install Homebrew"></a>Install Homebrew</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ruby 写的管理包管理工具</span></span><br><span class="line">/bin/bash -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
 <h3 id="using"><a href="#using" class="headerlink" title="using"></a>using</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">brew install wget</span><br><span class="line">把软件包安装到 /usr/<span class="built_in">local</span>/Cellar</span><br><span class="line">将可执行文件链接到 /usr/<span class="built_in">local</span>/bin/ 下</span><br><span class="line"></span><br><span class="line">brew edit wget</span><br><span class="line"></span><br><span class="line">brew cask create foo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包管理</span></span><br><span class="line">brew install node</span><br><span class="line">brew uninstall &lt;packageName&gt;</span><br><span class="line">brew search &lt;packageName&gt;</span><br><span class="line">brew list</span><br><span class="line">brew info &lt;packageName&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 更新</span></span><br><span class="line">xcode-select --install</span><br><span class="line">brew upgrade</span><br></pre></td></tr></table></figure>
-<h3 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">mac使用brew update无反应,更新慢解决办法</span><br><span class="line"></span><br><span class="line">使用中科大的镜像</span><br><span class="line">替换默认源</span><br><span class="line">第一步，替换brew.git</span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span> || <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/Homebrew</span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line">第二步：替换homebrew-core.git</span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line"></span><br><span class="line">最后使用</span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
-<h3 id="阿里云源"><a href="#阿里云源" class="headerlink" title="阿里云源"></a>阿里云源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 替换brew.git:</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.aliyun.com/homebrew/brew.git</span><br><span class="line"><span class="comment"># 替换homebrew-core.git:</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git</span><br><span class="line"><span class="comment"># 应用生效</span></span><br><span class="line">brew update</span><br><span class="line"><span class="comment"># 替换homebrew-bottles:</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles'</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<h3 id="mac使用brew-update无反应-更新慢解决办法"><a href="#mac使用brew-update无反应-更新慢解决办法" class="headerlink" title="mac使用brew update无反应,更新慢解决办法"></a>mac使用brew update无反应,更新慢解决办法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建议使用阿里云镜像</span></span><br><span class="line"><span class="comment">#mac使用brew update无反应,更新慢解决办法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用中科大的镜像</span></span><br><span class="line"><span class="comment">#替换默认源</span></span><br><span class="line"><span class="comment">#第一步，替换brew.git</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span> || <span class="built_in">cd</span> /usr/<span class="built_in">local</span>/Homebrew</span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/brew.git</span><br><span class="line"></span><br><span class="line"><span class="comment">#第二步：替换homebrew-core.git</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.ustc.edu.cn/homebrew-core.git</span><br><span class="line"></span><br><span class="line"><span class="comment">#最后使用</span></span><br><span class="line">brew update</span><br></pre></td></tr></table></figure>
+<h3 id="阿里云源"><a href="#阿里云源" class="headerlink" title="阿里云源"></a>阿里云源</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 替换brew.git:</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.aliyun.com/homebrew/brew.git</span><br><span class="line"><span class="comment"># 替换homebrew-core.git:</span></span><br><span class="line"><span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line">git remote <span class="built_in">set</span>-url origin https://mirrors.aliyun.com/homebrew/homebrew-core.git</span><br><span class="line"><span class="comment"># 应用生效</span></span><br><span class="line">brew update</span><br><span class="line"><span class="comment"># 替换homebrew-bottles:</span></span><br><span class="line"><span class="built_in">cd</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'export HOMEBREW_BOTTLE_DOMAIN=https://mirrors.aliyun.com/homebrew/homebrew-bottles'</span> &gt;&gt; ~/.bash_profile</span><br><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<h2 id="恢复"><a href="#恢复" class="headerlink" title="恢复"></a>恢复</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 重置brew.git:</span></span><br><span class="line">$ <span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>"</span></span><br><span class="line">$ git remote <span class="built_in">set</span>-url origin https://github.com/Homebrew/brew.git</span><br><span class="line"><span class="comment"># 重置homebrew-core.git:</span></span><br><span class="line">$ <span class="built_in">cd</span> <span class="string">"<span class="variable">$(brew --repo)</span>/Library/Taps/homebrew/homebrew-core"</span></span><br><span class="line">$ git remote <span class="built_in">set</span>-url origin https://github.com/Homebrew/homebrew-core.git</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -353,7 +356,7 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Homebrew"><span class="nav-number">1.</span> <span class="nav-text">Install Homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using"><span class="nav-number">2.</span> <span class="nav-text">using</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">3.</span> <span class="nav-text">Q&amp;A</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里云源"><span class="nav-number">4.</span> <span class="nav-text">阿里云源</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew"><span class="nav-number">1.</span> <span class="nav-text">Homebrew</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Homebrew"><span class="nav-number">1.1.</span> <span class="nav-text">Install Homebrew</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#using"><span class="nav-number">1.2.</span> <span class="nav-text">using</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac使用brew-update无反应-更新慢解决办法"><span class="nav-number">1.3.</span> <span class="nav-text">mac使用brew update无反应,更新慢解决办法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#阿里云源"><span class="nav-number">1.4.</span> <span class="nav-text">阿里云源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恢复"><span class="nav-number">2.</span> <span class="nav-text">恢复</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -367,14 +370,14 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">227</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -417,13 +420,13 @@ var _hmt = _hmt || [];
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">364k</span>
+    <span title="站点总字数">521k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">5:31</span>
+    <span title="站点阅读时长">7:54</span>
 </div>
 
         
