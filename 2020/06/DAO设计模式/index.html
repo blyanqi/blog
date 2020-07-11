@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="DAO 设计模式程序中分层  显示层  控制层  业务层 BO Service -&gt; 总业务层 -&gt; 子业务层  数据层 DAO -&gt; 原子性操作  数据库 对应的类实现   数据层  VO(emp) 类的实现  DatabaseConnection 数据库的连接类  IDAO 泛型顶层接口  IEmpDAO 子接口  EmpDAOImpl 接口实现类  DAOFactory D">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DAO设计模式">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/06/DAO%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="DAO 设计模式程序中分层  显示层  控制层  业务层 BO Service -&gt; 总业务层 -&gt; 子业务层  数据层 DAO -&gt; 原子性操作  数据库 对应的类实现   数据层  VO(emp) 类的实现  DatabaseConnection 数据库的连接类  IDAO 泛型顶层接口  IEmpDAO 子接口  EmpDAOImpl 接口实现类  DAOFactory D">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-26T05:21:56.000Z">
 <meta property="article:modified_time" content="2020-07-11T03:31:04.696Z">
@@ -269,17 +269,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="DAO-设计模式"><a href="#DAO-设计模式" class="headerlink" title="DAO 设计模式"></a>DAO 设计模式</h2><p>程序中分层<br>  显示层<br>  控制层<br>  业务层 BO Service -&gt; 总业务层 -&gt; 子业务层<br>  数据层 DAO -&gt; 原子性操作<br>  数据库</p>
-<p>对应的类实现</p>
-<h2 id="数据层"><a href="#数据层" class="headerlink" title="  数据层"></a>  数据层</h2><p>  VO(emp) 类的实现<br>  DatabaseConnection 数据库的连接类<br>  IDAO 泛型顶层接口<br>  IEmpDAO 子接口<br>  EmpDAOImpl 接口实现类<br>  DAOFactory DAO工厂类</p>
-<h2 id="业务层"><a href="#业务层" class="headerlink" title="  业务层"></a>  业务层</h2><p>  IEmpService Emp 服务接口<br>  EmpServiceImpl 接口实现类<br>  ServiceFactory Service工厂</p>
-<p>数据库的连接类<br>ValueObject 简单java 类<br>  必须提供 Serializable 接口<br>  必须与表名保持一致<br>  必须使用基本数据类型的包装类<br>  封装后提供 setter，getter方法<br>  必须保留一个无参构造方法</p>
-<p>两个层之间要想通信，必须实现一个标准接口</p>
-<p>开发数据层操作命名规范<br>  新建数据 doxxx<br>  查询数据 findxxx<br>  统计数据 getxxx</p>
-<p>包的命名规范<br>  vo 包<br>  dao 包<br>  Impl 包<br>  factory 包<br>  test 包</p>
-<p>不同层之间调用接口类需要实现工厂设计模式<br>定义数据层工厂类</p>
-<p>控制层开发完成，后端核心就完成了<br>需要编写测试<br>  调用测试<br>  junit 测试</p>
-
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="Oh, these decrypted content cannot be verified, but you can still have a look."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="Hey, password is required here." /><label>Hey, password is required here.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="5cce50194a0075f2b57419bc19ee3a599b68fa2c1c13498eb868584713f7253f">4dc7a94a957e0b6d366c4c57187f63c514b1838b6a28f070585cad84b1e80383823afa5695960eaf613334f5875bdfb08adf1b54968bae6f75323815871b97903d058ec2fb386405a9e110ec1beeb740f6856f37547d36edc7f37ad366d7409f1e297077bc40f01b219ff8cb5c589c06e7432033e859424280a9c215351504277ea5b72d0a3c88b439afcfcfdc4e7aebded72679b1186438d29cb186b1eb3d2a604610de7591ead960e6ac6a0fdc7050e1bd9c77129452c3e7353826a87967055d39faa54ebcca4b4ba5556589e462a59c66fd757b291b59b7954ee80ffa22619adc59b0ba4bedfb2e2f43c0d6242b2e3f2684ab8ea6740ceb7375f28818589861b22fb892e55352ce209cbc29de45b66051a139176b439b3770828f207f54e34ab6fedeb8686027aa04dc001e3e2998d1122ee55f0a1bf7c0faaac19abd798c9613d9562e8d1d6826fae50b37b5531728fc9a4f799c25f349909802a88e9f28ef4e5a4e4d433568dad335cf0d65a85823dd4c5517647fc2a5cff0731439f08cabc54c6b7d48a4734d2212362fafde45c4e1761f562fab23a33d632f384b9a5a70cc24134c3c399ae47c156ab99390d9be33d959466c13617fe0ca0f3642c8aebb57395f1c6f69d1f41f37cf6d275b6417dd123de2b5b0e0410642fff96351f195ddd75bb07dc716a9281344be7fcea0971f1fa1f96a65880c3ca7172d890a1e51f85c966fc9317f030f364f26e1ec012637381f24464f4a547b215d10e8535ccfcd9c8dd39750735ee0a8efc62f6ecca11bd7754ec5133fab24eb4c6bb46b61dc8445f58071f9e4cd7256420a1823882142a8b6aa451289aaa142c5ffb917d4acc147f16e305c5d200a2810381285e85a2b090282956bfc7ff2902f25984f50bbf839383bb852843434b3200d6ecdd8eb99674deb840015209fd64562894b7802de3c61c2315b21c0772a91fd8dd9c411186874cb294634d28c44fb193aed439189b8dc84dc35d09741d7287b7ef9d29e87f6848926b52d29957c10da02b331b801de2129c4cdd40130b7aea851686b5efb3d797077fd7f41e89bb02d14f770f666de3aab0f455174a76eee5b30a4bcddd9d01792bec0b4d0fa120088b2dbbe18e305d93c76146e535e8f725ed2c4adbc4044102471bca80b4ca345b945fa329b1cd9efeacd1ecff40a391fac99daa38bdefd2386b43117ea318fb5869de67d4ae96fb6c8e9cc037aa5c5ec5db63d4814a760e56adda6a91627ec4cdc0954cb11774c9102bb730706f264f8ce18bd47d47b7780aa07da3d67514213c98d02b1e4f9b7094610d59e5a828dd20b55a459727fd730280e9223b33fea8de4f50c243b0f5248b22c3e0383c17d6a64092970db73cef9b0f78e049c149d493d45f8cf3cef9532dfb5e154fced4360b0abcbc5d652b487a0c5c40ca1bffcae01bd6af9fff56c52de898f7f6e725189736a7f81eeffde6009a5a061f2519f8a455755f8a3019d7fe103d4b1a6e5ea14e4fad2b50daa5859ce925607b5b9d07c322c07c4b76741adc51b4335590c745b54a40850fae57cb783cf6c276cadeed772d73d02133713314ae7a700d754bf4da0e068c291fca78f317cfdeb13de361dc5048f51ecceb7dadd503cc2efc372ff7f9829488bb2233aa0eb8e5d4c9e36bb2eefa6b89d0a897d2873c9a4b4b6cd8e8673ea2f66c7d5d8a190f63fc7af618f2631cd802a5ccc92281385766aa5083eca70ca150562b9982da61f58428129f10eeab2f424f9ae74ffce98edc53c119780a297530be1c67cdef6b5a39332cdbc74941e380d828e2c0ee7cfbf1d0b0c439dae36a61e6270540c9dab9285c9be014779f60e521e06b0139bddabb5de41ea69998a9bf70f5ae5dc48e7e89a313c337111aa1cf1f11d5e1d847c06fbca441e524126e750434c6c233ad6deb9c789dd4cbe72806b26b1c1c9d34f6341c5217826141166c38dde77a55a483d04f3646aa71f59e9dcbc170cbbb2a3a156bbc3763baa6df37511562206530d645e9e8952afd04989374afff140d9f5f9988d5fb4fe78c61e1645484c2e208a51d5019784499f7529d3c3b267943dd5bc114a06de2b3009e7e66cb3d9befd32c92c5136461f85a46d83b6c3143bb04013892ee03ab43aa510756624050489d862089d1d91d8f7d9cb9343737ab1e658f6b43c2a8d2faf8f7b3711dccdde0a8f14aed7fafe45c4b75d9f8b9af69f238c03eaf5fc3d61fccf6d6cbdfd9fe364924b4fa316b75a2fc675eabd178635ed5379befa6a68bd40b6668846b057cc5adc667f0933ff88dc748db213dc178db9977ab861460b67b4ca6406732ce39313abe5172f08059b7ecfbcea1ac43bf1235ace37d0f63be813fe740fffc801fe2e07fde23d5031923005826794d6ddf76edec85d4ebc0eb8a353c1780b494166c6038e4d5bfbd887b1f3c0aae18510ead61475271d99ef21457868cf4d5594c117a8cf472495bd82e60e03</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -359,7 +349,6 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DAO-设计模式"><span class="nav-number">1.</span> <span class="nav-text">DAO 设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据层"><span class="nav-number">2.</span> <span class="nav-text">  数据层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#业务层"><span class="nav-number">3.</span> <span class="nav-text">  业务层</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

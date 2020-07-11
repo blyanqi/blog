@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="安装go get -u github.com&#x2F;kardianos&#x2F;govendor export PATH&#x3D;”$GOPATH&#x2F;bin:$PATH” 初始化在项目根目录下执行以下命令进行 vendor 初始化：govendor init govendor list govendor list -v fmt govendor fetch golang.org&#x2F;x&#x2F;net&#x2F;context 只格式化项目自">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="goVendor">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/06/goVendor/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="安装go get -u github.com&#x2F;kardianos&#x2F;govendor export PATH&#x3D;”$GOPATH&#x2F;bin:$PATH” 初始化在项目根目录下执行以下命令进行 vendor 初始化：govendor init govendor list govendor list -v fmt govendor fetch golang.org&#x2F;x&#x2F;net&#x2F;context 只格式化项目自">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-06-23T08:56:03.000Z">
 <meta property="article:modified_time" content="2020-07-11T03:33:43.385Z">
@@ -273,140 +273,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>go get -u github.com/kardianos/govendor</p>
-<p>export PATH=”$GOPATH/bin:$PATH”</p>
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>在项目根目录下执行以下命令进行 vendor 初始化：<br>govendor init</p>
-<p>govendor list</p>
-<p>govendor list -v fmt</p>
-<p>govendor fetch golang.org/x/net/context</p>
-<p>只格式化项目自身代码<br>govendor fmt +local</p>
-<p>只构建编译项目内部的包<br>govendor install +local</p>
-<p>只测试项目内部的测试案例<br>govendor test +local</p>
-<p>拉取所有依赖的包到 vendor 目录<br>govendor fetch +out</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>子命令</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>init</td>
-<td>创建 vendor 目录和 vendor.json 文件</td>
-</tr>
-<tr>
-<td>list</td>
-<td>列出&amp;过滤依赖包及其状态</td>
-</tr>
-<tr>
-<td>add</td>
-<td>从 $GOPATH 复制包到项目 vendor 目录</td>
-</tr>
-<tr>
-<td>update</td>
-<td>从 $GOPATH 更新依赖包到项目 vendor 目录</td>
-</tr>
-<tr>
-<td>remove</td>
-<td>从 vendor 目录移除依赖的包</td>
-</tr>
-<tr>
-<td>status</td>
-<td>列出所有缺失、过期和修改过的包</td>
-</tr>
-<tr>
-<td>fetch</td>
-<td>从远程仓库添加或更新包到项目 vendor 目录(不会存储到 $GOPATH)</td>
-</tr>
-<tr>
-<td>sync</td>
-<td>根据 vendor.json 拉取相匹配的包到 vendor 目录</td>
-</tr>
-<tr>
-<td>migrate</td>
-<td>从其他基于 vendor 实现的包管理工具中一键迁移</td>
-</tr>
-<tr>
-<td>get</td>
-<td>与 go get 类似，将包下载到 $GOPATH，再将依赖包复制到 vendor 目录</td>
-</tr>
-<tr>
-<td>license</td>
-<td>列出所有依赖包的 LICENSE</td>
-</tr>
-<tr>
-<td>shell</td>
-<td>可一次性运行多个 govendor 命令</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>状态</th>
-<th>缩写</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>+local</td>
-<td>l</td>
-<td>本地包，即项目内部编写的包</td>
-</tr>
-<tr>
-<td>+external</td>
-<td>e</td>
-<td>外部包，即在 GOPATH 中、却不在项目 vendor 目录</td>
-</tr>
-<tr>
-<td>+vendor</td>
-<td>v</td>
-<td>已在 vendor 目录下的包</td>
-</tr>
-<tr>
-<td>+std</td>
-<td>s</td>
-<td>标准库里的包</td>
-</tr>
-<tr>
-<td>+excluded</td>
-<td>x</td>
-<td>明确被排除的外部包</td>
-</tr>
-<tr>
-<td>+unused</td>
-<td>u</td>
-<td>未使用的包，即在 vendor 目录下，但项目中并未引用到</td>
-</tr>
-<tr>
-<td>+missing</td>
-<td>m</td>
-<td>被引用了但却找不到的包</td>
-</tr>
-<tr>
-<td>+program</td>
-<td>p</td>
-<td>主程序包，即可被编译为执行文件的包</td>
-</tr>
-<tr>
-<td>+outside</td>
-<td></td>
-<td>相当于状态为 +external +missing</td>
-</tr>
-<tr>
-<td>+all</td>
-<td></td>
-<td>所有包</td>
-</tr>
-</tbody>
-</table>
-</div>
-
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="Oh, these decrypted content cannot be verified, but you can still have a look."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="Hey, password is required here." /><label>Hey, password is required here.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="cc69b2ebb4b3111a0ebea3d5449fd30a7eb1633d5bd70e0082ed785478207852">4dc7a94a957e0b6d366c4c57187f63c514b1838b6a28f070585cad84b1e80383823afa5695960eaf613334f5875bdfb08adf1b54968bae6f75323815871b97903d058ec2fb386405a9e110ec1beeb740f6856f37547d36edc7f37ad366d7409f1e297077bc40f01b219ff8cb5c589c06e7432033e859424280a9c215351504277ea5b72d0a3c88b439afcfcfdc4e7aebded72679b1186438d29cb186b1eb3d2a604610de7591ead960e6ac6a0fdc7050e1bd9c77129452c3e7353826a8796705c92b4cd7df434350449d05c33e2fb6d70065afb8665dbf3f03ddf6440396113662a8ad2634796f45784c959c149c8191b10c646d7db0bedc88ddedd91b17f36d677a4a848fc9ea21870500d5294c6af10f35a828bfad4a7498245efd7df76a6a46240ae2a6b3f62f33c479f222b043da0a6c4d2fc79abe203b11350776ba8dd558fd7c3192027f11b16a4ce33c86460cc82a8068dd9474bbc149da8cc0d66174dc19706ec8bbb93bbd4a6835d36d39a277a8dc1bf09eacc3a115fc3da02c5716e57e9124598cf4e53c476cb855ed105b05132493c43d394665676b051100e2771bf8121bbc18f2e95cc2953b713a99b416d6f691c9c7b1519bf09e2cca4fdce4e40303ac372d4b992fbf98f57e3e9fce864c322a067c6d2afe4a0f65194dae439764ab8694676910ed64a03060883b361266877a62a1c858e81555b1469f46ef11205ebe2299071860cb1a2d36052b31244ecb84a71327653e85481bdf5e5d26ab918ef4e3684c87bca5c4f579556fbfcb31337dfed2f057ea1dcbb0a5b928c4c2f0681c5e4370bc2dc3afce16a5466fcc815e06c88d5407510d14baf828cf3f6e39c54e65516c2fca51e0f3b61776c8893044b0ce8a48cfcb1aaf0cdb0c77249fcdcb7f84101ad16300249697211e7cd82717352c95a8f2f88ddaf0d6e19d03e4ad20203a2703b9589f2217213ec043311e1638243ffc578bbd1500a4c910f4b518b4a01e09f695efaef655cb32e8b26829d15eab52bba5a81e7b2ae70fc081bdf7d1ad4f565bf408a7c676dc2a6895ad6f074fbe11f8e670254dececd68b9eafa9a23ebb9d61f140778c827ae465f8e08663196dc36c2dabbb102652f522a36fa3734b9f6cfccbb44102beafa27613ce4c7d11fdb4c779c497c277216a28ec1840f0c00629609e320d2d15cda2baf931ecf7ef0bc34ef23c9a86a623e2b4dd627005897c01063e548e9b613255c6fc3ec163ce2966f0defb35c3b917d3880412fbc1845b9f4518a0f4df9893443ba4abaeec5199a6d2398386fbf27004927e9669e71f3ce55ad5225f473bfb15df4bec9b8ab9894dd317a37f7616e3b0ee30fba5ad6ff13bf2fd0279801d2d90815209d4891b6e79439eb802695c2e5405f57d2440ab46201ba197c8c986514877c460157029af3e451d3b2a524d0f14fe587030d8f6e2ab1b58f5b0c832926d26a20a05f771e4b2ad9c7ef6bfd1c6711d322dc82604330eba45f60d49d7ce7d68e3c4638202f07c3cb4ec85240a7da9c8d816b570c3c47700ee54790bb878373d6efba8b9a262c374758f5bb490f0188745e888bee50e03abc48248834ad8d5058915589d1a767b58afb1cce80240155a117a9edd6fe916ef4973609d791e49748c283396bcf588a3f361fbacb4efa99f606b5c21d6c4409e9bd90b40070bcc3f1e760e3421b97777dbc966102becdc5a67c0eea25c1d67b0b67a93aa4a7de38a485798d0913c393f86db3246099ccb1e2b07f81c39642434472bcee79540efa4de80bf9762532c70a4642d37b319e27271dfcd03362342435a9731335ffc324cde635ed5ec7a3813cd7be4a7344dda27b43856f78870d3e57a4809559ce56529b60ed866c2cf10a3e0d3268c976f3f00bad19c409445e5738b17eb491d9d6e465d5bb24277cb751bef6a158d44065b5c72c9a0fdd61376609ab31108ed1dc952808b0eeed55a6f94b85f87224006be7bbaca75c640555d562c876124d9c24a8a98cd7f2011cb632c0899b69e286f58e878445979f46363cd484bf157121ea087c028d12ce5f50ca31bc15354e4927be945cd014d4d893eead114f44627517aec4575a9a701a67a56b41685fd7744bed71ca5abf28b70fb4ea616653634e9877422d78c4d35a5998d64fe33e5be95182cd04c1c961ec8b3b97da7490ad648b8b696e7cccd3a7596d3fac3271c324cc78300bf73702c27cdcedf0518340a5be06b3ff3f20ec50103a88044e9e08c08ce5c1785693a83cb7120605c758849d7c6bb74b6657fc9b8d6082d6a7313a361f71dcbebe9f8db986bdfc6d41e1b2ffd37f3bccb92598b63523438a819392d7fb1831e0d4a3b64b47af049b51bdba114c5539bb5b90ca1d696978f8de937b92376c189e8912f12a7696a380bb767626433acedba8cbe364ec8095e1a7aad50f8bd6d9b79288497351e2d2b9c640544a4f8dee82f635b80876a2edddda83298c1dd7305d1d6e186e221bb81ddb9972d4e71562a3bf198a4f53272998da881bbff78d23162200ceb5fb06d6eb7ca705c912859ec1fc14e8670b905acb93961bb89366ec2a1da4b4f667219e9c4789d4803b65d025b41271abda8780c7dce111622493efe91560cf1104dc1f4c1f4b11fefbc8101ae44e5d7ea897f4b82972edbe5acae84b9bd3cf0b89cbbe93a9e2668a9192da483e32089a221f199599ceae8d34788b8ed12a2bd5d7da8ed6e76f76b597eeee5311454c015f79f45f987ffbd401806ebd3463e92d2391cea49aab017833dc3aa943ff5e627fbafcab26e017dbede2b04422acd32e4a044b2ae662ec69feaf918111c2b156a66f955e846caf11a636b1dbb18d908eb4a34b77088ebeff5912c498b258af3f041cc553791adee5a4a45ff86456a2dbfdc7089ead842049bf5da7a99ee3281390bec870c5bd71bfa515d416534eb8ba6a242f86307f3ec919f0330c50f32e2a7d0129c76561cb681061d8e01caf8fe94c186a91e55f59ec237151db7935925f71cf5d6130ce086d27fcef0268c36d71f47037a08465d81213b9a7cbc5170a3f1a909e47b7abb333e22801ac51cd2e1b340c6c703c671d231c98e299eea08d8bfe29a0fe0331326ca5e9b8e81ef6200b859e137a5f438be87bf9bbe933927989c6e9d50275c2f7305081aaa125ede2e6907ebca7b4f66a3a156e8ac4b726027bb9d648ec577accd869de0db8674126ca3327eb60da5d59d47f2b1481c0d92beb6a5370e89d4285914c0a99fcbb27ea0368de79779f00a0cbbe36bff7426fa47b5a0f4505685a87d49f4099f64e167fdd449d4ec4f87e8723100ebe1bad51b3617228680f354d3258c0a46ed0a941d4bd25baefaebbd221557ee490165e7c9529936d610d9de315417fba1023bec478de3af5f1a23aaa91e35ff5d27d6b089c8b660328b071d90864a1b187ff8b12e89c54ea9bb91a5968ebf1340c89cb8efea41b5dcde1befde046d5597f5b646d7e1c97a56c0a6835b097061d50f3daa6c33308101e514532a70516b69d03806bd0d94b48e25d260de8aeff09e6b254b47bce1861f43724204c0042f23e100708eec8f514028dff3836c51ef9fa3756251af56f499ab31ccdcedd4581cecb462379c575a7987bad0882f43bff8a22d6ab47c4e6c76d3fcf40adb6fe58ddfbe4f4657d696d7e9248788d7150b17ec72082fcc146d501d42ac41a93e4d1496e621ceb69598145ec44967e48a84fd081ee009cdb15d95e953614b791a605d98e6e67ff0addfcfa26dfbf138b9e9aef0f2c40be6d0108ec91eb085e5e58c484eae693879dc52857145ddfd7ae6774ccdc5a33f2dc16774b80035c8e92f6ddf0d6b2b5b292d205bc1943869d508b117005ab4dc318591155f12dd52206cb9f46ba7ab6a3f516af4aaf0fead4239d8f021a50f5b5c7e084d0726cb4493a525b1949ad45eff1dd27fb1b71234a224e4a80303d429425d8b0e7106bbc5056c41b811c51ecfa7d5ad147eec5aa5461ddb6a631f0cfd0c4feb245a5b6e65a9c1fcc93fe1e18a46de69cbf14fbdd29b7831d43f69a2ea72ab317cc29dd84d9c5414adffda990d2bf741490751f79b86ff16e8fc5fe217157bfa75dbf982169145f859f382cacd35aefdf96f602ed0c24208f9245686e7f8f28d609b0995648538879db500f2701b0518525952f0a947da6b50f62bee8b46f51886b903bcf183060b3547ddcee6c657b199f4ca750ad9d42b61303107f74a9700b5b4b1a4ed0f42a61eb69a5e23d951a70c9c72041190ac1402201249c48a168ad274dbd0ddae45dd0b19662e2d506577102c47bf8d2587d5207e36edee44ddae5d391f97e7b5522b9fa16cf362d83f35a6784db5dda7d87b3b9cd6109bd00c8afe161637fdbc0d9bdc91</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -486,7 +353,6 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="java JVM Docs  概念java8虚拟机变化OOM: OutOfMemoryStackOverFlowError JVM的位置JVM的体系结构类加载器双全委派机制沙箱安全机制NativePC寄存器方法区栈三种JVM堆新生区，老年区永久区堆内存调优GC常用算法JMM  JVM的位置：  JRE  JDKJVM的体系结构  .java  .class  类加载器    加载      ne">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javaJVM">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/07/javaJVM/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="java JVM Docs  概念java8虚拟机变化OOM: OutOfMemoryStackOverFlowError JVM的位置JVM的体系结构类加载器双全委派机制沙箱安全机制NativePC寄存器方法区栈三种JVM堆新生区，老年区永久区堆内存调优GC常用算法JMM  JVM的位置：  JRE  JDKJVM的体系结构  .java  .class  类加载器    加载      ne">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-10T04:47:18.000Z">
 <meta property="article:modified_time" content="2020-07-11T03:38:40.631Z">
@@ -273,37 +273,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <ul>
-<li><a href="https://docs.oracle.com/javase/specs/index.html" target="_blank" rel="noopener">java JVM Docs</a></li>
-</ul>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>java8虚拟机变化<br>OOM: OutOfMemory<br>StackOverFlowError</p>
-<p>JVM的位置<br>JVM的体系结构<br>类加载器<br>双全委派机制<br>沙箱安全机制<br>Native<br>PC寄存器<br>方法区<br>栈<br>三种JVM<br>堆<br>新生区，老年区<br>永久区<br>堆内存调优<br>GC常用算法<br>JMM</p>
-<h2 id><a href="#" class="headerlink" title=" "></a> </h2><p>JVM的位置：<br>  JRE<br>  JDK<br>JVM的体系结构<br>  .java<br>  .class<br>  类加载器<br>    加载<br>      new Cart() -&gt; getClass() -&gt; getClassLoader() -&gt; getParent() -&gt; getParent()</p>
-<pre><code>  native加载器
-  根加载器
-  扩展类加载器
-  应用程序加载器
-  rt.jar runtime
-  lib/ext
-
-连接
-初始化
-</code></pre><p>  运行时<br>    java栈<br>    本地方法栈<br>    程序计数器<br>    方法区 -&gt; gc<br>    堆 -&gt; gc</p>
-<pre><code>本地方法接口 JNI
-本地方法库 native method library
-执行引擎
-  解释器
-  JIT编译器
-    中间代码生成器
-    代码优化器
-    目标代码生成器
-    探测器
-    垃圾回收器
-</code></pre><p>双全委派机制<br>  首先将类加载请求委托给父类加载器去完成，一直向上委托，直到顶层加载器。</p>
-<p>沙箱安全机制(限制程序运行的环境)<br>  本地代码受信任，远程代码不受信任。<br>  代码签名<br>  域<br>  字节码校验器<br>Native<br>  native JNI java 调用 C,C++<br>  socket 通过 socket 调用其他程序<br>PC寄存器<br>  每个线程都有一个程序计数器。<br>方法区<br>  被所有线程共享，所有字段和方法字节码。<br>  static<br>  final<br>  Class<br>  常量池<br>栈<br>  运行时栈，栈空程序结束。<br>  栈帧<br>  每一个方法是一个栈帧<br>  引用：指向特定变量的指针，不可更改。<br>堆<br>  堆内存大小是可以调节的<br>  新生区，幸存区，老年区，永久区<br>  堆内存调优<br>  重量级full gc，轻量级<br>  永久区：加载了大量的三方包，创建了大量的代理类<br>  Runtime.getRuntime().maxMemory()<br>  -Xms1024m -Xmx1024m -X:+PrintGCDetails<br>  jprofiler<br>  -XX:+HeapDumpOnOutOfMemoryError<br>三种JVM<br>  Sun HotSpot<br>  Oracle JRockit 最快的jvm<br>  IBM j9vm</p>
-<p>GC常用算法<br>  引用计数器(成本高)<br>  标记清除法<br>    gc多少次清除 TenuringThreshold = 3<br>  标记压缩<br>  复制算法（年轻代）</p>
-<p>JMM：Java Memory Model<br>  voliatile<br>  synchronized</p>
-
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="Oh, these decrypted content cannot be verified, but you can still have a look."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="Hey, password is required here." /><label>Hey, password is required here.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="a43c8fe7453842171de00c7b5fed20caaababd0a6aed9fdeb4eab10e663e12ce">4dc7a94a957e0b6d366c4c57187f63c514b1838b6a28f070585cad84b1e80383823afa5695960eaf613334f5875bdfb08adf1b54968bae6f75323815871b97903d058ec2fb386405a9e110ec1beeb740f6856f37547d36edc7f37ad366d7409f1e297077bc40f01b219ff8cb5c589c06e7432033e859424280a9c215351504277ea5b72d0a3c88b439afcfcfdc4e7aebded72679b1186438d29cb186b1eb3d2a604610de7591ead960e6ac6a0fdc70500fc87c1b15937338ff1777d9773da13d098d106a1e281ff4a9d817cc7b7645b097187fa95b9e129e181e5da066733e28c9778a9c72b9e2ef7758ace5b40c64c1f87dba3b70b34ffe24aae01a395d9cfcc22c1bc5eeb15094923a373ac598b014db5fe40f2c3aed1f2e0edb1c99dddc187c9fdbc74b5e83b45048a2256c7f8b4f72d94aaa53eafe4ac832297bd0e52fcb35ad000fd74651ef67c438f43f83ac141354ab5066c0bd90b3c76d1a74efe7c38507339925719620bc960830dceb586de7bccc6c83636fcf720d6365c26b626a75da565d63eb12a4284268c473e8ee38a79bff2c14c333f4e51802a69e52c23e4180e5d7e9af7a7fa2d307a0983203f9995841c73eed99fd75ea4b92ec1813fd3f1140289359dfb36d0d704fbbaef1cfc2c61548aa6f806276dab68feac667e2f50e58e189d1e9c3f82ffdf16dbad5a9bfb8aed912f09d5aa8135f2ac2b59a03a638eb423097068b846b1e5d8f449a5971a2be11d459f71c8d4a93961263da9360736ce6bbab9626dcaf10a9a1e82f9a584524282280bdf12c05052736c74b5874754ae564b5b166e55e455ef033bf441d4d607966387e6abad4122812b0e9c5417545575f898dd27a2cedb643693d937c18b6323cb7a951e5453e451f944011685901cf15b9be9cb2f1e59b8e5362ee226e3179381b714b68482bb178c7ed22da6dde96d97f0247700c76899b52cead75359c624b89d3cd36e6b805e52ae14e7ed73d86439d8032854fdd9836bc041af05765392db156993a4128caf5821a070285096a17873ddd8f2c102c08010e5e1ebe3a6ef6acf8bb1c547b0166b341bac3ba2c7a9e52a38f1106052869e2f8b479931b6299e7deeba0d28b3d0cedcf795140c687544457ab8b127343cbcef9cf1b9b579b0b144eb2aa9e2f34c8cb75d43bb7abbf192383a6bbeec65143de2e465087a919db7d475f4999072e5656b0c31bad05164185bb0e576085682977388e54617144ed21cd4d6f6b1526c48d7e45e388c8d1979de0d7501762e4624f09f5e397cf6e45f3e289079f947136d16d3f880d88314c36767a6fc542577ccf4088e25407b29df3bd0ead9d10803a4c2020c05b7ec74c21f27f523c48dd9b41c6a1a22297db0da501fdf2913a8f016ff44c4a83b73dffd9de21fb23fb123dc7d7d38909bf1a82778f4b8e188091e5efc240a395dee028a861fe090cb470c37e1e71e0c1dfa72e20f7f933648192b8a9e09644c8ebf753179eb3b029deeef3035ecd6afc8ad6207f1c137025dcc7e54ab55ef7d62ec0caca7d4929f53667365f4c29048f18ac908d8cdf0b7c0d0c3c54a9b9c22c050228ad99990353fe4d4b22e94be6075fab5eb6911ed28a593dd2069cd5ff9b63717f24470dc4c3013f788d2c7722d8eea07a18d180f8b70c9a6a133e3baac9aac07b744a460fd074d8a53952a8352e5cdfb4d32ad8cb81ad6c400a4752d45cc7e6c4c559307af41e947fad2ff08fb797037eab78b719b9ff867a33aecd5ab730cfbc581b97a5fec68da12a703cf5b833842b4a6f41ad498e6192f3ea6407c1cc148618e4b38ae082ada26fac7dacf25baa3a9470f0d5db925475c2660200f06a1aface3991ae460fdec48bdf3df7be123775d3db78d7915f3c9125e5c9c30f298aecb7d6a538b5c865a0768d97ff2e7bc197d470b62f4104f995de7b49e00000949a2d244eedee18f7c5ea686da0b25e32434e5e3634754c365989429f2f9a57c96b5503c2adeb9d0ded02479435bf5482d8d1e593195e44e5d4dca82f7c47704e49146238d8c110968bd67467e1c838115567de344fadd6db69793067f95dc810cbb0c374d1260f949c05bf6a7aae59f2ffa895f0c9e2fffcfd5a7f7d29f9534d8e7b3bf9427219b6e2e1ed5a86b98476ea9eb2a8a88487a20713cfe800636dc0c699494694f41978026ecc705c02d6aa1b30486488705371ae4821e69d8e5b40e34d49d2e1650264483cd32f686a7d04fbbdbfc14cd7ace4ce8d1af2aad59e66c3cbcc8ca459b8413b3fade510f0ba0356dcbedf908f79dd722fb808b6558a1bdfbb91319162f586e5b9dbb85bb220d01546895ac738539993046e265b8d58fcfcfdc065aa08527c70e9c8ca048692bbf5f43479b175e1b734a2ed1493034176d3b680b9b91510f9183925fdc1cd420dd88d6895f641fb556588a21ca5061531f6eb3ec9b3f4958bc04b2ace0763bb10a33648ab6c7093895094e16305706082ffe83ab89da9166a7b2cdbe7b472b915edf9fa5373accee156060b4bee6b496e3498c375208716f37fccc41a86129e9661a6a106dfdbb978142c97729df99273030d10e026a70fe5229dee76e9867a8a70dff77037c276071c5f8dfe11f6c930fd0e0fe537fba141c54eb5f15431dc3f7c4473d7081dc065c26fa8854c51e517eaf2926b8ecd74f0bb01de9345c4808ef8e8d9c8f503e220744d240cbe0875fc022bdeea09e0ed6ec90b6c478c0865247ad6e2dc7555fc0b9ee3f0e03a9621736519a4dd7802b6e1a3559806c5bbdd4309be0dbd02f4a5810b2b2782a499e1e3a470e4d1d7477be515b137e396daec06736ec162e392288164c885a5ce5602c4a8c4e39b3d2c278cda63b8da6a9c31e0b2890bde3ac716ffcc1e6867449fd0f8756e62167c43e6e29f303f1c74ba0abd022ffdc0d4037971a0f8c32f8ea34fe98b603a48eea3b38927e052c65146ecf2baf5b3613754b9353fe1ec1c77779da94ed2331b4de3f1aa1b0af5d0610b73e5833f6bf9e5b4b117a2b989d43d6427eef70cf0746ff1108864de87f773df8504c3f7bfaf1657ec5b77b095e50fba95f82a5cca50df61bb0d52cbe61b172ccb0b7f0547f947cc9db91e832aa730b4286037eae2e8fdc6520de3ade1140530fd237946576d501cab9c6c12a49c689a955c20c9e3e311ce678529dcb51357c93dd38024cc8249940d21f71a3ab3c80603e82a96a3e9ceeb05798aea289b876c61a6a66f5dc3efb945a554a438010e190ac2ff4a2496201411cc2d6b7c15d0b1cb9ad1ee85e933f90aa45cb4a176da7ed77c91f8bded12fe7e6c05d46d648303be1b900b408f2b5573c77c57a126ec5cad3449d3586687f0dcafcf91636f8da2b574859762f46d0bc4aa2890618d67f3ab025e22c4805925014eb68bd35a0d6970a868a7e13f2fb388a5bca95d2c33be6ed39890c6d574c659f49d5179b9117d9d64430204d33cec25ac9e5b204216221d2f4142547a2eceea14db90aa222f137ed6391d308de6bfc42fff00aedf79fa60a5045b0039b5719477ffbc12edb237b9dc522c4ee5dd8dac3504da5bcf63cd3853b34582d84e44ecd1740b505ee81fb4b74ad088a823760dca2272a906dcab9e617414b073a782007e9a757ae85e16297b30e03cd7714c67662d533bb276f21b4a05e49e8ebfaa85efbfeb2534a07f73962fd4df9913a2b503bc97cfbcc145775d1979e5bf9f6ccbe14d4994ce4499f57ad49b0e0d2498a83caa60f0155e0bca25f70aae2459506c5937d78aacbb033a99ec2ded202b117fa15aec8370619c4356219b99ee7c2d5a0de172617719fb48838f0bdee5e236b16cd55e04dc2a9586cbac8111e221b96ddf5c7764c59766883f531567df4f6db75b4ec0504a7297a90ed3d9e4373ca9f3d1a46a932c65da56db1c4e90f393086a1d2feb812dbcfdc750b5c44679a988bd9ae3df67306a48661cc1f4a117e62a9f1b49eb0fa6405e8042712a0426a183453b1ab9451caaf54f8b0f24753db42c0982e16bca62d78ce9fea87e271bf4d65246a4ae8a77a6fe1892bb2ab85e0f63fafc33c4a55882dfb2c78a650ac3b276475474418c0fbc22a0c35a3f0d19dd73db05366885bb</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -383,7 +353,6 @@ var _hmt = _hmt || [];
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"> </span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

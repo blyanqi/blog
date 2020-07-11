@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"blog.yanqi.cf","root":"/","scheme":"Gemini","version":"8.0.0-rc.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":false,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Spring  spring start guide  Spring 概念核心技术: 依赖注入, 事件管理, 资源管理, 国际化, 验证, 数据绑定, 类型转换, SpEL, 面向切面.测试: mock objects, TestContext framework, Spring MVC Test, WebTestClient.数据访问: transactions, DAO support, JD">
+  <meta name="description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring">
 <meta property="og:url" content="http://blog.yanqi.cf/2020/07/Spring/index.html">
 <meta property="og:site_name" content="blyanqi@163.com">
-<meta property="og:description" content="Spring  spring start guide  Spring 概念核心技术: 依赖注入, 事件管理, 资源管理, 国际化, 验证, 数据绑定, 类型转换, SpEL, 面向切面.测试: mock objects, TestContext framework, Spring MVC Test, WebTestClient.数据访问: transactions, DAO support, JD">
+<meta property="og:description" content="Here&#39;s something encrypted, password is required to continue reading.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-07-07T12:50:51.000Z">
 <meta property="article:modified_time" content="2020-07-11T03:36:34.466Z">
@@ -273,55 +273,7 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Spring</p>
-<ul>
-<li><a href="https://spring.io/guides" target="_blank" rel="noopener">spring start guide</a></li>
-</ul>
-<h2 id="Spring-概念"><a href="#Spring-概念" class="headerlink" title="Spring 概念"></a>Spring 概念</h2><p>核心技术: 依赖注入, 事件管理, 资源管理, 国际化, 验证, 数据绑定, 类型转换, SpEL, 面向切面.<br>测试: mock objects, TestContext framework, Spring MVC Test, WebTestClient.<br>数据访问: transactions, DAO support, JDBC, ORM, Marshalling XML.<br>web框架支持：Spring MVC 和 Spring WebFlux .<br>集成: remoting, JMS, JCA, JMX, email, tasks, scheduling, cache.<br>多语言支持: Kotlin, Groovy, dynamic languages.</p>
-<p>非入侵式：对源项目不造成影响<br>控制反转 IOC<br>面向切面 AOP<br>支持事务的处理<br>对框架整合的支持</p>
-<p>7大模块<br>  AOP<br>  DAO<br>  ORM<br>  WEB<br>  Context<br>  MVC<br>  Core</p>
-<p>构建一切 springboot<br>协调一切 springcloud<br>连接一些 springcloud data flow</p>
-<p>UserDao 接口<br>UserDaoImpl 实现类<br>UserService 业务接口<br>UserServiceImpl 业务接口</p>
-<p>通过 Spring 来创建对象。无需手动创建。所有对象由Spring统一管理<br>bean 必须有set方法</p>
-<p>由spring来管理程序，其实是通过配置文件来配置类</p>
-<p>使用无参构造创建对象<br>通过有参构造函数创建对象</p>
-<p>在配置文件加载时就会把对象创建出来</p>
-<p>Spring 配置<br>1、别名 alias<br>2、bean name 属性也可以取别名<br>3、import 导入多个配置文件</p>
-<p>构造器注入<br>set 注入</p>
-<p>第三方约束<br>c 命名空间 Constructs<br>p 命名空间 properties</p>
-<p>Bean 的作用域</p>
-<p>scopes:<br>  singleton<br>  prototype</p>
-<p>自动装配<br>  byName:<br>  byType:</p>
-<p>注解实现自动装配</p>
-<p>@Autowired<br>@Nullable<br>@Qualifiter(value=””) 指定装配</p>
-<p>@Resource java注解</p>
-<p>使用注解开发<br>指定扫描包 @component</p>
-<p>@Value(“”)</p>
-<p>@component MVC分层架构<br>dao<br>  @Repository<br>service<br>  @Service<br>controller<br>  @Controller</p>
-<p>四个注解功能一样，把类装配到spring中</p>
-<p>@Scope(“”)</p>
-<p>xml 更加万能，适用于任何场合！维护简单方便<br>注解不是自己类使用不了，维护相对复杂</p>
-<p>配置类<br>@Configuration<br>@Bean</p>
-<p>springboot = spring config配置类 + 注解</p>
-<p>所有的类都必须装配到spring bean里<br>所有的 bean 都需要通过spring取<br>容器里的 bean 拿出来就是一个对象</p>
-<p>AOP 面向切面<br>代理：<br>  需求：接口<br>  被代理： 类<br>  代理： 类实现接口<br>  客户(调用)： 类</p>
-<p>  静态代理模式</p>
-<p>  动态代理模式（使用反射）<br>    基于接口的动态搭理<br>    基于类的动态代理 cglib<br>    java字节码 javasist</p>
-<pre><code>Proxy 类
-InvocationHandler 接口
-invoke
-
-获取被代理的接口
-生成的带代理类，传参为
-  代理类加载器
-  被代理类接口
-  InvocationHandler
-处理代理实例，并返回结果
-</code></pre><p>AOP 实现 aspectj包<br>  横切关注点<br>  切面<br>  通知：前置方法，后置方法，环绕方法<br>  目标<br>  代理<br>  切入点<br>  连接点</p>
-<p>使用<br>自定义类切入</p>
-<p>注解实现 AOP<br>@Aspect<br>@Before</p>
-<p>整合 Mybatis</p>
-
+        <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="Oh, these decrypted content cannot be verified, but you can still have a look."><div class="hbe-input-container"><input type="password" id="hbePass" placeholder="Hey, password is required here." /><label>Hey, password is required here.</label><div class="bottom-line"></div></div><script id="hbeData" type="hbeData" data-hmacdigest="4c980f2e63c187ac2487506ffb7f88674996c9a5b02c311b6da1ed5b617fe92f">4dc7a94a957e0b6d366c4c57187f63c514b1838b6a28f070585cad84b1e80383823afa5695960eaf613334f5875bdfb08adf1b54968bae6f75323815871b97903d058ec2fb386405a9e110ec1beeb740f6856f37547d36edc7f37ad366d7409f1e297077bc40f01b219ff8cb5c589c06e7432033e859424280a9c215351504277ea5b72d0a3c88b439afcfcfdc4e7aebded72679b1186438d29cb186b1eb3d2a604610de7591ead960e6ac6a0fdc705011aa4fff44f404a4e19e391cb2518326b51ff567766370455860dfcf91a543f4ca26def7384cbb3b86a78b3bce568da50df1a70319f06b7fa0698c58f9ceb255ec29a9cd5618ee8eb851af408ae083b370b6a10da2ac04b2b2ebd0a0f95420ef06daca4a6be1adb6d5d8765c5f73cb0d61d69afb97031a7bfc6b679157b3ac6bd4d25b5ea48c340f914ff47a1dc3e5678d0e249a80500db4c28d40a89a85a818bdc1bbd11827a2764845bb51658aab8915cee9e117a8ea06eb3aaab237d28c5b9e1f7abbbb9cfb8b1232218e9a569f41a602c818c666dd6931857f6c80eba2023b694197cb7fd734d3865590d980e51fe27d64c35f1f411788a058e3c5e393bbe06d48c22f5761fece4fe60be38c83fe9ec3c7596eb2a44f9acaebd47c31bce94bf0d95ee570fd31d59adbb98e251434c4fad555f1ed3bddc3dbd176a531485498a9fb4279f9e0a8636988fc13c86e2200aa3d59a7a59ccab293d105bafa810d1e2a21d93017d382420238b5ae7b42c29721365a266e57a6fef9b1edf2a973e38cfc082038f1f0469eacab9b216741d575bace528790f9103b3597c9f94289032984c2220c518bfabda617557e8a9f1ec798208f66f94233a33dd3d39536dd53565da804d8d90328122b33d272716324cf2e65a1ee1945428c2bb4e9243195de33f9bef93eb1fa3026e9d49b7974a08af92734303738bd82fdbacfc9077106985983321b57a0d6f54c0c00296eaf4b764938f9e12e176492df8b46e347411074e229c5c865866ee4395963e889468121dc5e09e65518c1bf0faf6439d598136a55dcca511cbec2ef9ce8c323b653607e3cb968bef4d042c0b500e67540199bbe135ab913b2eb891d172ab1e8bb050ac9cbf797644bdf285f7e116f7fffb36516805ef48c6578342f85ab0bb14236257ee9d745b37553eaaa0aed7499a966a09e1b0bc4bfc2db037bc2c73180d26615b74a6a690f16e275d0ae76942c2917f7227cb7ce5a219addf13413bca3138abc721350007cce567114db069e71d76d027e3f3909d7cbb9eb84ccbcde40100a81f8edbcb8913567e9f656268bd302309d17d54773bc15b7091aeeda32ea83e493ccb2ed2bcedde59d9febde6c0b783b0050e197ca20c37b2995618999aca799fb83138156ba50274141b62cda81c70eb17c52f46a3b951a8a36825a26ab4a1d28bd0d4e3c18cf99ecd8f9620f4389e171d07bc64808b0bb1aa5be595f1844af1b72f8413b529393f15ce9f9eb18584ad9eaf7188f370cb98374ce64eb0ac6fcf5477eaf746fff1f44883ca09ced96e00e42a43e1d5c484a4fd7ec1f617e0bb04126c0a8603b3e9461d6255cf3bc5eeb4fe8febd1aec6239b77d7f7a1508b7358b304190f522b08147f8af8f626655d5543b102f901e9ba6114703a10fb5d4b038c1295e3361d8cd7e968c8d13acfbbaa7443ffa49dac8b2b87a7f3c5566600c447cebe787510d23b98ecda5f8db95941c629639931a11204011e4819f6c35699eaf9e1ed8854ce16021c692508e13b6e2f8ada3917c8b8b3e1aad38d62991ae22f49722a9e1009b46b29eb109f696e09cb67d657e2510aa38e613ff5d27d720e8da9cc0db74e6f14c570055bf9608322040371ef56eaa31707f5dfcfa4e2ad1ee98462836c3c2af3f83cec0ed911c8160999fa0aeeeae4878cfbe1db618ea4c1d2abf01045ff4725fac07f21784e1b025e7e76f77eea20ab923c7c2016e336b9371089c2609bab57d56a7f426f6744763b09180d02e8690abfdd11e97bc1f2b89760abab3b4a8194a071904d620b605eeafa25f6b51cb92c08a26bea0c9cc89580714ee0241a05549d267012ecf7eaf3d484ecfada3445fb15a5da9f3ec46ec8e678a19f67377c7ecdb18b993afe01db6238896301523cdc2c878d6c247296fa6f361d4c2e60d23a987b648b29702e27949b941a1eb2848c7b726203effbab30e2b04d870a7db244bfdb526edfc4095a70ac530d561a74cb899d0992d7d1596374fe7639fae203c6b357a76e17e3874165f9aeb05e55d1356937d807168cb43abcaa6b2dc6b175524ae3d6b15b0ff771ab5d58327387cd95d80948d7bc841974dd9f1158018066dea5243f9d2048bb670e3ea2a60bdd903b8d7d72dad8f15b86e625de082bd1e38493e26d6f404d1da952ba7489f748e80165ee5182d513d59afa6391a029b5c0b7f28adc583a3137a37b9fedd5e26c3045c3af8418e8b3b3469da57590898b231ed68e9bec3c49cbefbc8601a0b6c5715921c0cb552166108c3badc2c57f784eaf89af1ed53cfe3806b451b975fd024981b42da3cdf83a3b8d5606bf66e0bcaa4f50026eaec58e134f2831a2b0cd7b486ca23c1adaf6867cee40e4a98cfb48899bc27c7c2f3d9d67c74774d4dfe666c3dd52c943eb584fb4c524b3ab0f9718a29a004d18d4f6da4cfc21f66cbd667ebe46d349c98a59c719f87caf70c2b3754963531f9d2815b91a6a9a7b642bccd302b9a16f4d4633606747ac90906419053424ee0f09bea887bf46d4c31910bf670ba9d5de816104ec9c956b232d1b0c44fd573a42ed1af131bfb84def87907635a4313363a44d9719c56566fdd1e93d0ccfb39bdd4cf11dc7eff46407b15c2f5ad26194649d459560ee16ff5d22b039b5747a611bc289ef75f1b51bb668b54aecf7ae9ec5532e972249f8bf9733e4e2208e52a31b95c58d35eab01354f0b8fabf46d9a15b85d6ed92eab2e5a5294225ca9f538f68a4dac55f1046fb18d5c31f71a7dfebfc3d56dab47726b61fd28936257ae38def35d533270796760fd5f34506c52169db977aa41c73fc50540453840b158bb020483ffe8780e762b81a795945e5f12f146002a8a0816a6d4f862ce8a1ecd6c996a26e645d94c4d38b449a375c27273ca32fc875ef86217852792c5bd9e33d266365bd30eb7efd8cd227a1078d07295147b48fa94361597e76ba53939526e4d2fec10b1f5ea65ac03f0ac30a79c8d1443b73c5b42ad3358b80d7bfedfaf9779f5317085dfe6742d05c5677e9c1cc761cd75d36923c742bca9b297eac45d190cfe75c0a44ec889ee866d6de4d9c261567f6c794d77d9c20044dd6c7fa8902112ead711e536c033c17d902a57f663fc5680e63d1815519a7a4bd8c29654819d56af67be697cb629889dd68615a7c84f9d48489fad22ee0e2eff5de41b3503c5c4b5278a120570c6b9ae1da869ec11d0e440f60d35f5f0dace322b800b1380a01fbf2a9ae2de6f01cf857ba0a44eb18e633d6788990a6ea88df384e011bbb85c8e7f1f983fa1faf5920afe5d08fa58f49ca214efe7231f8b26a3013486bf8064f6eb7f057525ebe0c9705a9a39396a1f5cfcbfb2851eea021d972e94dfacb4a9aac8b33f7e9a18f511ec4946769bdc855374121d00f9e39471a81347bc5074c8f4e91840117f7dfa1007e20f8da22e8a14ca69ca890ca6e4299a1082ad86f393b5a083977820291c1cb73a6b736a961c3275e296f70b7f63497d5a6ea44a2fe42d86612e2a8e51009edd7d98d2b6b76967d5429e27ac29547cf185b48318b8cd27ef3f4374498da98fcf09232746cb7b462ef0b0422f225aa23fdb76d0c261399904326fdcf6d943dc49035a31b73e738e07274a9d3df769871e949ee5a294eb922ba98fe404e0f16e0e70dbef48b95e6d8cdb1b5b722844c0a3cde85a519fc51f2003919a21d69588f46952bf63e95b77aef58cca0adf0ebaaa5ed8ce88da7595089bd0d53800274a689ea448b2fb5aa8f5d45a22cb9d498e3b48cef01c35122bfde31d68004869bfa377d7b82ee132b37bcb170daa9030f94e5a651c1aba97cf2f639d640aed14571a2fd6957469bc2f046bcaa19434c4e8e02ac56724c8ba4addc12f9b4076dfc9d2fe0464a2723df35aff9c95f5bce486b94792f94cd636d4f8325efa41321c5bffe0f483728ba9551187256f7e060b0c1da6592d01e37e991d735630cf7aea79f8b6f099d944ba1c2698ccf76f6a0c563988e94fbe0a8afea737c4c967f5b115e6f9c073818a7d0c3cc06fab0d3d62d9597a25a9959504afe7c495062b212be835ec6f0b707afbe401fa6e6b8353e7d78d9b58248b7cecaa2f2e314e8370c2f5b687ece56adc30290bc58ae509f8fcb1113a112a6af853f13b7053eef4943c389f05467216ada0e264f158e3478900fad3765343e65aee0f085b0cbfd54bad5fb8abec1ef20a3f2dbc688dc238d3aebdb64dc75eca7dc968eefaa87a2228c7100b66c3b04e3277ae6cfb0ae9919f834671790aa3373f213b6861add1c3b7410753b891833b7793d31b4a0d8a82607c92112890e819b05516bb9eca9d5009b0168bbc3fd796966442dab3ddb2ffd52697ff413855d731ae7e8c0c155356b92d562d9893b76b249eb1ad2610cb827c9ae308d6c1dcedc1b09fe63fb265c932f34d31ac11afb3d26830216b40e3c37e92bcd5775db998d6376c7ed0ef93313c4ebcd100423454db31623b30cc229dbf344a1bf9498357e7dc2c6f2a88f04986fd19b86daa27c8384e64cd3a0359bca623df18a9b4da156f4af376adc6790a824dcf49251a88353e3e106d3bbf47472a8e9f3b2c1f55904559e12cc920a7a51295e94b5cda9bf432566d5001f908e9ca2c1c81f67b987af9fb47a46762877ac45409eb8ce399406ecf10a660cf127ea1798777b8b1c62008d694dbf0f47c3a21b949ff2f2c87402ca12adc53fde3daf6922a870f78d97bb7e1ecd065937e6bd575205b43fc27c698a1bf517e12c60e750eb66d4ed9e8ed381801a049f987343b9161407dde12eb199c97a7bad0f61dad2c07a34df88262173244b38958ba8181d1a5bf</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
     </div>
 
     
@@ -401,7 +353,6 @@ invoke
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-概念"><span class="nav-number">1.</span> <span class="nav-text">Spring 概念</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

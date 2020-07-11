@@ -252,7 +252,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="mariadb-install"><a href="#mariadb-install" class="headerlink" title="mariadb install"></a>mariadb install</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yum install mariadb mariadb-server python2-PyMySQL -y</span><br><span class="line"> </span><br><span class="line">vim /etc/my.cnf.d/openstack.cnf</span><br><span class="line"> </span><br><span class="line">[mysqld]</span><br><span class="line"><span class="built_in">bind</span>-address = 192.168.0.52</span><br><span class="line">default-storage-engine = innodb</span><br><span class="line">innodb_file_per_table</span><br><span class="line">max_connections = 4096</span><br><span class="line">collation-server = utf8_general_ci</span><br><span class="line">character-set-server = utf8</span><br><span class="line"> </span><br><span class="line">systemctl <span class="built_in">enable</span> mariadb.service</span><br><span class="line">systemctl start mariadb.service</span><br><span class="line"> </span><br><span class="line">数据库安装</span><br><span class="line"><span class="comment">#validate</span></span><br><span class="line">netstat -ntlp |grep 3306</span><br><span class="line"> </span><br><span class="line">mysql_secure_installation</span><br><span class="line">n y....</span><br></pre></td></tr></table></figure>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/mariadb/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -324,7 +332,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="mongodb-install"><a href="#mongodb-install" class="headerlink" title="mongodb install"></a>mongodb install</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install mongodb-server mongodb -y</span><br><span class="line"> </span><br><span class="line">/etc/mongod.conf</span><br><span class="line">bind_ip = 10.0.0.11</span><br><span class="line">smallfiles = <span class="literal">true</span></span><br><span class="line">systemctl <span class="built_in">enable</span> mongod.service systemctl start mongod.service</span><br></pre></td></tr></table></figure>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/mongodb/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -396,7 +412,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="memcache-install"><a href="#memcache-install" class="headerlink" title="memcache install"></a>memcache install</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install memcached python-memcached -y</span><br><span class="line"> </span><br><span class="line">vim /etc/sysconfig/memcached</span><br><span class="line">OPTIONS=<span class="string">"-l 127.0.0.1,::1,controller"</span></span><br><span class="line"> </span><br><span class="line">systemctl <span class="built_in">enable</span> memcached.service</span><br><span class="line">systemctl start memcached.service</span><br><span class="line"> </span><br><span class="line"><span class="comment"># validate</span></span><br><span class="line">netstat -ntlp |grep 11211</span><br></pre></td></tr></table></figure>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/memcache/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -468,7 +492,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="rabbitmq-install"><a href="#rabbitmq-install" class="headerlink" title="rabbitmq install"></a>rabbitmq install</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 rabbitmq</span></span><br><span class="line">yum install rabbitmq-server -y</span><br><span class="line"> </span><br><span class="line">systemctl <span class="built_in">enable</span> rabbitmq-server.service</span><br><span class="line">systemctl start rabbitmq-server.service</span><br><span class="line"> </span><br><span class="line"><span class="comment">#validate</span></span><br><span class="line">netstat -ntlp|grep 25672</span><br></pre></td></tr></table></figure>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/Rabbitmq/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -559,7 +591,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="etcd-安装"><a href="#etcd-安装" class="headerlink" title="etcd 安装"></a>etcd 安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">yum install etcd -y</span><br><span class="line"> </span><br><span class="line">vim /etc/etcd/etcd.conf</span><br><span class="line"> </span><br><span class="line"><span class="comment">#[Member]</span></span><br><span class="line">ETCD_DATA_DIR=<span class="string">"/var/lib/etcd/default.etcd"</span></span><br><span class="line">ETCD_LISTEN_PEER_URLS=<span class="string">"http://10.0.0.11:2380"</span></span><br><span class="line">ETCD_LISTEN_CLIENT_URLS=<span class="string">"http://10.0.0.11:2379"</span></span><br><span class="line">ETCD_NAME=<span class="string">"controller"</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#[Clustering]</span></span><br><span class="line">ETCD_INITIAL_ADVERTISE_PEER_URLS=<span class="string">"http://10.0.0.11:2380"</span></span><br><span class="line">ETCD_ADVERTISE_CLIENT_URLS=<span class="string">"http://10.0.0.11:2379"</span></span><br><span class="line">ETCD_INITIAL_CLUSTER=<span class="string">"controller=http://10.0.0.11:2380"</span></span><br><span class="line">ETCD_INITIAL_CLUSTER_TOKEN=<span class="string">"etcd-cluster-01"</span></span><br><span class="line">ETCD_INITIAL_CLUSTER_STATE=<span class="string">"new"</span></span><br><span class="line"> </span><br><span class="line">systemctl <span class="built_in">enable</span> etcd</span><br><span class="line">systemctl start etcd</span><br><span class="line"> </span><br><span class="line">netstat -ntlp|grep etcd</span><br></pre></td></tr></table></figure>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/Etcd/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -631,7 +671,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="ntp-安装"><a href="#ntp-安装" class="headerlink" title="ntp 安装"></a>ntp 安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install chrony -y</span><br><span class="line"> </span><br><span class="line">vim /etc/chrony.conf</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">"/^server/d"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp1.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf</span><br><span class="line">sed -i <span class="string">"2a server ntp2.cloud.aliyuncs.com iburst"</span> /etc/chrony.conf </span><br><span class="line">sed -i <span class="string">"/#allow/s/#//"</span> /etc/chrony.conf</span><br><span class="line">systemctl <span class="built_in">enable</span> chronyd.service;systemctl start chronyd.service</span><br></pre></td></tr></table></figure>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/NTP/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -709,18 +757,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>cloud note<br>项目管理 ScrumWorks</p>
-<p>需求管理 confluence<br>需求收集 Wiki<br>需求评审 Mind</p>
-<p>bug 管理 Jira</p>
-<p>产品管理<br>产品设计 Axure<br>规划迭代 Excel<br>产品研发 Visio</p>
-<p>流程图（流程图是对过程、算法、流程的一种图像表示。）<br>泳道图（流程图中经常用于梳理业务的一种图）</p>
-<p>产品设计草图（产品经理可以用设计草图来帮助自己思考、完善功能设计）<br>（角色、任务、逻辑（条件）、输入、输出）<br>大家可以参考这两本经典书籍：《用户体验草图设计》、《关键设计报告》。</p>
-<p>原型图（信息（类型、结构、梳理）、布局、权重（哪些信息更重要）、交互形式）<br>信息结构图（描述的是某个对象的属性）<br>测试用例图（关注角色、任务和事件三要素）</p>
-<p>甘特图（用来描述项目进度）</p>
-<p>常用 UML 动态图（5 个）：<br>用例图，活动图，状态机图，序列图，通信图。</p>
-<p>常用 UML 静态图（4 个）：<br>类图，包图，部署图，构件图。</p>
-<p>运维常用图<br>拓扑图<br>结构图</p>
-
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/ProductManageTools/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -900,13 +945,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="ali云-cpfs"><a href="#ali云-cpfs" class="headerlink" title="ali云 cpfs"></a>ali云 cpfs</h2><ul>
-<li><a href="https://help.aliyun.com/document_detail/131060.html?spm=a2c4g.11186623.4.2.6892722avCbsoK" target="_blank" rel="noopener">ali云 cpfs</a></li>
-</ul>
-<h3 id="cpfs-客户端安装"><a href="#cpfs-客户端安装" class="headerlink" title="cpfs 客户端安装"></a>cpfs 客户端安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保持kernel kernel-devel kernel-headers的版本一致</span></span><br><span class="line">sudo yum update kernel-devel kernel-headers</span><br><span class="line"></span><br><span class="line">sudo yum install -y make gcc libyaml-devel libtool zlib-devel glibc-headers dkms expect</span><br><span class="line"></span><br><span class="line">wget https://cpfs-client.oss-cn-beijing.aliyuncs.com/centos/cpfs-client-2.10.8-202.el7.tar.gz</span><br><span class="line"></span><br><span class="line">tar xf cpfs-client-2.10.8-202.el7.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这一步大概需要等待5-10分钟</span></span><br><span class="line">sudo rpm -vih  cpfs-client-dkms-1.0.0-202.el7.noarch.rpm</span><br><span class="line">sudo rpm -vih cpfs-client-2.10.8-202.el7.x86_64.rpm</span><br></pre></td></tr></table></figure>
-<h4 id="本地挂载验证"><a href="#本地挂载验证" class="headerlink" title="本地挂载验证"></a>本地挂载验证</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/cpfs/cpfs-mounts.conf</span><br><span class="line">xxx.cn-beijing.cpfs.nas.aliyuncs.com@tcp:xxx.cn-beijing.cpfs.nas.aliyuncs.com@tcp:/xxx</span><br><span class="line">/etc/init.d/cpfs-client start</span><br><span class="line">systemctl <span class="built_in">enable</span> cpfs-client</span><br></pre></td></tr></table></figure>
-<h4 id="kubernetes使用cfs作为持久存储"><a href="#kubernetes使用cfs作为持久存储" class="headerlink" title="kubernetes使用cfs作为持久存储"></a>kubernetes使用cfs作为持久存储</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolume</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">cpfs-pv</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">capacity:</span></span><br><span class="line">    <span class="attr">storage:</span> <span class="string">5Ti</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">flexVolume:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">"alicloud/cpfs"</span></span><br><span class="line">    <span class="attr">options:</span></span><br><span class="line">      <span class="attr">server:</span> <span class="string">xxx.cn-beijing.cpfs.nas.aliyuncs.com@tcp:xxx.cn-beijing.cpfs.nas.aliyuncs.com@tcp</span></span><br><span class="line">      <span class="attr">fileSystem:</span> <span class="string">xxx</span></span><br></pre></td></tr></table></figure>
-<h4 id="PVC"><a href="#PVC" class="headerlink" title="PVC"></a>PVC</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">kind:</span> <span class="string">PersistentVolumeClaim</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">cpfs-pvc</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">accessModes:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">ReadWriteMany</span></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">requests:</span></span><br><span class="line">      <span class="attr">storage:</span> <span class="string">5Ti</span></span><br></pre></td></tr></table></figure>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/ali%E4%BA%91%E5%BA%94%E7%94%A8%E9%83%A8%E7%BD%B2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -993,204 +1040,15 @@ var _hmt = _hmt || [];
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>首先对老平台资源占用情况进行计算，获取所有资源占用情况。</p>
-<h1 id="老项目资源成本计算"><a href="#老项目资源成本计算" class="headerlink" title="老项目资源成本计算"></a>老项目资源成本计算</h1><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>业务</th>
-<th>机器配置</th>
-<th>数量(台)</th>
-<th>总数</th>
-<th>费用(元)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>携程1</td>
-<td>8C,16G</td>
-<td>8</td>
-<td>64C，128G</td>
-<td>6400</td>
-</tr>
-<tr>
-<td>携程2</td>
-<td>8C,16G</td>
-<td>8</td>
-<td>64C，128G</td>
-<td>6400</td>
-</tr>
-<tr>
-<td>淘宝</td>
-<td>8C,16G</td>
-<td>6</td>
-<td>48C, 96G</td>
-<td>4800</td>
-</tr>
-<tr>
-<td>去哪儿</td>
-<td>8C,16G</td>
-<td>2</td>
-<td>12C，32G</td>
-<td>1600</td>
-</tr>
-<tr>
-<td>OTHER</td>
-<td>8C,16G</td>
-<td>3</td>
-<td>24C,48G</td>
-<td>2400</td>
-</tr>
-<tr>
-<td>渠道总数</td>
-<td>8C,16G</td>
-<td>27</td>
-<td>196C,384G</td>
-<td>21600</td>
-</tr>
-<tr>
-<td>美国</td>
-<td>8C,16G</td>
-<td>20</td>
-<td>160C,320G</td>
-<td>32000</td>
-</tr>
-<tr>
-<td>国内接口</td>
-<td>8C,16G</td>
-<td>5</td>
-<td>40C,96G</td>
-<td>4000</td>
-</tr>
-<tr>
-<td>数据库</td>
-<td>8C,16G</td>
-<td>5</td>
-<td>8C,48G,2T</td>
-<td>5500</td>
-</tr>
-<tr>
-<td>外网流量</td>
-<td>8C,16G</td>
-<td>5</td>
-<td>40C,96G</td>
-<td>20000</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="项目-业务流"><a href="#项目-业务流" class="headerlink" title="项目(业务流)"></a>项目(业务流)</h1><p>云主机规划:<br>国内</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>集群节点</th>
-<th>数量</th>
-<th>云主机配置</th>
-<th>单价</th>
-<th>总额(元)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rancher</td>
-<td>1</td>
-<td>4c，16G</td>
-<td>620</td>
-<td>620</td>
-</tr>
-<tr>
-<td>master</td>
-<td>3</td>
-<td>4c,16G,500G</td>
-<td>620</td>
-<td>1860</td>
-</tr>
-<tr>
-<td>work</td>
-<td>6</td>
-<td>40c,196G,500G</td>
-<td>5000</td>
-<td>30000</td>
-</tr>
-<tr>
-<td>cpfs</td>
-<td>1</td>
-<td>5TB,2.5T/s</td>
-<td>8700</td>
-<td>8700</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>美国</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>集群节点</th>
-<th>数量</th>
-<th>云主机配置</th>
-<th>单价</th>
-<th>总额(元)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>master</td>
-<td>3</td>
-<td>4c,16G,500G</td>
-<td>620</td>
-<td>620</td>
-</tr>
-<tr>
-<td>work</td>
-<td>3</td>
-<td>40c,196G,500G</td>
-<td>5000</td>
-<td>30000</td>
-</tr>
-<tr>
-<td>cpfs</td>
-<td>1</td>
-<td>2TB,2.5T/s</td>
-<td>8700</td>
-<td>8700</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>其他</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>应用</th>
-<th>数量</th>
-<th>云主机配置</th>
-<th>单价</th>
-<th>总额(元)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>数据库</td>
-<td>1</td>
-<td>8C,16G</td>
-<td>8C,48G,2T</td>
-<td>5500</td>
-</tr>
-<tr>
-<td>外网流量</td>
-<td>8C,16G</td>
-<td>5</td>
-<td>40C,96G</td>
-<td>20000</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h1 id="项目-辅助业务"><a href="#项目-辅助业务" class="headerlink" title="项目(辅助业务)"></a>项目(辅助业务)</h1>
+          Here's something encrypted, password is required to continue reading.
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/06/%E5%85%AC%E5%8F%B8%E5%AE%B9%E5%99%A8%E5%8C%96%E9%A1%B9%E7%9B%AE%E6%96%B9%E6%A1%88/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
