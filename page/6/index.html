@@ -199,140 +199,6 @@ var _hmt = _hmt || [];
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/AndroidNDK/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yan qi">
-      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="blyanqi@163.com">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/AndroidNDK/" class="post-title-link" itemprop="url">AndroidNDK</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-06-21 13:18:27" itemprop="dateCreated datePublished" datetime="2020-06-21T13:18:27+08:00">2020-06-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-07-11 11:34:57" itemprop="dateModified" datetime="2020-07-11T11:34:57+08:00">2020-07-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%BF%90%E7%BB%B4/" itemprop="url" rel="index"><span itemprop="name">运维</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><a href="https://developer.android.google.cn/" target="_blank" rel="noopener">Android cn</a></li>
-<li><a href="https://developer.android.google.cn/studio/intro" target="_blank" rel="noopener">Android Studio</a></li>
-<li><a href="https://www.android-x86.org/" target="_blank" rel="noopener">android-x86</a></li>
-</ul>
-<p>android 架构：<br>———————————-System Apps———————————-<br>——————————Java API Framework—————————-<br>————Native C/C++ libraries——- —-Android Runtime—-<br>————————-Hardware Abstraction Layer———————<br>————————————Linux kernel——————————-</p>
-<p>Android 设备</p>
-<pre><code>* Wear OS
-* Android TV
-* Android Auto
-* Android Things
-* Chrome 操作系统设备
-</code></pre><p>Google Play<br>应用商店</p>
-<p>Android Studio（包含 SDK）<br>Android 集成开发环境</p>
-<p>Kotlin<br>Kotlin 是一种新型的静态类型编程语言。</p>
-<p>Jetpack<br>Jetpack 库可帮助您以简单且一致的方式针对 90% 的 Android 设备开发相机应用。</p>
-<p>Android NDK 原生代码库</p>
-<h2 id="主要组件"><a href="#主要组件" class="headerlink" title="主要组件"></a>主要组件</h2><p><strong>原生共享库</strong>：NDK 从 C/C++ 源代码编译这些库或 .so 文件。<br><strong>原生静态库</strong>：NDK 也可编译静态库或 .a 文件，而您可将静态库关联到其他库。<br><strong>Java 原生接口 (JNI)</strong>：JNI 是 Java 和 C++ 组件用以互相通信的接口。<br><strong>应用二进制接口 (ABI)</strong>：ABI 可以非常精确地定义应用的机器代码在运行时应该如何与系统交互。<br><strong>清单</strong>：如果您编写的应用不包含 Java 组件，则必须在清单中声明 NativeActivity 类。</p>
-<h3 id="Android-开发原生应用的一般流程"><a href="#Android-开发原生应用的一般流程" class="headerlink" title="Android 开发原生应用的一般流程:"></a>Android 开发原生应用的一般流程:</h3><pre><code>1、设计应用，确定要以 Java 实现的部分，以及要以原生代码形式实现的部分。
-2、像创建任何其他 Android 项目一样创建一个 Android 应用项目。
-3、如果要编写纯原生应用，请在 AndroidManifest.xml 中声明 NativeActivity 类。
-4、在“JNI”目录中创建一个描述原生库的 Android.mk 文件，包括名称、标记、关联库和要编译的源文件。
-5、或者，也可以创建一个配置目标 ABI、工具链、发布/调试模式和 STL 的 Application.mk 文件。
-6、将原生源代码放在项目的 jni 目录下。
-7、使用 ndk-build 编译原生（.so、.a）库。
-8、编译 Java 组件，生成可执行 .dex 文件。
-9、将所有内容封装到一个 APK 文件中，包括 .so、.dex 以及应用运行所需的其他文件。
-</code></pre><h3 id="Android-NDK-为实现原生-Activity"><a href="#Android-NDK-为实现原生-Activity" class="headerlink" title="Android NDK 为实现原生 Activity"></a>Android NDK 为实现原生 Activity</h3><p>native_activity.h<br>android_native_app_glue.h</p>
-<h4 id="使用-native-activity-h-接口"><a href="#使用-native-activity-h-接口" class="headerlink" title="使用 native_activity.h 接口"></a>使用 native_activity.h 接口</h4><pre><code>1、在项目的根目录中创建一个 jni/ 目录。此目录用于存储所有原生代码。
-2、在 AndroidManifest.xml 文件中声明原生 Activity。
-3、创建用于原生 Activity 的文件，并实现 ANativeActivity_onCreate 变量中指定的函数。应用在原生 Activity 启动时会调用此函数。此函数类似于 C/C++ 中的 main，会接收 ANativeActivity 结构的指针，其中包含您需要编写的各个回调实现的函数指针。
-4、将 ANativeActivity-&gt;instance 字段设置为您要使用的特定数据的任何实例地址。
-5、实现您希望 Activity 在启动时执行的任何其他操作。
-6、开发应用的其余部分。
-7、在项目的 jni/ 目录中创建 Android.mk file，向构建系统描述您的原生模块。
-8、创建 Android.mk 文件后，使用 ndk-build 命令编译原生代码。
-9、像平常一样编译和安装 Android 项目。如果原生代码在 jni/ 目录中，构建脚本会自动将从其中构建的 .so 文件封装到 APK 中。
-</code></pre><p><strong>Dalvik</strong>： Android特有的虚拟机,和JVM不同,Dalvik虚拟机非常适合在移动终端上使用!<br><strong>AVD</strong>： (android virtual machine):安卓虚拟设备,就是安卓的模拟器<br><strong>ADT</strong>： (android development tools)安卓开发工具<br><strong>SDK</strong>：(software development kit)软件开发工具包,就是安卓系统,平台架构等的工具集合,如adb.exe<br><strong>DDMS</strong>：(dalvik debug monitor service)安卓调试工具<br><strong>adb</strong>：安卓调试桥,在sdk的platform-tools目录下,功能很多,命令行必备<br><strong>DX工具</strong>：将.class转换成.dex文件<br><strong>AAPT</strong>：(android asset packing tool),安卓资源打包工具<br><strong>R.java文件</strong>：由aapt工具根据App中的资源文件自动生成,可以理解为资源字典<br><strong>AndroidManifest.xml</strong>：app包名 + 组件声明 + 程序兼容的最低版本 + 所需权限等程序的配置文件</p>
-<p>adb 相关指令</p>
-<p>APP程序打包与安装的流程</p>
-<p>APP的安装过程</p>
-<p>Android Studio</p>
-<p>res资源文件夹</p>
-<p>drawable：存放各种位图文件<br>layout：该目录下存放的就是我们的布局文件<br>menu：在以前有物理菜单按钮<br>values目录<br>demens.xml：定义尺寸资源<br>string.xml：定义字符串资源<br>styles.xml：定义样式资源<br>colors.xml：定义颜色资源<br>arrays.xml：定义数组资源<br>attrs.xml：自定义控件时用的较多，自定义控件的属性！<br>theme主题文件，和styles很相似<br>animator：存放属性动画的XML文件<br>anim：存放补间动画的XML文件<br>所有的资源文件都会在R.java文件下生成一个资源id</p>
-<p>三个工具反编译<br>apktool：获取资源文件，提取图片文件，布局文件，还有一些XML的资源文件<br>dex2jar：将APK反编译成Java源码(将classes.dex转化为jar文件)<br>jd-gui：查看2中转换后的jar文件，即查看Java文件 为了方便各位读者，这里将三个打包到一起放到云盘中，又需要的可以进行下载： 反编译相关的三个工具.zip</p>
-<p>Android的四大组件：<br>Activity：提供一个界面让用户点击和各种滑动操作。Activity之间通过Intent进行通信。<br>Service：可以在后台执行长时间运行操作而没有用户界面的应用组件。<br>    started<br>    bound<br>BroadcastReceiver：广播接收器没有用户界面。<br>    静态注册<br>    动态注册<br>ContentProvider：通讯录数据被多个应用程序使用，且必须存储在一个内容提供者中。它的好处是统一数据访问方式。</p>
-<p>4大基本组件都需要注册才能使用，每个Activity、service、Content Provider都需要在AndroidManifest文件中进行配置。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/WebEnder/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1489,6 +1355,185 @@ var _hmt = _hmt || [];
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://blog.yanqi.cf/2020/06/Elasticsearch%E5%AE%89%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yan qi">
+      <meta itemprop="description" content="君子学以聚之，问以辩之，宽以居之，仁以行之。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="blyanqi@163.com">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/Elasticsearch%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">elasticsearch安装</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-17 10:46:40" itemprop="dateCreated datePublished" datetime="2020-06-17T10:46:40+08:00">2020-06-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-07-11 11:03:16" itemprop="dateModified" datetime="2020-07-11T11:03:16+08:00">2020-07-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BIGDATA/" itemprop="url" rel="index"><span itemprop="name">BIGDATA</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>base configuration<br>easticsearch<br>logstash<br>filebeat</p>
+<p>base configuration<br>/etc/hosts<br>192.168.0.130 elastic1<br>192.168.0.131 elastic2<br>192.168.0.132 elastic3</p>
+<p>ssh-keygen -t rsa<br>ssh-copy-id 192.168.0.130<br>ssh-copy-id 192.168.0.131<br>ssh-copy-id 192.168.0.133</p>
+<p>192.168.0.130 master<br>192.168.0.131 node1<br>192.168.0.132 node2</p>
+<p>yum -y install rsync&amp;&amp;/usr/bin/rsync -avzuP —delete —port=873 monitor@106.15.137.193::autosh /opt/autosh/</p>
+<p>设置资源限制<br>echo “* soft nofile 65536</p>
+<ul>
+<li>hard nofile 65536</li>
+<li>soft nproc 32000</li>
+<li>hard nproc 32000</li>
+<li>hard memlock unlimited</li>
+<li>soft memlock unlimited”&gt;&gt;/etc/security/limits.conf</li>
+</ul>
+<p>echo “DefaultLimitNOFILE=65536<br>DefaultLimitNPROC=32000<br>DefaultLimitMEMLOCK=infinity”&gt;&gt; /etc/systemd/system.conf</p>
+<p>easticsearch</p>
+<p>导入repo</p>
+<h1 id="ssh-192-168-0-130-rpm-—import-https-artifacts-elastic-co-GPG-KEY-elasticsearch"><a href="#ssh-192-168-0-130-rpm-—import-https-artifacts-elastic-co-GPG-KEY-elasticsearch" class="headerlink" title="ssh 192.168.0.130 rpm —import https://artifacts.elastic.co/GPG-KEY-elasticsearch"></a>ssh 192.168.0.130 rpm —import <a href="https://artifacts.elastic.co/GPG-KEY-elasticsearch" target="_blank" rel="noopener">https://artifacts.elastic.co/GPG-KEY-elasticsearch</a></h1><p>vim /etc/yum.repos.d/easticsearch-7.repo<br>[elasticsearch-7.x]<br>name=Elasticsearch repository for 7.x packages<br>baseurl=<a href="https://artifacts.elastic.co/packages/7.x/yum" target="_blank" rel="noopener">https://artifacts.elastic.co/packages/7.x/yum</a><br>gpgcheck=1<br>gpgkey=<a href="https://artifacts.elastic.co/GPG-KEY-elasticsearch" target="_blank" rel="noopener">https://artifacts.elastic.co/GPG-KEY-elasticsearch</a><br>enabled=1<br>autorefresh=1<br>type=rpm-md</p>
+<p>scp ./easticsearch-7.repo 192.168.0.130:/etc/yum.repos.d/</p>
+<p>ssh 192.168.0.130 yum -y install elasticsearch</p>
+<p>wget <a href="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.0-x86_64.rpm" target="_blank" rel="noopener">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.0-x86_64.rpm</a><br>wget <a href="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.0-x86_64.rpm.sha512" target="_blank" rel="noopener">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.0-x86_64.rpm.sha512</a><br>shasum -a 512 -c elasticsearch-7.2.0-x86_64.rpm.sha512<br>rpm -ivh elasticsearch-7.2.0-x86_64.rpm</p>
+<h2 id="单机配置"><a href="#单机配置" class="headerlink" title="单机配置"></a>单机配置</h2><p>path.data: /data/lib/elasticsearch<br>path.logs: /data/log/elasticsearch</p>
+<hr>
+<p>mkdir /data/lib/elasticsearch -p<br>mkdir  /data/log/elasticsearch -p</p>
+<h2 id="vim-etc-elasticsearch-elasticsearch-yml"><a href="#vim-etc-elasticsearch-elasticsearch-yml" class="headerlink" title="vim /etc/elasticsearch/elasticsearch.yml"></a>vim /etc/elasticsearch/elasticsearch.yml</h2><h1 id="集群的名称"><a href="#集群的名称" class="headerlink" title="集群的名称"></a>集群的名称</h1><p>cluster.name: yanqi-clusters</p>
+<h1 id="节点的名称"><a href="#节点的名称" class="headerlink" title="节点的名称"></a>节点的名称</h1><p>node.name: es-node-1</p>
+<h1 id="是否有资格成为主节点"><a href="#是否有资格成为主节点" class="headerlink" title="是否有资格成为主节点"></a>是否有资格成为主节点</h1><p>node.master: true</p>
+<h1 id="是否是数据节点"><a href="#是否是数据节点" class="headerlink" title="是否是数据节点"></a>是否是数据节点</h1><p>node.data: true</p>
+<h1 id="数据和日志路径"><a href="#数据和日志路径" class="headerlink" title="数据和日志路径"></a>数据和日志路径</h1><p>path.data: /var/lib/elasticsearch<br>path.logs: /var/log/elasticsearch</p>
+<h1 id="设置访问的地址和端口"><a href="#设置访问的地址和端口" class="headerlink" title="设置访问的地址和端口"></a>设置访问的地址和端口</h1><p>network.host: 0.0.0.0<br>http.port: 9200</p>
+<h1 id="设置集群中自动发现其它节点时ping连接超时时间，默认为3秒，对于比较差的网络环境可以高点的值来防止自动发现时出错。"><a href="#设置集群中自动发现其它节点时ping连接超时时间，默认为3秒，对于比较差的网络环境可以高点的值来防止自动发现时出错。" class="headerlink" title="设置集群中自动发现其它节点时ping连接超时时间，默认为3秒，对于比较差的网络环境可以高点的值来防止自动发现时出错。"></a>设置集群中自动发现其它节点时ping连接超时时间，默认为3秒，对于比较差的网络环境可以高点的值来防止自动发现时出错。</h1><p>discovery.zen.ping.timeout: 3s</p>
+<h1 id="设置是否打开多播发现节点，默认是true。"><a href="#设置是否打开多播发现节点，默认是true。" class="headerlink" title="设置是否打开多播发现节点，默认是true。"></a>设置是否打开多播发现节点，默认是true。</h1><p>discovery.zen.ping.multicast.enabled: false</p>
+<h1 id="集群地址设置"><a href="#集群地址设置" class="headerlink" title="集群地址设置"></a>集群地址设置</h1><p>discovery.zen.ping.unicast.hosts: [“192.168.0.130”,”192.168.0.131”,”192.168.0.132”]</p>
+<h1 id="设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）"><a href="#设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）" class="headerlink" title="设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）"></a>设置这个参数来保证集群中的节点可以知道其它N个有master资格的节点。默认为1，对于大的集群来说，可以设置大一点的值（2-4）</h1><p>discovery.zen.minimum_master_nodes: 2</p>
+<h1 id="设置集群中N个节点启动时进行数据恢复"><a href="#设置集群中N个节点启动时进行数据恢复" class="headerlink" title="设置集群中N个节点启动时进行数据恢复"></a>设置集群中N个节点启动时进行数据恢复</h1><p>gateway.recover_after_nodes: 3</p>
+<h1 id="设置初始化数据恢复进程的超时时间，默认是5分钟。"><a href="#设置初始化数据恢复进程的超时时间，默认是5分钟。" class="headerlink" title="设置初始化数据恢复进程的超时时间，默认是5分钟。"></a>设置初始化数据恢复进程的超时时间，默认是5分钟。</h1><p>gateway.recover_after_time: 5m</p>
+<h1 id="初始化数据恢复时，并发恢复线程的个数，默认为4。"><a href="#初始化数据恢复时，并发恢复线程的个数，默认为4。" class="headerlink" title="初始化数据恢复时，并发恢复线程的个数，默认为4。"></a>初始化数据恢复时，并发恢复线程的个数，默认为4。</h1><p>cluster.routing.allocation.node_initial_primaries_recoveries: 4</p>
+<h1 id="进行内存交换"><a href="#进行内存交换" class="headerlink" title="进行内存交换"></a>进行内存交换</h1><p>bootstrap.memory_lock: true</p>
+<h1 id="索引分片个数，默认为5片。"><a href="#索引分片个数，默认为5片。" class="headerlink" title="索引分片个数，默认为5片。"></a>索引分片个数，默认为5片。</h1><p>index.number_of_shards: 5</p>
+<h1 id="索引副本个数，默认为1个副本。"><a href="#索引副本个数，默认为1个副本。" class="headerlink" title="索引副本个数，默认为1个副本。"></a>索引副本个数，默认为1个副本。</h1><p>index.number_of_replicas: 1</p>
+<p>下面是一些查询时的慢日志参数设置<br>index.search.slowlog.level: TRACE<br>index.search.slowlog.threshold.query.warn: 10s<br>index.search.slowlog.threshold.query.info: 5s<br>index.search.slowlog.threshold.query.debug: 2s<br>index.search.slowlog.threshold.query.trace: 500ms<br>index.search.slowlog.threshold.fetch.warn: 1s<br>index.search.slowlog.threshold.fetch.info: 800ms<br>index.search.slowlog.threshold.fetch.debug:500ms<br>index.search.slowlog.threshold.fetch.trace: 200ms</p>
+<hr>
+<p>cluster.name: my-application<br>node.name: node-1<br>path.data: /var/lib/elasticsearch<br>path.logs: /var/log/elasticsearch<br>network.host: 0.0.0.0<br>http.port: 9200<br>discovery.seed_hosts: [“host1”, “host2”, “host3”]</p>
+<h2 id="cluster-initial-master-nodes-“node-1”-“node-2”-”node-3”"><a href="#cluster-initial-master-nodes-“node-1”-“node-2”-”node-3”" class="headerlink" title="cluster.initial_master_nodes: [“node-1”, “node-2”,”node-3”]"></a>cluster.initial_master_nodes: [“node-1”, “node-2”,”node-3”]</h2><p>cluster.name: my-application<br>node.name: node-2<br>path.data: /var/lib/elasticsearch<br>path.logs: /var/log/elasticsearch<br>network.host: 0.0.0.0<br>http.port: 9200<br>discovery.seed_hosts: [“host1”, “host2”, “host3”]</p>
+<h2 id="cluster-initial-master-nodes-“node-1”-“node-2”-”node-3”-1"><a href="#cluster-initial-master-nodes-“node-1”-“node-2”-”node-3”-1" class="headerlink" title="cluster.initial_master_nodes: [“node-1”, “node-2”,”node-3”]"></a>cluster.initial_master_nodes: [“node-1”, “node-2”,”node-3”]</h2><p>cluster.name: my-application<br>node.name: node-3<br>path.data: /var/lib/elasticsearch<br>path.logs: /var/log/elasticsearch<br>network.host: 0.0.0.0<br>http.port: 9200<br>discovery.seed_hosts: [“host1”, “host2”, “host3”]</p>
+<h2 id="cluster-initial-master-nodes-“node-1”-“node-2”-”node-3”-2"><a href="#cluster-initial-master-nodes-“node-1”-“node-2”-”node-3”-2" class="headerlink" title="cluster.initial_master_nodes: [“node-1”, “node-2”,”node-3”]"></a>cluster.initial_master_nodes: [“node-1”, “node-2”,”node-3”]</h2><p>开启 Auth 认证功能<br>xpack.security.enabled: true</p>
+<p>sudo systemctl daemon-reload<br>sudo systemctl enable elasticsearch.service<br>systemctl start elasticsearch.service</p>
+<p>/usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive</p>
+<p>sudo systemctl restart elasticsearch.service<br>sudo systemctl restart kibana.service</p>
+<h1 id="curl-XGET-‘http-localhost-9200-cluster-state-pretty‘"><a href="#curl-XGET-‘http-localhost-9200-cluster-state-pretty‘" class="headerlink" title="curl -XGET ‘http://localhost:9200/_cluster/state?pretty‘"></a>curl -XGET ‘<a href="http://localhost:9200/_cluster/state?pretty" target="_blank" rel="noopener">http://localhost:9200/_cluster/state?pretty</a>‘</h1><p>curl -XGET ‘localhost:9200/_cluster/health?pretty’<br>curl -XGET “127.0.0.1:9200”</p>
+<p>elasticsearch-head<br>git clone git://github.com/mobz/elasticsearch-head.git<br>cd elasticsearch-head<br>npm install<br>npm run start<br>curl <a href="http://localhost:9100/" target="_blank" rel="noopener">http://localhost:9100/</a></p>
+<p>yum -y install kibana<br>/etc/kibana/kibana.yml<br>server.port: 5601<br>server.host: “0.0.0.0”<br>elasticsearch.hosts: [“<a href="http://127.0.0.1:9200" target="_blank" rel="noopener">http://127.0.0.1:9200</a>“]<br>sudo systemctl daemon-reload<br>sudo systemctl enable kibana.service<br>sudo systemctl start kibana.service</p>
+<p>安装分词插件<br>/usr/share/elasticsearch/bin/elasticsearch-plugin install <a href="https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.3.2/elasticsearch-analysis-ik-6.3.2.zip" target="_blank" rel="noopener">https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v6.3.2/elasticsearch-analysis-ik-6.3.2.zip</a></p>
+<p>日志查看<br>tail -200f /var/log/elasticsearch/yanqi-clusters.log</p>
+<p>logstash<br><a href="https://www.elastic.co/downloads/logstash" target="_blank" rel="noopener">https://www.elastic.co/downloads/logstash</a><br>yum install logstash</p>
+<p>bin/logstash -f logstash-simple.conf</p>
+<p>input { stdin { } }<br>output {<br>  elasticsearch { hosts =&gt; [“localhost:9200”] }<br>  stdout { codec =&gt; rubydebug }<br>}</p>
+<p>bin/logstash -e ‘input { stdin { } } output { stdout {} }’</p>
+<h2 id="stdout-codec-gt-rubydebug-的意思是输出到控制台"><a href="#stdout-codec-gt-rubydebug-的意思是输出到控制台" class="headerlink" title="stdout { codec =&gt; rubydebug }的意思是输出到控制台"></a>stdout { codec =&gt; rubydebug }的意思是输出到控制台</h2><p>input {<br>    beats {<br>        port =&gt; “5044”<br>    }<br>}<br>filter {<br>    grok {<br>        match =&gt; { “message” =&gt; “%{COMBINEDAPACHELOG}”}<br>    }<br>}<br>output {</p>
+<pre><code>stdout { codec =&gt; rubydebug }
+</code></pre><h2 id><a href="#" class="headerlink" title="}"></a>}</h2><p> elasticsearch {<br>        hosts =&gt; [ “localhost:9200” ]<br>    }<br>geoip {<br>        source =&gt; “clientip”<br>    }</p>
+<p>bin/logstash -f logstash.conf</p>
+<p>filebeat<br>filebeat -&gt; logstash<br>              -&gt; elasticsearch<br><a href="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.2.0-x86_64.rpm" target="_blank" rel="noopener">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.2.0-x86_64.rpm</a><br>rpm -ivh <a href="https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.2.0-x86_64.rpm" target="_blank" rel="noopener">https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.2.0-x86_64.rpm</a></p>
+<p>rpm -ivh filebeat-7.2.0-x86_64.rpm</p>
+<h2 id="vim-filebeat-yml"><a href="#vim-filebeat-yml" class="headerlink" title="vim filebeat.yml"></a>vim filebeat.yml</h2><p>filebeat.inputs:</p>
+<ul>
+<li>type: log<br>enabled: false<br>paths:<ul>
+<li>/data/log/java_web/ota-whitelist-service/ota-whitelist-service.2019-07-05.log<br>filebeat.config.modules:<br>path: ${path.config}/modules.d/*.yml<br>reload.enabled: false<br>setup.template.settings:<br>index.number_of_shards: 1<br>setup.kibana:<br>host: “119.84.8.44:60117”<br>output.elasticsearch:<br>hosts: [“119.84.8.44:60116”]<br>output.logstash:<br>hosts: [“119.84.8.44:60118”]<h1 id="processors"><a href="#processors" class="headerlink" title="processors:"></a>processors:</h1><h1 id="add-host-metadata"><a href="#add-host-metadata" class="headerlink" title="- add_host_metadata: ~"></a>- add_host_metadata: ~</h1><h1 id="add-cloud-metadata"><a href="#add-cloud-metadata" class="headerlink" title="- add_cloud_metadata: ~"></a>- add_cloud_metadata: ~</h1></li>
+</ul>
+</li>
+</ul>
+<p>systemctl  start filebeat</p>
+<p>filebeat -e 直接输出到控制台</p>
+<h2 id="filebeat-e-c-filebeat-yml-d-“publish”"><a href="#filebeat-e-c-filebeat-yml-d-“publish”" class="headerlink" title="./filebeat -e -c filebeat.yml -d “publish”"></a>./filebeat -e -c filebeat.yml -d “publish”</h2><p>filebeat setup -e \<br>  -E output.logstash.enabled=false \<br>  -E output.elasticsearch.hosts=[“119.84.8.44:60116”] \<br>  -E setup.kibana.host=119.84.8.44:60117</p>
+<p>./filebeat setup —template -E output.logstash.enabled=false \<br>-E ‘output.elasticsearch.hosts=[“119.84.8.44:60116”]’</p>
+<p><a href="https://github.com/mobz/elasticsearch-head" target="_blank" rel="noopener">https://github.com/mobz/elasticsearch-head</a><br>git clone git://github.com/mobz/elasticsearch-head.git<br>cd elasticsearch-head<br>npm install<br>npm run start</p>
+<p>grunt server</p>
+<p>http.cors.enabled: true<br>http.cors.allow-origin: “*”<br>http.cors.allow-credentials: true</p>
+<p><a href="http://192.168.0.130:9200" target="_blank" rel="noopener">http://192.168.0.130:9200</a> 点击连接</p>
+<p>2019-07-05 00:23:32.965 INFO  - status:1,time:1947ms,request:KUL-SGN|20190815/|ctripDirect2016331|ABUS_F@IU3D|162257411018198086|1785362763|1</p>
+<p>“%{DATA:date} %{DATA:time} %{DATA:level} %{DATA:-} %{DATA:status},%{DATA:delay},%{DATA:airline}”|%{DATA:startdt}|%{DATA:cid}|%{DATA:ipcc}”</p>
+<p>DATA是logstash定义好的正则</p>
+<p>overwrite =&gt; [“message”]<br>remove_field  =&gt; “message”<br>add_field =&gt; { “shortHostname” =&gt; “%{hostname[0]}” }<br>rename =&gt; [“shortHostname”, “hostname” ]</p>
+<p><a href="https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html" target="_blank" rel="noopener">https://doc.yonyoucloud.com/doc/logstash-best-practice-cn/filter/grok.html</a><br><a href="http://grokdebug.herokuapp.com/" target="_blank" rel="noopener">http://grokdebug.herokuapp.com/</a></p>
+<p>match =&gt; [<br>    “message”, “(?<request_time>\d+(?:.\d+)?)”,<br>    “message”, “%{SYSLOGBASE} %{DATA:message}”,<br>    “message”, “(?m)%{WORD}”<br>]</request_time></p>
+<p>{<br>    “input” =&gt; {<br>        “type” =&gt; “log”<br>    },<br>     “date” =&gt; “2019-07-05”,<br>     “time” =&gt; “00:24:32.708”,<br>     “tags” =&gt; [<br>        [0] “beats_input_codec_plain_applied”<br>    ],<br>     “host” =&gt; {<br>        “name” =&gt; “xc1-1”<br>    },<br>      “log” =&gt; {<br>        “offset” =&gt; 27560723,<br>          “file” =&gt; {<br>            “path” =&gt; “/data/log/java_web/ota-whitelist-service/ota-whitelist-service.2019-07-05.log”<br>        }<br>    },<br>      “ecs” =&gt; {<br>        “version” =&gt; “1.0.0”<br>    }<br>}</p>
+<hr>
+<p>input {<br>    beats {<br>        port =&gt; “5044”<br>    }<br>}<br>filter {<br>    grok{<br>        remove_field =&gt;”@timestamp”<br>        remove_field =&gt;”log”<br>        remove_field =&gt;”input”<br>        remove_field =&gt;”tag”<br>        remove_field =&gt;”ecs”<br>        remove_field =&gt;”tags”<br>        remove_field =&gt; “agent”<br>        remove_field =&gt;”@version”<br>        match =&gt; {<br>            “message” =&gt; “”<br>        }<br>    }<br>}<br>output {<br>    elasticsearch {<br>        index =&gt; “whitelog”<br>        hosts =&gt; [ “119.84.8.44:60116” ]<br>    }</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title="}"></a>}</h2><p>119.84.8.44:60116 elasticsearch<br>119.84.8.44:60117 kibana</p>
+<h2 id="单机"><a href="#单机" class="headerlink" title="单机"></a>单机</h2><p>curl -L -O <a href="https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.0-linux-x86_64.tar.gz" target="_blank" rel="noopener">https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.0-linux-x86_64.tar.gz</a><br>tar -xvf elasticsearch-7.2.0-linux-x86_64.tar.gz<br>cd elasticsearch-7.2.0/bin<br>./elasticsearch</p>
+<hr>
+<p>“patterns”: [“%{IP:client} %{WORD:method} %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}”],</p>
+<h2 id="ingest-对数据分字段"><a href="#ingest-对数据分字段" class="headerlink" title="ingest 对数据分字段"></a>ingest 对数据分字段</h2><h2 id="curl-H-‘Content-Type-application-json’-XPUT-‘http-119-84-8-44-60116-ingest-pipeline-test-pipeline‘-d-pipeline-json"><a href="#curl-H-‘Content-Type-application-json’-XPUT-‘http-119-84-8-44-60116-ingest-pipeline-test-pipeline‘-d-pipeline-json" class="headerlink" title="curl -H ‘Content-Type: application/json’ -XPUT ‘http://119.84.8.44:60116/_ingest/pipeline/test-pipeline‘ -d@pipeline.json"></a>curl -H ‘Content-Type: application/json’ -XPUT ‘<a href="http://119.84.8.44:60116/_ingest/pipeline/test-pipeline" target="_blank" rel="noopener">http://119.84.8.44:60116/_ingest/pipeline/test-pipeline</a>‘ -d@pipeline.json</h2><p>{<br>  “description” : “test desc”,<br>  “processors”: [<br>    {<br>      “grok”: {<br>“field”: “message”,<br>        “patterns”: [“au<em>:%{NUMBER:au</em>}  9c<em>:%{NUMBER:9c</em>}  lcbx<em>f:%{NUMBER:lcbx_f}  lcjc_f:%{NUMBER:lcjc_f}  lcmm_f:%{NUMBER:lcmm_f}  lc6e_f:%{NUMBER:lc6e_f}  lcae_f:%{NUMBER:lcae_f}  lcub_f:%{NUMBER:lcub_f}  lc5j_f:%{NUMBER:lc5j_f}  lcij_f:%{NUMBER:lcij_f}  lcsg_f:%{NUMBER:lcsg_f}  lcfr_f:%{NUMBER:lcfr_f}  lcsl_f:%{NUMBER:lcsl_f}  lcbs_f:%{NUMBER:lcbs_f}  lcvj_f:%{NUMBER:lcvj_f}  vtae:%{NUMBER:vtae}  lcjt_f:%{NUMBER:lcjt_f} “]<br>      }<br>    },<br>    {<br>        “remove”: {<br>        “field”: [“agent”, “log”,”message”,”ecs”,”host”,”input”]<br>        }<br>    },<br>    {<br>    “convert” : {<br>        “field” : “au</em>“,<br>        “type”: “integer”<br>    }<br>    }<br>  ]<br>}</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1571,7 +1616,7 @@ var _hmt = _hmt || [];
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">41</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
